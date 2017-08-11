@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>iOS资源整合</title>
-    <meta name="description" content="各方搜集的 iOS 资源，包括大牛博客、网站、视频资料。">
+    <title>git push 多个远程仓库</title>
+    <meta name="description" content="git push 到多个远程仓库">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/">
+    <link rel="canonical" href="http://localhost:4000/2017/07/21/git%E5%90%8C%E6%97%B6%E6%8F%90%E4%BA%A4%E5%88%B0%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
@@ -142,11 +142,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>iOS资源整合</h1>
+        <h1>git push 多个远程仓库</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2017-07-26
+                <i class="fa fa-calendar"></i>2017-07-21
             </div>
 
             <div class="label-card">
@@ -166,7 +166,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>
+        <a href="/category/#Git" title="Category: Git" rel="category">Git</a>
     
   
 
@@ -183,11 +183,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
-        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
+        <!--a href="/tag/#Git" title="Tag: Git" rel="tag">Git</a-->
+        <a href="/tag/#Git" title="Tag: Git" rel="tag">Git</a>&nbsp;
     
-        <!--a href="/tag/#%E8%B5%84%E6%BA%90" title="Tag: 资源" rel="tag">资源</a-->
-        <a href="/tag/#资源" title="Tag: 资源" rel="tag">资源</a>
+        <!--a href="/tag/#%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6" title="Tag: 版本控制" rel="tag">版本控制</a-->
+        <a href="/tag/#版本控制" title="Tag: 版本控制" rel="tag">版本控制</a>
     
   
 
@@ -199,161 +199,104 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#大牛博客" id="markdown-toc-大牛博客">大牛博客</a></li>
-  <li><a href="#团队" id="markdown-toc-团队">团队</a></li>
-  <li><a href="#推荐网站" id="markdown-toc-推荐网站">推荐网站</a></li>
-  <li><a href="#视频资料" id="markdown-toc-视频资料">视频资料</a></li>
+  <li><a href="#前提" id="markdown-toc-前提">前提</a></li>
+  <li><a href="#步骤" id="markdown-toc-步骤">步骤</a>    <ul>
+      <li><a href="#在-csdn-和-码云-上分别建仓库" id="markdown-toc-在-csdn-和-码云-上分别建仓库">在 csdn 和 码云 上分别建仓库</a></li>
+      <li><a href="#关联远程仓库" id="markdown-toc-关联远程仓库">关联远程仓库</a></li>
+      <li><a href="#pullpush-测试" id="markdown-toc-pullpush-测试">pull/push 测试</a></li>
+    </ul>
+  </li>
+  <li><a href="#sourcetree-实现一次推送到-2-个远程仓库" id="markdown-toc-sourcetree-实现一次推送到-2-个远程仓库">SourceTree 实现一次推送到 2 个远程仓库</a>    <ul>
+      <li><a href="#自动同时推送到远程" id="markdown-toc-自动同时推送到远程">自动同时推送到远程</a></li>
+      <li><a href="#手动选择推送" id="markdown-toc-手动选择推送">手动选择推送</a></li>
+    </ul>
+  </li>
 </ul>
 
-<h2 id="大牛博客">大牛博客</h2>
+<h2 id="前提">前提</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>博客地址</th>
-      <th>RSS地址</th>
-      <th>简介</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="http://onevcat.com/">OneV Den</a></td>
-      <td><a href="http://onevcat.com/atom.xml">OneV Den-RSS</a></td>
-      <td>王巍，人称喵神</td>
-    </tr>
-    <tr>
-      <td><a href="http://blog.devtang.com/">唐巧</a></td>
-      <td><a href="http://blog.devtang.com/atom.xml">唐巧-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://nshipster.cn/">Nshipster</a></td>
-      <td><a href="http://nshipster.cn/feed.xml">Nshipster-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://limboy.me/">Limboy 无网不剩</a></td>
-      <td><a href="http://feeds.feedburner.com/lzyy">无网不剩-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://blog.sunnyxx.com/">sunnyxx的技术博客</a></td>
-      <td><a href="http://blog.sunnyxx.com/atom.xml">sunnyxx-RSS</a></td>
-      <td>孙源，前百度研发工程师</td>
-    </tr>
-    <tr>
-      <td><a href="http://blog.cnbang.net/">bang’s blog</a></td>
-      <td><a href="http://blog.cnbang.net/feed/">bang’s blog-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://xiangwangfeng.com/">阿毛的蛋疼地</a></td>
-      <td><a href="http://www.xiangwangfeng.com/atom.xml">阿毛-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://nonomori.farbox.com/">Nonomori</a></td>
-      <td><a href="http://nonomori.farbox.com/feed">Nonomori-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://wonderffee.github.io/">Wonderffee’s Blog</a></td>
-      <td><a href="http://wonderffee.github.io/atom.xml">Wonderffee-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://blog.ibireme.com/">Garan no Dou</a></td>
-      <td> </td>
-      <td>ibireme，YYKit作者</td>
-    </tr>
-    <tr>
-      <td><a href="http://www.jianshu.com/users/b82d2721ba07/latest_articles">叶孤城</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://adad184.com/archives/">里脊串的开发随笔</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://www.cnblogs.com/kenshincui">Kenshin Cui’s Blog</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="https://github.com/ChenYilong">ChenYilong</a></td>
-      <td> </td>
-      <td>就职于京东金融。</td>
-    </tr>
-    <tr>
-      <td><a href="http://foggry.com/">王中周的技术博客</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://tutuge.me/">土土哥</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
+<p>将同一份文档传到 2 个代码托管平台，防止文档丢失。</p>
 
-<h2 id="团队">团队</h2>
+<h2 id="步骤">步骤</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>博客地址</th>
-      <th>简介</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="http://wereadteam.github.io/">WeRead团队博客</a></td>
-      <td>微信读书团队博客</td>
-    </tr>
-    <tr>
-      <td><a href="http://baiduhidevios.github.io/">百度Hi iOS团队技术周报</a></td>
-      <td>百度Hi iOS团队技术周报</td>
-    </tr>
-    <tr>
-      <td><a href="http://tech.meituan.com/">美团点评技术团队博客</a></td>
-      <td>美团点评技术团队</td>
-    </tr>
-    <tr>
-      <td><a href="http://pingguohe.net/">苹果核</a></td>
-      <td>现由天猫无线-基础业务团队主力维护</td>
-    </tr>
-    <tr>
-      <td><a href="http://swift.gg/">SwiftGG翻译组</a></td>
-      <td>翻译的文章来源于国外的优秀 Swift 网站和博客</td>
-    </tr>
-    <tr>
-      <td><a href="http://mobilefrontier.github.io/">移动开发前线博客</a></td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
+<ol>
+  <li>建远程仓库</li>
+  <li>本地文件夹关联远程仓库</li>
+  <li>pull/push 测试</li>
+</ol>
 
-<h2 id="推荐网站">推荐网站</h2>
+<h3 id="在-csdn-和-码云-上分别建仓库">在 csdn 和 码云 上分别建仓库</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>git@git...csdn
 
-<table>
-  <thead>
-    <tr>
-      <th>网站地址</th>
-      <th>简介</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="https://objccn.io/issues/">Objc中国</a></td>
-      <td>由Objc翻译而来</td>
-    </tr>
-  </tbody>
-</table>
+git@git...oschina
+</code></pre>
+</div>
 
-<h2 id="视频资料">视频资料</h2>
+<h3 id="关联远程仓库">关联远程仓库</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git remote add guroad(自定义) git@git...csdn
+
+git remote set-url --add guroad(保持一致) git@git...oschina
+</code></pre>
+</div>
+
+<h3 id="pullpush-测试">pull/push 测试</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>git pull guroad --all
+
+git push guroad --all
+</code></pre>
+</div>
+
+<h2 id="sourcetree-实现一次推送到-2-个远程仓库">SourceTree 实现一次推送到 2 个远程仓库</h2>
+
+<h3 id="自动同时推送到远程">自动同时推送到远程</h3>
+<p>设置 <code class="highlighter-rouge">.git/config</code> 文件内容，如下：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>[core]
+    repositoryformatversion = 0
+    filemode = false
+    bare = false
+    logallrefupdates = true
+    symlinks = false
+    ignorecase = true
+    hideDotFiles = dotGitOnly
+[remote "origin"]
+    url = https://git.oschina.net/shuguang/cmsdev.git
+    url = https://git.coding.net/bagesoft/cmsdev.git
+    fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+    remote = origin
+    merge = refs/heads/master
+</code></pre>
+</div>
+
+<h3 id="手动选择推送">手动选择推送</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>[core]
+    repositoryformatversion = 0
+    filemode = false
+    bare = false
+    logallrefupdates = true
+    symlinks = false
+    ignorecase = true
+    hideDotFiles = dotGitOnly
+[remote "origin"]
+    url = https://git.oschina.net/shuguang/cmsdev.git
+    fetch = +refs/heads/*:refs/remotes/origin/*
+[remote "coding"]
+    url = https://git.coding.net/bagesoft/cmsdev.git
+    fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+    remote = origin
+    merge = refs/heads/master
+</code></pre>
+</div>
+
+<hr />
+<p>相关链接：</p>
+
+<p><a href="https://segmentfault.com/q/1010000008366409">git push到多个远程仓库</a></p>
+
+<p><a href="https://blog.digua.co/post/76/sourcetree-simultaneously-submits-multiple-remote-repositories">SourceTree push 到多个远程仓库</a></p>
 
         </article>
         <hr>
@@ -364,18 +307,6 @@
             
                 
                     
-                        
-                        <h2 id="similar_posts">Similar Posts</h2>
-                        <ul>
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/">自定义 CollectionView 布局之瀑布流
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
                 
                     
                 
@@ -414,20 +345,18 @@
                 
             
         
-        
-            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/07/21/git%E5%90%8C%E6%97%B6%E6%8F%90%E4%BA%A4%E5%88%B0%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">git push 多个远程仓库</a></p>
+        <p><strong>上一篇</strong> <a href="/2016/12/20/makefile%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E4%B8%8E%E4%BD%BF%E7%94%A8/">makefile文件编写与使用</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/">自定义 CollectionView 布局之瀑布流</a></p>
+        <p><strong>下一篇</strong> <a href="/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/">iOS资源整合</a></p>
         
     </div>
 </div>
@@ -445,8 +374,8 @@
      */
 
     var disqus_config = function() {
-        this.page.url = 'http://localhost:4000/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/'; // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'http://localhost:4000/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'http://localhost:4000/2017/07/21/git%E5%90%8C%E6%97%B6%E6%8F%90%E4%BA%A4%E5%88%B0%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://localhost:4000/2017/07/21/git%E5%90%8C%E6%97%B6%E6%8F%90%E4%BA%A4%E5%88%B0%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     (function() { // DON'T EDIT BELOW THIS LINE
@@ -475,8 +404,6 @@
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
-                    
-                    <li><a href="#similar_posts">Similar Posts</a></li>
                     
                     <li><a href="#comments">Comments</a></li>
                 </ul>

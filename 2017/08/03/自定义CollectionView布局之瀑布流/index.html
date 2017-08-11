@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>iOS资源整合</title>
-    <meta name="description" content="各方搜集的 iOS 资源，包括大牛博客、网站、视频资料。">
+    <title>自定义 CollectionView 布局之瀑布流</title>
+    <meta name="description" content="瀑布流">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/">
+    <link rel="canonical" href="http://localhost:4000/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
@@ -142,11 +142,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>iOS资源整合</h1>
+        <h1>自定义 CollectionView 布局之瀑布流</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2017-07-26
+                <i class="fa fa-calendar"></i>2017-08-03
             </div>
 
             <div class="label-card">
@@ -184,10 +184,7 @@
   
     
         <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
-        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
-    
-        <!--a href="/tag/#%E8%B5%84%E6%BA%90" title="Tag: 资源" rel="tag">资源</a-->
-        <a href="/tag/#资源" title="Tag: 资源" rel="tag">资源</a>
+        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>
     
   
 
@@ -199,161 +196,151 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#大牛博客" id="markdown-toc-大牛博客">大牛博客</a></li>
-  <li><a href="#团队" id="markdown-toc-团队">团队</a></li>
-  <li><a href="#推荐网站" id="markdown-toc-推荐网站">推荐网站</a></li>
-  <li><a href="#视频资料" id="markdown-toc-视频资料">视频资料</a></li>
+  <li><a href="#思路" id="markdown-toc-思路">思路</a>    <ul>
+      <li><a href="#preparelayout" id="markdown-toc-preparelayout">prepareLayout</a></li>
+    </ul>
+  </li>
 </ul>
 
-<h2 id="大牛博客">大牛博客</h2>
+<h2 id="思路">思路</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>博客地址</th>
-      <th>RSS地址</th>
-      <th>简介</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="http://onevcat.com/">OneV Den</a></td>
-      <td><a href="http://onevcat.com/atom.xml">OneV Den-RSS</a></td>
-      <td>王巍，人称喵神</td>
-    </tr>
-    <tr>
-      <td><a href="http://blog.devtang.com/">唐巧</a></td>
-      <td><a href="http://blog.devtang.com/atom.xml">唐巧-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://nshipster.cn/">Nshipster</a></td>
-      <td><a href="http://nshipster.cn/feed.xml">Nshipster-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://limboy.me/">Limboy 无网不剩</a></td>
-      <td><a href="http://feeds.feedburner.com/lzyy">无网不剩-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://blog.sunnyxx.com/">sunnyxx的技术博客</a></td>
-      <td><a href="http://blog.sunnyxx.com/atom.xml">sunnyxx-RSS</a></td>
-      <td>孙源，前百度研发工程师</td>
-    </tr>
-    <tr>
-      <td><a href="http://blog.cnbang.net/">bang’s blog</a></td>
-      <td><a href="http://blog.cnbang.net/feed/">bang’s blog-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://xiangwangfeng.com/">阿毛的蛋疼地</a></td>
-      <td><a href="http://www.xiangwangfeng.com/atom.xml">阿毛-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://nonomori.farbox.com/">Nonomori</a></td>
-      <td><a href="http://nonomori.farbox.com/feed">Nonomori-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://wonderffee.github.io/">Wonderffee’s Blog</a></td>
-      <td><a href="http://wonderffee.github.io/atom.xml">Wonderffee-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://blog.ibireme.com/">Garan no Dou</a></td>
-      <td> </td>
-      <td>ibireme，YYKit作者</td>
-    </tr>
-    <tr>
-      <td><a href="http://www.jianshu.com/users/b82d2721ba07/latest_articles">叶孤城</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://adad184.com/archives/">里脊串的开发随笔</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://www.cnblogs.com/kenshincui">Kenshin Cui’s Blog</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="https://github.com/ChenYilong">ChenYilong</a></td>
-      <td> </td>
-      <td>就职于京东金融。</td>
-    </tr>
-    <tr>
-      <td><a href="http://foggry.com/">王中周的技术博客</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://tutuge.me/">土土哥</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
+<p>自定义布局类 YSCustemCollectionViewFlowLayout，继承自 UICollectionViewFlowLayout。</p>
 
-<h2 id="团队">团队</h2>
+<p>需要覆盖的方法有：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>// 预布局，cell、supplementaryView、decorationView 坐标计算
+- prepareLayout;
 
-<table>
-  <thead>
-    <tr>
-      <th>博客地址</th>
-      <th>简介</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="http://wereadteam.github.io/">WeRead团队博客</a></td>
-      <td>微信读书团队博客</td>
-    </tr>
-    <tr>
-      <td><a href="http://baiduhidevios.github.io/">百度Hi iOS团队技术周报</a></td>
-      <td>百度Hi iOS团队技术周报</td>
-    </tr>
-    <tr>
-      <td><a href="http://tech.meituan.com/">美团点评技术团队博客</a></td>
-      <td>美团点评技术团队</td>
-    </tr>
-    <tr>
-      <td><a href="http://pingguohe.net/">苹果核</a></td>
-      <td>现由天猫无线-基础业务团队主力维护</td>
-    </tr>
-    <tr>
-      <td><a href="http://swift.gg/">SwiftGG翻译组</a></td>
-      <td>翻译的文章来源于国外的优秀 Swift 网站和博客</td>
-    </tr>
-    <tr>
-      <td><a href="http://mobilefrontier.github.io/">移动开发前线博客</a></td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
+// 当前 contentSize
+- collectionViewContentSize;
 
-<h2 id="推荐网站">推荐网站</h2>
+// 返回当前正在显示的视图的所有布局属性
+- layoutAttributesForElementsInRect:;
 
-<table>
-  <thead>
-    <tr>
-      <th>网站地址</th>
-      <th>简介</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="https://objccn.io/issues/">Objc中国</a></td>
-      <td>由Objc翻译而来</td>
-    </tr>
-  </tbody>
-</table>
+// 取出 indexPath 对应的 cell 的布局属性
+- layoutAttributesForItemAtIndexPath:;
 
-<h2 id="视频资料">视频资料</h2>
+// 取出对应的 supplementaryView 的布局属性
+- layoutAttributesForSupplementaryViewOfKind: atIndexPath:;
+
+// 取出对应的 decorationView 的布局属性
+- layoutAttributesForDecorationViewOfKind: atIndexPath:;
+
+// 是否重新布局
+- shouldInvalidateLayoutForBoundsChange:;
+</code></pre>
+</div>
+
+<h3 id="preparelayout">prepareLayout</h3>
+
+<ul>
+  <li>
+    <p>每段都要计算段头 frame，每段 cell frame，段尾 frame；</p>
+  </li>
+  <li>
+    <p>cell frame 计算时要注意，下一个 cell 是跟在当前所有 cells 中 maxY 最小的 cell 下面，而不是简单的从左到右排列；</p>
+  </li>
+  <li>
+    <p>用字典记下段头、cell、段尾的布局属性；</p>
+  </li>
+  <li>
+    <p>除此之外需要记录每列当前的 maxY。</p>
+  </li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>- (void)prepareLayout
+{
+    [super prepareLayout];
+
+    [self.itemsMaxYDic removeAllObjects];
+    [self.itemAttrsDic removeAllObjects];
+    [self.sectionHeadAttrsDic removeAllObjects];
+    [self.sectionFootAttrsDic removeAllObjects];
+
+    // item 宽度
+    CGFloat itemWidth = (self.collectionView.frame.size.width - self.ysSectionInset.left - self.ysSectionInset.right - (self.ysColumntCount-1)*self.ysSpaceHor)/self.ysColumntCount;
+
+    NSInteger sectionNum = self.collectionView.numberOfSections;
+    for (int i = 0; i &lt; sectionNum; i++) {
+
+        NSIndexPath * currentSectionIndexPath = [NSIndexPath indexPathForRow:0 inSection:i];
+        // 段头
+        CGFloat currentSectionHeadHeight = 0;
+        if (i &lt; [self.ysSectionHeadHeightArr count]) {
+            currentSectionHeadHeight = [self.ysSectionHeadHeightArr[i] floatValue];
+        }
+        if (currentSectionHeadHeight &gt; 0 &amp;&amp; [self.collectionView.delegate respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
+
+            UICollectionViewLayoutAttributes * attr = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:YSCustemCollectionView_SectionHeadKind withIndexPath:currentSectionIndexPath];
+            attr.frame = CGRectMake(0, [self currentMaxY], kScreenWidth, currentSectionHeadHeight);
+            // 保存段头
+            self.sectionHeadAttrsDic[currentSectionIndexPath] = attr;
+            [self setCurrentMaxY:[self currentMaxY] + self.ysSectionInset.top + currentSectionHeadHeight row:nil];
+        }
+        else {
+            // 没有段头时，加上段边距
+            [self setCurrentMaxY:[self currentMaxY] + self.ysSectionInset.top row:nil];
+        }
+
+        // cell
+        NSInteger itemNum = [self.collectionView numberOfItemsInSection:i];
+        for (int j = 0; j &lt; itemNum; j++) {
+            NSIndexPath * currentItemIndexPath = [NSIndexPath indexPathForRow:j inSection:i];
+
+            // 下一个 item 是接在当前 最短的 item 下面的
+            // row 的排列顺序不是从左到右，而是下一个 row 接在目前 bottem 最小的 row 下面。
+            __block CGFloat currentMinY = [self.itemsMaxYDic[@(0)] floatValue];
+            __block NSInteger currentRow = 0;   // 列号
+            [self.itemsMaxYDic enumerateKeysAndObjectsUsingBlock:^(NSNumber * row, NSNumber * rowMaxY, BOOL * _Nonnull stop) {
+                if (currentMinY &gt; [rowMaxY floatValue]) {
+                    currentMinY = [rowMaxY floatValue];
+                    currentRow = [row integerValue];
+                }
+            }];
+
+            CGFloat currentItemX = self.ysSectionInset.left + (itemWidth + self.ysSpaceHor)*currentRow;
+            CGFloat currentItemY = currentMinY;
+            CGFloat currentItemHeight = 0;
+            if (self.delegate &amp;&amp; [self.delegate respondsToSelector:@selector(ysCustemCollectionView:itemHeightWithIndexPath: itemWidth:)]) {
+                currentItemHeight = [self.delegate ysCustemCollectionView:self.collectionView itemHeightWithIndexPath:currentItemIndexPath itemWidth:itemWidth];
+            }
+
+            UICollectionViewLayoutAttributes * attr = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:currentItemIndexPath];
+            attr.frame = CGRectMake(currentItemX, currentItemY, itemWidth, currentItemHeight);
+            self.itemAttrsDic[currentItemIndexPath] = attr;
+            [self setCurrentMaxY:currentMinY + currentItemHeight + self.ysSpaceVer row:@(currentRow)];
+        }
+
+        // 最后一排 与 段尾 距离为 self.ysSectionInset.bottom
+        [self setCurrentMaxY:[self currentMaxY] - self.ysSpaceVer + self.ysSectionInset.bottom row:nil];
+
+        // 段尾
+        CGFloat currentSectionFootHeight = 0;
+        if (i &lt; [self.ysSectionFootHeightArr count]) {
+            currentSectionFootHeight = [self.ysSectionFootHeightArr[i] floatValue];
+        }
+        if (currentSectionFootHeight &gt; 0 &amp;&amp; [self.collectionView.delegate respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
+
+            UICollectionViewLayoutAttributes * attr = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:YSCustemCollectionView_SectionFootKind withIndexPath:currentSectionIndexPath];
+            attr.frame = CGRectMake(0, [self currentMaxY], kScreenWidth, currentSectionFootHeight);
+            // 保存段尾
+            self.sectionFootAttrsDic[currentSectionIndexPath] = attr;
+            [self setCurrentMaxY:[self currentMaxY] + currentSectionFootHeight row:nil];
+        }
+
+    }
+}
+
+</code></pre>
+</div>
+
+<hr />
+<p>相关链接：</p>
+
+<p><a href="https://objccn.io/issue-3-3/">objccn - 自定义 Collection View 布局</a></p>
+
+<p><a href="https://developer.apple.com/library/ios/documentation/uikit/reference/UICollectionViewLayout_class/Reference/Reference.html">官网 UICollectionViewLayout 文档</a></p>
+
+<p><a href="http://www.cocoachina.com/ios/20161118/18123.html">Cocoachina - UICollectionView自定义布局</a></p>
 
         </article>
         <hr>
@@ -369,7 +356,7 @@
                         <ul>
                         
                         <li class="relatedPost">
-                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/">自定义 CollectionView 布局之瀑布流
+                            <a href="/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/">iOS资源整合
                             
                             </a>
                         </li>
@@ -377,20 +364,7 @@
                         
                     
                 
-                    
-                
             
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
                 
                     
                 
@@ -401,6 +375,8 @@
                 
                     
                 
+            
+                
                     
                 
             
@@ -409,6 +385,11 @@
             
                 
                     
+                
+            
+        
+            
+            
                 
                     
                 
@@ -421,13 +402,11 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/07/21/git%E5%90%8C%E6%97%B6%E6%8F%90%E4%BA%A4%E5%88%B0%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">git push 多个远程仓库</a></p>
+        <p><strong>上一篇</strong> <a href="/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/">iOS资源整合</a></p>
         
     </div>
     <div class="nex">
 
-        
-        <p><strong>下一篇</strong> <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/">自定义 CollectionView 布局之瀑布流</a></p>
         
     </div>
 </div>
@@ -445,8 +424,8 @@
      */
 
     var disqus_config = function() {
-        this.page.url = 'http://localhost:4000/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/'; // Replace PAGE_URL with your page's canonical URL variable
-        this.page.identifier = 'http://localhost:4000/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+        this.page.url = 'http://localhost:4000/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/'; // Replace PAGE_URL with your page's canonical URL variable
+        this.page.identifier = 'http://localhost:4000/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/'; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
     };
 
     (function() { // DON'T EDIT BELOW THIS LINE
