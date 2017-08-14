@@ -5,8 +5,8 @@
     <description></description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Fri, 11 Aug 2017 17:12:56 +0800</pubDate>
-    <lastBuildDate>Fri, 11 Aug 2017 17:12:56 +0800</lastBuildDate>
+    <pubDate>Mon, 14 Aug 2017 12:07:16 +0800</pubDate>
+    <lastBuildDate>Mon, 14 Aug 2017 12:07:16 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -52,6 +52,52 @@
         
         
         <category>Git</category>
+        
+      </item>
+    
+      <item>
+        <title>github+jekyll搭建个人博客</title>
+        <description>记录个人博客搭建过程</description>
+        <pubDate>Sat, 24 Dec 2016 20:02:54 +0800</pubDate>
+        <link>http://localhost:4000/2016/12/24/github+jekyll%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/12/24/github+jekyll%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
+        
+        <category>jekyll</category>
+        
+        <category>Github</category>
+        
+        
+        <category>jekyll</category>
+        
+        <category>Github</category>
+        
+      </item>
+    
+      <item>
+        <title>jekyll安装与使用</title>
+        <description>记录 jekyll 安装与使用及过程中的问题</description>
+        <pubDate>Sat, 24 Dec 2016 16:02:54 +0800</pubDate>
+        <link>http://localhost:4000/2016/12/24/jekyll/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/12/24/jekyll/</guid>
+        
+        <category>jekyll</category>
+        
+        
+        <category>jekyll</category>
+        
+      </item>
+    
+      <item>
+        <title>Gihub Pages</title>
+        <description>Github Pages</description>
+        <pubDate>Sat, 24 Dec 2016 15:02:54 +0800</pubDate>
+        <link>http://localhost:4000/2016/12/24/Github-Pages/</link>
+        <guid isPermaLink="true">http://localhost:4000/2016/12/24/Github-Pages/</guid>
+        
+        <category>Github</category>
+        
+        
+        <category>Github</category>
         
       </item>
     

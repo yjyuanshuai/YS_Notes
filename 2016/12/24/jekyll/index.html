@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>iOS资源整合</title>
-    <meta name="description" content="各方搜集的 iOS 资源，包括大牛博客、网站、视频资料。">
+    <title>jekyll安装与使用</title>
+    <meta name="description" content="记录 jekyll 安装与使用及过程中的问题">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/">
+    <link rel="canonical" href="http://localhost:4000/2016/12/24/jekyll/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
@@ -144,11 +144,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>iOS资源整合</h1>
+        <h1>jekyll安装与使用</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2017-07-26
+                <i class="fa fa-calendar"></i>2016-12-24
             </div>
 
             <div class="label-card">
@@ -168,7 +168,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>
+        <a href="/category/#jekyll" title="Category: jekyll" rel="category">jekyll</a>
     
   
 
@@ -185,11 +185,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
-        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
-    
-        <!--a href="/tag/#%E8%B5%84%E6%BA%90" title="Tag: 资源" rel="tag">资源</a-->
-        <a href="/tag/#资源" title="Tag: 资源" rel="tag">资源</a>
+        <!--a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a-->
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>
     
   
 
@@ -201,161 +198,192 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#大牛博客" id="markdown-toc-大牛博客">大牛博客</a></li>
-  <li><a href="#团队" id="markdown-toc-团队">团队</a></li>
-  <li><a href="#推荐网站" id="markdown-toc-推荐网站">推荐网站</a></li>
-  <li><a href="#视频资料" id="markdown-toc-视频资料">视频资料</a></li>
+  <li><a href="#安装" id="markdown-toc-安装">安装</a>    <ul>
+      <li><a href="#1安装命令" id="markdown-toc-1安装命令">1、安装命令</a></li>
+    </ul>
+  </li>
+  <li><a href="#基本用法" id="markdown-toc-基本用法">基本用法</a>    <ul>
+      <li><a href="#1build" id="markdown-toc-1build">1、build</a></li>
+      <li><a href="#2使用开发服务器预览" id="markdown-toc-2使用开发服务器预览">2、使用开发服务器，预览</a></li>
+    </ul>
+  </li>
+  <li><a href="#问题" id="markdown-toc-问题">问题</a>    <ul>
+      <li><a href="#1-安装时" id="markdown-toc-1-安装时">1. 安装时</a></li>
+      <li><a href="#2-使用中" id="markdown-toc-2-使用中">2. 使用中</a></li>
+    </ul>
+  </li>
+  <li><a href="#目录结构" id="markdown-toc-目录结构">目录结构</a></li>
+  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接：</a></li>
 </ul>
 
-<h2 id="大牛博客">大牛博客</h2>
+<h2 id="安装">安装</h2>
+<h3 id="1安装命令">1、安装命令</h3>
+
+<blockquote>
+  <p>安装之前，查看 ruby 和 gem 版本，更新至最高版本</p>
+</blockquote>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+// 10.11 前
+sudo gem install jekyll
+
+// 10.11 及以后
+sudo gem install -n /usr/local/bin jekyll
+
+</code></pre>
+</div>
+
+<h2 id="基本用法">基本用法</h2>
+<h3 id="1build">1、build</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll build
+
+// 当前文件夹中的内容将会生成到 ./site 文件夹中。
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll build --destination &lt;destination&gt;
+
+// 当前文件夹中的内容将会生成到目标文件夹&lt;destination&gt;中。
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll build --source &lt;source&gt; --destination &lt;destination&gt;
+
+// 指定源文件夹&lt;source&gt;中的内容将会生成到目标文件夹&lt;destination&gt;中。
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll build --watch
+// 当前文件夹中的内容将会生成到 ./site 文件夹中，查看改变，并且自动再生成。
+</code></pre>
+</div>
+
+<h3 id="2使用开发服务器预览">2、使用开发服务器，预览</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll serve
+</code></pre>
+</div>
+<p>本地浏览器访问 <code class="highlighter-rouge">http://localhost:4000</code> 或 <code class="highlighter-rouge">127.0.0.1:4000</code>，是否正常访问</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll serve --detach
+
+# =&gt; 功能和`jekyll serve`命令相同，但是会脱离终端在后台运行。
+#    如果你想关闭服务器，可以使用`kill -9 1234`命令，"1234" 是进程号（PID）。
+#    如果你找不到进程号，那么就用`ps aux | grep jekyll`命令来查看，然后关闭服务器。[更多](http://unixhelp.ed.ac.uk/shell/jobz5.html).
+</code></pre>
+</div>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll serve --watch
+
+# =&gt; 和`jekyll serve`相同，但是会查看变更并且自动再生成。
+</code></pre>
+</div>
+
+<h2 id="问题">问题</h2>
+<h3 id="1-安装时">1. 安装时</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>ERROR:  Error installing jekyll:
+    ERROR: Failed to build gem native extension.
+</code></pre>
+</div>
+
+<p>安装 Command Line Tools</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>xcode-select --install
+</code></pre>
+</div>
+
+<h3 id="2-使用中">2. 使用中</h3>
+<p><code class="highlighter-rouge">jekyll serve</code></p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Dependency Error: Yikes! It looks like you don't have XXX or one of its dependencies installed.
+
+</code></pre>
+</div>
+
+<p>类似这种错误，安装对应的 XXX 即可。如 jekyll-paginate，bundler等。</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo gem install -n /usr/local/bin bundler
+</code></pre>
+</div>
+
+<h2 id="目录结构">目录结构</h2>
 
 <table>
   <thead>
     <tr>
-      <th>博客地址</th>
-      <th>RSS地址</th>
-      <th>简介</th>
+      <th style="text-align: left">文件/目录</th>
+      <th style="text-align: left">含义</th>
+      <th style="text-align: left">语法</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><a href="http://onevcat.com/">OneV Den</a></td>
-      <td><a href="http://onevcat.com/atom.xml">OneV Den-RSS</a></td>
-      <td>王巍，人称喵神</td>
+      <td style="text-align: left">_config.yml</td>
+      <td style="text-align: left">全局配置</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td><a href="http://blog.devtang.com/">唐巧</a></td>
-      <td><a href="http://blog.devtang.com/atom.xml">唐巧-RSS</a></td>
-      <td> </td>
+      <td style="text-align: left">_drafts</td>
+      <td style="text-align: left">草稿</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td><a href="http://nshipster.cn/">Nshipster</a></td>
-      <td><a href="http://nshipster.cn/feed.xml">Nshipster-RSS</a></td>
-      <td> </td>
+      <td style="text-align: left">_includes</td>
+      <td style="text-align: left">文章中可以重用的部分，可以放这里</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td><a href="http://limboy.me/">Limboy 无网不剩</a></td>
-      <td><a href="http://feeds.feedburner.com/lzyy">无网不剩-RSS</a></td>
-      <td> </td>
+      <td style="text-align: left">_layouts</td>
+      <td style="text-align: left">各种文章外部的模板（可以在文章头信息中选择，layout:XXX ）</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td><a href="http://blog.sunnyxx.com/">sunnyxx的技术博客</a></td>
-      <td><a href="http://blog.sunnyxx.com/atom.xml">sunnyxx-RSS</a></td>
-      <td>孙源，前百度研发工程师</td>
+      <td style="text-align: left">_posts</td>
+      <td style="text-align: left">所有的文件（有一定的格式，后缀有 md/textile）</td>
+      <td style="text-align: left">yyyy-MM-dd-文章名.md</td>
     </tr>
     <tr>
-      <td><a href="http://blog.cnbang.net/">bang’s blog</a></td>
-      <td><a href="http://blog.cnbang.net/feed/">bang’s blog-RSS</a></td>
-      <td> </td>
+      <td style="text-align: left">_data</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td><a href="http://xiangwangfeng.com/">阿毛的蛋疼地</a></td>
-      <td><a href="http://www.xiangwangfeng.com/atom.xml">阿毛-RSS</a></td>
-      <td> </td>
+      <td style="text-align: left">_site</td>
+      <td style="text-align: left">生成的可视化的主页</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td><a href="http://nonomori.farbox.com/">Nonomori</a></td>
-      <td><a href="http://nonomori.farbox.com/feed">Nonomori-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://wonderffee.github.io/">Wonderffee’s Blog</a></td>
-      <td><a href="http://wonderffee.github.io/atom.xml">Wonderffee-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://blog.ibireme.com/">Garan no Dou</a></td>
-      <td> </td>
-      <td>ibireme，YYKit作者</td>
-    </tr>
-    <tr>
-      <td><a href="http://www.jianshu.com/users/b82d2721ba07/latest_articles">叶孤城</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://adad184.com/archives/">里脊串的开发随笔</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://www.cnblogs.com/kenshincui">Kenshin Cui’s Blog</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="https://github.com/ChenYilong">ChenYilong</a></td>
-      <td> </td>
-      <td>就职于京东金融。</td>
-    </tr>
-    <tr>
-      <td><a href="http://foggry.com/">王中周的技术博客</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://tutuge.me/">土土哥</a></td>
-      <td> </td>
-      <td> </td>
+      <td style="text-align: left">index.html</td>
+      <td style="text-align: left">站点的首页，整个站的入口</td>
+      <td style="text-align: left"> </td>
     </tr>
   </tbody>
 </table>
-
-<h2 id="团队">团队</h2>
 
 <table>
   <thead>
     <tr>
-      <th>博客地址</th>
-      <th>简介</th>
+      <th style="text-align: left">自定义目录</th>
+      <th style="text-align: left">含义</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td><a href="http://wereadteam.github.io/">WeRead团队博客</a></td>
-      <td>微信读书团队博客</td>
+      <td style="text-align: left">sitemap.txt</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td><a href="http://baiduhidevios.github.io/">百度Hi iOS团队技术周报</a></td>
-      <td>百度Hi iOS团队技术周报</td>
+      <td style="text-align: left">_plugins</td>
+      <td style="text-align: left">插件放置的目录</td>
     </tr>
     <tr>
-      <td><a href="http://tech.meituan.com/">美团点评技术团队博客</a></td>
-      <td>美团点评技术团队</td>
-    </tr>
-    <tr>
-      <td><a href="http://pingguohe.net/">苹果核</a></td>
-      <td>现由天猫无线-基础业务团队主力维护</td>
-    </tr>
-    <tr>
-      <td><a href="http://swift.gg/">SwiftGG翻译组</a></td>
-      <td>翻译的文章来源于国外的优秀 Swift 网站和博客</td>
-    </tr>
-    <tr>
-      <td><a href="http://mobilefrontier.github.io/">移动开发前线博客</a></td>
-      <td> </td>
+      <td style="text-align: left">_assets</td>
+      <td style="text-align: left">用到的资源文件，如图片</td>
     </tr>
   </tbody>
 </table>
 
-<h2 id="推荐网站">推荐网站</h2>
+<hr />
+<h2 id="相关链接">相关链接：</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>网站地址</th>
-      <th>简介</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="https://objccn.io/issues/">Objc中国</a></td>
-      <td>由Objc翻译而来</td>
-    </tr>
-  </tbody>
-</table>
-
-<h2 id="视频资料">视频资料</h2>
+<p><a href="http://jekyll.com.cn/docs/usage/">jekyll官方-中文</a></p>
 
         </article>
         <hr>
@@ -366,12 +394,41 @@
             
                 
                     
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
                         
                         <h2 id="similar_posts">Similar Posts</h2>
                         <ul>
                         
                         <li class="relatedPost">
-                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/">自定义 CollectionView 布局之瀑布流
+                            <a href="/2016/12/24/github+jekyll%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">github+jekyll搭建个人博客
                             
                             </a>
                         </li>
@@ -379,20 +436,7 @@
                         
                     
                 
-                    
-                
             
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
                 
                     
                 
@@ -403,14 +447,6 @@
                 
                     
                 
-                    
-                
-            
-                
-                    
-                
-                    
-                
             
         
             
@@ -418,32 +454,10 @@
                 
                     
                 
-                    
-                
             
         
             
             
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
                 
                     
                 
@@ -456,13 +470,13 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/07/21/git%E5%90%8C%E6%97%B6%E6%8F%90%E4%BA%A4%E5%88%B0%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">git push 多个远程仓库</a></p>
+        <p><strong>上一篇</strong> <a href="/2016/12/24/Github-Pages/">Gihub Pages</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/">自定义 CollectionView 布局之瀑布流</a></p>
+        <p><strong>下一篇</strong> <a href="/2016/12/24/github+jekyll%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">github+jekyll搭建个人博客</a></p>
         
     </div>
 </div>
