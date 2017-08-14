@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>git push 多个远程仓库</title>
-    <meta name="description" content="git push 到多个远程仓库">
+    <title>Git push到多个仓库</title>
+    <meta name="description" content="同一份代码关联 2 个远程仓库，终端或SourceTree实现自动同时 push 到多个仓库，或者手动选择推送指定仓库。">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2017/07/21/git%E5%90%8C%E6%97%B6%E6%8F%90%E4%BA%A4%E5%88%B0%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">
+    <link rel="canonical" href="http://localhost:4000/2017/07/21/Git%E5%90%8C%E6%97%B6push%E5%88%B0%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
@@ -144,7 +144,7 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>git push 多个远程仓库</h1>
+        <h1>Git push到多个仓库</h1>
         <div class="label">
 
             <div class="label-card">
@@ -186,10 +186,7 @@
   
     
         <!--a href="/tag/#Git" title="Tag: Git" rel="tag">Git</a-->
-        <a href="/tag/#Git" title="Tag: Git" rel="tag">Git</a>&nbsp;
-    
-        <!--a href="/tag/#%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6" title="Tag: 版本控制" rel="tag">版本控制</a-->
-        <a href="/tag/#版本控制" title="Tag: 版本控制" rel="tag">版本控制</a>
+        <a href="/tag/#Git" title="Tag: Git" rel="tag">Git</a>
     
   
 
@@ -201,78 +198,101 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#前提" id="markdown-toc-前提">前提</a></li>
-  <li><a href="#步骤" id="markdown-toc-步骤">步骤</a>    <ul>
-      <li><a href="#在-csdn-和-码云-上分别建仓库" id="markdown-toc-在-csdn-和-码云-上分别建仓库">在 csdn 和 码云 上分别建仓库</a></li>
-      <li><a href="#关联远程仓库" id="markdown-toc-关联远程仓库">关联远程仓库</a></li>
-      <li><a href="#pullpush-测试" id="markdown-toc-pullpush-测试">pull/push 测试</a></li>
+  <li><a href="#需求" id="markdown-toc-需求">需求</a></li>
+  <li><a href="#实现" id="markdown-toc-实现">实现</a>    <ul>
+      <li><a href="#在-github-和-coding-上分别建仓库" id="markdown-toc-在-github-和-coding-上分别建仓库">在 github 和 coding 上分别建仓库</a></li>
+      <li><a href="#关联远程仓库修改配置文件" id="markdown-toc-关联远程仓库修改配置文件">关联远程仓库，修改配置文件</a>        <ul>
+          <li><a href="#terminal-实现" id="markdown-toc-terminal-实现">terminal 实现</a></li>
+          <li><a href="#直接打开配置文件修改" id="markdown-toc-直接打开配置文件修改">直接打开配置文件修改</a></li>
+        </ul>
+      </li>
+      <li><a href="#pullpush-测试" id="markdown-toc-pullpush-测试">pull/push 测试</a>        <ul>
+          <li><a href="#terminal" id="markdown-toc-terminal">terminal</a></li>
+          <li><a href="#sourcetree" id="markdown-toc-sourcetree">SourceTree</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
-  <li><a href="#sourcetree-实现一次推送到-2-个远程仓库" id="markdown-toc-sourcetree-实现一次推送到-2-个远程仓库">SourceTree 实现一次推送到 2 个远程仓库</a>    <ul>
-      <li><a href="#自动同时推送到远程" id="markdown-toc-自动同时推送到远程">自动同时推送到远程</a></li>
-      <li><a href="#手动选择推送" id="markdown-toc-手动选择推送">手动选择推送</a></li>
-    </ul>
-  </li>
+  <li><a href="#拓展" id="markdown-toc-拓展">拓展</a></li>
+  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接：</a></li>
 </ul>
 
-<h2 id="前提">前提</h2>
+<h2 id="需求">需求</h2>
 
-<p>将同一份文档传到 2 个代码托管平台，防止文档丢失。</p>
+<ul>
+  <li>同一份代码存在 2 个不同的远程仓库；</li>
+  <li>一次 push，同时推送到 2 个仓库；</li>
+</ul>
 
-<h2 id="步骤">步骤</h2>
+<p>Github 有时访问速度过慢，为了及时的获取或推送到远程仓库，我希望将同一份代码同时存到 2 个不同的远程仓库，比如一个是 Github，一个是 coding，这样在一个仓库不给力的时候，可以及时用另一个仓库。</p>
 
-<ol>
-  <li>建远程仓库</li>
-  <li>本地文件夹关联远程仓库</li>
-  <li>pull/push 测试</li>
-</ol>
+<h2 id="实现">实现</h2>
 
-<h3 id="在-csdn-和-码云-上分别建仓库">在 csdn 和 码云 上分别建仓库</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>git@git...csdn
+<p>通过配置 <code class="highlighter-rouge">.git/config</code>文件，可以实现我的需求。</p>
 
-git@git...oschina
+<p>配置完后，基本的信息如下：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>[core]
+	repositoryformatversion = 0
+	filemode = true
+	bare = false
+	logallrefupdates = true
+	ignorecase = true
+	precomposeunicode = true
+[remote "remote名"]
+	url = 仓库一地址
+	url = 仓库二地址
+	fetch = +refs/heads/*:refs/remotes/remote名/*
+[branch "master"]
+	remote = remote名
+	merge = refs/heads/master
 </code></pre>
 </div>
 
-<h3 id="关联远程仓库">关联远程仓库</h3>
+<h3 id="在-github-和-coding-上分别建仓库">在 github 和 coding 上分别建仓库</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>git remote add guroad(自定义) git@git...csdn
+<p>以下简称 git@github_repo1，和 git@coding_repo2。</p>
 
-git remote set-url --add guroad(保持一致) git@git...oschina
+<h3 id="关联远程仓库修改配置文件">关联远程仓库，修改配置文件</h3>
+
+<h4 id="terminal-实现">terminal 实现</h4>
+<p>打开 terminal，进入项目目录下。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>git remote add remote名(自定义，如：guroad、origin等) git@github_repo1
+
+git remote set-url --add remote名(与上面的保持一致) git@coding_repo2
 </code></pre>
 </div>
+
+<blockquote>
+  <p>注：上面 2 个 remote 名可以不同，这里保持相同，是为了实现<code class="highlighter-rouge">一次推送到 2 个仓库</code>。remote 名不同时，需分开推送。</p>
+</blockquote>
+
+<h4 id="直接打开配置文件修改">直接打开配置文件修改</h4>
 
 <h3 id="pullpush-测试">pull/push 测试</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>git pull guroad --all
+
+<h4 id="terminal">terminal</h4>
+<div class="highlighter-rouge"><pre class="highlight"><code>git pull guroad master
 
 git push guroad --all
 </code></pre>
 </div>
 
-<h2 id="sourcetree-实现一次推送到-2-个远程仓库">SourceTree 实现一次推送到 2 个远程仓库</h2>
+<p>若<code class="highlighter-rouge">remote 名</code>是 origin，可省略，即：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>git pull
 
-<h3 id="自动同时推送到远程">自动同时推送到远程</h3>
-<p>设置 <code class="highlighter-rouge">.git/config</code> 文件内容，如下：</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>[core]
-    repositoryformatversion = 0
-    filemode = false
-    bare = false
-    logallrefupdates = true
-    symlinks = false
-    ignorecase = true
-    hideDotFiles = dotGitOnly
-[remote "origin"]
-    url = https://git.oschina.net/shuguang/cmsdev.git
-    url = https://git.coding.net/bagesoft/cmsdev.git
-    fetch = +refs/heads/*:refs/remotes/origin/*
-[branch "master"]
-    remote = origin
-    merge = refs/heads/master
+git push --all
 </code></pre>
 </div>
 
-<h3 id="手动选择推送">手动选择推送</h3>
+<h4 id="sourcetree">SourceTree</h4>
+
+<p>配置文件设置好后，正常推送即可。</p>
+
+<h2 id="拓展">拓展</h2>
+
+<p>一份代码关联 2 个远程仓库，每次只推送到一个指定远程仓库。修改文件内容 <code class="highlighter-rouge">.git/config</code>如下：</p>
+
 <div class="highlighter-rouge"><pre class="highlight"><code>[core]
     repositoryformatversion = 0
     filemode = false
@@ -294,7 +314,7 @@ git push guroad --all
 </div>
 
 <hr />
-<p>相关链接：</p>
+<h2 id="相关链接">相关链接：</h2>
 
 <p><a href="https://segmentfault.com/q/1010000008366409">git push到多个远程仓库</a></p>
 
@@ -310,8 +330,6 @@ git push guroad --all
                 
                     
                 
-                    
-                
             
         
             
@@ -319,26 +337,7 @@ git push guroad --all
                 
                     
                 
-                    
-                
             
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
                 
                     
                 
@@ -349,14 +348,7 @@ git push guroad --all
                 
                     
                 
-                    
-                
             
-        
-            
-            
-                
-                    
                 
                     
                 
@@ -367,6 +359,11 @@ git push guroad --all
                 
                     
                 
+            
+        
+            
+            
+                
                     
                 
             
@@ -375,6 +372,11 @@ git push guroad --all
             
                 
                     
+                
+            
+        
+            
+            
                 
                     
                 

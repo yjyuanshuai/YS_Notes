@@ -1,0 +1,13 @@
+deploy:
+	git checkout master
+	jekyll build --source source --destination finnal_site
+	git add -A
+	git commit -m "update source master"
+	git push
+	cd finnal_site
+	git checkout gh-pages
+	git add -A
+	git commit -m "update site gh-pages"
+	git push 
+
+	
