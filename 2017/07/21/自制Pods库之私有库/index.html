@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>iOS资源整合</title>
-    <meta name="description" content="各方搜集的 iOS 资源，包括大牛博客、网站、视频资料。">
+    <title>创建私有 Pods 库</title>
+    <meta name="description" content="创建私有 Pods 库，简单记录。">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/">
+    <link rel="canonical" href="http://localhost:4000/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E7%A7%81%E6%9C%89%E5%BA%93/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
@@ -148,11 +148,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>iOS资源整合</h1>
+        <h1>创建私有 Pods 库</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2017-07-26
+                <i class="fa fa-calendar"></i>2017-07-21
             </div>
 
             <div class="label-card">
@@ -172,7 +172,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>
+        <a href="/category/#CocoaPods" title="Category: CocoaPods" rel="category">CocoaPods</a>
     
   
 
@@ -189,11 +189,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
-        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
-    
-        <!--a href="/tag/#%E8%B5%84%E6%BA%90" title="Tag: 资源" rel="tag">资源</a-->
-        <a href="/tag/#资源" title="Tag: 资源" rel="tag">资源</a>
+        <!--a href="/tag/#CocoaPods" title="Tag: CocoaPods" rel="tag">CocoaPods</a-->
+        <a href="/tag/#CocoaPods" title="Tag: CocoaPods" rel="tag">CocoaPods</a>
     
   
 
@@ -205,161 +202,191 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#大牛博客" id="markdown-toc-大牛博客">大牛博客</a></li>
-  <li><a href="#团队" id="markdown-toc-团队">团队</a></li>
-  <li><a href="#推荐网站" id="markdown-toc-推荐网站">推荐网站</a></li>
-  <li><a href="#视频资料" id="markdown-toc-视频资料">视频资料</a></li>
+  <li><a href="#简介" id="markdown-toc-简介">简介</a></li>
+  <li><a href="#概述过程" id="markdown-toc-概述过程">概述过程</a></li>
+  <li><a href="#1-创建远端私有版本库略" id="markdown-toc-1-创建远端私有版本库略">1. 创建远端私有版本库（略）</a></li>
+  <li><a href="#2-创建远端私有代码库略" id="markdown-toc-2-创建远端私有代码库略">2. 创建远端私有代码库（略）</a></li>
+  <li><a href="#3-代码库添加文件" id="markdown-toc-3-代码库添加文件">3. 代码库添加文件</a></li>
+  <li><a href="#4-验证-podspec-文件" id="markdown-toc-4-验证-podspec-文件">4. 验证 .podspec 文件</a></li>
+  <li><a href="#5-将-podspec-文件传到版本库中" id="markdown-toc-5-将-podspec-文件传到版本库中">5. 将 .podspec 文件传到版本库中</a></li>
+  <li><a href="#6-查找使用" id="markdown-toc-6-查找使用">6. 查找、使用</a></li>
+  <li><a href="#7-维护" id="markdown-toc-7-维护">7. 维护</a>    <ul>
+      <li><a href="#更改" id="markdown-toc-更改">更改</a></li>
+      <li><a href="#删除" id="markdown-toc-删除">删除</a></li>
+    </ul>
+  </li>
+  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
 </ul>
 
-<h2 id="大牛博客">大牛博客</h2>
+<h2 id="简介">简介</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>博客地址</th>
-      <th>RSS地址</th>
-      <th>简介</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="http://onevcat.com/">OneV Den</a></td>
-      <td><a href="http://onevcat.com/atom.xml">OneV Den-RSS</a></td>
-      <td>王巍，人称喵神</td>
-    </tr>
-    <tr>
-      <td><a href="http://blog.devtang.com/">唐巧</a></td>
-      <td><a href="http://blog.devtang.com/atom.xml">唐巧-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://nshipster.cn/">Nshipster</a></td>
-      <td><a href="http://nshipster.cn/feed.xml">Nshipster-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://limboy.me/">Limboy 无网不剩</a></td>
-      <td><a href="http://feeds.feedburner.com/lzyy">无网不剩-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://blog.sunnyxx.com/">sunnyxx的技术博客</a></td>
-      <td><a href="http://blog.sunnyxx.com/atom.xml">sunnyxx-RSS</a></td>
-      <td>孙源，前百度研发工程师</td>
-    </tr>
-    <tr>
-      <td><a href="http://blog.cnbang.net/">bang’s blog</a></td>
-      <td><a href="http://blog.cnbang.net/feed/">bang’s blog-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://xiangwangfeng.com/">阿毛的蛋疼地</a></td>
-      <td><a href="http://www.xiangwangfeng.com/atom.xml">阿毛-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://nonomori.farbox.com/">Nonomori</a></td>
-      <td><a href="http://nonomori.farbox.com/feed">Nonomori-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://wonderffee.github.io/">Wonderffee’s Blog</a></td>
-      <td><a href="http://wonderffee.github.io/atom.xml">Wonderffee-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://blog.ibireme.com/">Garan no Dou</a></td>
-      <td> </td>
-      <td>ibireme，YYKit作者</td>
-    </tr>
-    <tr>
-      <td><a href="http://www.jianshu.com/users/b82d2721ba07/latest_articles">叶孤城</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://adad184.com/archives/">里脊串的开发随笔</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://www.cnblogs.com/kenshincui">Kenshin Cui’s Blog</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="https://github.com/ChenYilong">ChenYilong</a></td>
-      <td> </td>
-      <td>就职于京东金融。</td>
-    </tr>
-    <tr>
-      <td><a href="http://foggry.com/">王中周的技术博客</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://tutuge.me/">土土哥</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
+<p>CocoaPods 作为 iOS 开发中最常用的框架管理工具，主要用于一些开源库在项目中的引用。也可用于私有项目的子模块的管理。因此，Pods库可以分为 公有 和 私有 两种形式。</p>
 
-<h2 id="团队">团队</h2>
+<p>公有，即 .spodspec 文件传到 CocoaPods 的仓库（Specs）中，所有人都能引用的，常见的公有 Pods 库有 AFNetWorking、SDWebImage等。创建共有 Pod 库需要注册 CocoaPods 账户。</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>博客地址</th>
-      <th>简介</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="http://wereadteam.github.io/">WeRead团队博客</a></td>
-      <td>微信读书团队博客</td>
-    </tr>
-    <tr>
-      <td><a href="http://baiduhidevios.github.io/">百度Hi iOS团队技术周报</a></td>
-      <td>百度Hi iOS团队技术周报</td>
-    </tr>
-    <tr>
-      <td><a href="http://tech.meituan.com/">美团点评技术团队博客</a></td>
-      <td>美团点评技术团队</td>
-    </tr>
-    <tr>
-      <td><a href="http://pingguohe.net/">苹果核</a></td>
-      <td>现由天猫无线-基础业务团队主力维护</td>
-    </tr>
-    <tr>
-      <td><a href="http://swift.gg/">SwiftGG翻译组</a></td>
-      <td>翻译的文章来源于国外的优秀 Swift 网站和博客</td>
-    </tr>
-    <tr>
-      <td><a href="http://mobilefrontier.github.io/">移动开发前线博客</a></td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
+<p>而私有，是某个公司或个人私有的，可以是搭建在内网的 git 仓库或者可创建私有仓库的平台上（如 github、coding等），还可以本机创建。</p>
 
-<h2 id="推荐网站">推荐网站</h2>
+<h2 id="概述过程">概述过程</h2>
 
-<table>
-  <thead>
-    <tr>
-      <th>网站地址</th>
-      <th>简介</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="https://objccn.io/issues/">Objc中国</a></td>
-      <td>由Objc翻译而来</td>
-    </tr>
-  </tbody>
-</table>
+<ol>
+  <li>
+    <p>创建远端私有版本库（如 YSPrivateRepo），将其添加到本地 repo。</p>
+  </li>
+  <li>
+    <p>创建远端私有代码库，将仓库克隆到本地（给需要的人访问仓库的权限）。</p>
+  </li>
+  <li>
+    <p>本地代码库添加文件，同公有库三要素，共享文件夹、描述文件、LICENSE文件。</p>
+  </li>
+  <li>
+    <p>验证 .podspec 文件通过，打 tag，push 到远端。</p>
+  </li>
+  <li>
+    <p>将 .podspec 文件传到 2 中建立的本地版本库。</p>
+  </li>
+  <li>
+    <p>查找、使用私有库。</p>
+  </li>
+  <li>
+    <p>更新维护。</p>
+  </li>
+</ol>
 
-<h2 id="视频资料">视频资料</h2>
+<h2 id="1-创建远端私有版本库略">1. 创建远端私有版本库（略）</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>// pod repo add 本地版本库名 远端版本库URL
+
+pod repo add YSPrivateRepo https://git.coding.net/TimerYJ/YSPrivateRepo.git
+</code></pre>
+</div>
+
+<p>完成之后，进入磁盘目录 <code class="highlighter-rouge">~/.cocoapods/repos</code> 可以看到增加了一个 <code class="highlighter-rouge">YSPrivateRepo</code> 目录。</p>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/20170721_03_01.png" alt="" /></p>
+
+<blockquote>
+  <p>注意：创建仓库时要选择 LICENSE 文件，类型一般为 MIT。</p>
+</blockquote>
+
+<blockquote>
+  <p>注意：区分 <strong>代码库</strong> 和 <strong>版本库</strong>。</p>
+</blockquote>
+
+<h2 id="2-创建远端私有代码库略">2. 创建远端私有代码库（略）</h2>
+
+<h2 id="3-代码库添加文件">3. 代码库添加文件</h2>
+<p>创建 .podspec 文件模板：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>pod spec create YSCocoapodsPrivateSpec
+</code></pre>
+</div>
+
+<p>修改完后的内容：( <a href="">附：podspec文件各属性与值含义</a> )</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>Pod::Spec.new do |s|
+  s.name         = "YSCocoapodsPrivateSpec"
+  s.version      = "1.0.0"
+  s.summary      = "私有 Pod Spec 库测试"
+  s.description  = "制作一个私有的 Pod Spec 库，用于测试模块化项目"
+  s.homepage     = "https://coding.net/u/TimerYJ/p/YSCocoapodsPrivateSpec/git"
+  s.license      = { :type =&gt; "MIT", :file =&gt; "LICENSE" }
+
+  s.author       = { "YJ" =&gt; "yuan***@gmail.com" }
+  s.platform     = :ios, "8.0"
+
+  s.source       = { :git =&gt; "https://git.coding.net/TimerYJ/YSCocoapodsPrivateSpec.git", :tag =&gt; "#{s.version}" }
+  s.source_files  = "Classes/**/*.{h,m}"
+  s.public_header_files = "Classes/**/*.h"
+
+  # s.framework  = "SomeFramework"
+  # s.frameworks = "SomeFramework", "AnotherFramework"
+end
+</code></pre>
+</div>
+
+<blockquote>
+  <p>注意：有的代码托管平台（如 oschina）建立的私有库使用 <code class="highlighter-rouge">s.license = "MIT"</code> 可能找不到 LICENSE 正式，可以改为上述写法指明文件。</p>
+</blockquote>
+
+<h2 id="4-验证-podspec-文件">4. 验证 .podspec 文件</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>// pod lib lint (YSCocoapodsPrivateSpec.podspec)(--private)(--allow-warnings)
+
+pod lib lint  
+</code></pre>
+</div>
+<p>验证通过后如下图：</p>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/20170721_03_02.png" alt="" /></p>
+
+<p>打 tag，push 到代码库。</p>
+
+<blockquote>
+  <p>注意：tag 标签 与 .podspec 的 version 要保持一致）</p>
+</blockquote>
+
+<p>不打 tag 或者 tag 标签与 version 不一致会报错，如下：</p>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/20170721_03_03.png" alt="" /></p>
+
+<h2 id="5-将-podspec-文件传到版本库中">5. 将 .podspec 文件传到版本库中</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>// pod repo push 本地版本库名 .podspec文件名
+
+pod repo push YSPrivateRepo YSCocoapodsPrivateSpec.podspec
+</code></pre>
+</div>
+
+<p>若出现错误，可以更新本地版本库重试：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>// 如：[!] The repo `MyRepo` at `../.cocoapods/repos/YSPrivateRepo` is not clean
+
+pod repo update YSPrivateRepo
+</code></pre>
+</div>
+
+<p>成功后如下图：</p>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/20170721_03_04.png" alt="" /></p>
+
+<h2 id="6-查找使用">6. 查找、使用</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>pod search YSCocoapodsPrivateSpec
+</code></pre>
+</div>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/20170721_03_05.png" alt="" /></p>
+
+<p>成功查找就可以导入到项目中使用了，要注意的是，含私有 Pods 时，Podfile 文件开头要给出私有库的版本库地址。而同时包含公有和私有库时，还需要加上公有库的版本库地址。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>// Podfile 内容
+
+source 'https://git.coding.net/TimerYJ/YSPrivateRepo.git'    #私有版本库
+source 'https://github.com/CocoaPods/Specs.git'      #公有版本库
+
+platform:ios,'8.0'
+target "YSCocoapodsTest" do
+
+pod 'YSCocoapodsPublicSpec'
+pod 'AFNetworking'
+
+pod 'YSCocoapodsPrivateSpec'
+
+end
+</code></pre>
+</div>
+
+<h2 id="7-维护">7. 维护</h2>
+<h3 id="更改">更改</h3>
+<p>重复 3、4、5</p>
+
+<h3 id="删除">删除</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>pod repo remove YSPrivateRepo
+</code></pre>
+</div>
+
+<hr />
+
+<h2 id="相关链接">相关链接</h2>
+
+<p><a href="http://qiubaiying.top/2017/03/10/CocoaPods%E7%A7%81%E6%9C%89%E4%BB%93%E5%BA%93%E7%9A%84%E5%88%9B%E5%BB%BA/">CocoaPods 私有库制作</a></p>
+
+<p><a href="http://www.pluto-y.com/cocoapod-private-pods-and-module-manager/">Cocoapods系列教程(三)——私有库管理和模块化管理</a></p>
+
+<p><a href="http://www.jianshu.com/p/cfebe2ca74fb">创建私有仓库中踩过的坑</a></p>
 
         </article>
         <hr>
@@ -370,19 +397,101 @@
             
                 
                     
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
                         
                         <h2 id="similar_posts">Similar Posts</h2>
                         <ul>
                         
                         <li class="relatedPost">
-                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/">自定义 CollectionView 布局之瀑布流
+                            <a href="/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E5%85%B1%E6%9C%89%E5%BA%93/">创建公有 Pods 库
                             
                             </a>
                         </li>
                         
                         
-                    
-                
                     
                 
             
@@ -393,158 +502,12 @@
                     
                         
                         <li class="relatedPost">
-                            <a href="/2017/07/24/%E5%BD%92%E8%A7%A3%E6%A1%A3/">归/解档
+                            <a href="/2017/07/21/CocoaPods%E5%8E%9F%E7%90%86/">CocoaPods 原理
                             
                             </a>
                         </li>
                         
                         
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/SQLite3/">iOS-SQLite3
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/plist/">Plist
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/NSUserDefaults/">NSUserDefaults
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/Setting_Bundle/">Setting.Bundle
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
                     
                 
             
@@ -556,13 +519,13 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/07/24/%E5%BD%92%E8%A7%A3%E6%A1%A3/">归/解档</a></p>
+        <p><strong>上一篇</strong> <a href="/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E5%85%B1%E6%9C%89%E5%BA%93/">创建公有 Pods 库</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/">自定义 CollectionView 布局之瀑布流</a></p>
+        <p><strong>下一篇</strong> <a href="/2017/07/24/sandBox/">SandBox</a></p>
         
     </div>
 </div>

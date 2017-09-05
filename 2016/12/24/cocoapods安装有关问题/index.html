@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>iOS资源整合</title>
-    <meta name="description" content="各方搜集的 iOS 资源，包括大牛博客、网站、视频资料。">
+    <title>CocoaPods 有关问题汇总</title>
+    <meta name="description" content="CocoaPods 安装、使用等过程中遇到的问题汇总">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/">
+    <link rel="canonical" href="http://localhost:4000/2016/12/24/cocoapods%E5%AE%89%E8%A3%85%E6%9C%89%E5%85%B3%E9%97%AE%E9%A2%98/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
@@ -148,11 +148,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>iOS资源整合</h1>
+        <h1>CocoaPods 有关问题汇总</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2017-07-26
+                <i class="fa fa-calendar"></i>2016-12-24
             </div>
 
             <div class="label-card">
@@ -172,7 +172,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>
+        <a href="/category/#CocoaPods" title="Category: CocoaPods" rel="category">CocoaPods</a>
     
   
 
@@ -189,11 +189,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
-        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
-    
-        <!--a href="/tag/#%E8%B5%84%E6%BA%90" title="Tag: 资源" rel="tag">资源</a-->
-        <a href="/tag/#资源" title="Tag: 资源" rel="tag">资源</a>
+        <!--a href="/tag/#CocoaPods" title="Tag: CocoaPods" rel="tag">CocoaPods</a-->
+        <a href="/tag/#CocoaPods" title="Tag: CocoaPods" rel="tag">CocoaPods</a>
     
   
 
@@ -205,161 +202,86 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#大牛博客" id="markdown-toc-大牛博客">大牛博客</a></li>
-  <li><a href="#团队" id="markdown-toc-团队">团队</a></li>
-  <li><a href="#推荐网站" id="markdown-toc-推荐网站">推荐网站</a></li>
-  <li><a href="#视频资料" id="markdown-toc-视频资料">视频资料</a></li>
+  <li><a href="#终端安装" id="markdown-toc-终端安装">终端安装</a>    <ul>
+      <li><a href="#1卡在-setting-up-cocoapods-master-repo-后报错" id="markdown-toc-1卡在-setting-up-cocoapods-master-repo-后报错">1、卡在 <code class="highlighter-rouge">Setting up CocoaPods master repo</code> 后报错</a></li>
+      <li><a href="#2ruby-源错" id="markdown-toc-2ruby-源错">2、Ruby 源错</a></li>
+    </ul>
+  </li>
+  <li><a href="#手动下载安装" id="markdown-toc-手动下载安装">手动下载安装</a>    <ul>
+      <li><a href="#1pod-command-not-found" id="markdown-toc-1pod-command-not-found">1、<code class="highlighter-rouge">pod: command not found</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#使用" id="markdown-toc-使用">使用</a>    <ul>
+      <li><a href="#1pod-search-afnetworking-时报以下错" id="markdown-toc-1pod-search-afnetworking-时报以下错">1、pod search AFNetworking 时报以下错：</a></li>
+    </ul>
+  </li>
+  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
 </ul>
 
-<h2 id="大牛博客">大牛博客</h2>
+<h2 id="终端安装">终端安装</h2>
+<h3 id="1卡在-setting-up-cocoapods-master-repo-后报错">1、卡在 <code class="highlighter-rouge">Setting up CocoaPods master repo</code> 后报错</h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>博客地址</th>
-      <th>RSS地址</th>
-      <th>简介</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="http://onevcat.com/">OneV Den</a></td>
-      <td><a href="http://onevcat.com/atom.xml">OneV Den-RSS</a></td>
-      <td>王巍，人称喵神</td>
-    </tr>
-    <tr>
-      <td><a href="http://blog.devtang.com/">唐巧</a></td>
-      <td><a href="http://blog.devtang.com/atom.xml">唐巧-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://nshipster.cn/">Nshipster</a></td>
-      <td><a href="http://nshipster.cn/feed.xml">Nshipster-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://limboy.me/">Limboy 无网不剩</a></td>
-      <td><a href="http://feeds.feedburner.com/lzyy">无网不剩-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://blog.sunnyxx.com/">sunnyxx的技术博客</a></td>
-      <td><a href="http://blog.sunnyxx.com/atom.xml">sunnyxx-RSS</a></td>
-      <td>孙源，前百度研发工程师</td>
-    </tr>
-    <tr>
-      <td><a href="http://blog.cnbang.net/">bang’s blog</a></td>
-      <td><a href="http://blog.cnbang.net/feed/">bang’s blog-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://xiangwangfeng.com/">阿毛的蛋疼地</a></td>
-      <td><a href="http://www.xiangwangfeng.com/atom.xml">阿毛-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://nonomori.farbox.com/">Nonomori</a></td>
-      <td><a href="http://nonomori.farbox.com/feed">Nonomori-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://wonderffee.github.io/">Wonderffee’s Blog</a></td>
-      <td><a href="http://wonderffee.github.io/atom.xml">Wonderffee-RSS</a></td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://blog.ibireme.com/">Garan no Dou</a></td>
-      <td> </td>
-      <td>ibireme，YYKit作者</td>
-    </tr>
-    <tr>
-      <td><a href="http://www.jianshu.com/users/b82d2721ba07/latest_articles">叶孤城</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://adad184.com/archives/">里脊串的开发随笔</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://www.cnblogs.com/kenshincui">Kenshin Cui’s Blog</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="https://github.com/ChenYilong">ChenYilong</a></td>
-      <td> </td>
-      <td>就职于京东金融。</td>
-    </tr>
-    <tr>
-      <td><a href="http://foggry.com/">王中周的技术博客</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-    <tr>
-      <td><a href="http://tutuge.me/">土土哥</a></td>
-      <td> </td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
+<p>经常会有卡在 Setting up CocoaPods master repo 很久后报以下错：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>[!] /usr/bin/git clone https://github.com/CocoaPods/Specs.git master
 
-<h2 id="团队">团队</h2>
+Cloning into 'master'...
+error: RPC failed: result=56, HTTP code = 200
+fatal: the remote end hung up unexpectedly
+fatal: early EOF
+fatal: index-pack failed
+</code></pre>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>博客地址</th>
-      <th>简介</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="http://wereadteam.github.io/">WeRead团队博客</a></td>
-      <td>微信读书团队博客</td>
-    </tr>
-    <tr>
-      <td><a href="http://baiduhidevios.github.io/">百度Hi iOS团队技术周报</a></td>
-      <td>百度Hi iOS团队技术周报</td>
-    </tr>
-    <tr>
-      <td><a href="http://tech.meituan.com/">美团点评技术团队博客</a></td>
-      <td>美团点评技术团队</td>
-    </tr>
-    <tr>
-      <td><a href="http://pingguohe.net/">苹果核</a></td>
-      <td>现由天猫无线-基础业务团队主力维护</td>
-    </tr>
-    <tr>
-      <td><a href="http://swift.gg/">SwiftGG翻译组</a></td>
-      <td>翻译的文章来源于国外的优秀 Swift 网站和博客</td>
-    </tr>
-    <tr>
-      <td><a href="http://mobilefrontier.github.io/">移动开发前线博客</a></td>
-      <td> </td>
-    </tr>
-  </tbody>
-</table>
+<p>可能的原因有 3 个：</p>
+<ul>
+  <li>gem 版本过低
+    <div class="highlighter-rouge"><pre class="highlight"><code>sudo gem update --system
+</code></pre>
+    </div>
+  </li>
+  <li>github 无法连接
+    <div class="highlighter-rouge"><pre class="highlight"><code>ping github.com
+</code></pre>
+    </div>
+  </li>
+  <li>.cocoapods目录下的配置信息错误
+    <div class="highlighter-rouge"><pre class="highlight"><code>pod repo list
+</code></pre>
+    </div>
+  </li>
+</ul>
 
-<h2 id="推荐网站">推荐网站</h2>
+<h3 id="2ruby-源错">2、Ruby 源错</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>  http://taobao.ruby.org/       // 已失效
+  https://taobao.ruby.org/      // 已不维护
+  https://gems.ruby-china.org/  // 当前有效，2017-09-05
+</code></pre>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>网站地址</th>
-      <th>简介</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><a href="https://objccn.io/issues/">Objc中国</a></td>
-      <td>由Objc翻译而来</td>
-    </tr>
-  </tbody>
-</table>
+<h2 id="手动下载安装">手动下载安装</h2>
+<h3 id="1pod-command-not-found">1、<code class="highlighter-rouge">pod: command not found</code></h3>
 
-<h2 id="视频资料">视频资料</h2>
+<p>运行pod后显示：”pod: command not found”的错误。赋予/usr/local/bin给予执行与读取权限，执行以下命令。若不行执行sudo chmod 777 /usr/local/bin/。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo chmod 700 /usr/local/bin/
+</code></pre>
+</div>
+
+<h2 id="使用">使用</h2>
+<h3 id="1pod-search-afnetworking-时报以下错">1、pod search AFNetworking 时报以下错：</h3>
+<div class="highlighter-rouge"><pre class="highlight"><code>[!] Unable to find a pod with name, author, summary, or descriptionmatching `AFNetworking`
+</code></pre>
+</div>
+
+<p>解决方法：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>rm ~/Library/Caches/CocoaPods/search_index.json
+</code></pre>
+</div>
+
+<hr />
+<h2 id="相关链接">相关链接</h2>
+
+<p><a href="http://www.jianshu.com/p/6e5c0f78200a">CocoaPods的安装使用和常见问题</a></p>
 
         </article>
         <hr>
@@ -370,19 +292,101 @@
             
                 
                     
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
                         
                         <h2 id="similar_posts">Similar Posts</h2>
                         <ul>
                         
                         <li class="relatedPost">
-                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/">自定义 CollectionView 布局之瀑布流
+                            <a href="/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E7%A7%81%E6%9C%89%E5%BA%93/">创建私有 Pods 库
                             
                             </a>
                         </li>
                         
                         
-                    
-                
                     
                 
             
@@ -393,158 +397,12 @@
                     
                         
                         <li class="relatedPost">
-                            <a href="/2017/07/24/%E5%BD%92%E8%A7%A3%E6%A1%A3/">归/解档
+                            <a href="/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E5%85%B1%E6%9C%89%E5%BA%93/">创建公有 Pods 库
                             
                             </a>
                         </li>
                         
                         
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/SQLite3/">iOS-SQLite3
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/plist/">Plist
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/NSUserDefaults/">NSUserDefaults
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/Setting_Bundle/">Setting.Bundle
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
                     
                 
             
@@ -556,13 +414,13 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/07/24/%E5%BD%92%E8%A7%A3%E6%A1%A3/">归/解档</a></p>
+        <p><strong>上一篇</strong> <a href="/2016/12/24/CocoaPods%E5%AE%89%E8%A3%85/">CocoaPods 安装方法</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/">自定义 CollectionView 布局之瀑布流</a></p>
+        <p><strong>下一篇</strong> <a href="/2016/12/24/github+jekyll%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">github+jekyll搭建个人博客</a></p>
         
     </div>
 </div>

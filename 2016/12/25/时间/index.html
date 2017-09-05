@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>NSDate 时间问题</title>
+    <meta name="description" content="iOS 时间有关问题">
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <!-- 菜单前的图标，需要下面这句 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="http://localhost:4000/2016/12/25/%E6%97%B6%E9%97%B4/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
+
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?cf8506e0ef223e57ff6239944e5d46a4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-72449510-4', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
+    "HTML-CSS": {
+      linebreaks: { automatic: true, width: "container" }
+    }
+});
+</script>
+<!-- <script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+</head>
+
+
+  <body>
+
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">YJ`s notes</a>
+        <small></small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>类别
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>标签
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>关于我
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>NSDate 时间问题</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2016-12-25
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
+        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#nsdate-8小时问题" id="markdown-toc-nsdate-8小时问题">NSDate 8小时问题</a>    <ul>
+      <li><a href="#nsdate-转字符串" id="markdown-toc-nsdate-转字符串">NSDate 转字符串</a></li>
+      <li><a href="#转字符串时间的时区设定" id="markdown-toc-转字符串时间的时区设定">转字符串时间的时区设定</a></li>
+      <li><a href="#字符串时间转nsdate" id="markdown-toc-字符串时间转nsdate">字符串时间转NSDate</a></li>
+      <li><a href="#nsdate-转当前时区的-nsdate-时间" id="markdown-toc-nsdate-转当前时区的-nsdate-时间">NSDate 转当前时区的 NSDate 时间</a></li>
+    </ul>
+  </li>
+  <li><a href="#时间换算时间戳的概念" id="markdown-toc-时间换算时间戳的概念">时间换算、时间戳的概念</a>    <ul>
+      <li><a href="#当前时间转时间戳" id="markdown-toc-当前时间转时间戳">当前时间转时间戳</a></li>
+      <li><a href="#时间戳转当前时间" id="markdown-toc-时间戳转当前时间">时间戳转当前时间</a></li>
+    </ul>
+  </li>
+  <li><a href="#时间操作与比较" id="markdown-toc-时间操作与比较">时间操作与比较</a>    <ul>
+      <li><a href="#时间初始化方法" id="markdown-toc-时间初始化方法">时间初始化方法</a></li>
+      <li><a href="#时间比较方法" id="markdown-toc-时间比较方法">时间比较方法</a></li>
+      <li><a href="#时间间隔计算方法" id="markdown-toc-时间间隔计算方法">时间间隔计算方法</a></li>
+    </ul>
+  </li>
+  <li><a href="#获取年月日时分秒周时区农历日期" id="markdown-toc-获取年月日时分秒周时区农历日期">获取年月日时分秒周时区、农历日期</a>    <ul>
+      <li><a href="#获取年月日时分秒周时区" id="markdown-toc-获取年月日时分秒周时区">获取年月日时分秒周时区</a></li>
+      <li><a href="#农历" id="markdown-toc-农历">农历</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="nsdate-8小时问题">NSDate 8小时问题</h2>
+
+<h3 id="nsdate-转字符串">NSDate 转字符串</h3>
+
+<p>初始化一个 NSDate 时间 [NSDate date]，获取的是零时区的时间（格林尼治的时间: 年-月-日 时:分:秒: +时区），而北京时间是东八区时间，因为时区不同，所以打印的时间相差了8小时。此刻表示的时间是一样的。</p>
+
+<p>系统会默认 [NSDate date] 获取的时间为零时区时间，而经过 NSDateFormatter 转化为字符串时间就是当前所在时区的准确时间，并没有8小时误差。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>NSDate * date = [NSDate date];
+NSLog(@"date时间 = %@", date);
+
+NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+[formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
+NSString *dateStr = [formatter stringFromDate:date];
+NSLog(@"字符串时间 = %@", dateStr);
+</code></pre>
+</div>
+
+<p>结果：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>2016-12-07 10:44:24.470 timeTest[32743:2995134] date时间 = 2016-12-07 02:44:24 +0000
+
+2016-12-07 10:44:24.471 timeTest[32743:2995134] 字符串时间 = 2016-12-07 10:44:24 +0800
+</code></pre>
+</div>
+
+<h3 id="转字符串时间的时区设定">转字符串时间的时区设定</h3>
+
+<p>NSDate 时间转为字符串时间，若不设置 NSDateFormatter 的 timeZone，会默认使用当前所在的时区。</p>
+
+<p>与设置系统时区formatter.timeZone = [NSTimeZone systemTimeZone]的效果是一样的。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+NSDate *date = [NSDate date];
+
+NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+[formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+
+//东八区时间
+formatter.timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
+
+NSString *dateStr = [formatter stringFromDate:date];
+NSLog(@"字符串时间 = %@", dateStr);
+
+</code></pre>
+</div>
+
+<p>获取系统支持的时区对应的字符串常量：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+NSArray *zones = [NSTimeZone knownTimeZoneNames];
+
+for (NSString *zone in zones) {
+   NSLog(@"时区名 = %@", zone);
+}
+
+</code></pre>
+</div>
+
+<h3 id="字符串时间转nsdate">字符串时间转NSDate</h3>
+
+<p>字符串时间转为NSDate时间也会有时区问题。</p>
+
+<p>也会遇到有所谓的8小时误差，其实就是时区不同。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+[formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
+NSDate *newDate = [formatter dateFromString:@"2016-12-07 14:06:24 +0800"];
+NSLog(@"newDate = %@", newDate);
+
+</code></pre>
+</div>
+
+<p>结果：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+&gt; 2016-12-07 14:12:17.468 timeTest[34279:3155380] newDate = 2016-12-07 06:06:24 +0000
+
+</code></pre>
+</div>
+
+<p>当不指定字符串时间的时区时，即没有后面的+0800，同时要把 NSDateFormatter 时间格式里的Z去掉，保证格式匹配。</p>
+
+<p>系统会认为字符串时间是系统所在时区的时间，转化为NSDate时间是零时区时间。</p>
+
+<p>同样，也可以使用 formatter.timeZone = [NSTimeZone timeZoneWithName:@”GMT”];这种方式指定字符串时间的时区，和用 Z 对应 +0000 是一样的。</p>
+
+<h3 id="nsdate-转当前时区的-nsdate-时间">NSDate 转当前时区的 NSDate 时间</h3>
+
+<p>因为 [NSDate date] 得出的时间是零时区时间，当我们要获取当前所在时区的 NSDate 时间时，通常会用以下方法：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+NSDate *date = [NSDate date];
+NSTimeZone *zone = [NSTimeZone systemTimeZone];
+NSInteger interval = [zone secondsFromGMTForDate:date];
+NSDate *localDate = [date  dateByAddingTimeInterval:interval];
+NSLog(@"localDate = %@",localDate);
+
+</code></pre>
+</div>
+
+<p>结果：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+&gt; 2016-12-07 14:49:03.777 timeTest[34519:3183548] localDate = 2016-12-07 14:49:03 +0000
+
+</code></pre>
+</div>
+
+<p>上面代码中 zone 是当前时区，interval 是当前时区和 零时区 时间的差值，最后结果 localDate 是零时区时间date加上这个差值interval，得到当前时区的NSDate时间。更有甚者，在开发中直接加8<em>60</em>60或28800这样的值，因为相差8小时嘛。这样在东八区没问题，在其他时区时间就错了。</p>
+
+<p>其实这种做法是不科学的，因为得到的最终时间还是零时区时间，时间后面明显是+0000，在使用中一般不显示时区，所以认为当做当前时区的时间使用也未尝不可。此为大坑！</p>
+
+<ul>
+  <li>
+    <p>坑1：这时如果转为字符串时间，又会增加8小时。因为做时间转换的时候，系统会认为这个NSDate是零时区，得到的字符串时间是东八区的。</p>
+  </li>
+  <li>
+    <p>坑2：在与后台交互时，有时需要+0000时区，这时只能手动拼接字符串更改这个时区字段，改为正确的时区。</p>
+  </li>
+</ul>
+
+<h2 id="时间换算时间戳的概念">时间换算、时间戳的概念</h2>
+
+<h3 id="当前时间转时间戳">当前时间转时间戳</h3>
+
+<p>时间戳是指 __ 1970年1月1日0时0分0秒 __ 到当前时间的秒数。</p>
+
+<p>注意：这里的当前时间是指零时区的NSDate时间。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+NSDate *date = [NSDate date];
+NSTimeInterval timeIn = [date timeIntervalSince1970];
+NSLog(@"时间戳 = %.0f", timeIn);
+
+</code></pre>
+</div>
+
+<p>结果：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+&gt; 2016-12-07 15:41:04.000 timeTest[34994:3232390] 时间戳 = 1481096464
+
+</code></pre>
+</div>
+
+<h3 id="时间戳转当前时间">时间戳转当前时间</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+NSDate *date = [NSDate date];
+NSTimeInterval timeIn = [date timeIntervalSince1970];
+
+NSDate *newDate = [NSDate dateWithTimeIntervalSince1970:timeIn];
+
+NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
+
+NSString *newTime = [dateFormatter stringFromDate:newDate];
+
+NSLog(@"初始化时间 = %@，\n 时间戳=%.0f，\n 时间戳转为NSDate时间 = %@，\n 转为字符串时间 = %@", date, timeIn, newDate, newTime);
+
+</code></pre>
+</div>
+
+<p>结果：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+&gt; 2016-12-07 16:11:56.146 timeTest[35186:3253589]
+初始化时间 = 2016-12-07 08:11:56 +0000，
+时间戳=1481098316，
+时间戳转为NSDate时间 = 2016-12-07 08:11:56 +0000，
+转为字符串时间 = 2016-12-07 16:11:56 +0800
+
+</code></pre>
+</div>
+
+<p>注意时间戳使用的 NSDate 时间是当前零时区的时间！当前零时区时间！当前零时区时间！重要的事情说三遍！不要进行 NSDate 转当前时区的NSDate时间，再转时间戳。下面是验证：</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+NSDate *date = [NSDate date];
+NSLog(@"系统零时区NSDate时间 = %@", date);  
+
+NSTimeInterval timeIn = [date timeIntervalSince1970];
+NSLog(@"系统零时区NSDate时间转化为时间戳 = %.0f", timeIn);
+
+NSTimeZone *zone = [NSTimeZone systemTimeZone];
+
+NSInteger interval = [zone secondsFromGMTForDate:date];
+
+NSDate *localDate = [date  dateByAddingTimeInterval:interval];
+NSLog(@"转化为本地 NSDate 时间 = %@", localDate);
+
+NSTimeInterval timeIn2 = [localDate timeIntervalSince1970];
+NSLog(@"本地NSDate时间转化为时间戳 = %.0f", timeIn2);
+
+NSDate *detaildate = [NSDate dateWithTimeIntervalSince1970:timeIn];
+NSDate *detaildate2 = [NSDate dateWithTimeIntervalSince1970:timeIn2];
+
+NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+[dateFormatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
+
+NSString *newTime = [dateFormatter stringFromDate:detaildate];
+NSString *newTime2 = [dateFormatter stringFromDate:detaildate2];
+NSLog(@"最终转为字符串时间1 = %@， 时间2 = %@", newTime, newTime2);
+
+</code></pre>
+</div>
+
+<p>结果：</p>
+<div class="highlighter-rouge"><pre class="highlight"><code>
+&gt; 2016-12-07 16:13:57.834 timeTest[35211:3255842] 系统零时区NSDate时间 = 2016-12-07 08:13:57 +0000
+2016-12-07 16:13:57.834 timeTest[35211:3255842] 系统零时区NSDate时间转化为时间戳 = 1481098438
+2016-12-07 16:13:57.835 timeTest[35211:3255842] 转化为本地NSDate时间 = 2016-12-07 16:13:57 +0000
+2016-12-07 16:13:57.835 timeTest[35211:3255842] 本地NSDate时间转化为时间戳 = 1481127238
+2016-12-07 16:13:57.836 timeTest[35211:3255842] 最终转为字符串时间1 = 2016-12-07 16:13:57 +0800， 时间2 = 2016-12-08 00:13:57 +0800
+
+</code></pre>
+</div>
+
+<h2 id="时间操作与比较">时间操作与比较</h2>
+
+<h3 id="时间初始化方法">时间初始化方法</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+//初始化当前时间，返回零时区时间
+NSDate *date = [NSDate date];
+
+//以当前时间为准，正数超前指定秒数，负数延后指定秒数
+NSDate *laterDate = [NSDate dateWithTimeIntervalSinceNow:60];
+
+//以2001-01-01 00:00:00 +0000为基准，正数超前指定秒数，负数延后指定秒数
+NSDate *newDate = [NSDate dateWithTimeIntervalSinceReferenceDate:60];
+
+//以1970-01-01 00:00:00 +0000为基准，正数超前指定秒数，负数延后指定秒数
+NSDate *newDate1 = [NSDate dateWithTimeIntervalSince1970:60];
+
+//实例方法，以指定时间为基准，正数超前指定秒数，负数延后指定秒数
+NSDate *newDate2 = [date dateByAddingTimeInterval:60];
+
+//很久以后的某一天
+NSDate *newDate3 = [NSDate distantFuture];
+
+//很久以前的某一天
+NSDate *newDate4 = [NSDate distantPast];
+
+</code></pre>
+</div>
+
+<h3 id="时间比较方法">时间比较方法</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+//比较两个时间是否相等
+- (BOOL)isEqualToDate:(NSDate *)otherDate;
+
+//两个时间比较，返回较早时间
+- (NSDate *)earlierDate:(NSDate *)anotherDate;
+
+//两个时间比较，返回较晚时间
+- (NSDate *)laterDate:(NSDate *)anotherDate;
+
+//两个时间比较，返回枚举类型
+- (NSComparisonResult)compare:(NSDate *)other;
+
+</code></pre>
+</div>
+
+<h3 id="时间间隔计算方法">时间间隔计算方法</h3>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>
+//返回实例时间与refDate时间间隔秒数
+- (NSTimeInterval)timeIntervalSinceDate:(NSDate *)refDate;
+
+//返回实例时间与当前时间间隔秒数
+- (NSTimeInterval)timeIntervalSinceNow;
+
+//返回实例时间的时间戳
+- (NSTimeInterval)timeIntervalSince1970;
+
+//返回实例时间和2001-01-01 00:00:00 +0000的间隔秒数
+- (NSTimeInterval)timeIntervalSinceReferenceDate;
+
+//返回当前时间和2001-01-01 00:00:00 +0000的间隔秒数
++ (NSTimeInterval)timeIntervalSinceReferenceDate;
+
+</code></pre>
+</div>
+
+<h2 id="获取年月日时分秒周时区农历日期">获取年月日时分秒周时区、农历日期</h2>
+
+<h3 id="获取年月日时分秒周时区">获取年月日时分秒周时区</h3>
+
+<p>OC里的时间坑太多，根本没办法像其他语言那样直接time.year就能获取年份。要想获取NSDate的年月日需要使用日历对象NSCalendar。</p>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="n">NSDate</span> <span class="o">*</span><span class="n">date</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSDate</span> <span class="n">date</span><span class="p">];</span>
+<span class="n">NSCalendar</span> <span class="o">*</span><span class="n">cal</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSCalendar</span> <span class="n">currentCalendar</span><span class="p">];</span>
+<span class="n">NSDateComponents</span> <span class="o">*</span><span class="n">dateComps</span> <span class="o">=</span> <span class="p">[</span><span class="n">cal</span> <span class="n">components</span><span class="p">:</span><span class="n">NSCalendarUnitYear</span><span class="o">|</span><span class="n">NSCalendarUnitMonth</span><span class="o">|</span><span class="n">NSCalendarUnitDay</span><span class="o">|</span><span class="n">NSCalendarUnitHour</span><span class="o">|</span><span class="n">NSCalendarUnitMinute</span><span class="o">|</span><span class="n">NSCalendarUnitSecond</span><span class="o">|</span><span class="n">NSCalendarUnitWeekday</span><span class="o">|</span><span class="n">NSCalendarUnitWeekOfMonth</span><span class="o">|</span><span class="n">NSCalendarUnitWeekOfYear</span><span class="o">|</span><span class="n">NSCalendarUnitTimeZone</span> <span class="n">fromDate</span><span class="p">:</span><span class="n">date</span><span class="p">];</span>
+<span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">"时间 = </span><span class="si">%</span><span class="s">@"</span><span class="p">,</span> <span class="n">date</span><span class="p">);</span>
+<span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">"年=</span><span class="si">%</span><span class="s">ld,月=</span><span class="si">%</span><span class="s">ld,日=</span><span class="si">%</span><span class="s">ld,时=</span><span class="si">%</span><span class="s">ld,分=</span><span class="si">%</span><span class="s">ld,秒=</span><span class="si">%</span><span class="s">ld,周=</span><span class="si">%</span><span class="s">ld,本月第</span><span class="si">%</span><span class="s">ld周,本年第</span><span class="si">%</span><span class="s">ld周,时区=</span><span class="si">%</span><span class="s">@"</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">weekday</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">weekOfMonth</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">weekOfYear</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">timeZone</span><span class="o">.</span><span class="n">name</span><span class="p">);</span>
+
+</code></pre>
+</div>
+
+<p>结果：</p>
+
+<blockquote>
+  <p>2016-12-07 17:20:41.639 timeTest[35734:3311752] 时间 = 2016-12-07 09:20:41 +0000
+2016-12-07 17:20:41.640 timeTest[35734:3311752] 年=2016,月=12,日=7,时=17,分=20,秒=41,周=4,本月第2周,本年第50周,时区=Asia/Shanghai</p>
+</blockquote>
+
+<p>NSDateComponents创建方法中添加的枚举NSCalendarUnit，是后面要获取的年月日时分秒必须对应添加的。比如要获取年dateComps.year，就需要添加枚举NSCalendarUnitYear。</p>
+
+<p>可以看到，[NSDate date]时间可以使用NSCalendar直接获取当前时区的时分秒，打印的时和时区即可看出。这是[NSCalendar currentCalendar]日历对象初始化的原因，也可以用[[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian]指定Identifier的方式初始化阳历日历。可以试试指定Identifier为NSCalendarIdentifierChinese，打印的是中国农历。</p>
+
+<p>dateComps.weekOfMonth是今天属于本月的第几周。</p>
+
+<p>dateComps.weekOfYear是今天属于本年的第几周。</p>
+
+<p>dateComps.weekday是星期，这个和日常使用有些不同。上述程序打印的是周=4，但2016-12-07是周三。这里weekday的对应关系是：周日-1，周一-2，周二-3，周三-4，周四-5，周五-6，周六-7。毕竟国外惯例周日是每周的第一天。</p>
+
+<h3 id="农历">农历</h3>
+
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
+<span class="o">+</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">LunarForSolarYear</span><span class="p">:(</span><span class="nb">int</span><span class="p">)</span><span class="n">wCurYear</span> <span class="n">Month</span><span class="p">:(</span><span class="nb">int</span><span class="p">)</span><span class="n">wCurMonth</span> <span class="n">Day</span><span class="p">:(</span><span class="nb">int</span><span class="p">)</span><span class="n">wCurDay</span>
+<span class="p">{</span>
+    <span class="o">//</span><span class="err">农历日期名</span>
+    <span class="n">NSArray</span> <span class="o">*</span><span class="n">cDayName</span> <span class="o">=</span>  <span class="p">[</span><span class="n">NSArray</span> <span class="n">arrayWithObjects</span><span class="p">:</span><span class="err">@</span><span class="s">"*"</span><span class="p">,</span><span class="err">@</span><span class="s">"初一"</span><span class="p">,</span><span class="err">@</span><span class="s">"初二"</span><span class="p">,</span><span class="err">@</span><span class="s">"初三"</span><span class="p">,</span><span class="err">@</span><span class="s">"初四"</span><span class="p">,</span><span class="err">@</span><span class="s">"初五"</span><span class="p">,</span><span class="err">@</span><span class="s">"初六"</span><span class="p">,</span><span class="err">@</span><span class="s">"初七"</span><span class="p">,</span><span class="err">@</span><span class="s">"初八"</span><span class="p">,</span><span class="err">@</span><span class="s">"初九"</span><span class="p">,</span><span class="err">@</span><span class="s">"初十"</span><span class="p">,</span><span class="err">@</span><span class="s">"十一"</span><span class="p">,</span><span class="err">@</span><span class="s">"十二"</span><span class="p">,</span><span class="err">@</span><span class="s">"十三"</span><span class="p">,</span><span class="err">@</span><span class="s">"十四"</span><span class="p">,</span><span class="err">@</span><span class="s">"十五"</span><span class="p">,</span><span class="err">@</span><span class="s">"十六"</span><span class="p">,</span><span class="err">@</span><span class="s">"十七"</span><span class="p">,</span><span class="err">@</span><span class="s">"十八"</span><span class="p">,</span><span class="err">@</span><span class="s">"十九"</span><span class="p">,</span><span class="err">@</span><span class="s">"二十"</span><span class="p">,</span><span class="err">@</span><span class="s">"廿一"</span><span class="p">,</span><span class="err">@</span><span class="s">"廿二"</span><span class="p">,</span><span class="err">@</span><span class="s">"廿三"</span><span class="p">,</span><span class="err">@</span><span class="s">"廿四"</span><span class="p">,</span><span class="err">@</span><span class="s">"廿五"</span><span class="p">,</span><span class="err">@</span><span class="s">"廿六"</span><span class="p">,</span><span class="err">@</span><span class="s">"廿七"</span><span class="p">,</span><span class="err">@</span><span class="s">"廿八"</span><span class="p">,</span><span class="err">@</span><span class="s">"廿九"</span><span class="p">,</span><span class="err">@</span><span class="s">"三十"</span><span class="p">,</span><span class="n">nil</span><span class="p">];</span>
+    <span class="o">//</span><span class="err">农历月份名</span>
+    <span class="n">NSArray</span> <span class="o">*</span><span class="n">cMonName</span> <span class="o">=</span>  <span class="p">[</span><span class="n">NSArray</span> <span class="n">arrayWithObjects</span><span class="p">:</span><span class="err">@</span><span class="s">"*"</span><span class="p">,</span><span class="err">@</span><span class="s">"正月"</span><span class="p">,</span><span class="err">@</span><span class="s">"二月"</span><span class="p">,</span><span class="err">@</span><span class="s">"三月"</span><span class="p">,</span><span class="err">@</span><span class="s">"四月"</span><span class="p">,</span><span class="err">@</span><span class="s">"五月"</span><span class="p">,</span><span class="err">@</span><span class="s">"六月"</span><span class="p">,</span><span class="err">@</span><span class="s">"七月"</span><span class="p">,</span><span class="err">@</span><span class="s">"八月"</span><span class="p">,</span><span class="err">@</span><span class="s">"九月"</span><span class="p">,</span><span class="err">@</span><span class="s">"十月"</span><span class="p">,</span><span class="err">@</span><span class="s">"冬月"</span><span class="p">,</span><span class="err">@</span><span class="s">"腊月"</span><span class="p">,</span><span class="n">nil</span><span class="p">];</span>
+    <span class="o">//</span><span class="err">公历每月前面的天数</span>
+    <span class="n">const</span> <span class="nb">int</span> <span class="n">wMonthAdd</span><span class="p">[</span><span class="mi">12</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span><span class="mi">31</span><span class="p">,</span><span class="mi">59</span><span class="p">,</span><span class="mi">90</span><span class="p">,</span><span class="mi">120</span><span class="p">,</span><span class="mi">151</span><span class="p">,</span><span class="mi">181</span><span class="p">,</span><span class="mi">212</span><span class="p">,</span><span class="mi">243</span><span class="p">,</span><span class="mi">273</span><span class="p">,</span><span class="mi">304</span><span class="p">,</span><span class="mi">334</span><span class="p">};</span>
+    <span class="o">//</span><span class="err">农历数据</span>
+    <span class="n">const</span> <span class="nb">int</span> <span class="n">wNongliData</span><span class="p">[</span><span class="mi">100</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">2635</span><span class="p">,</span><span class="mi">333387</span><span class="p">,</span><span class="mi">1701</span><span class="p">,</span><span class="mi">1748</span><span class="p">,</span><span class="mi">267701</span><span class="p">,</span><span class="mi">694</span><span class="p">,</span><span class="mi">2391</span><span class="p">,</span><span class="mi">133423</span><span class="p">,</span><span class="mi">1175</span><span class="p">,</span><span class="mi">396438</span>
+        <span class="p">,</span><span class="mi">3402</span><span class="p">,</span><span class="mi">3749</span><span class="p">,</span><span class="mi">331177</span><span class="p">,</span><span class="mi">1453</span><span class="p">,</span><span class="mi">694</span><span class="p">,</span><span class="mi">201326</span><span class="p">,</span><span class="mi">2350</span><span class="p">,</span><span class="mi">465197</span><span class="p">,</span><span class="mi">3221</span><span class="p">,</span><span class="mi">3402</span>
+        <span class="p">,</span><span class="mi">400202</span><span class="p">,</span><span class="mi">2901</span><span class="p">,</span><span class="mi">1386</span><span class="p">,</span><span class="mi">267611</span><span class="p">,</span><span class="mi">605</span><span class="p">,</span><span class="mi">2349</span><span class="p">,</span><span class="mi">137515</span><span class="p">,</span><span class="mi">2709</span><span class="p">,</span><span class="mi">464533</span><span class="p">,</span><span class="mi">1738</span>
+        <span class="p">,</span><span class="mi">2901</span><span class="p">,</span><span class="mi">330421</span><span class="p">,</span><span class="mi">1242</span><span class="p">,</span><span class="mi">2651</span><span class="p">,</span><span class="mi">199255</span><span class="p">,</span><span class="mi">1323</span><span class="p">,</span><span class="mi">529706</span><span class="p">,</span><span class="mi">3733</span><span class="p">,</span><span class="mi">1706</span><span class="p">,</span><span class="mi">398762</span>
+        <span class="p">,</span><span class="mi">2741</span><span class="p">,</span><span class="mi">1206</span><span class="p">,</span><span class="mi">267438</span><span class="p">,</span><span class="mi">2647</span><span class="p">,</span><span class="mi">1318</span><span class="p">,</span><span class="mi">204070</span><span class="p">,</span><span class="mi">3477</span><span class="p">,</span><span class="mi">461653</span><span class="p">,</span><span class="mi">1386</span><span class="p">,</span><span class="mi">2413</span>
+        <span class="p">,</span><span class="mi">330077</span><span class="p">,</span><span class="mi">1197</span><span class="p">,</span><span class="mi">2637</span><span class="p">,</span><span class="mi">268877</span><span class="p">,</span><span class="mi">3365</span><span class="p">,</span><span class="mi">531109</span><span class="p">,</span><span class="mi">2900</span><span class="p">,</span><span class="mi">2922</span><span class="p">,</span><span class="mi">398042</span><span class="p">,</span><span class="mi">2395</span>
+        <span class="p">,</span><span class="mi">1179</span><span class="p">,</span><span class="mi">267415</span><span class="p">,</span><span class="mi">2635</span><span class="p">,</span><span class="mi">661067</span><span class="p">,</span><span class="mi">1701</span><span class="p">,</span><span class="mi">1748</span><span class="p">,</span><span class="mi">398772</span><span class="p">,</span><span class="mi">2742</span><span class="p">,</span><span class="mi">2391</span><span class="p">,</span><span class="mi">330031</span>
+        <span class="p">,</span><span class="mi">1175</span><span class="p">,</span><span class="mi">1611</span><span class="p">,</span><span class="mi">200010</span><span class="p">,</span><span class="mi">3749</span><span class="p">,</span><span class="mi">527717</span><span class="p">,</span><span class="mi">1452</span><span class="p">,</span><span class="mi">2742</span><span class="p">,</span><span class="mi">332397</span><span class="p">,</span><span class="mi">2350</span><span class="p">,</span><span class="mi">3222</span>
+        <span class="p">,</span><span class="mi">268949</span><span class="p">,</span><span class="mi">3402</span><span class="p">,</span><span class="mi">3493</span><span class="p">,</span><span class="mi">133973</span><span class="p">,</span><span class="mi">1386</span><span class="p">,</span><span class="mi">464219</span><span class="p">,</span><span class="mi">605</span><span class="p">,</span><span class="mi">2349</span><span class="p">,</span><span class="mi">334123</span><span class="p">,</span><span class="mi">2709</span>
+        <span class="p">,</span><span class="mi">2890</span><span class="p">,</span><span class="mi">267946</span><span class="p">,</span><span class="mi">2773</span><span class="p">,</span><span class="mi">592565</span><span class="p">,</span><span class="mi">1210</span><span class="p">,</span><span class="mi">2651</span><span class="p">,</span><span class="mi">395863</span><span class="p">,</span><span class="mi">1323</span><span class="p">,</span><span class="mi">2707</span><span class="p">,</span><span class="mi">265877</span><span class="p">};</span>
+    <span class="n">static</span> <span class="nb">int</span> <span class="n">nTheDate</span><span class="p">,</span><span class="n">nIsEnd</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">nBit</span><span class="p">;</span>
+    <span class="o">//</span><span class="err">计算到初始时间</span><span class="mi">1921</span><span class="err">年</span><span class="mi">2</span><span class="err">月</span><span class="mi">8</span><span class="err">日的天数：</span><span class="mi">1921</span><span class="o">-</span><span class="mi">2</span><span class="o">-</span><span class="mi">8</span><span class="p">(</span><span class="err">正月初一</span><span class="p">)</span>
+    <span class="n">nTheDate</span> <span class="o">=</span> <span class="p">(</span><span class="n">wCurYear</span> <span class="o">-</span> <span class="mi">1921</span><span class="p">)</span> <span class="o">*</span> <span class="mi">365</span> <span class="o">+</span> <span class="p">(</span><span class="n">wCurYear</span> <span class="o">-</span> <span class="mi">1921</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span> <span class="o">+</span> <span class="n">wCurDay</span> <span class="o">+</span> <span class="n">wMonthAdd</span><span class="p">[</span><span class="n">wCurMonth</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="mi">38</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">((</span><span class="err">!</span><span class="p">(</span><span class="n">wCurYear</span> <span class="o">%</span> <span class="mi">4</span><span class="p">))</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">wCurMonth</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">))</span>
+        <span class="n">nTheDate</span> <span class="o">=</span> <span class="n">nTheDate</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="o">//</span><span class="err">计算农历天干、地支、月、日</span>
+    <span class="n">nIsEnd</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span><span class="p">(</span><span class="n">nIsEnd</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">wNongliData</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">4095</span><span class="p">)</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="mi">11</span><span class="p">;</span>
+        <span class="k">else</span>
+            <span class="n">k</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="n">k</span><span class="p">;</span>
+        <span class="k">while</span><span class="p">(</span><span class="n">n</span><span class="o">&gt;=</span><span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+            <span class="o">//</span><span class="err">获取</span><span class="n">wNongliData</span><span class="p">(</span><span class="n">m</span><span class="p">)</span><span class="err">的第</span><span class="n">n</span><span class="err">个二进制位的值</span>
+            <span class="n">nBit</span> <span class="o">=</span> <span class="n">wNongliData</span><span class="p">[</span><span class="n">m</span><span class="p">];</span>
+            <span class="k">for</span><span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span><span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span><span class="n">i</span><span class="o">++</span><span class="p">)</span>
+                <span class="n">nBit</span> <span class="o">=</span> <span class="n">nBit</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+            <span class="n">nBit</span> <span class="o">=</span> <span class="n">nBit</span> <span class="o">%</span> <span class="mi">2</span><span class="p">;</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">nTheDate</span> <span class="o">&lt;=</span> <span class="p">(</span><span class="mi">29</span> <span class="o">+</span> <span class="n">nBit</span><span class="p">)){</span>
+                <span class="n">nIsEnd</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+                <span class="k">break</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">nTheDate</span> <span class="o">=</span> <span class="n">nTheDate</span> <span class="o">-</span> <span class="mi">29</span> <span class="o">-</span> <span class="n">nBit</span><span class="p">;</span>
+            <span class="n">n</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">nIsEnd</span><span class="p">)</span>
+            <span class="k">break</span><span class="p">;</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">m</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">wCurYear</span> <span class="o">=</span> <span class="mi">1921</span> <span class="o">+</span> <span class="n">m</span><span class="p">;</span>
+    <span class="n">wCurMonth</span> <span class="o">=</span> <span class="n">k</span> <span class="o">-</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">wCurDay</span> <span class="o">=</span> <span class="n">nTheDate</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">(</span><span class="n">k</span> <span class="o">==</span> <span class="mi">12</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span><span class="p">(</span><span class="n">wCurMonth</span> <span class="o">==</span> <span class="n">wNongliData</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">/</span> <span class="mi">65536</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">wCurMonth</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">wCurMonth</span><span class="p">;</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">wCurMonth</span> <span class="o">&gt;</span> <span class="n">wNongliData</span><span class="p">[</span><span class="n">m</span><span class="p">]</span> <span class="o">/</span> <span class="mi">65536</span> <span class="o">+</span> <span class="mi">1</span><span class="p">){</span>
+            <span class="n">wCurMonth</span> <span class="o">=</span> <span class="n">wCurMonth</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="o">//</span> <span class="err">生成农历月</span>
+    <span class="n">NSString</span> <span class="o">*</span> <span class="n">szNongliMonth</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">wCurMonth</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">){</span>
+        <span class="n">szNongliMonth</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="n">stringWithFormat</span><span class="p">:</span><span class="err">@</span><span class="s">"闰</span><span class="si">%</span><span class="s">@："</span><span class="p">,</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)[</span><span class="n">cMonName</span> <span class="n">objectAtIndex</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">wCurMonth</span><span class="p">]];</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="p">{</span>
+        <span class="n">szNongliMonth</span> <span class="o">=</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)[</span><span class="n">cMonName</span> <span class="n">objectAtIndex</span><span class="p">:</span><span class="n">wCurMonth</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="o">//</span> <span class="err">生成农历日</span>
+    <span class="n">NSString</span> <span class="o">*</span> <span class="n">szNongliDay</span> <span class="o">=</span> <span class="p">[</span><span class="n">cDayName</span> <span class="n">objectAtIndex</span><span class="p">:</span><span class="n">wCurDay</span><span class="p">];</span>
+    <span class="o">//</span> <span class="err">合并</span>
+    <span class="n">NSString</span> <span class="o">*</span> <span class="n">lunarDate</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="n">stringWithFormat</span><span class="p">:</span><span class="err">@</span><span class="s">"</span><span class="si">%</span><span class="s">@-</span><span class="si">%</span><span class="s">@"</span><span class="p">,</span> <span class="n">szNongliMonth</span><span class="p">,</span> <span class="n">szNongliDay</span><span class="p">];</span>
+    <span class="k">return</span> <span class="n">lunarDate</span><span class="p">;</span>
+
+</code></pre>
+</div>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/">自定义 CollectionView 布局之瀑布流
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/">iOS资源整合
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/07/24/%E5%BD%92%E8%A7%A3%E6%A1%A3/">归/解档
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/07/24/SQLite3/">iOS-SQLite3
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/07/24/plist/">Plist
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/07/24/NSUserDefaults/">NSUserDefaults
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2016/12/24/github+jekyll%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">github+jekyll搭建个人博客</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2017/07/18/%E7%BC%96%E8%AF%91bug%E6%B1%87%E6%80%BB/">iOS 编译bug汇总</a></p>
+        
+    </div>
+</div>
+
+
+        <h2 id="comments">Comments</h2>
+        
+
+
+
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
+                    
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            <!-- Contact me at: -->
+            
+            
+            
+            
+            
+            
+            
+            
+        </p>
+        <!-- <p>
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p> -->
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<!-- <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+    </script>
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>

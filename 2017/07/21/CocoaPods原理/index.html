@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CocoaPods 原理</title>
+    <meta name="description" content="CocoaPods 原理简单记录">
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <!-- 菜单前的图标，需要下面这句 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="http://localhost:4000/2017/07/21/CocoaPods%E5%8E%9F%E7%90%86/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
+
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?cf8506e0ef223e57ff6239944e5d46a4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-72449510-4', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
+    "HTML-CSS": {
+      linebreaks: { automatic: true, width: "container" }
+    }
+});
+</script>
+<!-- <script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+</head>
+
+
+  <body>
+
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">YJ`s notes</a>
+        <small></small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>类别
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>标签
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>关于我
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>CocoaPods 原理</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2017-07-21
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#CocoaPods" title="Category: CocoaPods" rel="category">CocoaPods</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#CocoaPods" title="Tag: CocoaPods" rel="tag">CocoaPods</a-->
+        <a href="/tag/#CocoaPods" title="Tag: CocoaPods" rel="tag">CocoaPods</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#cocoapods-简介" id="markdown-toc-cocoapods-简介">CocoaPods 简介</a></li>
+  <li><a href="#核心组件" id="markdown-toc-核心组件">核心组件</a>    <ul>
+      <li><a href="#podfile" id="markdown-toc-podfile">Podfile</a></li>
+      <li><a href="#podspec" id="markdown-toc-podspec">podspec</a></li>
+      <li><a href="#cocoapodsxcodeproj" id="markdown-toc-cocoapodsxcodeproj">CocoaPods/Xcodeproj</a></li>
+    </ul>
+  </li>
+  <li><a href="#pod-install" id="markdown-toc-pod-install">pod install</a>    <ul>
+      <li><a href="#读取-podfile" id="markdown-toc-读取-podfile">读取 Podfile</a></li>
+      <li><a href="#版本控制和冲突" id="markdown-toc-版本控制和冲突">版本控制和冲突</a></li>
+      <li><a href="#加载源文件" id="markdown-toc-加载源文件">加载源文件</a></li>
+      <li><a href="#生成-podsxcodeproj" id="markdown-toc-生成-podsxcodeproj">生成 Pods.xcodeproj</a></li>
+      <li><a href="#安装第三方库" id="markdown-toc-安装第三方库">安装第三方库</a></li>
+      <li><a href="#写入磁盘" id="markdown-toc-写入磁盘">写入磁盘</a>        <ul>
+          <li><a href="#podfilelock" id="markdown-toc-podfilelock">Podfile.lock</a></li>
+          <li><a href="#manifestlock" id="markdown-toc-manifestlock">Manifest.lock</a></li>
+          <li><a href="#xcproj" id="markdown-toc-xcproj">xcproj</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
+</ul>
+
+<h2 id="cocoapods-简介">CocoaPods 简介</h2>
+<p>CocoaPods 是一个 OC 依赖管理库，而本身是由 Ruby 的依赖管理 gem 进行构建的。</p>
+
+<h2 id="核心组件">核心组件</h2>
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/20170721_01_01.png" alt="" /></p>
+
+<h3 id="podfile">Podfile</h3>
+<p>定义项目所需要使用的第三方库，高度定制。<a href="http://guides.cocoapods.org/syntax/podfile.html">Podfile官方指南</a></p>
+
+<h3 id="podspec">podspec</h3>
+<p>该文件描述了一个库是怎样被添加到工程中，支持的功能有列出源文件、framework、编译选项和某个库所需依赖等。</p>
+
+<h3 id="cocoapodsxcodeproj">CocoaPods/Xcodeproj</h3>
+<p>这个 gem 组件负责所有工程文件的整合。可以创建并修改 .xcodeproj 和 .xcworkspace 文件。也可以作为单独的一个 gem 包使用。如果你想要写一个脚本来方便的修改工程文件，那么可以使用这个 gem。</p>
+
+<h2 id="pod-install">pod install</h2>
+<div class="highlighter-rouge"><pre class="highlight"><code>pod install (--verbose)
+</code></pre>
+</div>
+
+<p>pod install 语句的执行过程如下。</p>
+
+<h3 id="读取-podfile">读取 Podfile</h3>
+<p>首先弄清楚显式 / 隐式的声明了哪些第三方库。在加载 podspec 过程中，CocoaPods 就建立了包括版本信息在内的所有的第三方库的列表。podspecs 被存储在本地路径 ~/.cocoapods 中。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Finding Podfile changes
+  - AFNetworking
+</code></pre>
+</div>
+
+<h3 id="版本控制和冲突">版本控制和冲突</h3>
+<p>CocoaPods使用了 <a href="http://semver.org/lang/zh-CN/">语义版本控制</a> 命名约定来解决对版本的依赖。</p>
+
+<p>由于冲突解决系统建立在非重大变更的补丁版本之间，这使得解决依赖关系变得容易很多。例如，两个不同的 pods 依赖于 CocoaLumberjack 的两个版本，假设一个依赖于 2.3.1，另一个依赖于 2.3.3，此时冲突解决系统可以使用最新的版本 2.3.3，因为这个可以向后与 2.3.1 兼容。</p>
+
+<p>但这并不总是有效。有许多第三方库并不使用这样的约定，这让解决方案变得非常复杂。</p>
+
+<p>当然，总会有一些冲突需要手动解决。如果一个库依赖于 CocoaLumberjack 的 1.2.5，另外一个库则依赖于 2.3.1，那么只有最终用户通过明确指定使用某个版本来解决冲突。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Downloading dependencies
+
+-&gt; Using AFNetworking (1.2.1)
+</code></pre>
+</div>
+
+<h3 id="加载源文件">加载源文件</h3>
+
+<p>每个 .podspec 文件都包含一个源代码的索引，这些索引一般包裹一个 git 地址和 git tag。它们以 commit SHAs 的方式存储在 ~/Library/Caches/CocoaPods 中。这个路径中文件的创建是由 Core gem 负责的。</p>
+
+<p>CocoaPods 将依照 Podfile、.podspec 和缓存文件的信息将源文件下载到 Pods 目录中。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>Generating Pods project
+  - Creating Pods project
+  - Adding source files to Pods project
+  - Adding frameworks to Pods project
+  - Adding libraries to Pods project
+  - Adding resources to Pods project
+  - Linking headers
+</code></pre>
+</div>
+
+<h3 id="生成-podsxcodeproj">生成 Pods.xcodeproj</h3>
+
+<p>每次 pod install 执行，如果检测到改动时，CocoaPods 会利用 Xcodeproj gem 组件对 Pods.xcodeproj 进行更新。如果该文件不存在，则用默认配置生成。否则，会将已有的配置项加载至内存中。</p>
+
+<h3 id="安装第三方库">安装第三方库</h3>
+
+<p>当 CocoaPods 往工程中添加一个第三方库时，不仅仅是添加代码这么简单，还会添加很多内容。由于每个第三方库有不同的 target，因此对于每个库，都会有几个文件需要添加，每个 target 都需要：</p>
+
+<ul>
+  <li>一个包含编译选项的 .xcconfig 文件</li>
+  <li>一个同时包含编译设置和 CocoaPods 默认配置的私有 .xcconfig 文件</li>
+  <li>一个编译所必须的 prefix.pch 文件</li>
+  <li>另一个编译必须的文件 dummy.m</li>
+</ul>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>- Installing libraries
+  - Installing target `Pods-AFNetworking` iOS 6.0
+    - Adding Build files
+    - Adding resource bundles to Pods project
+    - Generating public xcconfig file at `Pods/Pods-AFNetworking.xcconfig`
+    - Generating private xcconfig file at `Pods/Pods-AFNetworking-Private.xcconfig`
+    - Generating prefix header at `Pods/Pods-AFNetworking-prefix.pch`
+    - Generating dummy source file at `Pods/Pods-AFNetworking-dummy.m`
+</code></pre>
+</div>
+
+<p>一旦每个 pod 的 target 完成了上面的内容，整个 Pods target 就会被创建。这增加了相同文件的同时，还增加了另外几个文件。如果源码中包含有资源 bundle，将这个 bundle 添加至程序 target 的指令将被添加到 Pods-Resources.sh 文件中。还有一个名为 Pods-environment.h 的文件，文件中包含了一些宏，这些宏可以用来检查某个组件是否来自 pod。最后，将生成两个认可文件，一个是 plist，另一个是 markdown，这两个文件用于给最终用户查阅相关许可信息。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>- Installing target `Pods` iOS 6.0
+      - Generating xcconfig file at `Pods/Pods.xcconfig`
+      - Generating target environment header at `Pods/Pods-environment.h`
+      - Generating copy resources script at `Pods/Pods-resources.sh`
+      - Generating acknowledgements at `Pods/Pods-acknowledgements.plist`
+      - Generating acknowledgements at `Pods/Pods-acknowledgements.markdown`
+      - Generating dummy source file at `Pods/Pods-dummy.m`
+</code></pre>
+</div>
+
+<h3 id="写入磁盘">写入磁盘</h3>
+<p>直到现在，许多工作都是在内存中进行的。为了让这些成果能被重复利用，我们需要将所有的结果保存到一个文件中。</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>- Writing Xcode project file to `Pods/Pods.xcodeproj`
+- Writing Lockfile in `Podfile.lock`
+- Writing Manifest in `Pods/Manifest.lock`
+</code></pre>
+</div>
+
+<h4 id="podfilelock">Podfile.lock</h4>
+<p>这是 CocoaPods 创建的最重要的文件之一。它记录了需要被安装的 pod 的每个已安装的版本。如果你想知道已安装的 pod 是哪个版本，可以查看这个文件。推荐将 Podfile.lock 文件加入到版本控制中，这有助于整个团队的一致性。</p>
+
+<h4 id="manifestlock">Manifest.lock</h4>
+<p>这是每次运行 pod install 命令时创建的 Podfile.lock 文件的副本。如果你遇见过这样的错误 沙盒文件与 Podfile.lock 文件不同步 (The sandbox is not in sync with the Podfile.lock)，这是因为 Manifest.lock 文件和 Podfile.lock 文件不一致所引起。由于 Pods 所在的目录并不总在版本控制之下，这样可以保证开发者运行 app 之前都能更新他们的 pods，否则 app 可能会 crash，或者在一些不太明显的地方编译失败。</p>
+
+<h4 id="xcproj">xcproj</h4>
+<p>如果你已经依照我们的建议在系统上安装了 xcproj，它会对 Pods.xcodeproj 文件执行一下 touch 以将其转换成为旧的 ASCII plist 格式的文件。为什么要这么做呢？虽然在很久以前就不被其它软件支持了，但是 Xcode 仍然依赖于这种格式。如果没有 xcproj，你的 Pods.xcodeproj 文件将会以 XML 格式的 plist 文件存储，当你用 Xcode 打开它时，它会被改写，并造成大量的文件改动。</p>
+
+<hr />
+<h2 id="相关链接">相关链接</h2>
+
+<p><a href="https://objccn.io/issue-6-4/">OC中国-深入理解CocoaPods</a></p>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E7%A7%81%E6%9C%89%E5%BA%93/">创建私有 Pods 库
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E5%85%B1%E6%9C%89%E5%BA%93/">创建公有 Pods 库
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2017/07/21/Git%E5%90%8C%E6%97%B6push%E5%88%B0%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">Git push到多个仓库</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E5%85%B1%E6%9C%89%E5%BA%93/">创建公有 Pods 库</a></p>
+        
+    </div>
+</div>
+
+
+        <h2 id="comments">Comments</h2>
+        
+
+
+
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
+                    
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            <!-- Contact me at: -->
+            
+            
+            
+            
+            
+            
+            
+            
+        </p>
+        <!-- <p>
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p> -->
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<!-- <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+    </script>
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>

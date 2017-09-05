@@ -5,8 +5,8 @@
     <description></description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 28 Aug 2017 17:25:26 +0800</pubDate>
-    <lastBuildDate>Mon, 28 Aug 2017 17:25:26 +0800</lastBuildDate>
+    <pubDate>Tue, 05 Sep 2017 17:18:13 +0800</pubDate>
+    <lastBuildDate>Tue, 05 Sep 2017 17:18:13 +0800</lastBuildDate>
     <generator>Jekyll v3.3.1</generator>
     
       <item>
@@ -40,75 +40,15 @@
       </item>
     
       <item>
-        <title>Git push到多个仓库</title>
-        <description>同一份代码关联 2 个远程仓库，终端或SourceTree实现自动同时 push 到多个仓库，或者手动选择推送指定仓库。</description>
-        <pubDate>Fri, 21 Jul 2017 15:14:54 +0800</pubDate>
-        <link>http://localhost:4000/2017/07/21/Git%E5%90%8C%E6%97%B6push%E5%88%B0%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/07/21/Git%E5%90%8C%E6%97%B6push%E5%88%B0%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/</guid>
-        
-        <category>Git</category>
-        
-        
-        <category>Git</category>
-        
-      </item>
-    
-      <item>
-        <title>github+jekyll搭建个人博客</title>
-        <description>记录个人博客搭建过程</description>
-        <pubDate>Sat, 24 Dec 2016 20:02:54 +0800</pubDate>
-        <link>http://localhost:4000/2016/12/24/github+jekyll%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/12/24/github+jekyll%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/</guid>
-        
-        <category>jekyll</category>
-        
-        <category>Github</category>
-        
-        
-        <category>jekyll</category>
-        
-        <category>Github</category>
-        
-      </item>
-    
-      <item>
-        <title>jekyll安装与使用</title>
-        <description>记录 jekyll 安装与使用及过程中的问题</description>
-        <pubDate>Sat, 24 Dec 2016 16:02:54 +0800</pubDate>
-        <link>http://localhost:4000/2016/12/24/jekyll%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/12/24/jekyll%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/</guid>
-        
-        <category>jekyll</category>
-        
-        
-        <category>jekyll</category>
-        
-      </item>
-    
-      <item>
-        <title>Gihub Pages</title>
-        <description>Github Pages</description>
-        <pubDate>Sat, 24 Dec 2016 15:02:54 +0800</pubDate>
-        <link>http://localhost:4000/2016/12/24/Github-Pages/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/12/24/Github-Pages/</guid>
-        
-        <category>Github</category>
-        
-        
-        <category>Github</category>
-        
-      </item>
-    
-      <item>
-        <title>UIView动画</title>
-        <description>iOS UIView简单动画</description>
-        <pubDate>Wed, 21 Dec 2016 09:00:54 +0800</pubDate>
-        <link>http://localhost:4000/2016/12/21/UIView%E5%8A%A8%E7%94%BB/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/12/21/UIView%E5%8A%A8%E7%94%BB/</guid>
+        <title>归/解档</title>
+        <description>归/解档存储数据</description>
+        <pubDate>Mon, 24 Jul 2017 13:14:54 +0800</pubDate>
+        <link>http://localhost:4000/2017/07/24/%E5%BD%92%E8%A7%A3%E6%A1%A3/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/24/%E5%BD%92%E8%A7%A3%E6%A1%A3/</guid>
         
         <category>iOS</category>
         
-        <category>动画</category>
+        <category>数据存储</category>
         
         
         <category>iOS</category>
@@ -116,30 +56,110 @@
       </item>
     
       <item>
-        <title>makefile文件编写与使用</title>
-        <description>makefile</description>
-        <pubDate>Tue, 20 Dec 2016 17:14:54 +0800</pubDate>
-        <link>http://localhost:4000/2016/12/20/makefile%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E4%B8%8E%E4%BD%BF%E7%94%A8/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/12/20/makefile%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E4%B8%8E%E4%BD%BF%E7%94%A8/</guid>
+        <title>iOS-SQLite3</title>
+        <description>iOS-SQLite3</description>
+        <pubDate>Mon, 24 Jul 2017 13:14:54 +0800</pubDate>
+        <link>http://localhost:4000/2017/07/24/SQLite3/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/24/SQLite3/</guid>
         
-        <category>其他</category>
+        <category>iOS</category>
+        
+        <category>数据存储</category>
         
         
-        <category>其他</category>
+        <category>iOS</category>
         
       </item>
     
       <item>
-        <title>Makedown语法手册</title>
-        <description>Makedown语法手册</description>
-        <pubDate>Tue, 20 Dec 2016 17:14:54 +0800</pubDate>
-        <link>http://localhost:4000/2016/12/20/MakeDown%E8%AF%AD%E6%B3%95/</link>
-        <guid isPermaLink="true">http://localhost:4000/2016/12/20/MakeDown%E8%AF%AD%E6%B3%95/</guid>
+        <title>Plist</title>
+        <description>属性列表</description>
+        <pubDate>Mon, 24 Jul 2017 12:14:54 +0800</pubDate>
+        <link>http://localhost:4000/2017/07/24/plist/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/24/plist/</guid>
         
-        <category>Makedown</category>
+        <category>iOS</category>
+        
+        <category>数据存储</category>
         
         
-        <category>其他</category>
+        <category>iOS</category>
+        
+      </item>
+    
+      <item>
+        <title>NSUserDefaults</title>
+        <description>NSUserDefaults</description>
+        <pubDate>Mon, 24 Jul 2017 11:14:54 +0800</pubDate>
+        <link>http://localhost:4000/2017/07/24/NSUserDefaults/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/24/NSUserDefaults/</guid>
+        
+        <category>iOS</category>
+        
+        <category>数据存储</category>
+        
+        
+        <category>iOS</category>
+        
+      </item>
+    
+      <item>
+        <title>Setting.Bundle</title>
+        <description>App 在手机设置中的内容</description>
+        <pubDate>Mon, 24 Jul 2017 10:14:54 +0800</pubDate>
+        <link>http://localhost:4000/2017/07/24/Setting_Bundle/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/24/Setting_Bundle/</guid>
+        
+        <category>iOS</category>
+        
+        <category>数据存储</category>
+        
+        
+        <category>iOS</category>
+        
+      </item>
+    
+      <item>
+        <title>SandBox</title>
+        <description>iOS 沙盒结构和目录</description>
+        <pubDate>Mon, 24 Jul 2017 09:14:54 +0800</pubDate>
+        <link>http://localhost:4000/2017/07/24/sandBox/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/24/sandBox/</guid>
+        
+        <category>iOS</category>
+        
+        <category>数据存储</category>
+        
+        
+        <category>iOS</category>
+        
+      </item>
+    
+      <item>
+        <title>创建私有 Pods 库</title>
+        <description>创建私有 Pods 库，简单记录。</description>
+        <pubDate>Fri, 21 Jul 2017 17:14:54 +0800</pubDate>
+        <link>http://localhost:4000/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E7%A7%81%E6%9C%89%E5%BA%93/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E7%A7%81%E6%9C%89%E5%BA%93/</guid>
+        
+        <category>CocoaPods</category>
+        
+        
+        <category>CocoaPods</category>
+        
+      </item>
+    
+      <item>
+        <title>创建公有 Pods 库</title>
+        <description>创建共有 Pods 库的过程，简单记录。</description>
+        <pubDate>Fri, 21 Jul 2017 16:14:54 +0800</pubDate>
+        <link>http://localhost:4000/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E5%85%B1%E6%9C%89%E5%BA%93/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E5%85%B1%E6%9C%89%E5%BA%93/</guid>
+        
+        <category>CocoaPods</category>
+        
+        
+        <category>CocoaPods</category>
         
       </item>
     
