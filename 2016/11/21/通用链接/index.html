@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>UIView动画</title>
-    <meta name="description" content="iOS UIView简单动画">
+    <title>iOS 通用链接</title>
+    <meta name="description" content="iOS 9 前，拉起 App 用到的方法。iOS 9 后用通用链接方式拉起 App。">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2016/12/21/UIView%E5%8A%A8%E7%94%BB/">
+    <link rel="canonical" href="http://localhost:4000/2016/11/21/%E9%80%9A%E7%94%A8%E9%93%BE%E6%8E%A5/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
@@ -150,11 +150,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>UIView动画</h1>
+        <h1>iOS 通用链接</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2016-12-21
+                <i class="fa fa-calendar"></i>2016-11-21
             </div>
 
             <div class="label-card">
@@ -192,10 +192,7 @@
   
     
         <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
-        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
-    
-        <!--a href="/tag/#%E5%8A%A8%E7%94%BB" title="Tag: 动画" rel="tag">动画</a-->
-        <a href="/tag/#动画" title="Tag: 动画" rel="tag">动画</a>
+        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>
     
   
 
@@ -207,138 +204,15 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#block" id="markdown-toc-block">block</a>    <ul>
-      <li><a href="#1关键帧动画" id="markdown-toc-1关键帧动画">1、关键帧动画</a></li>
-      <li><a href="#2简单动画无完成回调" id="markdown-toc-2简单动画无完成回调">2、简单动画（无完成回调）</a></li>
-      <li><a href="#3简单动画有完成回调" id="markdown-toc-3简单动画有完成回调">3、简单动画（有完成回调）</a></li>
-      <li><a href="#4简单动画完成回调延时动画类型" id="markdown-toc-4简单动画完成回调延时动画类型">4、简单动画（完成回调+延时+动画类型）</a></li>
-      <li><a href="#5弹性动画" id="markdown-toc-5弹性动画">5、弹性动画</a></li>
-    </ul>
-  </li>
-  <li><a href="#一般动画" id="markdown-toc-一般动画">一般动画</a></li>
+  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
 </ul>
 
-<p>UIView 动画大致分两种，一种是 block，一种是多种 API 组合。</p>
+<p>iOS 9 以后的功能，之前若想实现拉起应用的功能，要用 URL Schemes。</p>
 
-<h2 id="block">block</h2>
+<hr />
+<h2 id="相关链接">相关链接</h2>
 
-<p><img src="http://ouo1r7usa.bkt.clouddn.com/2016/12/20161221_01_01.png" alt="" /></p>
-
-<h3 id="1关键帧动画">1、关键帧动画</h3>
-
-<p>示例：将一个按钮从原来尺寸放大到1.5倍，在缩小到0.8，再恢复到原始大小。</p>
-
-<p><img src="http://ouo1r7usa.bkt.clouddn.com/2016/12/20161221_01_02.gif" alt="" /></p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>
-[UIView animateKeyframesWithDuration:0.5 delay:0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
-
-        [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:1/3.0 animations:^{
-            customBtn.transform = CGAffineTransformMakeScale(1.5, 1.5);
-        }];
-        [UIView addKeyframeWithRelativeStartTime:1/3.0 relativeDuration:1/3.0 animations:^{
-            customBtn.transform = CGAffineTransformMakeScale(0.8, 0.8);
-        }];
-        [UIView addKeyframeWithRelativeStartTime:2/3.0 relativeDuration:1/3.0 animations:^{
-            customBtn.transform = CGAffineTransformIdentity;
-        }];
-
-} completion:nil];
-
-</code></pre>
-</div>
-
-<p>参数说明：</p>
-<ul>
-  <li>1）动画执行时长</li>
-  <li>2）延时执行的时间，即多久后开始执行</li>
-  <li>3）动画类型，枚举值</li>
-  <li>4）动画内容</li>
-  <li>5）完成动画回调</li>
-</ul>
-
-<h3 id="2简单动画无完成回调">2、简单动画（无完成回调）</h3>
-
-<div class="language-python highlighter-rouge"><pre class="highlight"><code>
-<span class="p">[</span><span class="n">UIView</span> <span class="n">animateWithDuration</span><span class="p">:</span><span class="mf">3.0</span> <span class="n">animations</span><span class="p">:</span><span class="o">^</span><span class="p">{</span>
-        <span class="n">squareView</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
-<span class="p">}];</span>
-
-</code></pre>
-</div>
-
-<h3 id="3简单动画有完成回调">3、简单动画（有完成回调）</h3>
-
-<div class="language-python highlighter-rouge"><pre class="highlight"><code>
-<span class="p">[</span><span class="n">UIView</span> <span class="n">animateWithDuration</span><span class="p">:</span><span class="mf">3.0</span> <span class="n">animations</span><span class="p">:</span><span class="o">^</span><span class="p">{</span>
-        <span class="n">squareView</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
-    <span class="p">}</span> <span class="n">completion</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">BOOL</span> <span class="n">finished</span><span class="p">)</span> <span class="p">{</span>
-        <span class="p">[</span><span class="n">squareView</span> <span class="n">removeFromSuperview</span><span class="p">];</span>
-<span class="p">}];</span>
-
-</code></pre>
-</div>
-
-<h3 id="4简单动画完成回调延时动画类型">4、简单动画（完成回调+延时+动画类型）</h3>
-
-<div class="language-python highlighter-rouge"><pre class="highlight"><code>
-<span class="p">[</span><span class="n">UIView</span> <span class="n">animateWithDuration</span><span class="p">:</span><span class="mf">3.0</span> <span class="n">delay</span><span class="p">:</span><span class="mi">0</span> <span class="n">options</span><span class="p">:</span><span class="n">UIViewAnimationOptionCurveLinear</span> <span class="n">animations</span><span class="p">:</span><span class="o">^</span><span class="p">{</span>
-        <span class="n">squareView</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="o">-</span><span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
-    <span class="p">}</span> <span class="n">completion</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">BOOL</span> <span class="n">finished</span><span class="p">)</span> <span class="p">{</span>
-        <span class="p">[</span><span class="n">squareView</span> <span class="n">removeFromSuperview</span><span class="p">];</span>
-<span class="p">}];</span>
-
-</code></pre>
-</div>
-
-<h3 id="5弹性动画">5、弹性动画</h3>
-
-<p><img src="http://ouo1r7usa.bkt.clouddn.com/2016/12/20161221_01_05.gif" alt="" /></p>
-
-<div class="language-python highlighter-rouge"><pre class="highlight"><code>
-<span class="p">[</span><span class="n">UIView</span> <span class="n">animateWithDuration</span><span class="p">:</span><span class="mf">0.7</span> <span class="n">delay</span><span class="p">:</span><span class="mf">0.0</span> <span class="n">usingSpringWithDamping</span><span class="p">:</span><span class="mf">0.5</span> <span class="n">initialSpringVelocity</span><span class="p">:</span><span class="mf">0.9</span> <span class="n">options</span><span class="p">:</span><span class="n">UIViewAnimationOptionBeginFromCurrentState</span><span class="o">|</span><span class="n">UIViewAnimationOptionAllowUserInteraction</span> <span class="n">animations</span><span class="p">:</span><span class="o">^</span><span class="p">{</span>
-        <span class="n">_someView</span><span class="o">.</span><span class="n">frame</span> <span class="o">=</span> <span class="n">CGRectMake</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
-    <span class="p">}</span> <span class="n">completion</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">BOOL</span> <span class="n">finished</span><span class="p">)</span> <span class="p">{</span>
-
-<span class="p">}];</span>
-
-</code></pre>
-</div>
-
-<p>参数说明：</p>
-<ul>
-  <li>1）-</li>
-  <li>2）-</li>
-  <li>3）阻尼系数</li>
-  <li>4）初速度</li>
-  <li>5）-</li>
-</ul>
-
-<h2 id="一般动画">一般动画</h2>
-
-<p>不完整API
-<img src="http://ouo1r7usa.bkt.clouddn.com/2016/12/20161221_01_06.png" alt="" /></p>
-
-<div class="language-python highlighter-rouge"><pre class="highlight"><code>
-<span class="p">[</span><span class="n">UIView</span> <span class="n">beginAnimations</span><span class="p">:</span><span class="err">@</span><span class="s">"centerAnimation"</span> <span class="n">context</span><span class="p">:</span><span class="n">nil</span><span class="p">];</span>
-<span class="p">[</span><span class="n">UIView</span> <span class="n">setAnimationCurve</span><span class="p">:</span><span class="n">UIViewAnimationCurveLinear</span><span class="p">];</span>
-<span class="p">[</span><span class="n">UIView</span> <span class="n">setAnimationDuration</span><span class="p">:</span><span class="mf">2.0</span><span class="p">];</span>
-<span class="p">[</span><span class="n">UIView</span> <span class="n">setAnimationDelegate</span><span class="p">:</span><span class="bp">self</span><span class="p">];</span>
-<span class="p">[</span><span class="n">UIView</span> <span class="n">setAnimationWillStartSelector</span><span class="p">:</span><span class="nd">@selector</span><span class="p">(</span><span class="n">animationWillStart</span><span class="p">)];</span>
-
-<span class="bp">self</span><span class="o">.</span><span class="n">squareView</span><span class="o">.</span><span class="n">center</span> <span class="o">=</span> <span class="n">CGPointMake</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
-<span class="p">[</span><span class="n">UIView</span> <span class="n">commitAnimations</span><span class="p">];</span>
-
-</code></pre>
-</div>
-
-<blockquote>
-  <p>要先设置完动画参数，然后在修改视图的动画属性，否则动画参数可能不起作用。因此，修改视图动画属性的语句写在 commitAnimatons上一行。</p>
-</blockquote>
-
-<blockquote>
-  <p>如果要在动画开始前，动画结束后做一些事情要先设置delegate，然后在设置好动画开始前，动画开始后要调用的selector。</p>
-</blockquote>
+<p><a href="https://yohunl.com/ios-universal-links-tong-yong-lian-jie/">iOS Universal Links(通用链接)</a></p>
 
         </article>
         <hr>
@@ -362,8 +236,6 @@
                         
                     
                 
-                    
-                
             
         
             
@@ -380,11 +252,7 @@
                         
                     
                 
-                    
-                
             
-                
-                    
                 
                     
                 
@@ -404,11 +272,7 @@
                         
                     
                 
-                    
-                
             
-                
-                    
                 
                     
                 
@@ -428,11 +292,7 @@
                         
                     
                 
-                    
-                
             
-                
-                    
                 
                     
                 
@@ -452,11 +312,7 @@
                         
                     
                 
-                    
-                
             
-                
-                    
                 
                     
                 
@@ -476,11 +332,7 @@
                         
                     
                 
-                    
-                
             
-                
-                    
                 
                     
                 
@@ -491,11 +343,7 @@
                 
                     
                 
-                    
-                
             
-                
-                    
                 
                     
                 
@@ -506,11 +354,7 @@
                 
                     
                 
-                    
-                
             
-                
-                    
                 
                     
                 
@@ -521,14 +365,10 @@
                 
                     
                 
-                    
-                
             
         
             
             
-                
-                    
                 
                     
                 
@@ -541,13 +381,13 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2016/12/20/makefile%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E4%B8%8E%E4%BD%BF%E7%94%A8/">makefile文件编写与使用</a></p>
+        <p><strong>上一篇</strong> <a href="/2016/11/21/URLSchemes/">URL Schemes</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2016/12/24/Github-Pages/">Gihub Pages</a></p>
+        <p><strong>下一篇</strong> <a href="/2016/11/21/%E4%B8%BAApp%E5%88%9B%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/">为 App 创建桌面快捷方式</a></p>
         
     </div>
 </div>
