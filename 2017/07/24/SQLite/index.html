@@ -243,8 +243,9 @@
 
 <h2 id="导入系统支持库">导入系统支持库</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libsqlite3.dylib
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>libsqlite3.dylib
+</code></pre>
+</div>
 
 <h2 id="sqlite-api">SQLite API</h2>
 <p>// 略</p>
@@ -266,29 +267,33 @@
 <h3 id="表操作ddl">表操作（DDL）</h3>
 <h4 id="1创建表">1、创建表</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>create table 表名 (字段名1 字段类型1, 字段名2 字段类型2, …) ;
+<div class="highlighter-rouge"><pre class="highlight"><code>create table 表名 (字段名1 字段类型1, 字段名2 字段类型2, …) ;
 create table if not exists 表名 (字段名1 字段类型1, 字段名2 字段类型2, …) ;
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="2删除表">2、删除表</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>drop table 表名;
+<div class="highlighter-rouge"><pre class="highlight"><code>drop table 表名;
 drop table if exists 表名;
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="数据操作">数据操作</h3>
 <h4 id="1插入">1、插入</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>insert into 表名 (字段1, 字段2, …) values (字段1的值, 字段2的值, …) ;
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>insert into 表名 (字段1, 字段2, …) values (字段1的值, 字段2的值, …) ;
+</code></pre>
+</div>
 
 <h4 id="2删除">2、删除</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>delete from 表名 ;
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>delete from 表名 ;
+</code></pre>
+</div>
 
 <h4 id="3查询">3、查询</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 限制查询数据范围（0 表示起始，3 表示需要查询的数目）
+<div class="highlighter-rouge"><pre class="highlight"><code>// 限制查询数据范围（0 表示起始，3 表示需要查询的数目）
 select * from t_person limit 0, 3;
 
 // 数据升降序（默认升序）
@@ -296,16 +301,18 @@ SELECT * FROM t_person ORDER BY age ASC, id DESC;
 
 // 条件（+模糊查询）
 select * from t_person where name like 'wangwu%';
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="4更新">4、更新</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>update 表名 set 字段1 = 字段1的值, 字段2 = 字段2的值, … ;
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>update 表名 set 字段1 = 字段1的值, 字段2 = 字段2的值, … ;
+</code></pre>
+</div>
 
 <h4 id="5数据统计">5、数据统计</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 取出所有数据的总数目
+<div class="highlighter-rouge"><pre class="highlight"><code>// 取出所有数据的总数目
 select count(*) from t_person;
 
 // 统计符合条件的记录条数
@@ -322,7 +329,8 @@ select avg(age) from t_person;
 
 // 计算指定列数值的总数
 select sum(age) from t_person;
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="第三方库fmdb">第三方库（FMDB）</h2>
 
@@ -346,10 +354,11 @@ select sum(age) from t_person;
 <h3 id="基本使用">基本使用</h3>
 
 <h4 id="打开数据库">打开数据库</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FMDatabase * db = [FMDatabase databaseWithPath:filePath];
+<div class="highlighter-rouge"><pre class="highlight"><code>FMDatabase * db = [FMDatabase databaseWithPath:filePath];
 
 [db open];
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="操作">操作</h4>
 <ul>
@@ -365,7 +374,7 @@ select sum(age) from t_person;
 
 <p>FMDatabase是线程不安全的，当FMDB数据存储想要使用多线程的时候，FMDatabaseQueue就派上用场了。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//初始化FMDatabaseQueue
+<div class="highlighter-rouge"><pre class="highlight"><code>//初始化FMDatabaseQueue
 FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:filePath];
 
 //在block中执行SQLite语句命令
@@ -388,7 +397,8 @@ FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:filePath];
             NSLog(@"%d,%@,%d",ID,name,age);
         }
     }];
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="fmdb-中的事务">FMDB 中的事务</h3>
 
@@ -396,7 +406,7 @@ FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:filePath];
 
 <p>下面代码中，利用事务循环向数据库中添加2000条数据，假如在添加的过程中出现了一些问题，由于执行了*rollback = YES的回滚操作，数据库中一个数据都不会出现。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//初始化FMDatabaseQueue
+<div class="highlighter-rouge"><pre class="highlight"><code>//初始化FMDatabaseQueue
 FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:filePath];
 
 //FMDatabaseQueue的事务inTransaction
@@ -414,7 +424,8 @@ FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:filePath];
             }
         }
     }];
-</code></pre></div></div>
+</code></pre>
+</div>
 
         </article>
         <hr>

@@ -257,10 +257,11 @@
 </ol>
 
 <h2 id="1-创建远端私有版本库略">1. 创建远端私有版本库（略）</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// pod repo add 本地版本库名 远端版本库URL
+<div class="highlighter-rouge"><pre class="highlight"><code>// pod repo add 本地版本库名 远端版本库URL
 
 pod repo add YSPrivateRepo https://git.coding.net/TimerYJ/YSPrivateRepo.git
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>完成之后，进入磁盘目录 <code class="highlighter-rouge">~/.cocoapods/repos</code> 可以看到增加了一个 <code class="highlighter-rouge">YSPrivateRepo</code> 目录。</p>
 
@@ -278,11 +279,12 @@ pod repo add YSPrivateRepo https://git.coding.net/TimerYJ/YSPrivateRepo.git
 
 <h2 id="3-代码库添加文件">3. 代码库添加文件</h2>
 <p>创建 .podspec 文件模板：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pod spec create YSCocoapodsPrivateSpec
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>pod spec create YSCocoapodsPrivateSpec
+</code></pre>
+</div>
 
 <p>修改完后的内容：( <a href="">附：podspec文件各属性与值含义</a> )</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pod::Spec.new do |s|
+<div class="highlighter-rouge"><pre class="highlight"><code>Pod::Spec.new do |s|
   s.name         = "YSCocoapodsPrivateSpec"
   s.version      = "1.0.0"
   s.summary      = "私有 Pod Spec 库测试"
@@ -300,17 +302,19 @@ pod repo add YSPrivateRepo https://git.coding.net/TimerYJ/YSPrivateRepo.git
   # s.framework  = "SomeFramework"
   # s.frameworks = "SomeFramework", "AnotherFramework"
 end
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <blockquote>
   <p>注意：有的代码托管平台（如 oschina）建立的私有库使用 <code class="highlighter-rouge">s.license = "MIT"</code> 可能找不到 LICENSE 正式，可以改为上述写法指明文件。</p>
 </blockquote>
 
 <h2 id="4-验证-podspec-文件">4. 验证 .podspec 文件</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// pod lib lint (YSCocoapodsPrivateSpec.podspec)(--private)(--allow-warnings)
+<div class="highlighter-rouge"><pre class="highlight"><code>// pod lib lint (YSCocoapodsPrivateSpec.podspec)(--private)(--allow-warnings)
 
 pod lib lint  
-</code></pre></div></div>
+</code></pre>
+</div>
 <p>验证通过后如下图：</p>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/20170721_03_02.png" alt="" /></p>
@@ -326,30 +330,33 @@ pod lib lint
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/20170721_03_03.png" alt="" /></p>
 
 <h2 id="5-将-podspec-文件传到版本库中">5. 将 .podspec 文件传到版本库中</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// pod repo push 本地版本库名 .podspec文件名
+<div class="highlighter-rouge"><pre class="highlight"><code>// pod repo push 本地版本库名 .podspec文件名
 
 pod repo push YSPrivateRepo YSCocoapodsPrivateSpec.podspec
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>若出现错误，可以更新本地版本库重试：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 如：[!] The repo `MyRepo` at `../.cocoapods/repos/YSPrivateRepo` is not clean
+<div class="highlighter-rouge"><pre class="highlight"><code>// 如：[!] The repo `MyRepo` at `../.cocoapods/repos/YSPrivateRepo` is not clean
 
 pod repo update YSPrivateRepo
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>成功后如下图：</p>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/20170721_03_04.png" alt="" /></p>
 
 <h2 id="6-查找使用">6. 查找、使用</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pod search YSCocoapodsPrivateSpec
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>pod search YSCocoapodsPrivateSpec
+</code></pre>
+</div>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/20170721_03_05.png" alt="" /></p>
 
 <p>成功查找就可以导入到项目中使用了，要注意的是，含私有 Pods 时，Podfile 文件开头要给出私有库的版本库地址。而同时包含公有和私有库时，还需要加上公有库的版本库地址。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Podfile 内容
+<div class="highlighter-rouge"><pre class="highlight"><code>// Podfile 内容
 
 source 'https://git.coding.net/TimerYJ/YSPrivateRepo.git'    #私有版本库
 source 'https://github.com/CocoaPods/Specs.git'      #公有版本库
@@ -363,15 +370,17 @@ pod 'AFNetworking'
 pod 'YSCocoapodsPrivateSpec'
 
 end
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="7-维护">7. 维护</h2>
 <h3 id="更改">更改</h3>
 <p>重复 3、4、5</p>
 
 <h3 id="删除">删除</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pod repo remove YSPrivateRepo
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>pod repo remove YSPrivateRepo
+</code></pre>
+</div>
 
 <hr />
 

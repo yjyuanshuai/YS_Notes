@@ -239,20 +239,22 @@
 
 <p>系统会默认 [NSDate date] 获取的时间为零时区时间，而经过 NSDateFormatter 转化为字符串时间就是当前所在时区的准确时间，并没有8小时误差。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>NSDate * date = [NSDate date];
+<div class="highlighter-rouge"><pre class="highlight"><code>NSDate * date = [NSDate date];
 NSLog(@"date时间 = %@", date);
 
 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
 NSString *dateStr = [formatter stringFromDate:date];
 NSLog(@"字符串时间 = %@", dateStr);
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>结果：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>2016-12-07 10:44:24.470 timeTest[32743:2995134] date时间 = 2016-12-07 02:44:24 +0000
+<div class="highlighter-rouge"><pre class="highlight"><code>2016-12-07 10:44:24.470 timeTest[32743:2995134] date时间 = 2016-12-07 02:44:24 +0000
 
 2016-12-07 10:44:24.471 timeTest[32743:2995134] 字符串时间 = 2016-12-07 10:44:24 +0800
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="转字符串时间的时区设定">转字符串时间的时区设定</h3>
 
@@ -260,7 +262,7 @@ NSLog(@"字符串时间 = %@", dateStr);
 
 <p>与设置系统时区formatter.timeZone = [NSTimeZone systemTimeZone]的效果是一样的。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 NSDate *date = [NSDate date];
 
 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -272,18 +274,20 @@ formatter.timeZone = [NSTimeZone timeZoneWithName:@"Asia/Shanghai"];
 NSString *dateStr = [formatter stringFromDate:date];
 NSLog(@"字符串时间 = %@", dateStr);
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>获取系统支持的时区对应的字符串常量：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 NSArray *zones = [NSTimeZone knownTimeZoneNames];
 
 for (NSString *zone in zones) {
    NSLog(@"时区名 = %@", zone);
 }
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="字符串时间转nsdate">字符串时间转NSDate</h3>
 
@@ -291,19 +295,21 @@ for (NSString *zone in zones) {
 
 <p>也会遇到有所谓的8小时误差，其实就是时区不同。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
 [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss Z"];
 NSDate *newDate = [formatter dateFromString:@"2016-12-07 14:06:24 +0800"];
 NSLog(@"newDate = %@", newDate);
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>结果：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 &gt; 2016-12-07 14:12:17.468 timeTest[34279:3155380] newDate = 2016-12-07 06:06:24 +0000
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>当不指定字符串时间的时区时，即没有后面的+0800，同时要把 NSDateFormatter 时间格式里的Z去掉，保证格式匹配。</p>
 
@@ -315,20 +321,22 @@ NSLog(@"newDate = %@", newDate);
 
 <p>因为 [NSDate date] 得出的时间是零时区时间，当我们要获取当前所在时区的 NSDate 时间时，通常会用以下方法：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 NSDate *date = [NSDate date];
 NSTimeZone *zone = [NSTimeZone systemTimeZone];
 NSInteger interval = [zone secondsFromGMTForDate:date];
 NSDate *localDate = [date  dateByAddingTimeInterval:interval];
 NSLog(@"localDate = %@",localDate);
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>结果：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 &gt; 2016-12-07 14:49:03.777 timeTest[34519:3183548] localDate = 2016-12-07 14:49:03 +0000
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>上面代码中 zone 是当前时区，interval 是当前时区和 零时区 时间的差值，最后结果 localDate 是零时区时间date加上这个差值interval，得到当前时区的NSDate时间。更有甚者，在开发中直接加8<em>60</em>60或28800这样的值，因为相差8小时嘛。这样在东八区没问题，在其他时区时间就错了。</p>
 
@@ -351,22 +359,24 @@ NSLog(@"localDate = %@",localDate);
 
 <p>注意：这里的当前时间是指零时区的NSDate时间。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 NSDate *date = [NSDate date];
 NSTimeInterval timeIn = [date timeIntervalSince1970];
 NSLog(@"时间戳 = %.0f", timeIn);
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>结果：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 &gt; 2016-12-07 15:41:04.000 timeTest[34994:3232390] 时间戳 = 1481096464
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="时间戳转当前时间">时间戳转当前时间</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 NSDate *date = [NSDate date];
 NSTimeInterval timeIn = [date timeIntervalSince1970];
 
@@ -379,21 +389,23 @@ NSString *newTime = [dateFormatter stringFromDate:newDate];
 
 NSLog(@"初始化时间 = %@，\n 时间戳=%.0f，\n 时间戳转为NSDate时间 = %@，\n 转为字符串时间 = %@", date, timeIn, newDate, newTime);
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>结果：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 &gt; 2016-12-07 16:11:56.146 timeTest[35186:3253589]
 初始化时间 = 2016-12-07 08:11:56 +0000，
 时间戳=1481098316，
 时间戳转为NSDate时间 = 2016-12-07 08:11:56 +0000，
 转为字符串时间 = 2016-12-07 16:11:56 +0800
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>注意时间戳使用的 NSDate 时间是当前零时区的时间！当前零时区时间！当前零时区时间！重要的事情说三遍！不要进行 NSDate 转当前时区的NSDate时间，再转时间戳。下面是验证：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 NSDate *date = [NSDate date];
 NSLog(@"系统零时区NSDate时间 = %@", date);  
 
@@ -420,23 +432,25 @@ NSString *newTime = [dateFormatter stringFromDate:detaildate];
 NSString *newTime2 = [dateFormatter stringFromDate:detaildate2];
 NSLog(@"最终转为字符串时间1 = %@， 时间2 = %@", newTime, newTime2);
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>结果：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 &gt; 2016-12-07 16:13:57.834 timeTest[35211:3255842] 系统零时区NSDate时间 = 2016-12-07 08:13:57 +0000
 2016-12-07 16:13:57.834 timeTest[35211:3255842] 系统零时区NSDate时间转化为时间戳 = 1481098438
 2016-12-07 16:13:57.835 timeTest[35211:3255842] 转化为本地NSDate时间 = 2016-12-07 16:13:57 +0000
 2016-12-07 16:13:57.835 timeTest[35211:3255842] 本地NSDate时间转化为时间戳 = 1481127238
 2016-12-07 16:13:57.836 timeTest[35211:3255842] 最终转为字符串时间1 = 2016-12-07 16:13:57 +0800， 时间2 = 2016-12-08 00:13:57 +0800
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="时间操作与比较">时间操作与比较</h2>
 
 <h3 id="时间初始化方法">时间初始化方法</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 //初始化当前时间，返回零时区时间
 NSDate *date = [NSDate date];
 
@@ -458,11 +472,12 @@ NSDate *newDate3 = [NSDate distantFuture];
 //很久以前的某一天
 NSDate *newDate4 = [NSDate distantPast];
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="时间比较方法">时间比较方法</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 //比较两个时间是否相等
 - (BOOL)isEqualToDate:(NSDate *)otherDate;
 
@@ -475,11 +490,12 @@ NSDate *newDate4 = [NSDate distantPast];
 //两个时间比较，返回枚举类型
 - (NSComparisonResult)compare:(NSDate *)other;
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="时间间隔计算方法">时间间隔计算方法</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 //返回实例时间与refDate时间间隔秒数
 - (NSTimeInterval)timeIntervalSinceDate:(NSDate *)refDate;
 
@@ -495,7 +511,8 @@ NSDate *newDate4 = [NSDate distantPast];
 //返回当前时间和2001-01-01 00:00:00 +0000的间隔秒数
 + (NSTimeInterval)timeIntervalSinceReferenceDate;
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="获取年月日时分秒周时区农历日期">获取年月日时分秒周时区、农历日期</h2>
 
@@ -503,14 +520,15 @@ NSDate *newDate4 = [NSDate distantPast];
 
 <p>OC里的时间坑太多，根本没办法像其他语言那样直接time.year就能获取年份。要想获取NSDate的年月日需要使用日历对象NSCalendar。</p>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
 <span class="n">NSDate</span> <span class="o">*</span><span class="n">date</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSDate</span> <span class="n">date</span><span class="p">];</span>
 <span class="n">NSCalendar</span> <span class="o">*</span><span class="n">cal</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSCalendar</span> <span class="n">currentCalendar</span><span class="p">];</span>
 <span class="n">NSDateComponents</span> <span class="o">*</span><span class="n">dateComps</span> <span class="o">=</span> <span class="p">[</span><span class="n">cal</span> <span class="n">components</span><span class="p">:</span><span class="n">NSCalendarUnitYear</span><span class="o">|</span><span class="n">NSCalendarUnitMonth</span><span class="o">|</span><span class="n">NSCalendarUnitDay</span><span class="o">|</span><span class="n">NSCalendarUnitHour</span><span class="o">|</span><span class="n">NSCalendarUnitMinute</span><span class="o">|</span><span class="n">NSCalendarUnitSecond</span><span class="o">|</span><span class="n">NSCalendarUnitWeekday</span><span class="o">|</span><span class="n">NSCalendarUnitWeekOfMonth</span><span class="o">|</span><span class="n">NSCalendarUnitWeekOfYear</span><span class="o">|</span><span class="n">NSCalendarUnitTimeZone</span> <span class="n">fromDate</span><span class="p">:</span><span class="n">date</span><span class="p">];</span>
 <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">"时间 = </span><span class="si">%</span><span class="s">@"</span><span class="p">,</span> <span class="n">date</span><span class="p">);</span>
 <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">"年=</span><span class="si">%</span><span class="s">ld,月=</span><span class="si">%</span><span class="s">ld,日=</span><span class="si">%</span><span class="s">ld,时=</span><span class="si">%</span><span class="s">ld,分=</span><span class="si">%</span><span class="s">ld,秒=</span><span class="si">%</span><span class="s">ld,周=</span><span class="si">%</span><span class="s">ld,本月第</span><span class="si">%</span><span class="s">ld周,本年第</span><span class="si">%</span><span class="s">ld周,时区=</span><span class="si">%</span><span class="s">@"</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">year</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">weekday</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">weekOfMonth</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">weekOfYear</span><span class="p">,</span> <span class="n">dateComps</span><span class="o">.</span><span class="n">timeZone</span><span class="o">.</span><span class="n">name</span><span class="p">);</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>结果：</p>
 
@@ -531,7 +549,7 @@ NSDate *newDate4 = [NSDate distantPast];
 
 <h3 id="农历">农历</h3>
 
-<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-python highlighter-rouge"><pre class="highlight"><code>
 <span class="o">+</span> <span class="p">(</span><span class="n">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">LunarForSolarYear</span><span class="p">:(</span><span class="nb">int</span><span class="p">)</span><span class="n">wCurYear</span> <span class="n">Month</span><span class="p">:(</span><span class="nb">int</span><span class="p">)</span><span class="n">wCurMonth</span> <span class="n">Day</span><span class="p">:(</span><span class="nb">int</span><span class="p">)</span><span class="n">wCurDay</span>
 <span class="p">{</span>
     <span class="o">//</span><span class="err">农历日期名</span>
@@ -608,7 +626,8 @@ NSDate *newDate4 = [NSDate distantPast];
     <span class="n">NSString</span> <span class="o">*</span> <span class="n">lunarDate</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSString</span> <span class="n">stringWithFormat</span><span class="p">:</span><span class="err">@</span><span class="s">"</span><span class="si">%</span><span class="s">@-</span><span class="si">%</span><span class="s">@"</span><span class="p">,</span> <span class="n">szNongliMonth</span><span class="p">,</span> <span class="n">szNongliDay</span><span class="p">];</span>
     <span class="k">return</span> <span class="n">lunarDate</span><span class="p">;</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
         </article>
         <hr>

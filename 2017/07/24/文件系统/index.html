@@ -231,8 +231,9 @@
 <h2 id="沙盒目录获取">沙盒目录获取</h2>
 
 <h3 id="根目录">根目录</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  NSHomeDirectory();
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>  NSHomeDirectory();
+</code></pre>
+</div>
 
 <h3 id="documents">Documents</h3>
 
@@ -244,7 +245,7 @@
   <p>如：游戏存档</p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (NSString *)dirDoc{
+<div class="highlighter-rouge"><pre class="highlight"><code>- (NSString *)dirDoc{
       // [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
 
       // NSDocumentDirectory: 表明我们正在查找 Documents 目录的路径
@@ -259,7 +260,8 @@
 
       // stringByAppendingPathComponent + 文件名
 }
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="library">Library</h3>
 
@@ -267,14 +269,15 @@
   <p>体积大但相对不重要的数据。</p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-(void)dirLib{
+<div class="highlighter-rouge"><pre class="highlight"><code>-(void)dirLib{
 
     //[NSHomeDirectory() stringByAppendingPathComponent:@"Library"];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
     NSString *libraryDirectory = [paths objectAtIndex:0];
     NSLog(@"app_home_lib: %@",libraryDirectory);
 }
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="cache">Cache</h4>
 
@@ -282,12 +285,13 @@
   <p>程序运行时需要持久化存储的数据，iTunes__不会__备份。</p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  -(void)dirCache{
+<div class="highlighter-rouge"><pre class="highlight"><code>  -(void)dirCache{
     NSArray *cacPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *cachePath = [cacPath objectAtIndex:0];
     NSLog(@"app_home_lib_cache: %@",cachePath);
 }
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="preferences">Preferences</h4>
 
@@ -303,13 +307,14 @@
   <p>临时数据。不备份</p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-(void)dirTmp{
+<div class="highlighter-rouge"><pre class="highlight"><code>-(void)dirTmp{
     //[NSHomeDirectory() stringByAppendingPathComponent:@"tmp"];
 
     NSString *tmpDirectory = NSTemporaryDirectory();
     NSLog(@"app_home_tmp: %@",tmpDirectory);
 }  
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="文件操作">文件操作</h2>
 

@@ -235,7 +235,7 @@
 
 <p>UIBezierPath主要是用来绘制路径的，分为一阶、二阶…..n阶。一阶是直线，二阶以上才是曲线。而最终路径的显示还是得依靠CALayer。用CoreGraphics将路径绘制出来，最终也是绘制到CALayer上。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 - (void)drawRect:(CGRect)rect
 {
     UIColor *fillColor = [UIColor colorWithRed:0.0 green:0.722 blue:1.0 alpha:1.0];
@@ -266,7 +266,8 @@
     [self.layer addSublayer:shapeLayer];
 }
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <blockquote>
   <p>注：在用自定义的CAShapeLayer做动画时，建议在动画开始前先将动画属性与最终的属性值一致，再开始动画，不要使用removedOnCompletion控制最终的状态，这在WWDC苹果这么建议。</p>
@@ -297,23 +298,25 @@
 <p>边线样式的起始位置，如上，就表示第 1 个长度2的线的起始位置。</p>
 
 <h3 id="linecap">lineCap</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 kCALineCapButt    // 不设置样式
 kCALineCapRound   // 圆形
 kCALineCapSquare  // 方形
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="linejoin">lineJoin</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 kCALineJoinMiter  // 三角
 kCALineJoinRound  // 圆形
 kCALineJoinBevel  // 斜切
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="机器猫实例">机器猫实例</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 CGFloat arcCenterX = self.view.frame.size.width/2;
 CGFloat arcCenterY = 80;
 CGFloat delay = LanPangZiDuration;
@@ -512,7 +515,8 @@ UIBezierPath *rightArmPath = [UIBezierPath bezierPath];
 
 [self performSelector:@selector(showHello) withObject:nil afterDelay:delay*29];
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
         </article>
         <hr>
