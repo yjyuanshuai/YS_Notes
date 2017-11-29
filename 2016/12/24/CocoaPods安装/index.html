@@ -142,6 +142,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -218,6 +222,10 @@
     </ul>
   </li>
   <li><a href="#手动下载-cocoapods-库安装" id="markdown-toc-手动下载-cocoapods-库安装">手动下载 CocoaPods 库安装</a>    <ul>
+      <li><a href="#更新记录" id="markdown-toc-更新记录">更新记录</a>        <ul>
+          <li><a href="#20171124" id="markdown-toc-20171124">2017.11.24</a></li>
+        </ul>
+      </li>
       <li><a href="#步骤" id="markdown-toc-步骤">步骤</a>        <ul>
           <li><a href="#1检查是否有以下路径存在" id="markdown-toc-1检查是否有以下路径存在">1、检查是否有以下路径存在</a></li>
           <li><a href="#2调整文件名和文件层次" id="markdown-toc-2调整文件名和文件层次">2、调整文件名和文件层次</a></li>
@@ -241,98 +249,93 @@
 <p>天朝墙了原本的亚马逊 https://rubygems.org/ 源，所以需更改。</p>
 
 <p>1、查看当前的 ruby 源</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>gem sources -l
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem sources -l
+</code></pre></div></div>
 
 <p>2、添加可用的 ruby 源（目前是：https://gems.ruby-china.org）</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>gem gem sources -a 有效的ruby源
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem gem sources -a 有效的ruby源
+</code></pre></div></div>
 
 <p>3、删除旧的</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>gem sources --remove 无效的ruby源
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem sources --remove 无效的ruby源
+</code></pre></div></div>
 
 <p>4、使用上述查看ruby源的命令，查看是否成功，确保只有一个源</p>
 
 <h3 id="安装-cocoapods">安装 CocoaPods</h3>
 <h4 id="1开始安装">1、开始安装</h4>
-<div class="highlighter-rouge"><pre class="highlight"><code>// OS X 10.11 前
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// OS X 10.11 前
 sudo gem install cocoapods
 
 // OS X 10.11 及之后
 sudo gem install -n /usr/local/bin cocoapods
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>安装完成，最后一条信息是：gems installed</p>
 
 <h4 id="2判断-cocoapods-是否可用">2、判断 CocoaPods 是否可用</h4>
-<div class="highlighter-rouge"><pre class="highlight"><code>pod setup
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pod setup
+</code></pre></div></div>
 
 <p>经常会出现卡在 <code class="highlighter-rouge">Setting up CocoaPods master repo</code> 的情况，使用以下方法可以查看下载进度：</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>// 终端输入：cd ~/.cocoapods，进入cocoapods
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 终端输入：cd ~/.cocoapods，进入cocoapods
 du -sh *
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="3常见错误">3、常见错误</h4>
 <p>经常会有卡在 <code class="highlighter-rouge">Setting up CocoaPods master repo</code> 很久后报以下错：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>[!] /usr/bin/git clone https://github.com/CocoaPods/Specs.git master
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[!] /usr/bin/git clone https://github.com/CocoaPods/Specs.git master
 
 Cloning into 'master'...
 error: RPC failed: result=56, HTTP code = 200
 fatal: the remote end hung up unexpectedly
 fatal: early EOF
 fatal: index-pack failed
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>可能的原因有 3 个：</p>
 <ul>
   <li>gem 版本过低
-    <div class="highlighter-rouge"><pre class="highlight"><code>sudo gem update --system
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo gem update --system
+</code></pre></div>    </div>
   </li>
   <li>github 无法连接
-    <div class="highlighter-rouge"><pre class="highlight"><code>ping github.com
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ping github.com
+</code></pre></div>    </div>
   </li>
   <li>.cocoapods目录下的配置信息错误
-    <div class="highlighter-rouge"><pre class="highlight"><code>pod repo list
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pod repo list
+</code></pre></div>    </div>
   </li>
 </ul>
 
 <h2 id="手动下载-cocoapods-库安装">手动下载 CocoaPods 库安装</h2>
 
+<h3 id="更新记录">更新记录</h3>
+<h4 id="20171124">2017.11.24</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Mac OS X 10.12.6
+gem 2.6.14
+</code></pre></div></div>
+
+<p>执行<code class="highlighter-rouge">sudo gem install -n /usr/local/bin cocoapods</code>后，<code class="highlighter-rouge">cd ~/.cocoapods/repos</code>找不到路径。</p>
+
 <h3 id="步骤">步骤</h3>
 
 <h4 id="1检查是否有以下路径存在">1、检查是否有以下路径存在</h4>
-<div class="highlighter-rouge"><pre class="highlight"><code>cd ~/.cocoapods/repos
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd ~/.cocoapods/repos
+</code></pre></div></div>
 
 <p>若没有，执行以下命令（猜测手动建路径应该也可以）</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>sudo gem install cocoapods
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo gem install cocoapods
+</code></pre></div></div>
 
 <p>有路径后，手动下载/克隆 Specs 库</p>
 <ul>
   <li>在 ~/.cocoapods/repos 路径下，克隆 Specs 库
-    <div class="highlighter-rouge"><pre class="highlight"><code>git clone https://github.com/CocoaPods/Specs
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone https://github.com/CocoaPods/Specs
+</code></pre></div>    </div>
   </li>
   <li>手动下载 https://github.com/CocoaPods/Specs</li>
 </ul>
@@ -347,9 +350,8 @@ fatal: index-pack failed
 
 <p>运行pod后显示：”pod: command not found”的错误。赋予/usr/local/bin给予执行与读取权限，执行以下命令。若不行执行sudo chmod 777 /usr/local/bin/。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sudo chmod 700 /usr/local/bin/
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo chmod 700 /usr/local/bin/
+</code></pre></div></div>
 
 <hr />
 <h2 id="相关链接">相关链接</h2>
@@ -371,6 +373,65 @@ fatal: index-pack failed
                     
                 
             
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
         
             
             
@@ -416,76 +477,6 @@ fatal: index-pack failed
                 
             
         
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <h2 id="similar_posts">Similar Posts</h2>
-                        <ul>
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E7%A7%81%E6%9C%89%E5%BA%93/">创建私有 Pods 库
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E5%85%B1%E6%9C%89%E5%BA%93/">创建公有 Pods 库
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-            
-        
-        
-            </ul>
         
 
         <div class="post-recent">
@@ -521,8 +512,6 @@ fatal: index-pack failed
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
-                    
-                    <li><a href="#similar_posts">Similar Posts</a></li>
                     
                     <li><a href="#comments">Comments</a></li>
                 </ul>

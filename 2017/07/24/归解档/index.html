@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>归/解档</title>
-    <meta name="description" content="归/解档存储数据">
+    <meta name="description" content="iOS 归/解档存储数据">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -142,6 +142,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -209,7 +213,7 @@
         <ul id="markdown-toc">
   <li><a href="#简单数据" id="markdown-toc-简单数据">简单数据</a></li>
   <li><a href="#自定义对象" id="markdown-toc-自定义对象">自定义对象</a>    <ul>
-      <li><a href="#1类对象要遵守-nscoding协议" id="markdown-toc-1类对象要遵守-nscoding协议">1、类对象要遵守 <code class="highlighter-rouge">NSCoding</code>协议</a></li>
+      <li><a href="#1类对象要遵守-nscoding-协议" id="markdown-toc-1类对象要遵守-nscoding-协议">1、类对象要遵守 <code class="highlighter-rouge">NSCoding</code> 协议</a></li>
       <li><a href="#2类实例实现归档" id="markdown-toc-2类实例实现归档">2、类实例实现归档</a></li>
       <li><a href="#3实现解档" id="markdown-toc-3实现解档">3、实现解档</a></li>
     </ul>
@@ -223,15 +227,15 @@
 <p>只要类中的所有属性都是标量 / 都符合 NSCoding 协议，就可以对该类的对象进行完整的归档。</p>
 
 <blockquote>
-  <p>注： UIImage 不符合NSCoding</p>
+  <p>注： UIImage 不符合 NSCoding</p>
 </blockquote>
 
 <h2 id="自定义对象">自定义对象</h2>
 
 <p>自定义的类的对象，是操作整个类对象。而自定义的内容也是通过 key - value 来实现，如将一个字符串归解档。</p>
 
-<h3 id="1类对象要遵守-nscoding协议">1、类对象要遵守 <code class="highlighter-rouge">NSCoding</code>协议</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>// 归档（或称为 序列化）
+<h3 id="1类对象要遵守-nscoding-协议">1、类对象要遵守 <code class="highlighter-rouge">NSCoding</code> 协议</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 归档（或称为 序列化）
 - (void)encodeWithCoder:(NSCoder *)encoder
 {
   [aCoder encodeObject:self.gender forKey:@"gender"];
@@ -249,12 +253,11 @@
   }
   return self;
 }
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="2类实例实现归档">2、类实例实现归档</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// 1:准备存储数据的对象
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 1:准备存储数据的对象
 NSMutableData *data = [NSMutableData data];
 
 // 2:创建归档对象
@@ -268,12 +271,11 @@ NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableDa
 
 // 5 将 data 写入文件中
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="3实现解档">3、实现解档</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 // 准备解档路径
 NSData *myData = [NSData dataWithContentsOfFile:path];
 
@@ -286,8 +288,7 @@ aper = [unarchiver decodeObjectForKey:@"person"];
 
 // 完成反归档
 [unarchiver finishDecoding];
-</code></pre>
-</div>
+</code></pre></div></div>
 
         </article>
         <hr>
@@ -303,7 +304,7 @@ aper = [unarchiver decodeObjectForKey:@"person"];
                         <ul>
                         
                         <li class="relatedPost">
-                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/">自定义 CollectionView 布局之瀑布流
+                            <a href="/2017/11/29/iOS%E6%8A%80%E6%9C%AF%E6%A0%88/">iOS技术栈
                             
                             </a>
                         </li>
@@ -313,6 +314,123 @@ aper = [unarchiver decodeObjectForKey:@"person"];
                 
                     
                 
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/">iOS WWDC更新总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/">自定义 CollectionView 布局
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
             
         
             
@@ -343,87 +461,6 @@ aper = [unarchiver decodeObjectForKey:@"person"];
             
                 
                     
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/SQLite3/">iOS-SQLite3
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/plist/">Plist
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/NSUserDefaults/">NSUserDefaults
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/Setting_Bundle/">Setting.Bundle
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
                 
                     
                 
@@ -457,18 +494,6 @@ aper = [unarchiver decodeObjectForKey:@"person"];
                 
                     
                 
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
             
                 
                     
@@ -484,13 +509,13 @@ aper = [unarchiver decodeObjectForKey:@"person"];
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/07/24/SQLite3/">iOS-SQLite3</a></p>
+        <p><strong>上一篇</strong> <a href="/2017/07/24/plist/">Plist</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/">iOS资源整合</a></p>
+        <p><strong>下一篇</strong> <a href="/2017/07/24/SQLite3/">SQLite</a></p>
         
     </div>
 </div>

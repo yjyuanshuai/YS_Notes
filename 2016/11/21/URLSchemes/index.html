@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>URL Schemes</title>
-    <meta name="description" content="iOS 9 前，拉起 App 用到的方法。iOS 9 后用通用链接方式拉起 App。">
+    <meta name="description" content="iOS 9 前，拉起 App 用 URL Schemes。iOS 9 后用通用链接方式拉起 App。">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -142,6 +142,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -204,11 +208,80 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#url-schemes" id="markdown-toc-url-schemes">URL Schemes</a></li>
+  <li><a href="#url-schemes-是什么" id="markdown-toc-url-schemes-是什么">URL Schemes 是什么</a></li>
+  <li><a href="#url-schemes-使用形式" id="markdown-toc-url-schemes-使用形式">URL Schemes 使用形式</a>    <ul>
+      <li><a href="#1基本" id="markdown-toc-1基本">1、基本</a></li>
+      <li><a href="#2复杂" id="markdown-toc-2复杂">2、复杂</a>        <ul>
+          <li><a href="#打开某个功能带参数" id="markdown-toc-打开某个功能带参数">打开某个功能（带参数）</a></li>
+          <li><a href="#加-jumpback" id="markdown-toc-加-jumpback">加 jumpback</a></li>
+        </ul>
+      </li>
+      <li><a href="#3变形" id="markdown-toc-3变形">3、变形</a></li>
+    </ul>
+  </li>
+  <li><a href="#延伸" id="markdown-toc-延伸">延伸</a>    <ul>
+      <li><a href="#1x-callback-url" id="markdown-toc-1x-callback-url">1、x-callback-URL</a></li>
+    </ul>
+  </li>
+  <li><a href="#应用" id="markdown-toc-应用">应用</a>    <ul>
+      <li><a href="#1为-app-创建桌面快捷方式" id="markdown-toc-1为-app-创建桌面快捷方式">1、为 App 创建桌面快捷方式</a></li>
+      <li><a href="#2打开另一个-app" id="markdown-toc-2打开另一个-app">2、打开另一个 App</a></li>
+    </ul>
+  </li>
   <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
 </ul>
 
-<h2 id="url-schemes">URL Schemes</h2>
+<h2 id="url-schemes-是什么">URL Schemes 是什么</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>weixin://dl/moments
+</code></pre></div></div>
+
+<p>说明：</p>
+
+<p><code class="highlighter-rouge">weixin://</code> 指定了是哪个 App，而 <code class="highlighter-rouge">dl/moments</code> 指定了具体的功能，比如此处是微信朋友圈的意思。</p>
+
+<blockquote>
+  <p>注：</p>
+</blockquote>
+
+<blockquote>
+  <p>URL Schemes 没有唯一性，也就是说，多个App可以由同样的 URL Schemes</p>
+</blockquote>
+
+<h2 id="url-schemes-使用形式">URL Schemes 使用形式</h2>
+<h3 id="1基本">1、基本</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>YSDevScheme://
+</code></pre></div></div>
+
+<h3 id="2复杂">2、复杂</h3>
+<h4 id="打开某个功能带参数">打开某个功能（带参数）</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 打开某个功能界面
+fantastical2://parse?sentence
+
+
+// 打开某个功能，并且带参数过去
+fantastical2://parse?sentence=事件描述
+</code></pre></div></div>
+
+<h4 id="加-jumpback">加 jumpback</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eudic://dict/想查的单词?jumpback=指定URL
+</code></pre></div></div>
+
+<p>如 B App 的 URL Schemes 如上，在 A App 中拉起 B，然后点击返回，回到指定的 URL（可以是 A，也可以是其他的 App）。</p>
+
+<h3 id="3变形">3、变形</h3>
+
+<p>利用 URL Schemes 的规则和 iOS 系统的一些内置功能，来扩充复杂 URL Schemes，使其中需要输入字符或参数的部分可以预设或输入后再跳转。</p>
+
+<h2 id="延伸">延伸</h2>
+<h3 id="1x-callback-url">1、x-callback-URL</h3>
+
+<h2 id="应用">应用</h2>
+<h3 id="1为-app-创建桌面快捷方式">1、为 App 创建桌面快捷方式</h3>
+
+<h3 id="2打开另一个-app">2、打开另一个 App</h3>
 
 <hr />
 <h2 id="相关链接">相关链接</h2>
@@ -216,6 +289,8 @@
 <p><a href="http://sspai.com/31500">使用详解</a></p>
 
 <p><a href="http://www.cocoachina.com/industry/20140522/8514.html">URL Schemes完全指南</a></p>
+
+<p><a href="http://www.jianshu.com/p/0811ccd6a65d">打开另一个 App</a></p>
 
         </article>
         <hr>
@@ -231,7 +306,7 @@
                         <ul>
                         
                         <li class="relatedPost">
-                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/">自定义 CollectionView 布局之瀑布流
+                            <a href="/2017/11/29/iOS%E6%8A%80%E6%9C%AF%E6%A0%88/">iOS技术栈
                             
                             </a>
                         </li>
@@ -239,6 +314,101 @@
                         
                     
                 
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/">iOS WWDC更新总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/">自定义 CollectionView 布局
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
             
         
             
@@ -265,75 +435,6 @@
             
                 
                     
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/%E5%BD%92%E8%A7%A3%E6%A1%A3/">归/解档
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/SQLite3/">iOS-SQLite3
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/plist/">Plist
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/NSUserDefaults/">NSUserDefaults
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
                 
             
                 
@@ -357,20 +458,6 @@
                 
                     
                 
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-        
-            
             
                 
                     

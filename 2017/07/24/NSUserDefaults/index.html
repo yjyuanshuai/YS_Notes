@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>NSUserDefaults</title>
-    <meta name="description" content="NSUserDefaults">
+    <meta name="description" content="iOS NSUserDefaults">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -142,6 +142,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -217,9 +221,11 @@
 </ul>
 
 <h2 id="1使用环境">1.使用环境</h2>
+
 <p>每个用户都有自己的独特偏好设置，把这些偏好记录在应用包的 plist 文件中，通过 NSUserDefaults 类来访问，这是 NSUserDefaults 的常用姿势。</p>
 
 <h2 id="2使用">2.使用</h2>
+
 <p>存储的对象必须是 plist 文件可以存储的类型：</p>
 <ul>
   <li>NSData</li>
@@ -231,22 +237,20 @@
 </ul>
 
 <p>常用的设值方法：</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>- setBool:forKey:
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- setBool:forKey:
 - setFloat:forKey:
 - setInteger:forKey:
 - setDouble:forKey:
 - setURL:forKey:
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>立即存储方法：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 // 强制存储，非必须，只有在需要立即存储时使用
 - synchronize;
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="3nsuserdefaults-域">3.NSUserDefaults 域</h2>
 
@@ -267,15 +271,14 @@
 <p>当使用 key 去获取 value 时，value 可能是空，造成后续代码逻辑由问题。解决方法：</p>
 
 <p>创建一个包含用户偏好设置信息的 DefaultPreference.plist 文件，添加到 target，在运行时，app就可以加载这个文件并且把内容传到 registerDefaults：。</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 // 在 App 启动时
 NSURL *defaultPrefsFile = [[NSBundle mainBundle] URLForResource:@"DefaultPreferences" withExtension:@"plist"];
 NSDictionary *defaultPrefs = [NSDictionary dictionaryWithContentsOfURL:defaultPrefsFile];
 
 [[NSUserDefaults standardUserDefaults] registerDefaults:defaultPrefs];
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>这样做的原因是：</p>
 
@@ -299,7 +302,7 @@ NSDictionary *defaultPrefs = [NSDictionary dictionaryWithContentsOfURL:defaultPr
                         <ul>
                         
                         <li class="relatedPost">
-                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/">自定义 CollectionView 布局之瀑布流
+                            <a href="/2017/11/29/iOS%E6%8A%80%E6%9C%AF%E6%A0%88/">iOS技术栈
                             
                             </a>
                         </li>
@@ -309,6 +312,123 @@ NSDictionary *defaultPrefs = [NSDictionary dictionaryWithContentsOfURL:defaultPr
                 
                     
                 
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/">iOS WWDC更新总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/">自定义 CollectionView 布局
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
             
         
             
@@ -339,87 +459,6 @@ NSDictionary *defaultPrefs = [NSDictionary dictionaryWithContentsOfURL:defaultPr
             
                 
                     
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/%E5%BD%92%E8%A7%A3%E6%A1%A3/">归/解档
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/SQLite3/">iOS-SQLite3
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/plist/">Plist
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/Setting_Bundle/">Setting.Bundle
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
                 
                     
                 
@@ -453,18 +492,6 @@ NSDictionary *defaultPrefs = [NSDictionary dictionaryWithContentsOfURL:defaultPr
                 
                     
                 
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
             
                 
                     

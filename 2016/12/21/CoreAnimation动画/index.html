@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CoreAnimation动画</title>
+    <meta name="description" content="iOS CoreAnimation动画">
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <!-- 菜单前的图标，需要下面这句 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="http://localhost:4000/2016/12/21/CoreAnimation%E5%8A%A8%E7%94%BB/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
+
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?cf8506e0ef223e57ff6239944e5d46a4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-72449510-4', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
+    "HTML-CSS": {
+      linebreaks: { automatic: true, width: "container" }
+    }
+});
+</script>
+<!-- <script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+</head>
+
+
+  <body>
+
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">YJ`s notes</a>
+        <small></small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>类别
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>标签
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>关于我
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>CoreAnimation动画</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2016-12-21
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
+        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
+    
+        <!--a href="/tag/#%E5%8A%A8%E7%94%BB" title="Tag: 动画" rel="tag">动画</a-->
+        <a href="/tag/#动画" title="Tag: 动画" rel="tag">动画</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#核心动画简介" id="markdown-toc-核心动画简介">核心动画简介</a></li>
+  <li><a href="#常用的方法" id="markdown-toc-常用的方法">常用的方法</a>    <ul>
+      <li><a href="#初始化方法" id="markdown-toc-初始化方法">初始化方法</a></li>
+      <li><a href="#添加删除动画" id="markdown-toc-添加删除动画">添加/删除动画</a></li>
+      <li><a href="#设置动画属性" id="markdown-toc-设置动画属性">设置动画属性</a>        <ul>
+          <li><a href="#keypath" id="markdown-toc-keypath">keyPath</a></li>
+          <li><a href="#timingfunction" id="markdown-toc-timingfunction">timingFunction</a></li>
+          <li><a href="#delegate" id="markdown-toc-delegate">delegate</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#cabasicanimation" id="markdown-toc-cabasicanimation">CABasicAnimation</a></li>
+  <li><a href="#cakeyframeanimation" id="markdown-toc-cakeyframeanimation">CAKeyframeAnimation</a>    <ul>
+      <li><a href="#示例代码1-缩放" id="markdown-toc-示例代码1-缩放">示例代码1-缩放</a></li>
+      <li><a href="#示例代码2-路径" id="markdown-toc-示例代码2-路径">示例代码2-路径</a></li>
+    </ul>
+  </li>
+  <li><a href="#catransition" id="markdown-toc-catransition">CATransition</a>    <ul>
+      <li><a href="#type" id="markdown-toc-type">type</a></li>
+      <li><a href="#subtype" id="markdown-toc-subtype">subtype</a></li>
+    </ul>
+  </li>
+  <li><a href="#caspringanimation" id="markdown-toc-caspringanimation">CASpringAnimation</a></li>
+  <li><a href="#caanimationgroup" id="markdown-toc-caanimationgroup">CAAnimationGroup</a></li>
+  <li><a href="#catransaction-事务" id="markdown-toc-catransaction-事务">CATransaction 事务</a>    <ul>
+      <li><a href="#隐显式" id="markdown-toc-隐显式">隐/显式</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="核心动画简介">核心动画简介</h2>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_02_01.png" alt="" /></p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">类名</th>
+      <th style="text-align: left">含义</th>
+      <th style="text-align: left">使用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">CAAnimation</td>
+      <td style="text-align: left">抽象类</td>
+      <td style="text-align: left">不能直接使用</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CAPropertyAnimation</td>
+      <td style="text-align: left">支持动画地显示图层的keyPath</td>
+      <td style="text-align: left">一般不直接使用</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CATransition</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">常用于转场动画</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CAAnimationGroup</td>
+      <td style="text-align: left">动画组</td>
+      <td style="text-align: left">常用</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CABasicAnimation</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">常用</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CAKeyframeAnimation</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">常用</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CASpringAnimation</td>
+      <td style="text-align: left">弹簧动画（iOS 9 后新增）</td>
+      <td style="text-align: left">常用</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="常用的方法">常用的方法</h2>
+<h3 id="初始化方法">初始化方法</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+ (instancetype)animation;
+
+// CAPropertyAnimation 的子类还可以通过如下方法初始化
++ (instancetype)animationWithKeyPath:(nullable NSString *)path;
+</code></pre></div></div>
+
+<h3 id="添加删除动画">添加/删除动画</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//
+- (void)addAnimation:(CAAnimation *)anim forKey:(nullable NSString *)key;
+
+//
+- (void)removeAnimationForKey:(NSString *)key;
+- (void)removeAllAnimations;
+</code></pre></div></div>
+
+<h3 id="设置动画属性">设置动画属性</h3>
+<p>设置动画的执行时间，执行曲线，keyPath的目标值，代理等等.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">属性值</th>
+      <th style="text-align: left">备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">keyPath</td>
+      <td style="text-align: left">可以指定keyPath为CALayer的属性值，并对它的值进行修改，以达到对应的动画效果，需要注意的是部分属性值是不支持动画效果的</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">duration</td>
+      <td style="text-align: left">动画的持续时间</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">repeatCount</td>
+      <td style="text-align: left">动画的重复次数</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">timingFunction</td>
+      <td style="text-align: left">动画的时间节奏控制，CAMediaTimingFunction 方法可以自定义。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">fillMode</td>
+      <td style="text-align: left">视图在非Active时的行为，当removedOnCompletion设置为NO后才起作用，可以设置layer是保持动画开始前的状态还是动画结束后的状态，或是其他的</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">removedOnCompletion</td>
+      <td style="text-align: left">动画执行完毕后是否从图层上移除，默认为YES（视图会恢复到动画前的状态），可设置为NO（图层保持动画执行后的状态，前提是 fillMode 设置为 kCAFillModeForwards）</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">beginTime</td>
+      <td style="text-align: left">动画延迟执行时间（通过CACurrentMediaTime() + your time 设置）</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">delegate</td>
+      <td style="text-align: left">代理方法</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="keypath">keyPath</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// rotation 旋转
+rotation.x
+rotation.y
+rotation.z
+
+// scale 缩放
+scale.x
+scale.y
+scale.z
+
+// translation 缩放
+translation.x
+translation.y
+translation.z
+
+// postion
+x
+y
+
+// origin
+origin.x
+origin.y
+
+// size
+size.width
+size.height
+
+// shadow
+shadowColor
+shadowOffset
+shadowOpacity
+shadowRadius
+
+// 其他
+opacity
+backgroundColor
+cornerRadius
+borderWidth
+contents
+
+</code></pre></div></div>
+
+<h4 id="timingfunction">timingFunction</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+// enum 值：
+kCAMediaTimingFunctionLinear 匀速
+kCAMediaTimingFunctionEaseIn 慢进
+kCAMediaTimingFunctionEaseOut 慢出
+kCAMediaTimingFunctionEaseInEaseOut 慢进慢出
+kCAMediaTimingFunctionDefault 默认值（慢进慢出）
+
+</code></pre></div></div>
+
+<h4 id="delegate">delegate</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+//动画开始
+- (void)animationDidStart:(CAAnimation *)anim;  
+
+//动画结束
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag;
+
+</code></pre></div></div>
+
+<h2 id="cabasicanimation">CABasicAnimation</h2>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_02_02.gif" alt="" /></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+CABasicAnimation *postionAnimation = [CABasicAnimation animationWithKeyPath:@"position.y"];
+postionAnimation.duration = 1.0f;
+postionAnimation.fromValue = @(self.squareView.center.y);
+postionAnimation.toValue = @(self.squareView.center.y - 300);
+postionAnimation.removedOnCompletion = NO;
+postionAnimation.delegate = self;
+postionAnimation.autoreverses = YES;
+postionAnimation.fillMode = kCAFillModeForwards;
+postionAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+[self.squareView.layer addAnimation:postionAnimation forKey:@"posstionAnimation"];
+
+</code></pre></div></div>
+
+<p>属性说明：</p>
+
+<ul>
+  <li>autoreverses，动画结束后是否 backwards(回退) 到动画开始前的状态。可与上面两个属性（removedOnCompletion、fillMode）组合出不同效果。</li>
+</ul>
+
+<h2 id="cakeyframeanimation">CAKeyframeAnimation</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">属性名</th>
+      <th style="text-align: left">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">values</td>
+      <td style="text-align: left">关键帧数组对象，里面每一个元素即为一个关键帧，动画会在对应的时间段内，依次执行数组中每一个关键帧的动画。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">path</td>
+      <td style="text-align: left">动画路径对象，可以指定一个路径，在执行动画时路径会沿着路径移动，Path在动画中只会影响视图的Position。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">keyTimes</td>
+      <td style="text-align: left">设置关键帧对应的时间点，范围：0-1。如果没有设置该属性，则每一帧的时间平分。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="示例代码1-缩放">示例代码1-缩放</h3>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_02_03.gif" alt="" /></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+CAKeyframeAnimation *keyAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
+keyAnimation.duration = 1.0f;
+keyAnimation.beginTime = CACurrentMediaTime() + 1.0;
+
+CATransform3D transform1 = CATransform3DMakeScale(1.5, 1.5, 0);
+CATransform3D transform2 = CATransform3DMakeScale(0.8, 0.8, 0);
+CATransform3D transform3 = CATransform3DMakeScale(3, 3, 0);
+
+keyAnimation.values = @[[NSValue valueWithCATransform3D:transform1],[NSValue valueWithCATransform3D:transform2],[NSValue valueWithCATransform3D:transform3]];
+keyAnimation.keyTimes = @[@0,@0.5,@1];
+keyAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+keyAnimation.removedOnCompletion = NO;
+keyAnimation.fillMode = kCAFillModeForwards;
+[_someView.layer addAnimation:keyAnimation forKey:nil];
+
+</code></pre></div></div>
+
+<h3 id="示例代码2-路径">示例代码2-路径</h3>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_07.gif" alt="" /></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CAKeyframeAnimation * ani = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+
+CGMutablePathRef path = CGPathCreateMutable();
+CGPathAddEllipseInRect(path, NULL, CGRectMake(130, 200, 100, 100));
+ani.path = path;
+CGPathRelease(path);
+
+ani.duration = 4.0;
+ani.removedOnCompletion = NO;
+ani.fillMode = kCAFillModeForwards;
+[self.centerShow.layer addAnimation:ani forKey:@"PostionKeyframePathAni"];
+</code></pre></div></div>
+
+<h2 id="catransition">CATransition</h2>
+
+<p>常用于转场动画</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">属性</th>
+      <th style="text-align: left">属性含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">type</td>
+      <td style="text-align: left">过度动画类型</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">subtype</td>
+      <td style="text-align: left">过度动画类型</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="type">type</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// enum
+kCATransitionFade   // 渐变，淡入淡出
+kCATransitionMoveIn // 覆盖
+kCATransitionPush   // 推出
+kCATransitionReveal // 揭开
+
+// 私有动画类型
+"cube"          // 立体旋转
+"suckEffect"    // 飘缩
+"oglFlip"       // 翻转
+"rippleEffect"  // 水滴波纹
+"pageCurl"      // 翻页翻过
+"pageUnCurl"    // 翻页翻回
+"cameraIrisHollowOpen"  // 相机打开
+"cameraIrisHollowClose" // 相机关闭
+
+// 枚举
+UIViewAnimationTransitionCurlDown       // 下翻转
+UIViewAnimationTransitionCurlUp         // 上翻转
+UIViewAnimationTransitionFlipFromLeft   // 左翻转
+UIViewAnimationTransitionFlipFromRight  // 右翻转
+</code></pre></div></div>
+
+<h3 id="subtype">subtype</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kCATransitionFromRight  // 从右边
+kCATransitionFromLeft   // 从左边
+kCATransitionFromTop    // 从顶部
+kCATransitionFromBottom // 从底部
+</code></pre></div></div>
+
+<h2 id="caspringanimation">CASpringAnimation</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">属性</th>
+      <th style="text-align: left">属性含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">mass</td>
+      <td style="text-align: left">质量（影响弹簧的惯性，质量越大，弹簧惯性越大，运动的幅度越大）</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">stiffness</td>
+      <td style="text-align: left">弹性系数（弹性系数越大，弹簧的运动越快）</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">damping</td>
+      <td style="text-align: left">阻尼系数（阻尼系数越大，弹簧的停止越快）</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">initialVelocity</td>
+      <td style="text-align: left">初始速率（弹簧动画的初始速度大小，弹簧运动的初始方向与初始速率的正负一致，若初始速率为0，表示忽略该属性）</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">settlingDuration</td>
+      <td style="text-align: left">结算时间（根据动画参数估算弹簧开始运动到停止的时间，动画设置的时间最好根据此时间来设置）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_08.gif" alt="" /></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+CASpringAnimation * ani = [CASpringAnimation animationWithKeyPath:@"bounds"];
+
+ani.mass = 10.0; //质量，影响图层运动时的弹簧惯性，质量越大，弹簧拉伸和压缩的幅度越大
+ani.stiffness = 5000; //刚度系数(劲度系数/弹性系数)，刚度系数越大，形变产生的力就越大，运动越快
+ani.damping = 100.0;//阻尼系数，阻止弹簧伸缩的系数，阻尼系数越大，停止越快
+ani.initialVelocity = 5.f;//初始速率，动画视图的初始速度大小;速率为正数时，速度方向与运动方向一致，速率为负数时，速度方向与运动方向相反
+ani.duration = ani.settlingDuration;
+ani.toValue = [NSValue valueWithCGRect:self.centerShow.bounds];
+ani.removedOnCompletion = NO;
+ani.fillMode = kCAFillModeForwards;
+ani.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+[self.cartCenter.layer addAnimation:ani forKey:@"boundsAni"];
+
+</code></pre></div></div>
+
+<h2 id="caanimationgroup">CAAnimationGroup</h2>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_02_04.gif" alt="" /></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+CABasicAnimation *rotationYAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.y"];
+rotationYAnimation.fromValue = @0;
+rotationYAnimation.toValue = @(M_PI);
+rotationYAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+
+CABasicAnimation *postionAnimation = [CABasicAnimation animationWithKeyPath:@"position.y"];
+postionAnimation.fromValue = @(_markView.center.y);
+postionAnimation.toValue = @(_markView.center.y - 100);
+postionAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+
+CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+animationGroup.duration = kUpDuration;
+animationGroup.removedOnCompletion = NO;
+animationGroup.fillMode = kCAFillModeForwards;
+animationGroup.delegate = self;
+animationGroup.animations = @[rotationYAnimation, postionAnimation];
+
+[_markView.layer addAnimation:animationGroup forKey:kJumpAnimation];
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>注：CAAnimationGroup的 animations 中可以放其他任何动画类（包括CAAnimationGroup），需要注意的是animations里的动画设置了duration之后动画可能会有不同，一般里面不设置，在最外层设置group的duration即可。</p>
+</blockquote>
+
+<p>接上面示例之后的动画，实现视图继续绕Y轴旋转90°，下落回原处：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+- (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
+{
+    if ([anim isEqual:[_someView.layer animationForKey:@"jumpUp"]]) {
+        CABasicAnimation *rotationYAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.y"];
+        rotationYAnimation.fromValue = @(M_PI_2);
+        rotationYAnimation.toValue = @(M_PI);
+        rotationYAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+
+        CABasicAnimation *postionAnimation = [CABasicAnimation animationWithKeyPath:@"position.y"];
+        postionAnimation.fromValue = @(_someView.center.y - 14);
+        postionAnimation.toValue = @(_someView.center.y);
+        postionAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
+
+        CAAnimationGroup *animationGroup = [CAAnimationGroup animation];
+        animationGroup.duration = 0.256;
+        animationGroup.removedOnCompletion = NO;
+        animationGroup.fillMode = kCAFillModeForwards;
+        animationGroup.delegate = self;
+        animationGroup.animations = @[rotationYAnimation, postionAnimation];
+
+        [_someView.layer addAnimation:animationGroup forKey:@"jumpDown"];
+    }
+}
+
+</code></pre></div></div>
+
+<h2 id="catransaction-事务">CATransaction 事务</h2>
+
+<p>简单来说事务是核心动画里面的一个基本的单元，动画的产生必然伴随着layer的Animatable属性的变化，而layer属性的变化必须属于某一个事务。</p>
+
+<p>核心动画依赖事务。</p>
+
+<h3 id="隐显式">隐/显式</h3>
+<p>事务分为隐式和显式：</p>
+
+<p>　　1.隐式：没有明显调用事务的方法，由系统自动生成事务。比如直接设置一个layer的position属性，则会在当前线程自动生成一个事务，并在下一个runLoop中自动commit事务。</p>
+
+<p>　　2.显式：明显调用事务的方法（[CATransaction begin]和 [CATransaction commit]）。</p>
+
+<p>CA事务的可设置属性（会覆盖隐式动画的设置）：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+animationDuration：动画时间
+animationTimingFunction：动画时间曲线
+disableActions：是否关闭动画
+completionBlock：动画执行完毕的回调
+
+</code></pre></div></div>
+
+<p>事务支持嵌套使用：当最外层的事务commit后动画才会开始。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+[CATransaction begin];
+[CATransaction setAnimationDuration:2.0];
+[CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
+//    [CATransaction setDisableActions:YES]; //设置为YES就关闭动画
+self.subLayer.bounds = self.centerShow.layer.bounds;
+[CATransaction commit];
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>注意：只有非root layer才有隐式动画，如果你是直接设置self.cartCenter.layer.bounds = self.centerShow.layer.bounds;是不会有动画效果的。</p>
+</blockquote>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/29/iOS%E6%8A%80%E6%9C%AF%E6%A0%88/">iOS技术栈
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/">iOS WWDC更新总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/">自定义 CollectionView 布局
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/">iOS资源整合
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2016/12/21/UIView%E5%8A%A8%E7%94%BB/">UIView动画</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2016/12/22/UIBezierPath%E7%BB%98%E5%9B%BE/">UIBezierPath 绘图</a></p>
+        
+    </div>
+</div>
+
+
+        <h2 id="comments">Comments</h2>
+        
+
+
+
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
+                    
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            <!-- Contact me at: -->
+            
+            
+            
+            
+            
+            
+            
+            
+        </p>
+        <!-- <p>
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p> -->
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<!-- <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+    </script>
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>

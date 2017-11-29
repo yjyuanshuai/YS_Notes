@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>iOS-SQLite3</title>
-    <meta name="description" content="iOS-SQLite3">
+    <title>SQLite</title>
+    <meta name="description" content="SQLite">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -142,6 +142,10 @@
                 
                     
                 
+                    
+                
+                    
+                
             </ul>
         </nav>
     </div>
@@ -150,7 +154,7 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>iOS-SQLite3</h1>
+        <h1>SQLite</h1>
         <div class="label">
 
             <div class="label-card">
@@ -225,14 +229,24 @@
       </li>
     </ul>
   </li>
-  <li><a href="#第三方库fmdb" id="markdown-toc-第三方库fmdb">第三方库（FMDB）</a></li>
+  <li><a href="#第三方库fmdb" id="markdown-toc-第三方库fmdb">第三方库（FMDB）</a>    <ul>
+      <li><a href="#基本类" id="markdown-toc-基本类">基本类</a></li>
+      <li><a href="#语法" id="markdown-toc-语法">语法</a></li>
+      <li><a href="#基本使用" id="markdown-toc-基本使用">基本使用</a>        <ul>
+          <li><a href="#打开数据库" id="markdown-toc-打开数据库">打开数据库</a></li>
+          <li><a href="#操作" id="markdown-toc-操作">操作</a></li>
+          <li><a href="#fmdatabasequeue-基本使用" id="markdown-toc-fmdatabasequeue-基本使用">FMDatabaseQueue 基本使用</a></li>
+        </ul>
+      </li>
+      <li><a href="#fmdb-中的事务" id="markdown-toc-fmdb-中的事务">FMDB 中的事务</a></li>
+    </ul>
+  </li>
 </ul>
 
 <h2 id="导入系统支持库">导入系统支持库</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>libsqlite3.dylib
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libsqlite3.dylib
+</code></pre></div></div>
 
 <h2 id="sqlite-api">SQLite API</h2>
 <p>// 略</p>
@@ -240,7 +254,8 @@
 <h2 id="常用数据库语句">常用数据库语句</h2>
 
 <ul>
-  <li>不区分大小写；</li>
+  <li>不区分大小写，但有需要注意的，如 GLOB 和 glob 具有不同作用；</li>
+  <li>有 5 种基本数据类型，text、integer、float、boolean、blob；</li>
   <li>以 <strong>;</strong> 结尾。</li>
 </ul>
 
@@ -253,33 +268,29 @@
 <h3 id="表操作ddl">表操作（DDL）</h3>
 <h4 id="1创建表">1、创建表</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>create table 表名 (字段名1 字段类型1, 字段名2 字段类型2, …) ;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>create table 表名 (字段名1 字段类型1, 字段名2 字段类型2, …) ;
 create table if not exists 表名 (字段名1 字段类型1, 字段名2 字段类型2, …) ;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="2删除表">2、删除表</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>drop table 表名;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>drop table 表名;
 drop table if exists 表名;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="数据操作">数据操作</h3>
 <h4 id="1插入">1、插入</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>insert into 表名 (字段1, 字段2, …) values (字段1的值, 字段2的值, …) ;
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>insert into 表名 (字段1, 字段2, …) values (字段1的值, 字段2的值, …) ;
+</code></pre></div></div>
 
 <h4 id="2删除">2、删除</h4>
-<div class="highlighter-rouge"><pre class="highlight"><code>delete from 表名 ;
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>delete from 表名 ;
+</code></pre></div></div>
 
 <h4 id="3查询">3、查询</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// 限制查询数据范围（0 表示起始，3 表示需要查询的数目）
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 限制查询数据范围（0 表示起始，3 表示需要查询的数目）
 select * from t_person limit 0, 3;
 
 // 数据升降序（默认升序）
@@ -287,18 +298,16 @@ SELECT * FROM t_person ORDER BY age ASC, id DESC;
 
 // 条件（+模糊查询）
 select * from t_person where name like 'wangwu%';
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="4更新">4、更新</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>update 表名 set 字段1 = 字段1的值, 字段2 = 字段2的值, … ;
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>update 表名 set 字段1 = 字段1的值, 字段2 = 字段2的值, … ;
+</code></pre></div></div>
 
 <h4 id="5数据统计">5、数据统计</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// 取出所有数据的总数目
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 取出所有数据的总数目
 select count(*) from t_person;
 
 // 统计符合条件的记录条数
@@ -315,10 +324,99 @@ select avg(age) from t_person;
 
 // 计算指定列数值的总数
 select sum(age) from t_person;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="第三方库fmdb">第三方库（FMDB）</h2>
+
+<p>FMDB 封装了 SQLite3 的C语言API。</p>
+
+<h3 id="基本类">基本类</h3>
+
+<ul>
+  <li>FMDatabase：可以理解成一个数据库。</li>
+  <li>FMResultSet：查询的结果集合。</li>
+  <li>FMDatabaseQueue：运用多线程，可执行多个查询、更新。线程安全。</li>
+</ul>
+
+<h3 id="语法">语法</h3>
+
+<ul>
+  <li>查询 executeQuery；</li>
+  <li>其他的操作都是更新，executeUpdate。</li>
+</ul>
+
+<h3 id="基本使用">基本使用</h3>
+
+<h4 id="打开数据库">打开数据库</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FMDatabase * db = [FMDatabase databaseWithPath:filePath];
+
+[db open];
+</code></pre></div></div>
+
+<h4 id="操作">操作</h4>
+<ul>
+  <li>创建表</li>
+  <li>插入数据</li>
+  <li>删除</li>
+  <li>修改</li>
+  <li>查询</li>
+  <li>删除表</li>
+</ul>
+
+<h4 id="fmdatabasequeue-基本使用">FMDatabaseQueue 基本使用</h4>
+
+<p>FMDatabase是线程不安全的，当FMDB数据存储想要使用多线程的时候，FMDatabaseQueue就派上用场了。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//初始化FMDatabaseQueue
+FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:filePath];
+
+//在block中执行SQLite语句命令
+    [dbQueue inDatabase:^(FMDatabase * db)?{
+        //创建表
+        [db executeUpdate:@"create table if not exists t_student (...)"];
+
+        //添加数据
+        [db executeUpdate:@"insert into t_student(name,age) values(?,?)",@"jack",@17];
+        [db executeUpdate:@"insert into t_student(name,age) values(?,?)",@"lily",@16];
+
+        //查询数据
+        FMResultSet *set = [db executeQuery:@"select id, name, age from t_student"];
+
+        //遍历查询到的数据
+        while ([set next]) {
+            int ID = [set intForColumn:@"id"];
+            NSString * name = [set stringForColumn:@"name"];
+            int age = [set?intForColumn:@"age"];
+            NSLog(@"%d,%@,%d",ID,name,age);
+        }
+    }];
+</code></pre></div></div>
+
+<h3 id="fmdb-中的事务">FMDB 中的事务</h3>
+
+<p>事务（Transaction）是不可分割的一个整体操作，要么都执行，要么都不执行。</p>
+
+<p>下面代码中，利用事务循环向数据库中添加2000条数据，假如在添加的过程中出现了一些问题，由于执行了*rollback = YES的回滚操作，数据库中一个数据都不会出现。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//初始化FMDatabaseQueue
+FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:filePath];
+
+//FMDatabaseQueue的事务inTransaction
+[dbQueue inTransaction:^(FMDatabase * _Nonnull db, BOOL * _Nonnull rollback) {
+        //创建表
+        [db executeUpdate:@"create table if not exists t_student (id integer primary key autoincrement, name text, age integer)"];
+        //循环添加2000条数据
+        for (int i = 0; i &lt; 2000; i++) {
+            BOOL success = [db executeUpdate:@"insert into t_student(name,age) values(?,?)",@"jack",@(i)];
+            //如果添加数据出现问题，则回滚
+            if (!success) {
+                //数据回滚
+                *rollback = YES;
+                return;
+            }
+        }
+    }];
+</code></pre></div></div>
 
         </article>
         <hr>
@@ -334,7 +432,7 @@ select sum(age) from t_person;
                         <ul>
                         
                         <li class="relatedPost">
-                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/">自定义 CollectionView 布局之瀑布流
+                            <a href="/2017/11/29/iOS%E6%8A%80%E6%9C%AF%E6%A0%88/">iOS技术栈
                             
                             </a>
                         </li>
@@ -344,6 +442,123 @@ select sum(age) from t_person;
                 
                     
                 
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/">iOS WWDC更新总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/">自定义 CollectionView 布局
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
             
         
             
@@ -374,87 +589,6 @@ select sum(age) from t_person;
             
                 
                     
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/%E5%BD%92%E8%A7%A3%E6%A1%A3/">归/解档
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/plist/">Plist
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/NSUserDefaults/">NSUserDefaults
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/07/24/Setting_Bundle/">Setting.Bundle
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
                 
                     
                 
@@ -488,18 +622,6 @@ select sum(age) from t_person;
                 
                     
                 
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
             
                 
                     
@@ -515,13 +637,13 @@ select sum(age) from t_person;
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/07/24/plist/">Plist</a></p>
+        <p><strong>上一篇</strong> <a href="/2017/07/24/%E5%BD%92%E8%A7%A3%E6%A1%A3/">归/解档</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2017/07/24/%E5%BD%92%E8%A7%A3%E6%A1%A3/">归/解档</a></p>
+        <p><strong>下一篇</strong> <a href="/2017/07/24/CoreData/">CoreData</a></p>
         
     </div>
 </div>

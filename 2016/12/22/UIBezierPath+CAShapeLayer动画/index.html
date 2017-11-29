@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>CAShapeLayer + UIBezierPath</title>
+    <meta name="description" content="UIBezierPath（贝塞尔曲线）结合 CAShapeLayer 绘制图形或路径等。">
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <!-- 菜单前的图标，需要下面这句 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="http://localhost:4000/2016/12/22/UIBezierPath+CAShapeLayer%E5%8A%A8%E7%94%BB/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
+
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?cf8506e0ef223e57ff6239944e5d46a4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-72449510-4', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
+    "HTML-CSS": {
+      linebreaks: { automatic: true, width: "container" }
+    }
+});
+</script>
+<!-- <script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+</head>
+
+
+  <body>
+
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">YJ`s notes</a>
+        <small></small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>类别
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>标签
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>关于我
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>CAShapeLayer + UIBezierPath</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2016-12-22
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
+        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
+    
+        <!--a href="/tag/#CAShapeLayer" title="Tag: CAShapeLayer" rel="tag">CAShapeLayer</a-->
+        <a href="/tag/#CAShapeLayer" title="Tag: CAShapeLayer" rel="tag">CAShapeLayer</a>&nbsp;
+    
+        <!--a href="/tag/#UIBezierPath" title="Tag: UIBezierPath" rel="tag">UIBezierPath</a-->
+        <a href="/tag/#UIBezierPath" title="Tag: UIBezierPath" rel="tag">UIBezierPath</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#calayer" id="markdown-toc-calayer">CALayer</a></li>
+  <li><a href="#cashapelayer" id="markdown-toc-cashapelayer">CAShapeLayer</a>    <ul>
+      <li><a href="#linedashpattern" id="markdown-toc-linedashpattern">lineDashPattern</a></li>
+      <li><a href="#linedashphase" id="markdown-toc-linedashphase">lineDashPhase</a></li>
+      <li><a href="#linecap" id="markdown-toc-linecap">lineCap</a></li>
+      <li><a href="#linejoin" id="markdown-toc-linejoin">lineJoin</a></li>
+    </ul>
+  </li>
+  <li><a href="#机器猫实例" id="markdown-toc-机器猫实例">机器猫实例</a></li>
+</ul>
+
+<h2 id="calayer">CALayer</h2>
+
+<p>将路径显示的图案显示到视图上（3种方法）：</p>
+
+<p>1、直接使用 UIBezierPath 的方法；</p>
+
+<p>2、使用 CoreGraphics 绘制；</p>
+
+<p>3、利用 CAShapeLayer 绘制。</p>
+
+<p>UIBezierPath主要是用来绘制路径的，分为一阶、二阶…..n阶。一阶是直线，二阶以上才是曲线。而最终路径的显示还是得依靠CALayer。用CoreGraphics将路径绘制出来，最终也是绘制到CALayer上。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+- (void)drawRect:(CGRect)rect
+{
+    UIColor *fillColor = [UIColor colorWithRed:0.0 green:0.722 blue:1.0 alpha:1.0];
+
+    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
+    [bezierPath moveToPoint:CGPointMake(0, 0)];
+    [bezierPath addLineToPoint:CGPointMake(rect.size.width - spaceWidth, 0)];
+    [bezierPath addQuadCurveToPoint:CGPointMake(rect.size.width - spaceWidth, rect.size.height) controlPoint:CGPointMake(rect.size.width - spaceWidth + _deltaWith, rect.size.height * 0.5)];
+    [bezierPath addLineToPoint:CGPointMake(0, rect.size.height)];
+    [bezierPath addLineToPoint:CGPointMake(0, 0)];
+    [bezierPath closePath];
+
+    // 1、bezierPath方法
+    //    [fillColor setFill];
+    //    [bezierPath fill];
+
+    // 2、使用CoreGraphics
+    //    CGContextRef ctx = UIGraphicsGetCurrentContext();
+    //    CGContextAddPath(ctx, bezierPath.CGPath);
+    //    CGContextSetFillColorWithColor(ctx, fillColor.CGColor);
+    //    CGContextFillPath(ctx);
+
+    // 3.CAShaperLayer
+    [self.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
+    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+    shapeLayer.path = bezierPath.CGPath;
+    shapeLayer.fillColor = fillColor.CGColor;
+    [self.layer addSublayer:shapeLayer];
+}
+
+</code></pre></div></div>
+
+<blockquote>
+  <p>注：在用自定义的CAShapeLayer做动画时，建议在动画开始前先将动画属性与最终的属性值一致，再开始动画，不要使用removedOnCompletion控制最终的状态，这在WWDC苹果这么建议。</p>
+</blockquote>
+
+<h2 id="cashapelayer">CAShapeLayer</h2>
+<p>|属性|属性含义|
+|:–|:–|
+| path | CGPathRef 对象，路径 |
+| lineWidth | 边线宽度 |
+| strokeColor | 边线颜色 |
+| lineDashPattern | 边线样式，默认是实线 |
+| lineDashPhase | 边线样式的起始位置 |
+| lineCap | 线终点的样式 |
+| lineJoin | 线拐点处的样式 |
+| strokeStart | 画边线的起点，即在路径上的百分比，0~1之间的CGFloat量 |
+| strokeEnd | 终点 |
+| fillColor | CGColorRef对象，图形填充色，默认为黑色 |</p>
+
+<h3 id="linedashpattern">lineDashPattern</h3>
+
+<p>是一个 NSNumber 数组，数组中的值依次表示虚线中，单个线的长度，和空白的长度。</p>
+
+<p>如：@[2,2,3,4]表示长度2的线，长度2的空白，长度3的线，长度4的空白，不断循环。</p>
+
+<h3 id="linedashphase">lineDashPhase</h3>
+
+<p>边线样式的起始位置，如上，就表示第 1 个长度2的线的起始位置。</p>
+
+<h3 id="linecap">lineCap</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+kCALineCapButt    // 不设置样式
+kCALineCapRound   // 圆形
+kCALineCapSquare  // 方形
+
+</code></pre></div></div>
+
+<h3 id="linejoin">lineJoin</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+kCALineJoinMiter  // 三角
+kCALineJoinRound  // 圆形
+kCALineJoinBevel  // 斜切
+
+</code></pre></div></div>
+
+<h2 id="机器猫实例">机器猫实例</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+CGFloat arcCenterX = self.view.frame.size.width/2;
+CGFloat arcCenterY = 80;
+CGFloat delay = LanPangZiDuration;
+
+//头
+CAShapeLayer *headLayer = [CAShapeLayer layer];
+UIBezierPath *headPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(self.view.frame.size.width/2-80, 0, 160, 160) cornerRadius:80];
+[self setLayer:headLayer path:headPath delay:delay*0];
+
+//脸
+CAShapeLayer *faceLayer = [CAShapeLayer layer];
+UIBezierPath *facePath = [UIBezierPath bezierPath];
+[facePath moveToPoint:CGPointMake(arcCenterX-80*sqrt(2.0)/2, arcCenterY+80*sqrt(2.0)/2)];
+[facePath addCurveToPoint:CGPointMake(arcCenterX-30, arcCenterY-20) controlPoint1:CGPointMake(arcCenterX-80, arcCenterY+25) controlPoint2:CGPointMake(arcCenterX-80, arcCenterY-20)];
+[facePath addLineToPoint:CGPointMake(arcCenterX+30, arcCenterY-20)];
+[facePath addCurveToPoint:CGPointMake(arcCenterX+80*sqrt(2.0)/2, arcCenterY+80*sqrt(2.0)/2) controlPoint1:CGPointMake(arcCenterX+80, arcCenterY-20) controlPoint2:CGPointMake(arcCenterX+80, arcCenterY+25)];
+[facePath addQuadCurveToPoint:CGPointMake(arcCenterX-80*sqrt(2.0)/2, arcCenterY+80*sqrt(2.0)/2) controlPoint:CGPointMake(arcCenterX, arcCenterY+105)];
+[self setLayer:faceLayer path:facePath delay:delay*1];
+
+//左眼
+CAShapeLayer *leftEyeLayer = [CAShapeLayer layer];
+UIBezierPath *leftEyePath = [UIBezierPath bezierPath];
+[leftEyePath moveToPoint:CGPointMake(arcCenterX-30, arcCenterY-25)];
+[leftEyePath addQuadCurveToPoint:CGPointMake(arcCenterX-15, arcCenterY-45) controlPoint:CGPointMake(arcCenterX-30, arcCenterY-45)];
+[leftEyePath addQuadCurveToPoint:CGPointMake(arcCenterX, arcCenterY-25) controlPoint:CGPointMake(arcCenterX, arcCenterY-45)];
+[leftEyePath addQuadCurveToPoint:CGPointMake(arcCenterX-15, arcCenterY-5) controlPoint:CGPointMake(arcCenterX, arcCenterY-5)];
+[leftEyePath addQuadCurveToPoint:CGPointMake(arcCenterX-30, arcCenterY-25) controlPoint:CGPointMake(arcCenterX-30, arcCenterY-5)];
+[self setLayer:leftEyeLayer path:leftEyePath delay:delay*2];
+
+//左眼珠
+CAShapeLayer *leftEyeBallLayer = [CAShapeLayer layer];
+UIBezierPath *leftEyeBallPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(arcCenterX-5, arcCenterY-30) radius:2.5 startAngle:0 endAngle:2*M_PI clockwise:YES];
+[self setLayer:leftEyeBallLayer path:leftEyeBallPath delay:delay*3];
+
+//右眼
+CAShapeLayer *rightEyeLayer = [CAShapeLayer layer];
+UIBezierPath *rightEyePath = [UIBezierPath bezierPath];
+[rightEyePath moveToPoint:CGPointMake(arcCenterX, arcCenterY-25)];
+[rightEyePath addQuadCurveToPoint:CGPointMake(arcCenterX+15, arcCenterY-45) controlPoint:CGPointMake(arcCenterX, arcCenterY-45)];
+[rightEyePath addQuadCurveToPoint:CGPointMake(arcCenterX+30, arcCenterY-25) controlPoint:CGPointMake(arcCenterX+30, arcCenterY-45)];
+[rightEyePath addQuadCurveToPoint:CGPointMake(arcCenterX+15, arcCenterY-5) controlPoint:CGPointMake(arcCenterX+30, arcCenterY-5)];
+[rightEyePath addQuadCurveToPoint:CGPointMake(arcCenterX, arcCenterY-25) controlPoint:CGPointMake(arcCenterX, arcCenterY-5)];
+[self setLayer:rightEyeLayer path:rightEyePath delay:delay*4];
+
+//右眼珠
+CAShapeLayer *rightEyeBallLayer = [CAShapeLayer layer];
+UIBezierPath *rightEyeBallPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(arcCenterX+5, arcCenterY-30) radius:2.5 startAngle:0 endAngle:2*M_PI clockwise:YES];
+[self setLayer:rightEyeBallLayer path:rightEyeBallPath delay:delay*5];
+
+//鼻子
+CAShapeLayer *noseLayer  = [CAShapeLayer layer];
+UIBezierPath *nosePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(arcCenterX, arcCenterY) radius:10 startAngle:0 endAngle:2*M_PI clockwise:YES];
+[self setLayer:noseLayer path:nosePath delay:delay*6];
+//鼻子光晕
+CAShapeLayer *noseHaloLayer = [CAShapeLayer layer];
+UIBezierPath *noseHaloPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(arcCenterX-4, arcCenterY-5) radius:2.5 startAngle:0 endAngle:2*M_PI clockwise:YES];
+[self setLayer:noseHaloLayer path:noseHaloPath delay:delay*7];
+
+//嘴巴
+CAShapeLayer *mouthLayer = [CAShapeLayer layer];
+UIBezierPath *mouthPath = [UIBezierPath bezierPath];
+[mouthPath moveToPoint:CGPointMake(arcCenterX-60, arcCenterY+25)];
+[mouthPath addQuadCurveToPoint:CGPointMake(arcCenterX+60, arcCenterY+25) controlPoint:CGPointMake(arcCenterX, arcCenterY+90)];
+[self setLayer:mouthLayer path:mouthPath delay:delay*8];
+CAShapeLayer *mouthLayer1 = [CAShapeLayer layer];
+UIBezierPath *mouthPath1 = [UIBezierPath bezierPath];
+[mouthPath1 moveToPoint:CGPointMake(arcCenterX, arcCenterY+10)];
+[mouthPath1 addLineToPoint:CGPointMake(arcCenterX, arcCenterY+55)];
+[self setLayer:mouthLayer1 path:mouthPath1 delay:delay*9];
+
+//胡子
+[self addBeardFromPoint:CGPointMake(arcCenterX-58, arcCenterY-5) toPoint:CGPointMake(arcCenterX-15, arcCenterY+10) delay:delay*10];
+[self addBeardFromPoint:CGPointMake(arcCenterX-68, arcCenterY+15) toPoint:CGPointMake(arcCenterX-15, arcCenterY+20) delay:delay*11];
+[self addBeardFromPoint:CGPointMake(arcCenterX-61, arcCenterY+45) toPoint:CGPointMake(arcCenterX-15, arcCenterY+30) delay:delay*12];
+[self addBeardFromPoint:CGPointMake(arcCenterX+58, arcCenterY-5) toPoint:CGPointMake(arcCenterX+15, arcCenterY+10) delay:delay*13];
+[self addBeardFromPoint:CGPointMake(arcCenterX+68, arcCenterY+15) toPoint:CGPointMake(arcCenterX+15, arcCenterY+20) delay:delay*14];
+[self addBeardFromPoint:CGPointMake(arcCenterX+61, arcCenterY+45) toPoint:CGPointMake(arcCenterX+15, arcCenterY+30) delay:delay*15];
+//左手
+CAShapeLayer *leftHandLayer = [CAShapeLayer layer];
+UIBezierPath *leftHandPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(arcCenterX-95, arcCenterY+110) radius:20 startAngle:0 endAngle:2*M_PI clockwise:YES];
+[self setLayer:leftHandLayer path:leftHandPath delay:delay*16];
+//左胳膊
+CGFloat distanceXToArcCenter = 80*cos(M_PI_2*4/9);
+CGFloat distanceYToArcCenter = 80*sin(M_PI_2*4/9);
+CAShapeLayer *leftArmLayer = [CAShapeLayer layer];
+UIBezierPath *leftArmPath = [UIBezierPath bezierPath];
+[leftArmPath moveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter, arcCenterY+distanceYToArcCenter)];
+[leftArmPath addLineToPoint:CGPointMake(arcCenterX-95, arcCenterY+90)];
+[leftArmPath addQuadCurveToPoint:CGPointMake(arcCenterX-75, arcCenterY+110) controlPoint:CGPointMake(arcCenterX-92, arcCenterY+107)];
+[leftArmPath addLineToPoint:CGPointMake(arcCenterX-distanceXToArcCenter+1.5, arcCenterY+95)];
+[self setLayer:leftArmLayer path:leftArmPath delay:delay*17];
+
+//围巾
+CAShapeLayer *mufflerLayer = [CAShapeLayer layer];
+UIBezierPath *mufflerPath = [UIBezierPath bezierPath];
+[mufflerPath moveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter, arcCenterY+distanceYToArcCenter)];
+[mufflerPath addQuadCurveToPoint:CGPointMake(arcCenterX+distanceXToArcCenter, arcCenterY+distanceYToArcCenter) controlPoint:CGPointMake(arcCenterX, arcCenterY+109)];
+[mufflerPath addLineToPoint:CGPointMake(arcCenterX+distanceXToArcCenter+2, arcCenterY+distanceYToArcCenter+7)];
+[mufflerPath addQuadCurveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter-4, arcCenterY+distanceYToArcCenter+5) controlPoint:CGPointMake(arcCenterX, arcCenterY+115)];
+[mufflerPath addLineToPoint:CGPointMake(arcCenterX-distanceXToArcCenter, arcCenterY+distanceYToArcCenter)];
+[self setLayer:mufflerLayer path:mufflerPath delay:delay*18];
+//身体
+CAShapeLayer *bodyLayer = [CAShapeLayer layer];
+UIBezierPath *bodyPath = [UIBezierPath bezierPath];
+[bodyPath moveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter, arcCenterY+distanceYToArcCenter+7)];
+[bodyPath addQuadCurveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter+5, arcCenterY+150) controlPoint:CGPointMake(arcCenterX-distanceXToArcCenter+2, arcCenterY+140)];
+[bodyPath addQuadCurveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter+3, arcCenterY+170) controlPoint:CGPointMake(arcCenterX-distanceXToArcCenter, arcCenterY+160)];
+[bodyPath addQuadCurveToPoint:CGPointMake(arcCenterX-8, arcCenterY+170) controlPoint:CGPointMake(arcCenterX-(distanceXToArcCenter+5)/2, arcCenterY+175)];
+[bodyPath addQuadCurveToPoint:CGPointMake(arcCenterX+8, arcCenterY+170) controlPoint:CGPointMake(arcCenterX, arcCenterY+155)];
+[bodyPath addQuadCurveToPoint:CGPointMake(arcCenterX+distanceXToArcCenter-3, arcCenterY+170) controlPoint:CGPointMake(arcCenterX+(distanceXToArcCenter+5)/2, arcCenterY+175)];
+[bodyPath addQuadCurveToPoint:CGPointMake(arcCenterX+distanceXToArcCenter-5, arcCenterY+150) controlPoint:CGPointMake(arcCenterX+distanceXToArcCenter-2, arcCenterY+160)];
+[bodyPath addQuadCurveToPoint:CGPointMake(arcCenterX+distanceXToArcCenter, arcCenterY+distanceYToArcCenter+8) controlPoint:CGPointMake(arcCenterX+distanceXToArcCenter-2, arcCenterY+140)];
+[bodyPath addQuadCurveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter, arcCenterY+distanceYToArcCenter+7) controlPoint:CGPointMake(arcCenterX, arcCenterY+115)];
+[self setLayer:bodyLayer path:bodyPath delay:delay*19];
+//左脚
+CAShapeLayer *leftFootLayer = [CAShapeLayer layer];
+UIBezierPath *leftFootPath = [UIBezierPath bezierPath];
+[leftFootPath moveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter+3, arcCenterY+170)];
+[leftFootPath addQuadCurveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter+3, arcCenterY+195) controlPoint:CGPointMake(arcCenterX-distanceXToArcCenter-20, arcCenterY+185)];
+[leftFootPath addQuadCurveToPoint:CGPointMake(arcCenterX-13, arcCenterY+195) controlPoint:CGPointMake(arcCenterX-(distanceXToArcCenter+10)/2, arcCenterY+200)];
+[leftFootPath addQuadCurveToPoint:CGPointMake(arcCenterX-10, arcCenterY+170) controlPoint:CGPointMake(arcCenterX+8, arcCenterY+187)];
+[self setLayer:leftFootLayer path:leftFootPath delay:delay*20];
+//右脚
+CAShapeLayer *rightFootLayer = [CAShapeLayer layer];
+UIBezierPath *rightFootPath = [UIBezierPath bezierPath];
+[rightFootPath moveToPoint:CGPointMake(arcCenterX+10, arcCenterY+170)];
+[rightFootPath addQuadCurveToPoint:CGPointMake(arcCenterX+15, arcCenterY+195) controlPoint:CGPointMake(arcCenterX-12, arcCenterY+185)];
+[rightFootPath addQuadCurveToPoint:CGPointMake(arcCenterX+distanceXToArcCenter-5, arcCenterY+195) controlPoint:CGPointMake(arcCenterX+(distanceXToArcCenter+20)/2, arcCenterY+200)];
+[rightFootPath addQuadCurveToPoint:CGPointMake(arcCenterX+distanceXToArcCenter-3, arcCenterY+170) controlPoint:CGPointMake(arcCenterX+distanceXToArcCenter+18, arcCenterY+185)];
+[self setLayer:rightFootLayer path:rightFootPath delay:delay*21];
+//肚子
+CAShapeLayer *bellyLayer = [CAShapeLayer layer];
+UIBezierPath *bellyPath = [UIBezierPath bezierPath];
+[bellyPath moveToPoint:CGPointMake(arcCenterX-30, arcCenterY+80)];
+[bellyPath addCurveToPoint:CGPointMake(arcCenterX-30, arcCenterY+150) controlPoint1:CGPointMake(arcCenterX-65, arcCenterY+95) controlPoint2:CGPointMake(arcCenterX-60, arcCenterY+140)];
+[bellyPath addQuadCurveToPoint:CGPointMake(arcCenterX+30, arcCenterY+150) controlPoint:CGPointMake(arcCenterX, arcCenterY+160)];
+[bellyPath addCurveToPoint:CGPointMake(arcCenterX+30, arcCenterY+80) controlPoint1:CGPointMake(arcCenterX+60, arcCenterY+140) controlPoint2:CGPointMake(arcCenterX+65, arcCenterY+95)];
+[bellyPath addQuadCurveToPoint:CGPointMake(arcCenterX-30, arcCenterY+80) controlPoint:CGPointMake(arcCenterX, arcCenterY+92)];
+[self setLayer:bellyLayer path:bellyPath delay:delay*22];
+//铃铛
+CAShapeLayer *bellLayer = [CAShapeLayer layer];
+UIBezierPath *bellPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(arcCenterX, arcCenterY+97) radius:15 startAngle:0 endAngle:2*M_PI clockwise:YES];
+[self setLayer:bellLayer path:bellPath delay:delay*23];
+//铃铛上的线
+CAShapeLayer *bellLineLayer = [CAShapeLayer layer];
+UIBezierPath *BellLinePath = [UIBezierPath bezierPath];
+[BellLinePath moveToPoint:CGPointMake(arcCenterX-(sqrt(pow(15.0, 2)-pow(5.0, 2))), arcCenterY+92)];
+[BellLinePath addLineToPoint:CGPointMake(arcCenterX+(sqrt(pow(15.0, 2)-pow(5.0, 2))), arcCenterY+92)];
+[BellLinePath moveToPoint:CGPointMake(arcCenterX+(sqrt(pow(15.0, 2)-pow(2.0, 2))), arcCenterY+95)];
+[BellLinePath addLineToPoint:CGPointMake(arcCenterX-(sqrt(pow(15.0, 2)-pow(2.0, 2))), arcCenterY+95)];
+[self setLayer:bellLineLayer path:BellLinePath delay:delay*24];
+//铃铛上的小圆点
+CAShapeLayer *bellCirLayer = [CAShapeLayer layer];
+UIBezierPath *bellCirPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(arcCenterX, arcCenterY+102) radius:2.5 startAngle:0 endAngle:2*M_PI clockwise:YES];
+[bellCirPath moveToPoint:CGPointMake(arcCenterX, arcCenterY+104.5)];
+[bellCirPath addLineToPoint:CGPointMake(arcCenterX, arcCenterY+112)];
+[self setLayer:bellCirLayer path:bellCirPath delay:delay*25];
+//口袋
+CAShapeLayer *bagLayer = [CAShapeLayer layer];
+UIBezierPath *bagPath = [UIBezierPath bezierPath];
+[bagPath moveToPoint:CGPointMake(arcCenterX-40, arcCenterY+112)];
+[bagPath addQuadCurveToPoint:CGPointMake(arcCenterX+40, arcCenterY+112) controlPoint:CGPointMake(arcCenterX, arcCenterY+120)];
+[bagPath addCurveToPoint:CGPointMake(arcCenterX-40, arcCenterY+112) controlPoint1:CGPointMake(arcCenterX+28, arcCenterY+160) controlPoint2:CGPointMake(arcCenterX-28, arcCenterY+160)];
+[self setLayer:bagLayer path:bagPath delay:delay*26];
+//右手
+CAShapeLayer *rightHandLayer = [CAShapeLayer layer];
+UIBezierPath *rightHandPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(arcCenterX+85*cos(27/180.0*M_PI), arcCenterY-85*sin(27/180.0*M_PI)) radius:20 startAngle:0 endAngle:2*M_PI clockwise:YES];
+[self setLayer:rightHandLayer path:rightHandPath delay:delay*27];
+//右胳膊
+CAShapeLayer *rightArmLayer = [CAShapeLayer layer];
+UIBezierPath *rightArmPath = [UIBezierPath bezierPath];
+[rightArmPath moveToPoint:CGPointMake(arcCenterX+80*cos(13/180.0*M_PI), arcCenterY-80*sin(13/180.0*M_PI))];
+[rightArmPath addQuadCurveToPoint:CGPointMake(arcCenterX+distanceXToArcCenter, arcCenterY+distanceYToArcCenter) controlPoint:CGPointMake(arcCenterX+80*cos(13/180.0*M_PI)+9, arcCenterY+20)];
+[rightArmPath addLineToPoint:CGPointMake(arcCenterX+distanceXToArcCenter, arcCenterY+distanceYToArcCenter+25)];
+[rightArmPath addQuadCurveToPoint:CGPointMake(arcCenterX+93*cos(15/180.0*M_PI), arcCenterY-93*sin(15/180.0*M_PI)) controlPoint:CGPointMake(arcCenterX+90*cos(13/180.0*M_PI)+15, arcCenterY+25)];
+[rightArmPath addQuadCurveToPoint:CGPointMake(arcCenterX+80*cos(13/180.0*M_PI), arcCenterY-80*sin(13/180.0*M_PI)) controlPoint:CGPointMake(arcCenterX+80*cos(13/180.0*M_PI)+5, arcCenterY-93*sin(15/180.0*M_PI)+5)];
+[self setLayer:rightArmLayer path:rightArmPath delay:delay*28];
+
+//上色
+[self setLayerColor:faceLayer color:[UIColor whiteColor] delay:delay*16];
+[self setLayerColor:leftEyeLayer color:[UIColor whiteColor] delay:delay*29];
+[self setLayerColor:rightEyeLayer color:[UIColor whiteColor] delay:delay*29];
+[self setLayerColor:leftEyeBallLayer color:[UIColor blackColor] delay:delay*29];
+[self setLayerColor:rightEyeBallLayer color:[UIColor blackColor] delay:delay*29];
+[self setLayerColor:noseLayer color:[UIColor redColor] delay:delay*29];
+[self setLayerColor:noseHaloLayer color:[UIColor whiteColor] delay:delay*29];
+[self setLayerColor:headLayer color:[UIColor colorWithRed:21/255.0 green:159/255.0 blue:237/255.0 alpha:1] delay:delay*29];
+[self setLayerColor:leftArmLayer color:[UIColor colorWithRed:21/255.0 green:159/255.0 blue:237/255.0 alpha:1] delay:delay*29];
+[self setLayerColor:leftHandLayer color:[UIColor whiteColor] delay:delay*29];
+[self setLayerColor:mufflerLayer color:[UIColor redColor] delay:delay*29];
+[self setLayerColor:bellyLayer color:[UIColor whiteColor] delay:delay*29];
+[self setLayerColor:bellLayer color:[UIColor yellowColor] delay:delay*29];
+[self setLayerColor:bodyLayer color:[UIColor colorWithRed:21/255.0 green:159/255.0 blue:237/255.0 alpha:1] delay:delay*29];
+[self setLayerColor:rightHandLayer color:[UIColor whiteColor] delay:delay*29];
+[self setLayerColor:rightArmLayer color:[UIColor colorWithRed:21/255.0 green:159/255.0 blue:237/255.0 alpha:1] delay:delay*29];
+
+[self performSelector:@selector(showHello) withObject:nil afterDelay:delay*29];
+
+</code></pre></div></div>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/29/iOS%E6%8A%80%E6%9C%AF%E6%A0%88/">iOS技术栈
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/">iOS WWDC更新总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/">自定义 CollectionView 布局
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/">iOS资源整合
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2016/12/22/UIBezierPath%E7%BB%98%E5%9B%BE/">UIBezierPath 绘图</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2016/12/24/Github-Pages/">Gihub Pages</a></p>
+        
+    </div>
+</div>
+
+
+        <h2 id="comments">Comments</h2>
+        
+
+
+
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
+                    
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            <!-- Contact me at: -->
+            
+            
+            
+            
+            
+            
+            
+            
+        </p>
+        <!-- <p>
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p> -->
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<!-- <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+    </script>
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>

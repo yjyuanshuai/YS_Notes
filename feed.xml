@@ -5,21 +5,104 @@
     <description></description>
     <link>http://localhost:4000/</link>
     <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Thu, 07 Sep 2017 15:19:23 +0800</pubDate>
-    <lastBuildDate>Thu, 07 Sep 2017 15:19:23 +0800</lastBuildDate>
-    <generator>Jekyll v3.3.1</generator>
+    <pubDate>Wed, 29 Nov 2017 17:06:42 +0800</pubDate>
+    <lastBuildDate>Wed, 29 Nov 2017 17:06:42 +0800</lastBuildDate>
+    <generator>Jekyll v3.6.2</generator>
     
       <item>
-        <title>自定义 CollectionView 布局之瀑布流</title>
-        <description>瀑布流</description>
-        <pubDate>Thu, 03 Aug 2017 17:14:54 +0800</pubDate>
+        <title>iOS技术栈</title>
+        <description>某位大牛总结的 iOS 技术栈，跟着大牛走~</description>
+        <pubDate>Wed, 29 Nov 2017 09:00:54 +0800</pubDate>
+        <link>http://localhost:4000/2017/11/29/iOS%E6%8A%80%E6%9C%AF%E6%A0%88/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/11/29/iOS%E6%8A%80%E6%9C%AF%E6%A0%88/</guid>
+        
+        <category>iOS</category>
+        
+        <category>技术栈</category>
+        
+        
+        <category>iOS</category>
+        
+      </item>
+    
+      <item>
+        <title>开发效率Tips</title>
+        <description>总结 iOS 开发中可以提高开发效率的方法/工具。</description>
+        <pubDate>Fri, 17 Nov 2017 09:00:54 +0800</pubDate>
+        <link>http://localhost:4000/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/</guid>
+        
+        <category>iOS</category>
+        
+        <category>Xcode</category>
+        
+        <category>开发效率</category>
+        
+        
+        <category>iOS</category>
+        
+        <category>Xcode</category>
+        
+      </item>
+    
+      <item>
+        <title>iOS WWDC更新总结</title>
+        <description>历年 iOS WWDC 的技术点总结</description>
+        <pubDate>Mon, 06 Nov 2017 18:14:54 +0800</pubDate>
+        <link>http://localhost:4000/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/</guid>
+        
+        <category>iOS</category>
+        
+        <category>总结</category>
+        
+        <category>WWDC</category>
+        
+        
+        <category>iOS</category>
+        
+      </item>
+    
+      <item>
+        <title>iOS 开发技术总结</title>
+        <description>iOS 开发技术总结</description>
+        <pubDate>Mon, 06 Nov 2017 17:14:54 +0800</pubDate>
+        <link>http://localhost:4000/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/</guid>
+        
+        <category>iOS</category>
+        
+        <category>总结</category>
+        
+        
+        <category>iOS</category>
+        
+      </item>
+    
+      <item>
+        <title>自定义 CollectionView 布局</title>
+        <description>iOS UICollectionView 自定义布局，瀑布流、导航风火轮</description>
+        <pubDate>Thu, 03 Aug 2017 16:14:54 +0800</pubDate>
+        <link>http://localhost:4000/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/</guid>
+        
+        <category>iOS</category>
+        
+        <category>UICollectionView布局</category>
+        
+        
+        <category>iOS</category>
+        
+      </item>
+    
+      <item>
+        <title>自定义collectionview布局之瀑布流</title>
+        <description>
+</description>
+        <pubDate>Thu, 03 Aug 2017 00:00:00 +0800</pubDate>
         <link>http://localhost:4000/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/</link>
         <guid isPermaLink="true">http://localhost:4000/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/</guid>
         
-        <category>iOS</category>
-        
-        
-        <category>iOS</category>
         
       </item>
     
@@ -40,11 +123,11 @@
       </item>
     
       <item>
-        <title>归/解档</title>
-        <description>归/解档存储数据</description>
-        <pubDate>Mon, 24 Jul 2017 13:14:54 +0800</pubDate>
-        <link>http://localhost:4000/2017/07/24/%E5%BD%92%E8%A7%A3%E6%A1%A3/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/07/24/%E5%BD%92%E8%A7%A3%E6%A1%A3/</guid>
+        <title>CoreData</title>
+        <description>iOS CoreData</description>
+        <pubDate>Mon, 24 Jul 2017 15:14:54 +0800</pubDate>
+        <link>http://localhost:4000/2017/07/24/CoreData/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/24/CoreData/</guid>
         
         <category>iOS</category>
         
@@ -56,9 +139,9 @@
       </item>
     
       <item>
-        <title>iOS-SQLite3</title>
-        <description>iOS-SQLite3</description>
-        <pubDate>Mon, 24 Jul 2017 13:14:54 +0800</pubDate>
+        <title>SQLite</title>
+        <description>SQLite</description>
+        <pubDate>Mon, 24 Jul 2017 14:14:54 +0800</pubDate>
         <link>http://localhost:4000/2017/07/24/SQLite3/</link>
         <guid isPermaLink="true">http://localhost:4000/2017/07/24/SQLite3/</guid>
         
@@ -72,11 +155,11 @@
       </item>
     
       <item>
-        <title>Plist</title>
-        <description>属性列表</description>
-        <pubDate>Mon, 24 Jul 2017 12:14:54 +0800</pubDate>
-        <link>http://localhost:4000/2017/07/24/plist/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/07/24/plist/</guid>
+        <title>归/解档</title>
+        <description>iOS 归/解档存储数据</description>
+        <pubDate>Mon, 24 Jul 2017 13:14:54 +0800</pubDate>
+        <link>http://localhost:4000/2017/07/24/%E5%BD%92%E8%A7%A3%E6%A1%A3/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/07/24/%E5%BD%92%E8%A7%A3%E6%A1%A3/</guid>
         
         <category>iOS</category>
         
@@ -84,82 +167,6 @@
         
         
         <category>iOS</category>
-        
-      </item>
-    
-      <item>
-        <title>NSUserDefaults</title>
-        <description>NSUserDefaults</description>
-        <pubDate>Mon, 24 Jul 2017 11:14:54 +0800</pubDate>
-        <link>http://localhost:4000/2017/07/24/NSUserDefaults/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/07/24/NSUserDefaults/</guid>
-        
-        <category>iOS</category>
-        
-        <category>数据存储</category>
-        
-        
-        <category>iOS</category>
-        
-      </item>
-    
-      <item>
-        <title>Setting.Bundle</title>
-        <description>App 在手机设置中的内容</description>
-        <pubDate>Mon, 24 Jul 2017 10:14:54 +0800</pubDate>
-        <link>http://localhost:4000/2017/07/24/Setting_Bundle/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/07/24/Setting_Bundle/</guid>
-        
-        <category>iOS</category>
-        
-        <category>数据存储</category>
-        
-        
-        <category>iOS</category>
-        
-      </item>
-    
-      <item>
-        <title>SandBox</title>
-        <description>iOS 沙盒结构和目录</description>
-        <pubDate>Mon, 24 Jul 2017 09:14:54 +0800</pubDate>
-        <link>http://localhost:4000/2017/07/24/sandBox/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/07/24/sandBox/</guid>
-        
-        <category>iOS</category>
-        
-        <category>数据存储</category>
-        
-        
-        <category>iOS</category>
-        
-      </item>
-    
-      <item>
-        <title>创建私有 Pods 库</title>
-        <description>创建私有 Pods 库，简单记录。</description>
-        <pubDate>Fri, 21 Jul 2017 17:14:54 +0800</pubDate>
-        <link>http://localhost:4000/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E7%A7%81%E6%9C%89%E5%BA%93/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E7%A7%81%E6%9C%89%E5%BA%93/</guid>
-        
-        <category>CocoaPods</category>
-        
-        
-        <category>CocoaPods</category>
-        
-      </item>
-    
-      <item>
-        <title>创建公有 Pods 库</title>
-        <description>创建共有 Pods 库的过程，简单记录。</description>
-        <pubDate>Fri, 21 Jul 2017 16:14:54 +0800</pubDate>
-        <link>http://localhost:4000/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E5%85%B1%E6%9C%89%E5%BA%93/</link>
-        <guid isPermaLink="true">http://localhost:4000/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E5%85%B1%E6%9C%89%E5%BA%93/</guid>
-        
-        <category>CocoaPods</category>
-        
-        
-        <category>CocoaPods</category>
         
       </item>
     
