@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>归/解档</title>
-    <meta name="description" content="iOS 归/解档存储数据">
+    <title>SandBox</title>
+    <meta name="description" content="iOS 沙盒结构和目录">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/07/24/%E5%BD%92%E8%A7%A3%E6%A1%A3/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2017/07/24/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -144,8 +144,6 @@
                 
                     
                 
-                    
-                
             </ul>
         </nav>
     </div>
@@ -154,7 +152,7 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>归/解档</h1>
+        <h1>SandBox</h1>
         <div class="label">
 
             <div class="label-card">
@@ -211,84 +209,109 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#简单数据" id="markdown-toc-简单数据">简单数据</a></li>
-  <li><a href="#自定义对象" id="markdown-toc-自定义对象">自定义对象</a>    <ul>
-      <li><a href="#1类对象要遵守-nscoding-协议" id="markdown-toc-1类对象要遵守-nscoding-协议">1、类对象要遵守 <code class="highlighter-rouge">NSCoding</code> 协议</a></li>
-      <li><a href="#2类实例实现归档" id="markdown-toc-2类实例实现归档">2、类实例实现归档</a></li>
-      <li><a href="#3实现解档" id="markdown-toc-3实现解档">3、实现解档</a></li>
+  <li><a href="#ios沙盒结构" id="markdown-toc-ios沙盒结构">iOS沙盒结构</a></li>
+  <li><a href="#沙盒目录获取" id="markdown-toc-沙盒目录获取">沙盒目录获取</a>    <ul>
+      <li><a href="#根目录" id="markdown-toc-根目录">根目录</a></li>
+      <li><a href="#documents" id="markdown-toc-documents">Documents</a></li>
+      <li><a href="#library" id="markdown-toc-library">Library</a>        <ul>
+          <li><a href="#cache" id="markdown-toc-cache">Cache</a></li>
+          <li><a href="#preferences" id="markdown-toc-preferences">Preferences</a></li>
+        </ul>
+      </li>
+      <li><a href="#tmp" id="markdown-toc-tmp">Tmp</a></li>
     </ul>
   </li>
+  <li><a href="#文件操作" id="markdown-toc-文件操作">文件操作</a></li>
 </ul>
 
-<h2 id="简单数据">简单数据</h2>
+<h2 id="ios沙盒结构">iOS沙盒结构</h2>
 
-<p>如 NSArray 、NSDictionary 对象，不用转 NSData，直接操作。</p>
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/20170724_01_sandbox.png" alt="描述" /></p>
 
-<p>只要类中的所有属性都是标量 / 都符合 NSCoding 协议，就可以对该类的对象进行完整的归档。</p>
+<h2 id="沙盒目录获取">沙盒目录获取</h2>
+
+<h3 id="根目录">根目录</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  NSHomeDirectory();
+</code></pre></div></div>
+
+<h3 id="documents">Documents</h3>
 
 <blockquote>
-  <p>注： UIImage 不符合 NSCoding</p>
+  <p>保存应用运行时生成需要持久化的数据，iTunes 同步时__会__备份。</p>
 </blockquote>
 
-<h2 id="自定义对象">自定义对象</h2>
+<blockquote>
+  <p>如：游戏存档</p>
+</blockquote>
 
-<p>自定义的类的对象，是操作整个类对象。而自定义的内容也是通过 key - value 来实现，如将一个字符串归解档。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (NSString *)dirDoc{
+      // [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
 
-<h3 id="1类对象要遵守-nscoding-协议">1、类对象要遵守 <code class="highlighter-rouge">NSCoding</code> 协议</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 归档（或称为 序列化）
-- (void)encodeWithCoder:(NSCoder *)encoder
-{
-  [aCoder encodeObject:self.gender forKey:@"gender"];
-  [aCoder encodeInt:self.age forKey:@"age"];
-}
+      // NSDocumentDirectory: 表明我们正在查找 Documents 目录的路径
+      // NSUserDomainMask: 表示将搜索限制在引用程序的沙盒内
+      // YES: iOS中主目录的全写形式是/User/userName，这个参数填YES就表示全写，填NO就是写成‘‘~’’，我们一般填YES。
+      NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
 
+      // 每个应用只有一份 Documents 目录，因此只需取数组首位
+      NSString *documentsDirectory = [paths objectAtIndex:0];
+      NSLog(@"app_home_doc: %@",documentsDirectory);
+      return documentsDirectory;
 
-// 解档（或称为 反序列化）
-- (id)initWithCoder:(NSCoder *)decoder
-{
-  if (self = [super init]) {
-    self.name = [aDecoder decodeObjectForKey:@"name"];
-    self.gender = [aDecoder decodeObjectForKey:@"gender"];
-    self.age = [aDecoder decodeIntForKey:@"age"];
-  }
-  return self;
+      // stringByAppendingPathComponent + 文件名
 }
 </code></pre></div></div>
 
-<h3 id="2类实例实现归档">2、类实例实现归档</h3>
+<h3 id="library">Library</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 1:准备存储数据的对象
-NSMutableData *data = [NSMutableData data];
+<blockquote>
+  <p>体积大但相对不重要的数据。</p>
+</blockquote>
 
-// 2:创建归档对象
-NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-(void)dirLib{
 
-// 3:开始归档（per 为一个自定义的 Person 类对象）
-[archiver encodeObject:per forKey:@"person"];
-
-// 4:完成归档
-[archiver finishEncoding];
-
-// 5 将 data 写入文件中
-
+    //[NSHomeDirectory() stringByAppendingPathComponent:@"Library"];
+    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
+    NSString *libraryDirectory = [paths objectAtIndex:0];
+    NSLog(@"app_home_lib: %@",libraryDirectory);
+}
 </code></pre></div></div>
 
-<h3 id="3实现解档">3、实现解档</h3>
+<h4 id="cache">Cache</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-// 准备解档路径
-NSData *myData = [NSData dataWithContentsOfFile:path];
+<blockquote>
+  <p>程序运行时需要持久化存储的数据，iTunes__不会__备份。</p>
+</blockquote>
 
-// 创建反归档对象
-NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:myData];
-
-// 反归档
-Person *aper = [Person new];
-aper = [unarchiver decodeObjectForKey:@"person"];
-
-// 完成反归档
-[unarchiver finishDecoding];
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  -(void)dirCache{
+    NSArray *cacPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
+    NSString *cachePath = [cacPath objectAtIndex:0];
+    NSLog(@"app_home_lib_cache: %@",cachePath);
+}
 </code></pre></div></div>
+
+<h4 id="preferences">Preferences</h4>
+
+<blockquote>
+  <p>偏好设置数据。iTunes <strong>不会</strong> 备份</p>
+</blockquote>
+
+<p>利用 NSUserDefaults 来记录设置。</p>
+
+<h3 id="tmp">Tmp</h3>
+
+<blockquote>
+  <p>临时数据。不备份</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-(void)dirTmp{
+    //[NSHomeDirectory() stringByAppendingPathComponent:@"tmp"];
+
+    NSString *tmpDirectory = NSTemporaryDirectory();
+    NSLog(@"app_home_tmp: %@",tmpDirectory);
+}  
+</code></pre></div></div>
+
+<h2 id="文件操作">文件操作</h2>
 
         </article>
         <hr>
@@ -509,13 +532,13 @@ aper = [unarchiver decodeObjectForKey:@"person"];
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/07/24/plist/">Plist</a></p>
+        <p><strong>上一篇</strong> <a href="/2017/07/21/%E8%87%AA%E5%88%B6Pods%E5%BA%93%E4%B9%8B%E7%A7%81%E6%9C%89%E5%BA%93/">创建私有 Pods 库</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2017/07/24/SQLite3/">SQLite</a></p>
+        <p><strong>下一篇</strong> <a href="/2017/07/24/iOS%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95/">iOS 数据存储其他方法</a></p>
         
     </div>
 </div>

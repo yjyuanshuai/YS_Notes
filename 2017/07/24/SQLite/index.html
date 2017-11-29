@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Setting.Bundle</title>
-    <meta name="description" content="iOS App 在手机设置中的内容">
+    <title>sqlite</title>
+    <meta name="description" content="sqlite基本语句，FMDB基本使用。">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/07/24/Setting_Bundle/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2017/07/24/SQLite/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -144,8 +144,6 @@
                 
                     
                 
-                    
-                
             </ul>
         </nav>
     </div>
@@ -154,7 +152,7 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Setting.Bundle</h1>
+        <h1>sqlite</h1>
         <div class="label">
 
             <div class="label-card">
@@ -211,110 +209,212 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#settingbundle" id="markdown-toc-settingbundle">Setting.Bundle</a></li>
-  <li><a href="#enlproj" id="markdown-toc-enlproj">en.lproj</a></li>
-  <li><a href="#rootplist" id="markdown-toc-rootplist">Root.plist</a>    <ul>
-      <li><a href="#preferences-items" id="markdown-toc-preferences-items">Preferences Items</a>        <ul>
-          <li><a href="#1每项底下的通用项目意义" id="markdown-toc-1每项底下的通用项目意义">1、每项底下的通用项目意义：</a></li>
-          <li><a href="#2不通用的项目意义" id="markdown-toc-2不通用的项目意义">2、不通用的项目意义：</a>            <ul>
-              <li><a href="#1-文本框-pstextfeildspecifier-" id="markdown-toc-1-文本框-pstextfeildspecifier-">1) 文本框（ PSTextFeildSpecifier ）</a></li>
-              <li><a href="#2-滑块-slider-" id="markdown-toc-2-滑块-slider-">2) 滑块（ Slider ）</a></li>
-              <li><a href="#3多值参数multivalue" id="markdown-toc-3多值参数multivalue">3）多值参数（MultiValue）</a></li>
-              <li><a href="#4子视图childpance" id="markdown-toc-4子视图childpance">4）子视图（ChildPance）</a></li>
-            </ul>
-          </li>
+  <li><a href="#导入系统支持库" id="markdown-toc-导入系统支持库">导入系统支持库</a></li>
+  <li><a href="#sqlite-api" id="markdown-toc-sqlite-api">SQLite API</a></li>
+  <li><a href="#常用数据库语句" id="markdown-toc-常用数据库语句">常用数据库语句</a>    <ul>
+      <li><a href="#表操作ddl" id="markdown-toc-表操作ddl">表操作（DDL）</a>        <ul>
+          <li><a href="#1创建表" id="markdown-toc-1创建表">1、创建表</a></li>
+          <li><a href="#2删除表" id="markdown-toc-2删除表">2、删除表</a></li>
         </ul>
       </li>
-      <li><a href="#strings-filename" id="markdown-toc-strings-filename">Strings FileName</a></li>
+      <li><a href="#数据操作" id="markdown-toc-数据操作">数据操作</a>        <ul>
+          <li><a href="#1插入" id="markdown-toc-1插入">1、插入</a></li>
+          <li><a href="#2删除" id="markdown-toc-2删除">2、删除</a></li>
+          <li><a href="#3查询" id="markdown-toc-3查询">3、查询</a></li>
+          <li><a href="#4更新" id="markdown-toc-4更新">4、更新</a></li>
+          <li><a href="#5数据统计" id="markdown-toc-5数据统计">5、数据统计</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#第三方库fmdb" id="markdown-toc-第三方库fmdb">第三方库（FMDB）</a>    <ul>
+      <li><a href="#基本类" id="markdown-toc-基本类">基本类</a></li>
+      <li><a href="#语法" id="markdown-toc-语法">语法</a></li>
+      <li><a href="#基本使用" id="markdown-toc-基本使用">基本使用</a>        <ul>
+          <li><a href="#打开数据库" id="markdown-toc-打开数据库">打开数据库</a></li>
+          <li><a href="#操作" id="markdown-toc-操作">操作</a></li>
+          <li><a href="#fmdatabasequeue-基本使用" id="markdown-toc-fmdatabasequeue-基本使用">FMDatabaseQueue 基本使用</a></li>
+        </ul>
+      </li>
+      <li><a href="#fmdb-中的事务" id="markdown-toc-fmdb-中的事务">FMDB 中的事务</a></li>
     </ul>
   </li>
 </ul>
 
-<h2 id="settingbundle">Setting.Bundle</h2>
+<h2 id="导入系统支持库">导入系统支持库</h2>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libsqlite3.dylib
+</code></pre></div></div>
+
+<h2 id="sqlite-api">SQLite API</h2>
+<p>// 略</p>
+
+<h2 id="常用数据库语句">常用数据库语句</h2>
+
+<ul>
+  <li>不区分大小写，但有需要注意的，如 GLOB 和 glob 具有不同作用；</li>
+  <li>有 5 种基本数据类型，text、integer、float、boolean、blob；</li>
+  <li>以 <strong>;</strong> 结尾。</li>
+</ul>
+
+<p>关键字：select、insert、update、delete、from、create、where、desc、order、by、group、table、alter、view、index等。</p>
 
 <blockquote>
-  <p>手机设置中的内容，初创建时有2个文件（Root.plist、en.lproj）</p>
+  <p>注：实际上 SQLite 是无类型的，就算声明为integer类型，还是能存储字符串文本（主键除外）。</p>
 </blockquote>
 
-<h2 id="enlproj">en.lproj</h2>
+<h3 id="表操作ddl">表操作（DDL）</h3>
+<h4 id="1创建表">1、创建表</h4>
 
-<p>是国际化文件夹，en表示英文。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>create table 表名 (字段名1 字段类型1, 字段名2 字段类型2, …) ;
+create table if not exists 表名 (字段名1 字段类型1, 字段名2 字段类型2, …) ;
+</code></pre></div></div>
 
-<h2 id="rootplist">Root.plist</h2>
-<p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/02_02.png" alt="" /></p>
+<h4 id="2删除表">2、删除表</h4>
 
-<h3 id="preferences-items">Preferences Items</h3>
-<h4 id="1每项底下的通用项目意义">1、每项底下的通用项目意义：</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>drop table 表名;
+drop table if exists 表名;
+</code></pre></div></div>
 
-<ul>
-  <li>Title: 显示的标题</li>
-  <li>
-    <p>Type: 参数的类型
-      PSTextFeildSpecifier(文本框)
-      ..TitleValue..(与显示标题相同)
-      ..ToggleSwitch..(开关)
-      ..Slider..(滑块)
-      ..MultiValue..(可供用户选择的列表)
-      ..Group..(定义一个分组)
-      ..ChildPance..(定义一个子设置视图，用户单击时，将会打开新的设置界面。定义这种类型的Item时，必须重新指定一个plist文件来定义子视图的界面。)</p>
-  </li>
-  <li>Key: 保存应用参数的key</li>
-  <li>DefaultValue: 默认参数</li>
-</ul>
+<h3 id="数据操作">数据操作</h3>
+<h4 id="1插入">1、插入</h4>
 
-<h4 id="2不通用的项目意义">2、不通用的项目意义：</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>insert into 表名 (字段1, 字段2, …) values (字段1的值, 字段2的值, …) ;
+</code></pre></div></div>
 
-<h5 id="1-文本框-pstextfeildspecifier-">1) 文本框（ PSTextFeildSpecifier ）</h5>
+<h4 id="2删除">2、删除</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>delete from 表名 ;
+</code></pre></div></div>
 
-<ul>
-  <li>
-    <p>AutocapitalizationType: 指定文本框为自动大写类型，支持的属性值与 UITextView的 Capitalization 支持的属性值相同。</p>
-  </li>
-  <li>
-    <p>AutocorrectionType: 指定文本框的自动更正类型，与TextView的 Correction 支持的属性值同。</p>
-  </li>
-  <li>
-    <p>IsSecure: 是否是密码输入框</p>
-  </li>
-  <li>
-    <p>KeyBoardType: 指定该文本框关联的虚拟键盘类型。</p>
-  </li>
-</ul>
+<h4 id="3查询">3、查询</h4>
 
-<h5 id="2-滑块-slider-">2) 滑块（ Slider ）</h5>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 限制查询数据范围（0 表示起始，3 表示需要查询的数目）
+select * from t_person limit 0, 3;
 
-<ul>
-  <li>MinimumValue: 最小值</li>
-  <li>MaxmumValue: 最大值</li>
-  <li>MinimumValueImage: 最小值图片</li>
-  <li>MaxmumValueImage: 最大值图片</li>
-</ul>
+// 数据升降序（默认升序）
+SELECT * FROM t_person ORDER BY age ASC, id DESC;
 
-<blockquote>
-  <p>注：UISlider 参数不能通过Title设置显示标题，因为不起作用。</p>
-</blockquote>
+// 条件（+模糊查询）
+select * from t_person where name like 'wangwu%';
+</code></pre></div></div>
 
-<blockquote>
-  <p>图片必须放在 Setting.Bundle 文件夹中才能被访问，否则访问不到。</p>
-</blockquote>
+<h4 id="4更新">4、更新</h4>
 
-<h5 id="3多值参数multivalue">3）多值参数（MultiValue）</h5>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>update 表名 set 字段1 = 字段1的值, 字段2 = 字段2的值, … ;
+</code></pre></div></div>
 
-<ul>
-  <li>Titles:</li>
-  <li>Values: 列表项值</li>
-</ul>
+<h4 id="5数据统计">5、数据统计</h4>
 
-<h5 id="4子视图childpance">4）子视图（ChildPance）</h5>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 取出所有数据的总数目
+select count(*) from t_person;
+
+// 统计符合条件的记录条数
+select count(*) from t_person where name like 'wang%';
+
+// 选择指定列的最大值
+select max(age) from t_person;
+
+// 选择指定列的最小值
+select min(age) from t_person;
+
+// 计算指定列的平均值
+select avg(age) from t_person;
+
+// 计算指定列数值的总数
+select sum(age) from t_person;
+</code></pre></div></div>
+
+<h2 id="第三方库fmdb">第三方库（FMDB）</h2>
+
+<p>FMDB 封装了 SQLite3 的C语言API。</p>
+
+<h3 id="基本类">基本类</h3>
 
 <ul>
-  <li>File: 设置子视图的 plist 的文件名，且该文件与 Root.plist 文件格式一模一样。必须存在 Setting.Bundle 文件夹下。</li>
+  <li>FMDatabase：可以理解成一个数据库。</li>
+  <li>FMResultSet：查询的结果集合。</li>
+  <li>FMDatabaseQueue：运用多线程，可执行多个查询、更新。线程安全。</li>
 </ul>
 
-<h3 id="strings-filename">Strings FileName</h3>
+<h3 id="语法">语法</h3>
 
-<p>这个节点是String，值为 Root。
-作用是告诉系统到 *.lproj 文件中找 Root.strings 文件，作为国际化资源文件</p>
+<ul>
+  <li>查询 executeQuery；</li>
+  <li>其他的操作都是更新，executeUpdate。</li>
+</ul>
+
+<h3 id="基本使用">基本使用</h3>
+
+<h4 id="打开数据库">打开数据库</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>FMDatabase * db = [FMDatabase databaseWithPath:filePath];
+
+[db open];
+</code></pre></div></div>
+
+<h4 id="操作">操作</h4>
+<ul>
+  <li>创建表</li>
+  <li>插入数据</li>
+  <li>删除</li>
+  <li>修改</li>
+  <li>查询</li>
+  <li>删除表</li>
+</ul>
+
+<h4 id="fmdatabasequeue-基本使用">FMDatabaseQueue 基本使用</h4>
+
+<p>FMDatabase是线程不安全的，当FMDB数据存储想要使用多线程的时候，FMDatabaseQueue就派上用场了。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//初始化FMDatabaseQueue
+FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:filePath];
+
+//在block中执行SQLite语句命令
+    [dbQueue inDatabase:^(FMDatabase * db)?{
+        //创建表
+        [db executeUpdate:@"create table if not exists t_student (...)"];
+
+        //添加数据
+        [db executeUpdate:@"insert into t_student(name,age) values(?,?)",@"jack",@17];
+        [db executeUpdate:@"insert into t_student(name,age) values(?,?)",@"lily",@16];
+
+        //查询数据
+        FMResultSet *set = [db executeQuery:@"select id, name, age from t_student"];
+
+        //遍历查询到的数据
+        while ([set next]) {
+            int ID = [set intForColumn:@"id"];
+            NSString * name = [set stringForColumn:@"name"];
+            int age = [set?intForColumn:@"age"];
+            NSLog(@"%d,%@,%d",ID,name,age);
+        }
+    }];
+</code></pre></div></div>
+
+<h3 id="fmdb-中的事务">FMDB 中的事务</h3>
+
+<p>事务（Transaction）是不可分割的一个整体操作，要么都执行，要么都不执行。</p>
+
+<p>下面代码中，利用事务循环向数据库中添加2000条数据，假如在添加的过程中出现了一些问题，由于执行了*rollback = YES的回滚操作，数据库中一个数据都不会出现。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//初始化FMDatabaseQueue
+FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:filePath];
+
+//FMDatabaseQueue的事务inTransaction
+[dbQueue inTransaction:^(FMDatabase * _Nonnull db, BOOL * _Nonnull rollback) {
+        //创建表
+        [db executeUpdate:@"create table if not exists t_student (id integer primary key autoincrement, name text, age integer)"];
+        //循环添加2000条数据
+        for (int i = 0; i &lt; 2000; i++) {
+            BOOL success = [db executeUpdate:@"insert into t_student(name,age) values(?,?)",@"jack",@(i)];
+            //如果添加数据出现问题，则回滚
+            if (!success) {
+                //数据回滚
+                *rollback = YES;
+                return;
+            }
+        }
+    }];
+</code></pre></div></div>
 
         </article>
         <hr>
@@ -535,13 +635,13 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/07/24/sandBox/">SandBox</a></p>
+        <p><strong>上一篇</strong> <a href="/2017/07/24/iOS%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95/">iOS 数据存储其他方法</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2017/07/24/NSUserDefaults/">NSUserDefaults</a></p>
+        <p><strong>下一篇</strong> <a href="/2017/07/24/CoreData/">CoreData</a></p>
         
     </div>
 </div>

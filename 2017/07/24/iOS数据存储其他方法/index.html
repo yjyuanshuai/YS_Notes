@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>NSUserDefaults</title>
-    <meta name="description" content="iOS NSUserDefaults">
+    <title>iOS 数据存储其他方法</title>
+    <meta name="description" content="归解档、NSUserDefaults、plist、Setting.Bundle等">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/07/24/NSUserDefaults/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2017/07/24/iOS%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -144,8 +144,6 @@
                 
                     
                 
-                    
-                
             </ul>
         </nav>
     </div>
@@ -154,7 +152,7 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>NSUserDefaults</h1>
+        <h1>iOS 数据存储其他方法</h1>
         <div class="label">
 
             <div class="label-card">
@@ -211,20 +209,131 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#1使用环境" id="markdown-toc-1使用环境">1.使用环境</a></li>
-  <li><a href="#2使用" id="markdown-toc-2使用">2.使用</a></li>
-  <li><a href="#3nsuserdefaults-域" id="markdown-toc-3nsuserdefaults-域">3.NSUserDefaults 域</a>    <ul>
-      <li><a href="#域" id="markdown-toc-域">域</a></li>
-      <li><a href="#有关的实际问题" id="markdown-toc-有关的实际问题">有关的实际问题</a></li>
+  <li><a href="#一归解档" id="markdown-toc-一归解档">一、归解档</a>    <ul>
+      <li><a href="#简单数据" id="markdown-toc-简单数据">简单数据</a></li>
+      <li><a href="#自定义对象" id="markdown-toc-自定义对象">自定义对象</a>        <ul>
+          <li><a href="#1类对象要遵守-nscoding-协议" id="markdown-toc-1类对象要遵守-nscoding-协议">1、类对象要遵守 <code class="highlighter-rouge">NSCoding</code> 协议</a></li>
+          <li><a href="#2类实例实现归档" id="markdown-toc-2类实例实现归档">2、类实例实现归档</a></li>
+          <li><a href="#3实现解档" id="markdown-toc-3实现解档">3、实现解档</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#二nsuserdefaults" id="markdown-toc-二nsuserdefaults">二、NSUserDefaults</a>    <ul>
+      <li><a href="#1使用环境" id="markdown-toc-1使用环境">1.使用环境</a></li>
+      <li><a href="#2使用" id="markdown-toc-2使用">2.使用</a></li>
+      <li><a href="#3nsuserdefaults-域" id="markdown-toc-3nsuserdefaults-域">3.NSUserDefaults 域</a>        <ul>
+          <li><a href="#域" id="markdown-toc-域">域</a></li>
+          <li><a href="#有关的实际问题" id="markdown-toc-有关的实际问题">有关的实际问题</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#三plist" id="markdown-toc-三plist">三、plist</a>    <ul>
+      <li><a href="#前提" id="markdown-toc-前提">前提</a></li>
+      <li><a href="#写入--读出方法" id="markdown-toc-写入--读出方法">写入 / 读出方法</a></li>
+    </ul>
+  </li>
+  <li><a href="#四settingbundle" id="markdown-toc-四settingbundle">四、Setting.Bundle</a>    <ul>
+      <li><a href="#enlproj" id="markdown-toc-enlproj">en.lproj</a></li>
+      <li><a href="#rootplist" id="markdown-toc-rootplist">Root.plist</a>        <ul>
+          <li><a href="#preferences-items" id="markdown-toc-preferences-items">Preferences Items</a>            <ul>
+              <li><a href="#1每项底下的通用项目意义" id="markdown-toc-1每项底下的通用项目意义">1、每项底下的通用项目意义：</a></li>
+              <li><a href="#2不通用的项目意义" id="markdown-toc-2不通用的项目意义">2、不通用的项目意义：</a>                <ul>
+                  <li><a href="#1-文本框-pstextfeildspecifier-" id="markdown-toc-1-文本框-pstextfeildspecifier-">1) 文本框（ PSTextFeildSpecifier ）</a></li>
+                  <li><a href="#2-滑块-slider-" id="markdown-toc-2-滑块-slider-">2) 滑块（ Slider ）</a></li>
+                  <li><a href="#3多值参数multivalue" id="markdown-toc-3多值参数multivalue">3）多值参数（MultiValue）</a></li>
+                  <li><a href="#4子视图childpance" id="markdown-toc-4子视图childpance">4）子视图（ChildPance）</a></li>
+                </ul>
+              </li>
+            </ul>
+          </li>
+          <li><a href="#strings-filename" id="markdown-toc-strings-filename">Strings FileName</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
 </ul>
 
-<h2 id="1使用环境">1.使用环境</h2>
+<h2 id="一归解档">一、归解档</h2>
+
+<h3 id="简单数据">简单数据</h3>
+
+<p>如 NSArray 、NSDictionary 对象，不用转 NSData，直接操作。</p>
+
+<p>只要类中的所有属性都是标量 / 都符合 NSCoding 协议，就可以对该类的对象进行完整的归档。</p>
+
+<blockquote>
+  <p>注： UIImage 不符合 NSCoding</p>
+</blockquote>
+
+<h3 id="自定义对象">自定义对象</h3>
+
+<p>自定义的类的对象，是操作整个类对象。而自定义的内容也是通过 key - value 来实现，如将一个字符串归解档。</p>
+
+<h4 id="1类对象要遵守-nscoding-协议">1、类对象要遵守 <code class="highlighter-rouge">NSCoding</code> 协议</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 归档（或称为 序列化）
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
+  [aCoder encodeObject:self.gender forKey:@"gender"];
+  [aCoder encodeInt:self.age forKey:@"age"];
+}
+
+
+// 解档（或称为 反序列化）
+- (id)initWithCoder:(NSCoder *)decoder
+{
+  if (self = [super init]) {
+    self.name = [aDecoder decodeObjectForKey:@"name"];
+    self.gender = [aDecoder decodeObjectForKey:@"gender"];
+    self.age = [aDecoder decodeIntForKey:@"age"];
+  }
+  return self;
+}
+</code></pre></div></div>
+
+<h4 id="2类实例实现归档">2、类实例实现归档</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 1:准备存储数据的对象
+NSMutableData *data = [NSMutableData data];
+
+// 2:创建归档对象
+NSKeyedArchiver *archiver = [[NSKeyedArchiver alloc] initForWritingWithMutableData:data];
+
+// 3:开始归档（per 为一个自定义的 Person 类对象）
+[archiver encodeObject:per forKey:@"person"];
+
+// 4:完成归档
+[archiver finishEncoding];
+
+// 5 将 data 写入文件中
+
+</code></pre></div></div>
+
+<h4 id="3实现解档">3、实现解档</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+// 准备解档路径
+NSData *myData = [NSData dataWithContentsOfFile:path];
+
+// 创建反归档对象
+NSKeyedUnarchiver *unarchiver = [[NSKeyedUnarchiver alloc] initForReadingWithData:myData];
+
+// 反归档
+Person *aper = [Person new];
+aper = [unarchiver decodeObjectForKey:@"person"];
+
+// 完成反归档
+[unarchiver finishDecoding];
+</code></pre></div></div>
+
+<h2 id="二nsuserdefaults">二、NSUserDefaults</h2>
+
+<h3 id="1使用环境">1.使用环境</h3>
 
 <p>每个用户都有自己的独特偏好设置，把这些偏好记录在应用包的 plist 文件中，通过 NSUserDefaults 类来访问，这是 NSUserDefaults 的常用姿势。</p>
 
-<h2 id="2使用">2.使用</h2>
+<h3 id="2使用">2.使用</h3>
 
 <p>存储的对象必须是 plist 文件可以存储的类型：</p>
 <ul>
@@ -252,9 +361,9 @@
 
 </code></pre></div></div>
 
-<h2 id="3nsuserdefaults-域">3.NSUserDefaults 域</h2>
+<h3 id="3nsuserdefaults-域">3.NSUserDefaults 域</h3>
 
-<h3 id="域">域</h3>
+<h4 id="域">域</h4>
 
 <p>user defaults 数据库中其实是由多个层级的域组成的，当你读取一个键值的数据时，NSUserDefaults 从上到下透过域的层级寻找正确的值，不同的域有不同的功能，有些域是可持久的，有些域则不行。</p>
 
@@ -266,7 +375,7 @@
   <li>参数域（ argument domain）有最高优先权。</li>
 </ul>
 
-<h3 id="有关的实际问题">有关的实际问题</h3>
+<h4 id="有关的实际问题">有关的实际问题</h4>
 
 <p>当使用 key 去获取 value 时，value 可能是空，造成后续代码逻辑由问题。解决方法：</p>
 
@@ -287,6 +396,121 @@ NSDictionary *defaultPrefs = [NSDictionary dictionaryWithContentsOfURL:defaultPr
 <p>当应用第一次设置某项用户偏好设置的值时，相应的值会通过指定的键加入应用域。</p>
 
 <p>当通过NSUserDefaults获取某项用户偏好设置的值时，NSUserDefaults会先在应用域中查找，如果找到了值，NSUserDefaults就会返回这个值。如果没有找到，NSUserDefaults就会在注册域中查找并返回默认值。</p>
+
+<h2 id="三plist">三、plist</h2>
+
+<h3 id="前提">前提</h3>
+
+<p>适用于保存简单的数据；</p>
+
+<p>保存的数据类型有限，自定义的不可保存。</p>
+
+<ul>
+  <li>NSArray / NSMutableArray</li>
+  <li>NADictionary / NSMutableDictionary</li>
+  <li>NSData / NSMutableData</li>
+  <li>NSString / NSMutableString</li>
+  <li>NSValue / NSNumber</li>
+</ul>
+
+<h3 id="写入--读出方法">写入 / 读出方法</h3>
+
+<blockquote>
+  <p>可以通过 atomically 参数让该方法将数据写入辅助文件，而非指定路径。该辅助文件将被复制到第一个参数指定的位置。当应用程序在保存期间崩溃，吸纳有文件将不会被破坏。</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+wiritToFile: filePath: atomically:
+
+xxxWithContentsOfFile:
+
+</code></pre></div></div>
+
+<h2 id="四settingbundle">四、Setting.Bundle</h2>
+
+<blockquote>
+  <p>手机设置中的内容，初创建时有2个文件（Root.plist、en.lproj）</p>
+</blockquote>
+
+<h3 id="enlproj">en.lproj</h3>
+
+<p>是国际化文件夹，en表示英文。</p>
+
+<h3 id="rootplist">Root.plist</h3>
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/02_02.png" alt="" /></p>
+
+<h4 id="preferences-items">Preferences Items</h4>
+<h5 id="1每项底下的通用项目意义">1、每项底下的通用项目意义：</h5>
+
+<ul>
+  <li>Title: 显示的标题</li>
+  <li>
+    <p>Type: 参数的类型
+      PSTextFeildSpecifier(文本框)
+      ..TitleValue..(与显示标题相同)
+      ..ToggleSwitch..(开关)
+      ..Slider..(滑块)
+      ..MultiValue..(可供用户选择的列表)
+      ..Group..(定义一个分组)
+      ..ChildPance..(定义一个子设置视图，用户单击时，将会打开新的设置界面。定义这种类型的Item时，必须重新指定一个plist文件来定义子视图的界面。)</p>
+  </li>
+  <li>Key: 保存应用参数的key</li>
+  <li>DefaultValue: 默认参数</li>
+</ul>
+
+<h5 id="2不通用的项目意义">2、不通用的项目意义：</h5>
+
+<h6 id="1-文本框-pstextfeildspecifier-">1) 文本框（ PSTextFeildSpecifier ）</h6>
+
+<ul>
+  <li>
+    <p>AutocapitalizationType: 指定文本框为自动大写类型，支持的属性值与 UITextView的 Capitalization 支持的属性值相同。</p>
+  </li>
+  <li>
+    <p>AutocorrectionType: 指定文本框的自动更正类型，与TextView的 Correction 支持的属性值同。</p>
+  </li>
+  <li>
+    <p>IsSecure: 是否是密码输入框</p>
+  </li>
+  <li>
+    <p>KeyBoardType: 指定该文本框关联的虚拟键盘类型。</p>
+  </li>
+</ul>
+
+<h6 id="2-滑块-slider-">2) 滑块（ Slider ）</h6>
+
+<ul>
+  <li>MinimumValue: 最小值</li>
+  <li>MaxmumValue: 最大值</li>
+  <li>MinimumValueImage: 最小值图片</li>
+  <li>MaxmumValueImage: 最大值图片</li>
+</ul>
+
+<blockquote>
+  <p>注：UISlider 参数不能通过Title设置显示标题，因为不起作用。</p>
+</blockquote>
+
+<blockquote>
+  <p>图片必须放在 Setting.Bundle 文件夹中才能被访问，否则访问不到。</p>
+</blockquote>
+
+<h6 id="3多值参数multivalue">3）多值参数（MultiValue）</h6>
+
+<ul>
+  <li>Titles:</li>
+  <li>Values: 列表项值</li>
+</ul>
+
+<h6 id="4子视图childpance">4）子视图（ChildPance）</h6>
+
+<ul>
+  <li>File: 设置子视图的 plist 的文件名，且该文件与 Root.plist 文件格式一模一样。必须存在 Setting.Bundle 文件夹下。</li>
+</ul>
+
+<h4 id="strings-filename">Strings FileName</h4>
+
+<p>这个节点是String，值为 Root。
+作用是告诉系统到 *.lproj 文件中找 Root.strings 文件，作为国际化资源文件</p>
 
         </article>
         <hr>
@@ -507,13 +731,13 @@ NSDictionary *defaultPrefs = [NSDictionary dictionaryWithContentsOfURL:defaultPr
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/07/24/Setting_Bundle/">Setting.Bundle</a></p>
+        <p><strong>上一篇</strong> <a href="/2017/07/24/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">SandBox</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2017/07/24/plist/">Plist</a></p>
+        <p><strong>下一篇</strong> <a href="/2017/07/24/SQLite/">sqlite</a></p>
         
     </div>
 </div>
