@@ -5,8 +5,8 @@
     <description></description>
     <link>https://yjyuanshuai.github.io/</link>
     <atom:link href="https://yjyuanshuai.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 29 Nov 2017 17:54:41 +0800</pubDate>
-    <lastBuildDate>Wed, 29 Nov 2017 17:54:41 +0800</lastBuildDate>
+    <pubDate>Thu, 21 Dec 2017 18:04:46 +0800</pubDate>
+    <lastBuildDate>Thu, 21 Dec 2017 18:04:46 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
@@ -42,6 +42,20 @@
         <category>iOS</category>
         
         <category>Xcode</category>
+        
+      </item>
+    
+      <item>
+        <title>Apple Developer账号申请</title>
+        <description>开发者账号申请流程</description>
+        <pubDate>Tue, 07 Nov 2017 08:14:54 +0800</pubDate>
+        <link>https://yjyuanshuai.github.io/2017/11/07/Apple%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A6%E5%8F%B7%E7%94%B3%E8%AF%B7/</link>
+        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/11/07/Apple%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A6%E5%8F%B7%E7%94%B3%E8%AF%B7/</guid>
+        
+        <category>iOS</category>
+        
+        
+        <category>iOS</category>
         
       </item>
     
@@ -144,22 +158,6 @@
         <pubDate>Mon, 24 Jul 2017 11:14:54 +0800</pubDate>
         <link>https://yjyuanshuai.github.io/2017/07/24/SQLite/</link>
         <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/07/24/SQLite/</guid>
-        
-        <category>iOS</category>
-        
-        <category>数据存储</category>
-        
-        
-        <category>iOS</category>
-        
-      </item>
-    
-      <item>
-        <title>iOS 数据存储其他方法</title>
-        <description>归解档、NSUserDefaults、plist、Setting.Bundle等</description>
-        <pubDate>Mon, 24 Jul 2017 10:14:54 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2017/07/24/iOS%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/07/24/iOS%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95/</guid>
         
         <category>iOS</category>
         

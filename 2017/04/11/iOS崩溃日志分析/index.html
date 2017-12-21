@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>iOS 日志分析</title>
+    <meta name="description" content="iOS 日志简介与应用情形，分析日志，实际开发中常见崩溃情况等。">
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <!-- 菜单前的图标，需要下面这句 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/04/11/iOS%E5%B4%A9%E6%BA%83%E6%97%A5%E5%BF%97%E5%88%86%E6%9E%90/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?cf8506e0ef223e57ff6239944e5d46a4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-72449510-4', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
+    "HTML-CSS": {
+      linebreaks: { automatic: true, width: "container" }
+    }
+});
+</script>
+<!-- <script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+</head>
+
+
+  <body>
+
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">YJ`s notes</a>
+        <small></small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>类别
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>标签
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>关于我
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>iOS 日志分析</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2017-04-11
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
+        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
+    
+        <!--a href="/tag/#%E6%97%A5%E5%BF%97" title="Tag: 日志" rel="tag">日志</a-->
+        <a href="/tag/#日志" title="Tag: 日志" rel="tag">日志</a>&nbsp;
+    
+        <!--a href="/tag/#Crash" title="Tag: Crash" rel="tag">Crash</a-->
+        <a href="/tag/#Crash" title="Tag: Crash" rel="tag">Crash</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#概述" id="markdown-toc-概述">概述</a>    <ul>
+      <li><a href="#使用场景" id="markdown-toc-使用场景">使用场景</a></li>
+      <li><a href="#注意事项" id="markdown-toc-注意事项">注意事项</a></li>
+      <li><a href="#获取日志文件" id="markdown-toc-获取日志文件">获取日志文件</a></li>
+      <li><a href="#上传日志文件" id="markdown-toc-上传日志文件">上传日志文件</a></li>
+    </ul>
+  </li>
+  <li><a href="#崩溃日志" id="markdown-toc-崩溃日志">崩溃日志</a>    <ul>
+      <li><a href="#一获取日志" id="markdown-toc-一获取日志">一、获取日志</a>        <ul>
+          <li><a href="#1itunes-store-同步" id="markdown-toc-1itunes-store-同步">1、iTunes Store 同步</a></li>
+          <li><a href="#2xcode-devices" id="markdown-toc-2xcode-devices">2、Xcode Devices</a></li>
+          <li><a href="#3itunes-connect" id="markdown-toc-3itunes-connect">3、iTunes Connect</a></li>
+          <li><a href="#4第三方崩溃管理工具" id="markdown-toc-4第三方崩溃管理工具">4、第三方崩溃管理工具</a></li>
+          <li><a href="#5自己截取" id="markdown-toc-5自己截取">5、自己截取</a></li>
+        </ul>
+      </li>
+      <li><a href="#二日志产生场景" id="markdown-toc-二日志产生场景">二、日志产生场景</a>        <ul>
+          <li><a href="#代码bug" id="markdown-toc-代码bug">代码Bug</a></li>
+          <li><a href="#违反操作系统规则" id="markdown-toc-违反操作系统规则">违反操作系统规则</a>            <ul>
+              <li><a href="#1-atchdog-超时" id="markdown-toc-1-atchdog-超时">1. atchdog 超时</a></li>
+              <li><a href="#2-用户强制退出" id="markdown-toc-2-用户强制退出">2. 用户强制退出</a></li>
+              <li><a href="#3-低内存终止" id="markdown-toc-3-低内存终止">3. 低内存终止</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#三崩溃日志分析" id="markdown-toc-三崩溃日志分析">三、崩溃日志分析</a>        <ul>
+          <li><a href="#1-进程信息" id="markdown-toc-1-进程信息">1. 进程信息</a></li>
+          <li><a href="#2-基本信息" id="markdown-toc-2-基本信息">2. 基本信息</a></li>
+          <li><a href="#3-异常" id="markdown-toc-3-异常">3. 异常</a></li>
+          <li><a href="#4-线程回溯" id="markdown-toc-4-线程回溯">4. 线程回溯</a></li>
+          <li><a href="#5-二进制映象" id="markdown-toc-5-二进制映象">5. 二进制映象</a></li>
+          <li><a href="#6符号化" id="markdown-toc-6符号化">6、符号化</a>            <ul>
+              <li><a href="#xcode" id="markdown-toc-xcode">Xcode</a></li>
+              <li><a href="#symbolicatecrash-脚本符号化" id="markdown-toc-symbolicatecrash-脚本符号化">symbolicatecrash 脚本符号化</a></li>
+              <li><a href="#atos" id="markdown-toc-atos">atos</a></li>
+              <li><a href="#其他工具" id="markdown-toc-其他工具">其他工具</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#四低内存闪退日志" id="markdown-toc-四低内存闪退日志">四、低内存闪退日志</a></li>
+      <li><a href="#五异常类型" id="markdown-toc-五异常类型">五、异常类型</a></li>
+      <li><a href="#六异常编码" id="markdown-toc-六异常编码">六、异常编码</a></li>
+    </ul>
+  </li>
+  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
+</ul>
+
+<h2 id="概述">概述</h2>
+<h3 id="使用场景">使用场景</h3>
+
+<ol>
+  <li>
+    <p>在开发环境中，应该将日志写入控制台；而在生产环境中，应该将日志写入文件。在调试代码的时候，不输出到控制台就无法在XCode中看到日志。当最好的方式是同时写入控制台和日志文件。</p>
+  </li>
+  <li>
+    <p>应该分为多种不同的日志级别（错误、警告、信息、详细）。</p>
+  </li>
+  <li>
+    <p>当某个日志级别被禁用时，相应日志函数的调用开销要非常小。</p>
+  </li>
+  <li>
+    <p>向控制台或者文件写日志的时候，不可以阻塞调用者线程。</p>
+  </li>
+  <li>
+    <p>要定期删除日志文件以避免占满磁盘。</p>
+  </li>
+  <li>
+    <p>日志函数的调用要非常方便，通常使用支持变参的C语法，不建议使用 Object-C 语法。NSLog的调用凡是非常简单，这一点就值得学习。</p>
+  </li>
+</ol>
+
+<h3 id="注意事项">注意事项</h3>
+
+<p>敏感信息不应该记录到日志，如用户名、密码、银行卡号等。</p>
+
+<h3 id="获取日志文件">获取日志文件</h3>
+
+<p>获取日志可以通过网络协议让用户上传日志到服务器。</p>
+
+<p>另外要注意，日志文件可能会比较大，在上传之前应该进行压缩以减少大小。考虑到用户流量情况，最好是在 WIFI 情况下静默上传日志文件。</p>
+
+<h3 id="上传日志文件">上传日志文件</h3>
+
+<p>非程序崩溃情况下地日志，最好是选择在用户闲暇时间段且 WIFI 情况下上传；而崩溃情况下的日志，考虑到程序在崩溃的时候会处于奇怪且未知的状态，最好是选择在程序重启的时候（而不是崩溃期间）上传 crash 报告。在程序崩溃期间尽量什么都不要做。</p>
+
+<h2 id="崩溃日志">崩溃日志</h2>
+<h3 id="一获取日志">一、获取日志</h3>
+<h4 id="1itunes-store-同步">1、iTunes Store 同步</h4>
+<p>Mac OS X: ~/Library/Logs/CrashReporter/MobileDevice/</p>
+
+<p>Windows XP: C:Documents and SettingsApplication DataApple ComputerLogsCrashReporterMobileDevice</p>
+
+<p>Windows Vista or 7:  C:UsersAppDataRoamingApple ComputerLogsCrashReporterMobileDevice</p>
+
+<h4 id="2xcode-devices">2、Xcode Devices</h4>
+<p>Device Logs</p>
+
+<h4 id="3itunes-connect">3、iTunes Connect</h4>
+<p>线上用户崩溃日志</p>
+
+<p>iTunes Connect(Manage Your Applications - View Details - Crash Reports)</p>
+
+<h4 id="4第三方崩溃管理工具">4、第三方崩溃管理工具</h4>
+<p>如：友盟、腾讯Bugly</p>
+
+<h4 id="5自己截取">5、自己截取</h4>
+<p>自己写代码，截取崩溃日志，发送到开发者邮箱。</p>
+
+<blockquote>
+  <p>如何做？</p>
+</blockquote>
+
+<h3 id="二日志产生场景">二、日志产生场景</h3>
+<h4 id="代码bug">代码Bug</h4>
+
+<h4 id="违反操作系统规则">违反操作系统规则</h4>
+<h5 id="1-atchdog-超时">1. atchdog 超时</h5>
+<p>在启动、恢复、挂起、退出时 watchdog 超时。所以耗时的操作应放到后台线程。</p>
+
+<h5 id="2-用户强制退出">2. 用户强制退出</h5>
+<p>用户双击 home 键终止应用，会生成一个崩溃日志。</p>
+
+<blockquote>
+  <p>通常用户在点击 home 键时，应用将在后台保留约 10 分钟，然后操作系统自动将其终止。</p>
+</blockquote>
+
+<blockquote>
+  <p>双击 home 键看到的应用列表，是表示一系列过去打开过的应用。删除那些历史的应用（被挂起）并不会产生崩溃日志。</p>
+</blockquote>
+
+<h5 id="3-低内存终止">3. 低内存终止</h5>
+
+<p>内存不够时，操作系统发出 UIApplicationDidReceiveMemoryWarningNotification 通知，调用 didReceiveMemoryWarning 方法。首先发通知回收一些正在运行的应用和进程，不够则终止后台线程，而在这种情况下被终止的后台应用，不会产生崩溃日志。还不够则应用被终止，产生崩溃日志。</p>
+
+<h3 id="三崩溃日志分析">三、崩溃日志分析</h3>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_10_2010411/B00_001_10_20170411_01_01.png" alt="iOS崩溃日志" /></p>
+
+<h4 id="1-进程信息">1. 进程信息</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">字段名</th>
+      <th style="text-align: left">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Incident Identifier</td>
+      <td style="text-align: left">崩溃报告的唯一标识符。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">CrashReporter Key</td>
+      <td style="text-align: left">是与设备标识相对应的唯一键值。虽然它不是真正的设备标识符，但也是一个非常有用的情报:如果你看到100个崩溃日志的CrashReporter Key值都是相同的，或者只有少数几个不同的CrashReport值，说明这不是一个普遍的问题，只发生在一个或少数几个设备上。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Hardware Model</td>
+      <td style="text-align: left">标识设备类型。 如果很多崩溃日志都是来自相同的设备类型，说明应用只在某特定类型的设备上有问题。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="2-基本信息">2. 基本信息</h4>
+
+<p>崩溃发生日期与时间，设备的 iOS 版本。</p>
+
+<h4 id="3-异常">3. 异常</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">字段名</th>
+      <th style="text-align: left">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Exception Type</td>
+      <td style="text-align: left">异常类型</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Exception Codes</td>
+      <td style="text-align: left">异常编码</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Triggered by Thread</td>
+      <td style="text-align: left">异常的线程</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>常见异常类型见“五、异常类型”
+常见异常编码见“六、异常编码”</p>
+</blockquote>
+
+<h4 id="4-线程回溯">4. 线程回溯</h4>
+<p>| 列号 | 含义 |
+|:–|:–|
+| 1 | 帧编号 |
+| 2 | 二进制库名称 |
+| 3 | 调用方法的地址 |
+| 4 | 基本地址 + 偏移量 |</p>
+
+<h4 id="5-二进制映象">5. 二进制映象</h4>
+
+<p>这部分列出了闪退时已经加载的二进制文件。</p>
+
+<h4 id="6符号化">6、符号化</h4>
+<p>需要以下 3 个文件（放到同一个目录下）：</p>
+<ul>
+  <li>.crash</li>
+  <li>.app (appName.app文件，把IPA文件后缀改为zip，然后解压，Payload目录下的appName.app文件)</li>
+  <li>.dSYM</li>
+</ul>
+
+<h5 id="xcode">Xcode</h5>
+<p>打开Xcode的Window菜单下的organizer，然后点击Devices tab，然后选中左边的Device Logs。</p>
+
+<p>然后把.crash文件拖到Device Logs或者选择下面的import导入.crash文件。</p>
+
+<p>这样你就可以看到crash的详细log了。</p>
+
+<h5 id="symbolicatecrash-脚本符号化">symbolicatecrash 脚本符号化</h5>
+<p>现在打开终端(Terminal)然后输入如下的命令：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/PrivateFrameworks/DTDeviceKitBase.framework/Versions/A/Resources/symbolicatecrash appName.crash appName.app &gt; appName.log
+</code></pre></div></div>
+
+<p>现在，符号化的crash log就保存在appName.log中了。</p>
+
+<h5 id="atos">atos</h5>
+<p>若有多个 .ipa 、.dSYM文件，确定对应关系，可使用atos。</p>
+
+<h5 id="其他工具">其他工具</h5>
+
+<h3 id="四低内存闪退日志">四、低内存闪退日志</h3>
+
+<p>低内存崩溃日志上没有应用线程的堆栈回溯。相反，上面显示的是以内存页数为单位的各进程内存使用量。</p>
+
+<p>被iOS因释放内存页终止的进程名称后面你会看到jettisoned 字样。如果看到它出现在你的应用名称后面，说明你的应用因使用太多内存而被终止了。</p>
+
+<p><img src="http://www.cocoachina.com/cms/uploads/allimg/130725/4196_130725163754_1.png" alt="" /></p>
+
+<p>当应用发生低内存闪退时，你必需看看应用中内存使用的方式，以及是如何处理低内存警告的。你可以使用Instruments工具中使用Allocations 和 Leaks来发现内存分配问题和内存泄漏问题。</p>
+
+<p>还有，别忘记虚拟内存！ Instruments工具的Leaks 和 Allocations 不能跟踪显存使用情况。必需使用 VM Tracker 才能查看显存使用情况。</p>
+
+<p>VM Tracker 默认是关闭的。打开Instrument,手动 选中Automatic Snapshotting 标志或者按下Snapshot Now 按钮。</p>
+
+<h3 id="五异常类型">五、异常类型</h3>
+<p>| 异常类型 | 含义 |
+|:–|:–|
+| SIGABRT | 在某个对象上调用了不存在的方法 |
+| SIGALRM | 程序超时信号 |
+| SIGFPE | 程序浮点异常信号 |
+| SIGILL | 代表signal illegal instruction(非法指令信号)。当在处理器上执行非法指令时，它就会发生。执行非法指令是指，将函数指针会给另外一个函数时，该函数指针由于某种原因是坏的，指向了一段已经释放的内存或是一个数据段。有时你收到的是EXC_BAD_INSTRUCTION而不是SIGILL，虽然它们是一回事，不过EXC_*等同于此信号不依赖体系结构。|
+| SIGHUP | 程序终端中止信号 |
+| SIGINT | 程序键盘中断信号 |
+| SIGKILL | 程序结束接收中止信号 |
+| SIGTERM | 程序kill中止信号 |
+| SIGSTOP | 程序键盘中止信号 |
+| SIGPIPE | 程序Socket发送失败中止信号 |
+| SIGSEGV | 段错误信息（SIGSEGV）是操作系统产生的一个更严重的问题。当硬件出现错误、访问不可读的内存地址或向受保护的内存地址写入数据时，就会发生这个错误。|
+| SIGBUS | 总线错误信号（SIGBUG）代表无效内存访问，即访问的内存是一个无效的内存地址。也就是说，那个地址指向的位置根本不是物理内存地址（它可能是某个硬件芯片的地址）。|
+| SIGTRAP | 代表陷阱信号。它并不是一个真正的崩溃信号。它会在处理器执行trap指令发送。LLDB调试器通常会处理此信号，并在指定的断点处停止运行。|
+| EXC_BAD_ACCESS | 访问已经释放掉的对象 |
+| EXC_ARITHETIC | 当要除零时，应用会收到EXC_ARITHMETIC信号。|</p>
+
+<h3 id="六异常编码">六、异常编码</h3>
+<p>| 异常编码 | 含义 |
+|:–|:–|
+| 0x8badf00d | 读做 “ate bad food”! 表示应用是因为发生watchdog超时而被iOS终止的。通常是应用花费太多时间而无法启动、终止或响应用系统事件。|
+| 0xbad22222 | 该编码表示 VoIP 应用因为过于频繁重启而被终止。|
+| 0xdead10cc | 读做 “dead lock”!该代码表明应用因为在后台运行时占用系统资源，如通讯录数据库不释放而被终止 。|
+| 0xdeadfa11 | 读做 “dead fall”! 该代码表示应用是被用户强制退出的。根据苹果文档, 强制退出发生在用户长按开关按钮直到出现 “滑动来关机”, 然后长按 Home按钮。强制退出将产生 包含0xdeadfa11 异常编码的崩溃日志, 因为大多数是强制退出是因为应用阻塞了界面。|
+| 0xbaaaaaad | ⽤用户按住Home键和⾳音量键,获取当前内存状态,不代表崩溃 |
+| 0xc00010ff | 因为太烫了被干掉,意为“cool off” |</p>
+
+<hr />
+<h2 id="相关链接">相关链接</h2>
+
+<p><a href="http://blog.csdn.net/chaoyuan899/article/details/38639829">iOS日志记录</a></p>
+
+<p><a href="http://www.cocoachina.com/ios/20130725/6677.html">iOS应用崩溃日志分析</a></p>
+
+<p><a href="http://www.jianshu.com/p/45f45590190c">iOS 应用Crash日志分析整理</a></p>
+
+<p><a href="http://www.jianshu.com/p/1b804426d212">iOS Crash大全</a></p>
+
+<p><a href="http://www.iosxxx.com/blog/2015-08-29-iosyi-chang-bu-huo.html">iOS异常捕获</a></p>
+
+<p><a href="http://wufawei.com/2014/03/symbolicating-ios-crash-logs/">分析iOS Crash文件：符号化iOS Crash文件的3种方法</a></p>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/29/iOS%E6%8A%80%E6%9C%AF%E6%A0%88/">iOS技术栈
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/07/Apple%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A6%E5%8F%B7%E7%94%B3%E8%AF%B7/">Apple Developer账号申请
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/">iOS WWDC更新总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/">自定义 CollectionView 布局
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2016/12/25/%E6%97%B6%E9%97%B4/">NSDate 时间问题</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2017/07/18/%E7%BC%96%E8%AF%91bug%E6%B1%87%E6%80%BB/">iOS 编译bug汇总</a></p>
+        
+    </div>
+</div>
+
+
+        <h2 id="comments">Comments</h2>
+        
+
+
+
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
+                    
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            <!-- Contact me at: -->
+            
+            
+            
+            
+            
+            
+            
+            
+        </p>
+        <!-- <p>
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p> -->
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<!-- <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+    </script>
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>
