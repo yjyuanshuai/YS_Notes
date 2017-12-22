@@ -231,11 +231,11 @@
         </ul>
       </li>
       <li><a href="#二日志产生场景" id="markdown-toc-二日志产生场景">二、日志产生场景</a>        <ul>
-          <li><a href="#代码bug" id="markdown-toc-代码bug">代码Bug</a></li>
-          <li><a href="#违反操作系统规则" id="markdown-toc-违反操作系统规则">违反操作系统规则</a>            <ul>
-              <li><a href="#1-atchdog-超时" id="markdown-toc-1-atchdog-超时">1. atchdog 超时</a></li>
-              <li><a href="#2-用户强制退出" id="markdown-toc-2-用户强制退出">2. 用户强制退出</a></li>
-              <li><a href="#3-低内存终止" id="markdown-toc-3-低内存终止">3. 低内存终止</a></li>
+          <li><a href="#1代码bug" id="markdown-toc-1代码bug">1、代码Bug</a></li>
+          <li><a href="#2违反操作系统规则" id="markdown-toc-2违反操作系统规则">2、违反操作系统规则</a>            <ul>
+              <li><a href="#1atchdog-超时" id="markdown-toc-1atchdog-超时">1）atchdog 超时</a></li>
+              <li><a href="#2用户强制退出" id="markdown-toc-2用户强制退出">2）用户强制退出</a></li>
+              <li><a href="#3低内存终止" id="markdown-toc-3低内存终止">3）低内存终止</a></li>
             </ul>
           </li>
         </ul>
@@ -247,10 +247,10 @@
           <li><a href="#4-线程回溯" id="markdown-toc-4-线程回溯">4. 线程回溯</a></li>
           <li><a href="#5-二进制映象" id="markdown-toc-5-二进制映象">5. 二进制映象</a></li>
           <li><a href="#6符号化" id="markdown-toc-6符号化">6、符号化</a>            <ul>
-              <li><a href="#xcode" id="markdown-toc-xcode">Xcode</a></li>
-              <li><a href="#symbolicatecrash-脚本符号化" id="markdown-toc-symbolicatecrash-脚本符号化">symbolicatecrash 脚本符号化</a></li>
-              <li><a href="#atos" id="markdown-toc-atos">atos</a></li>
-              <li><a href="#其他工具" id="markdown-toc-其他工具">其他工具</a></li>
+              <li><a href="#1xcode" id="markdown-toc-1xcode">1）Xcode</a></li>
+              <li><a href="#2symbolicatecrash-脚本符号化" id="markdown-toc-2symbolicatecrash-脚本符号化">2）symbolicatecrash 脚本符号化</a></li>
+              <li><a href="#3atos" id="markdown-toc-3atos">3）atos</a></li>
+              <li><a href="#4其他工具" id="markdown-toc-4其他工具">4）其他工具</a></li>
             </ul>
           </li>
         </ul>
@@ -329,13 +329,13 @@
 </blockquote>
 
 <h3 id="二日志产生场景">二、日志产生场景</h3>
-<h4 id="代码bug">代码Bug</h4>
+<h4 id="1代码bug">1、代码Bug</h4>
 
-<h4 id="违反操作系统规则">违反操作系统规则</h4>
-<h5 id="1-atchdog-超时">1. atchdog 超时</h5>
+<h4 id="2违反操作系统规则">2、违反操作系统规则</h4>
+<h5 id="1atchdog-超时">1）atchdog 超时</h5>
 <p>在启动、恢复、挂起、退出时 watchdog 超时。所以耗时的操作应放到后台线程。</p>
 
-<h5 id="2-用户强制退出">2. 用户强制退出</h5>
+<h5 id="2用户强制退出">2）用户强制退出</h5>
 <p>用户双击 home 键终止应用，会生成一个崩溃日志。</p>
 
 <blockquote>
@@ -346,13 +346,13 @@
   <p>双击 home 键看到的应用列表，是表示一系列过去打开过的应用。删除那些历史的应用（被挂起）并不会产生崩溃日志。</p>
 </blockquote>
 
-<h5 id="3-低内存终止">3. 低内存终止</h5>
+<h5 id="3低内存终止">3）低内存终止</h5>
 
 <p>内存不够时，操作系统发出 UIApplicationDidReceiveMemoryWarningNotification 通知，调用 didReceiveMemoryWarning 方法。首先发通知回收一些正在运行的应用和进程，不够则终止后台线程，而在这种情况下被终止的后台应用，不会产生崩溃日志。还不够则应用被终止，产生崩溃日志。</p>
 
 <h3 id="三崩溃日志分析">三、崩溃日志分析</h3>
 
-<p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_10_2010411/B00_001_10_20170411_01_01.png" alt="iOS崩溃日志" /></p>
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_10_2010411/B00_01_20170411_01_02.png" alt="iOS崩溃日志" /></p>
 
 <h4 id="1-进程信息">1. 进程信息</h4>
 
@@ -409,17 +409,41 @@
 </table>
 
 <blockquote>
-  <p>常见异常类型见“五、异常类型”
-常见异常编码见“六、异常编码”</p>
+  <p>常见异常类型见“五、异常类型”</p>
+</blockquote>
+
+<blockquote>
+  <p>常见异常编码见“六、异常编码”</p>
 </blockquote>
 
 <h4 id="4-线程回溯">4. 线程回溯</h4>
-<p>| 列号 | 含义 |
-|:–|:–|
-| 1 | 帧编号 |
-| 2 | 二进制库名称 |
-| 3 | 调用方法的地址 |
-| 4 | 基本地址 + 偏移量 |</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">列号</th>
+      <th style="text-align: left">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">1</td>
+      <td style="text-align: left">帧编号</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">2</td>
+      <td style="text-align: left">二进制库名称</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">3</td>
+      <td style="text-align: left">调用方法的地址</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">4</td>
+      <td style="text-align: left">基本地址 + 偏移量</td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="5-二进制映象">5. 二进制映象</h4>
 
@@ -433,14 +457,14 @@
   <li>.dSYM</li>
 </ul>
 
-<h5 id="xcode">Xcode</h5>
+<h5 id="1xcode">1）Xcode</h5>
 <p>打开Xcode的Window菜单下的organizer，然后点击Devices tab，然后选中左边的Device Logs。</p>
 
 <p>然后把.crash文件拖到Device Logs或者选择下面的import导入.crash文件。</p>
 
 <p>这样你就可以看到crash的详细log了。</p>
 
-<h5 id="symbolicatecrash-脚本符号化">symbolicatecrash 脚本符号化</h5>
+<h5 id="2symbolicatecrash-脚本符号化">2）symbolicatecrash 脚本符号化</h5>
 <p>现在打开终端(Terminal)然后输入如下的命令：</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
 </code></pre></div></div>
@@ -450,10 +474,10 @@
 
 <p>现在，符号化的crash log就保存在appName.log中了。</p>
 
-<h5 id="atos">atos</h5>
+<h5 id="3atos">3）atos</h5>
 <p>若有多个 .ipa 、.dSYM文件，确定对应关系，可使用atos。</p>
 
-<h5 id="其他工具">其他工具</h5>
+<h5 id="4其他工具">4）其他工具</h5>
 
 <h3 id="四低内存闪退日志">四、低内存闪退日志</h3>
 
@@ -470,33 +494,114 @@
 <p>VM Tracker 默认是关闭的。打开Instrument,手动 选中Automatic Snapshotting 标志或者按下Snapshot Now 按钮。</p>
 
 <h3 id="五异常类型">五、异常类型</h3>
-<p>| 异常类型 | 含义 |
-|:–|:–|
-| SIGABRT | 在某个对象上调用了不存在的方法 |
-| SIGALRM | 程序超时信号 |
-| SIGFPE | 程序浮点异常信号 |
-| SIGILL | 代表signal illegal instruction(非法指令信号)。当在处理器上执行非法指令时，它就会发生。执行非法指令是指，将函数指针会给另外一个函数时，该函数指针由于某种原因是坏的，指向了一段已经释放的内存或是一个数据段。有时你收到的是EXC_BAD_INSTRUCTION而不是SIGILL，虽然它们是一回事，不过EXC_*等同于此信号不依赖体系结构。|
-| SIGHUP | 程序终端中止信号 |
-| SIGINT | 程序键盘中断信号 |
-| SIGKILL | 程序结束接收中止信号 |
-| SIGTERM | 程序kill中止信号 |
-| SIGSTOP | 程序键盘中止信号 |
-| SIGPIPE | 程序Socket发送失败中止信号 |
-| SIGSEGV | 段错误信息（SIGSEGV）是操作系统产生的一个更严重的问题。当硬件出现错误、访问不可读的内存地址或向受保护的内存地址写入数据时，就会发生这个错误。|
-| SIGBUS | 总线错误信号（SIGBUG）代表无效内存访问，即访问的内存是一个无效的内存地址。也就是说，那个地址指向的位置根本不是物理内存地址（它可能是某个硬件芯片的地址）。|
-| SIGTRAP | 代表陷阱信号。它并不是一个真正的崩溃信号。它会在处理器执行trap指令发送。LLDB调试器通常会处理此信号，并在指定的断点处停止运行。|
-| EXC_BAD_ACCESS | 访问已经释放掉的对象 |
-| EXC_ARITHETIC | 当要除零时，应用会收到EXC_ARITHMETIC信号。|</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">异常类型</th>
+      <th style="text-align: left">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">SIGABRT</td>
+      <td style="text-align: left">在某个对象上调用了不存在的方法</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SIGALRM</td>
+      <td style="text-align: left">程序超时信号</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SIGFPE</td>
+      <td style="text-align: left">程序浮点异常信号</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SIGILL</td>
+      <td style="text-align: left">代表signal illegal instruction(非法指令信号)。当在处理器上执行非法指令时，它就会发生。执行非法指令是指，将函数指针会给另外一个函数时，该函数指针由于某种原因是坏的，指向了一段已经释放的内存或是一个数据段。有时你收到的是EXC_BAD_INSTRUCTION而不是SIGILL，虽然它们是一回事，不过EXC_*等同于此信号不依赖体系结构。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SIGHUP</td>
+      <td style="text-align: left">程序终端中止信号</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SIGINT</td>
+      <td style="text-align: left">程序键盘中断信号</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SIGKILL</td>
+      <td style="text-align: left">程序结束接收中止信号</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SIGTERM</td>
+      <td style="text-align: left">程序kill中止信号</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SIGSTOP</td>
+      <td style="text-align: left">程序键盘中止信号</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SIGPIPE</td>
+      <td style="text-align: left">程序Socket发送失败中止信号</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SIGSEGV</td>
+      <td style="text-align: left">段错误信息（SIGSEGV）是操作系统产生的一个更严重的问题。当硬件出现错误、访问不可读的内存地址或向受保护的内存地址写入数据时，就会发生这个错误。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SIGBUS</td>
+      <td style="text-align: left">总线错误信号（SIGBUG）代表无效内存访问，即访问的内存是一个无效的内存地址。也就是说，那个地址指向的位置根本不是物理内存地址（它可能是某个硬件芯片的地址）。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">SIGTRAP</td>
+      <td style="text-align: left">代表陷阱信号。它并不是一个真正的崩溃信号。它会在处理器执行trap指令发送。LLDB调试器通常会处理此信号，并在指定的断点处停止运行。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">EXC_BAD_ACCESS</td>
+      <td style="text-align: left">访问已经释放掉的对象</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">EXC_ARITHETIC</td>
+      <td style="text-align: left">当要除零时，应用会收到EXC_ARITHMETIC信号。</td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="六异常编码">六、异常编码</h3>
-<p>| 异常编码 | 含义 |
-|:–|:–|
-| 0x8badf00d | 读做 “ate bad food”! 表示应用是因为发生watchdog超时而被iOS终止的。通常是应用花费太多时间而无法启动、终止或响应用系统事件。|
-| 0xbad22222 | 该编码表示 VoIP 应用因为过于频繁重启而被终止。|
-| 0xdead10cc | 读做 “dead lock”!该代码表明应用因为在后台运行时占用系统资源，如通讯录数据库不释放而被终止 。|
-| 0xdeadfa11 | 读做 “dead fall”! 该代码表示应用是被用户强制退出的。根据苹果文档, 强制退出发生在用户长按开关按钮直到出现 “滑动来关机”, 然后长按 Home按钮。强制退出将产生 包含0xdeadfa11 异常编码的崩溃日志, 因为大多数是强制退出是因为应用阻塞了界面。|
-| 0xbaaaaaad | ⽤用户按住Home键和⾳音量键,获取当前内存状态,不代表崩溃 |
-| 0xc00010ff | 因为太烫了被干掉,意为“cool off” |</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">异常编码</th>
+      <th style="text-align: left">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">0x8badf00d</td>
+      <td style="text-align: left">读做 “ate bad food”! 表示应用是因为发生watchdog超时而被iOS终止的。通常是应用花费太多时间而无法启动、终止或响应用系统事件。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">0xbad22222</td>
+      <td style="text-align: left">该编码表示 VoIP 应用因为过于频繁重启而被终止。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">0xdead10cc</td>
+      <td style="text-align: left">读做 “dead lock”!该代码表明应用因为在后台运行时占用系统资源，如通讯录数据库不释放而被终止 。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">0xdeadfa11</td>
+      <td style="text-align: left">读做 “dead fall”! 该代码表示应用是被用户强制退出的。根据苹果文档, 强制退出发生在用户长按开关按钮直到出现 “滑动来关机”, 然后长按 Home按钮。强制退出将产生 包含0xdeadfa11 异常编码的崩溃日志, 因为大多数是强制退出是因为应用阻塞了界面。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">0xbaaaaaad</td>
+      <td style="text-align: left">⽤用户按住Home键和⾳音量键,获取当前内存状态,不代表崩溃</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">0xc00010ff</td>
+      <td style="text-align: left">因为太烫了被干掉,意为“cool off”</td>
+    </tr>
+  </tbody>
+</table>
 
 <hr />
 <h2 id="相关链接">相关链接</h2>
