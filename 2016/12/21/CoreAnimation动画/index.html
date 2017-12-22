@@ -295,22 +295,20 @@
 
 <h2 id="常用的方法">常用的方法</h2>
 <h3 id="初始化方法">初始化方法</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>+ (instancetype)animation;
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+ (instancetype)animation;
 
 // CAPropertyAnimation 的子类还可以通过如下方法初始化
 + (instancetype)animationWithKeyPath:(nullable NSString *)path;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="添加删除动画">添加/删除动画</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>//
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//
 - (void)addAnimation:(CAAnimation *)anim forKey:(nullable NSString *)key;
 
 //
 - (void)removeAnimationForKey:(NSString *)key;
 - (void)removeAllAnimations;
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="设置动画属性">设置动画属性</h3>
 <p>设置动画的执行时间，执行曲线，keyPath的目标值，代理等等.</p>
@@ -359,7 +357,7 @@
 </table>
 
 <h4 id="keypath">keyPath</h4>
-<div class="highlighter-rouge"><pre class="highlight"><code>// rotation 旋转
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// rotation 旋转
 rotation.x
 rotation.y
 rotation.z
@@ -399,11 +397,10 @@ cornerRadius
 borderWidth
 contents
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="timingfunction">timingFunction</h4>
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 // enum 值：
 kCAMediaTimingFunctionLinear 匀速
 kCAMediaTimingFunctionEaseIn 慢进
@@ -411,25 +408,23 @@ kCAMediaTimingFunctionEaseOut 慢出
 kCAMediaTimingFunctionEaseInEaseOut 慢进慢出
 kCAMediaTimingFunctionDefault 默认值（慢进慢出）
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h4 id="delegate">delegate</h4>
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 //动画开始
 - (void)animationDidStart:(CAAnimation *)anim;  
 
 //动画结束
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag;
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="cabasicanimation">CABasicAnimation</h2>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_02_02.gif" alt="" /></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 CABasicAnimation *postionAnimation = [CABasicAnimation animationWithKeyPath:@"position.y"];
 postionAnimation.duration = 1.0f;
 postionAnimation.fromValue = @(self.squareView.center.y);
@@ -441,8 +436,7 @@ postionAnimation.fillMode = kCAFillModeForwards;
 postionAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
 [self.squareView.layer addAnimation:postionAnimation forKey:@"posstionAnimation"];
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>属性说明：</p>
 
@@ -479,7 +473,7 @@ postionAnimation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMed
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_02_03.gif" alt="" /></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 CAKeyframeAnimation *keyAnimation = [CAKeyframeAnimation animationWithKeyPath:@"transform"];
 keyAnimation.duration = 1.0f;
 keyAnimation.beginTime = CACurrentMediaTime() + 1.0;
@@ -495,14 +489,13 @@ keyAnimation.removedOnCompletion = NO;
 keyAnimation.fillMode = kCAFillModeForwards;
 [_someView.layer addAnimation:keyAnimation forKey:nil];
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="示例代码2-路径">示例代码2-路径</h3>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_07.gif" alt="" /></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>CAKeyframeAnimation * ani = [CAKeyframeAnimation animationWithKeyPath:@"position"];
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CAKeyframeAnimation * ani = [CAKeyframeAnimation animationWithKeyPath:@"position"];
 
 CGMutablePathRef path = CGPathCreateMutable();
 CGPathAddEllipseInRect(path, NULL, CGRectMake(130, 200, 100, 100));
@@ -513,8 +506,7 @@ ani.duration = 4.0;
 ani.removedOnCompletion = NO;
 ani.fillMode = kCAFillModeForwards;
 [self.centerShow.layer addAnimation:ani forKey:@"PostionKeyframePathAni"];
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="catransition">CATransition</h2>
 
@@ -540,7 +532,7 @@ ani.fillMode = kCAFillModeForwards;
 </table>
 
 <h3 id="type">type</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>// enum
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// enum
 kCATransitionFade   // 渐变，淡入淡出
 kCATransitionMoveIn // 覆盖
 kCATransitionPush   // 推出
@@ -561,16 +553,14 @@ UIViewAnimationTransitionCurlDown       // 下翻转
 UIViewAnimationTransitionCurlUp         // 上翻转
 UIViewAnimationTransitionFlipFromLeft   // 左翻转
 UIViewAnimationTransitionFlipFromRight  // 右翻转
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="subtype">subtype</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>kCATransitionFromRight  // 从右边
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kCATransitionFromRight  // 从右边
 kCATransitionFromLeft   // 从左边
 kCATransitionFromTop    // 从顶部
 kCATransitionFromBottom // 从底部
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="caspringanimation">CASpringAnimation</h2>
 
@@ -607,7 +597,7 @@ kCATransitionFromBottom // 从底部
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_08.gif" alt="" /></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 CASpringAnimation * ani = [CASpringAnimation animationWithKeyPath:@"bounds"];
 
 ani.mass = 10.0; //质量，影响图层运动时的弹簧惯性，质量越大，弹簧拉伸和压缩的幅度越大
@@ -621,14 +611,13 @@ ani.fillMode = kCAFillModeForwards;
 ani.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut];
 [self.cartCenter.layer addAnimation:ani forKey:@"boundsAni"];
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="caanimationgroup">CAAnimationGroup</h2>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_02_04.gif" alt="" /></p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 CABasicAnimation *rotationYAnimation = [CABasicAnimation animationWithKeyPath:@"transform.rotation.y"];
 rotationYAnimation.fromValue = @0;
 rotationYAnimation.toValue = @(M_PI);
@@ -648,8 +637,7 @@ animationGroup.animations = @[rotationYAnimation, postionAnimation];
 
 [_markView.layer addAnimation:animationGroup forKey:kJumpAnimation];
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>注：CAAnimationGroup的 animations 中可以放其他任何动画类（包括CAAnimationGroup），需要注意的是animations里的动画设置了duration之后动画可能会有不同，一般里面不设置，在最外层设置group的duration即可。</p>
@@ -657,7 +645,7 @@ animationGroup.animations = @[rotationYAnimation, postionAnimation];
 
 <p>接上面示例之后的动画，实现视图继续绕Y轴旋转90°，下落回原处：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 - (void)animationDidStop:(CAAnimation *)anim finished:(BOOL)flag
 {
     if ([anim isEqual:[_someView.layer animationForKey:@"jumpUp"]]) {
@@ -682,8 +670,7 @@ animationGroup.animations = @[rotationYAnimation, postionAnimation];
     }
 }
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="catransaction-事务">CATransaction 事务</h2>
 
@@ -699,18 +686,17 @@ animationGroup.animations = @[rotationYAnimation, postionAnimation];
 <p>　　2.显式：明显调用事务的方法（[CATransaction begin]和 [CATransaction commit]）。</p>
 
 <p>CA事务的可设置属性（会覆盖隐式动画的设置）：</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 animationDuration：动画时间
 animationTimingFunction：动画时间曲线
 disableActions：是否关闭动画
 completionBlock：动画执行完毕的回调
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>事务支持嵌套使用：当最外层的事务commit后动画才会开始。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 [CATransaction begin];
 [CATransaction setAnimationDuration:2.0];
 [CATransaction setAnimationTimingFunction:[CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseInEaseOut]];
@@ -718,8 +704,7 @@ completionBlock：动画执行完毕的回调
 self.subLayer.bounds = self.centerShow.layer.bounds;
 [CATransaction commit];
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>注意：只有非root layer才有隐式动画，如果你是直接设置self.cartCenter.layer.bounds = self.centerShow.layer.bounds;是不会有动画效果的。</p>
@@ -737,30 +722,6 @@ self.subLayer.bounds = self.centerShow.layer.bounds;
                         
                         <h2 id="similar_posts">Similar Posts</h2>
                         <ul>
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/11/29/iOS%E6%8A%80%E6%9C%AF%E6%A0%88/">iOS技术栈
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
                         
                         <li class="relatedPost">
                             <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
@@ -884,6 +845,30 @@ self.subLayer.bounds = self.centerShow.layer.bounds;
             
         
             
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/">iOS资源整合
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
             
         
             

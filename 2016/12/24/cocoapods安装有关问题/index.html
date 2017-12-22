@@ -228,61 +228,53 @@
 <h3 id="1卡在-setting-up-cocoapods-master-repo-后报错">1、卡在 <code class="highlighter-rouge">Setting up CocoaPods master repo</code> 后报错</h3>
 
 <p>经常会有卡在 Setting up CocoaPods master repo 很久后报以下错：</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>[!] /usr/bin/git clone https://github.com/CocoaPods/Specs.git master
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[!] /usr/bin/git clone https://github.com/CocoaPods/Specs.git master
 
 Cloning into 'master'...
 error: RPC failed: result=56, HTTP code = 200
 fatal: the remote end hung up unexpectedly
 fatal: early EOF
 fatal: index-pack failed
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>可能的原因有 3 个：</p>
 <ul>
   <li>gem 版本过低
-    <div class="highlighter-rouge"><pre class="highlight"><code>sudo gem update --system
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo gem update --system
+</code></pre></div>    </div>
   </li>
   <li>github 无法连接
-    <div class="highlighter-rouge"><pre class="highlight"><code>ping github.com
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ping github.com
+</code></pre></div>    </div>
   </li>
   <li>.cocoapods目录下的配置信息错误
-    <div class="highlighter-rouge"><pre class="highlight"><code>pod repo list
-</code></pre>
-    </div>
+    <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pod repo list
+</code></pre></div>    </div>
   </li>
 </ul>
 
 <h3 id="2ruby-源错">2、Ruby 源错</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>  http://taobao.ruby.org/       // 已失效
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  http://taobao.ruby.org/       // 已失效
   https://taobao.ruby.org/      // 已不维护
   https://gems.ruby-china.org/  // 当前有效，2017-09-05
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="手动下载安装">手动下载安装</h2>
 <h3 id="1pod-command-not-found">1、<code class="highlighter-rouge">pod: command not found</code></h3>
 
 <p>运行pod后显示：”pod: command not found”的错误。赋予/usr/local/bin给予执行与读取权限，执行以下命令。若不行执行sudo chmod 777 /usr/local/bin/。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>sudo chmod 700 /usr/local/bin/
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo chmod 700 /usr/local/bin/
+</code></pre></div></div>
 
 <h2 id="使用">使用</h2>
 <h3 id="1pod-search-afnetworking-时报以下错">1、pod search AFNetworking 时报以下错：</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>[!] Unable to find a pod with name, author, summary, or descriptionmatching `AFNetworking`
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[!] Unable to find a pod with name, author, summary, or descriptionmatching `AFNetworking`
+</code></pre></div></div>
 
 <p>解决方法：</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>rm ~/Library/Caches/CocoaPods/search_index.json
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rm ~/Library/Caches/CocoaPods/search_index.json
+</code></pre></div></div>
 
 <hr />
 <h2 id="相关链接">相关链接</h2>
@@ -304,17 +296,6 @@ fatal: index-pack failed
                     
                 
             
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
                 
                     
                 
@@ -365,6 +346,17 @@ fatal: index-pack failed
             
         
             
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
             
         
             

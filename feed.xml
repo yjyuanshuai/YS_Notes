@@ -5,31 +5,9 @@
     <description></description>
     <link>https://yjyuanshuai.github.io/</link>
     <atom:link href="https://yjyuanshuai.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-<<<<<<< HEAD
-    <pubDate>Thu, 21 Dec 2017 18:04:46 +0800</pubDate>
-    <lastBuildDate>Thu, 21 Dec 2017 18:04:46 +0800</lastBuildDate>
+    <pubDate>Fri, 22 Dec 2017 09:44:47 +0800</pubDate>
+    <lastBuildDate>Fri, 22 Dec 2017 09:44:47 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
-=======
-    <pubDate>Wed, 29 Nov 2017 22:11:59 +0800</pubDate>
-    <lastBuildDate>Wed, 29 Nov 2017 22:11:59 +0800</lastBuildDate>
-    <generator>Jekyll v3.5.2</generator>
->>>>>>> 3ecdb6694793a76f165820c5dfc67e51358200aa
-    
-      <item>
-        <title>iOS技术栈</title>
-        <description>某位大牛总结的 iOS 技术栈，跟着大牛走~</description>
-        <pubDate>Wed, 29 Nov 2017 09:00:54 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2017/11/29/iOS%E6%8A%80%E6%9C%AF%E6%A0%88/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/11/29/iOS%E6%8A%80%E6%9C%AF%E6%A0%88/</guid>
-        
-        <category>iOS</category>
-        
-        <category>技术栈</category>
-        
-        
-        <category>iOS</category>
-        
-      </item>
     
       <item>
         <title>开发效率Tips</title>
@@ -164,6 +142,22 @@
         <pubDate>Mon, 24 Jul 2017 11:14:54 +0800</pubDate>
         <link>https://yjyuanshuai.github.io/2017/07/24/SQLite/</link>
         <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/07/24/SQLite/</guid>
+        
+        <category>iOS</category>
+        
+        <category>数据存储</category>
+        
+        
+        <category>iOS</category>
+        
+      </item>
+    
+      <item>
+        <title>iOS 数据存储其他方法</title>
+        <description>归解档、NSUserDefaults、plist、Setting.Bundle等</description>
+        <pubDate>Mon, 24 Jul 2017 10:14:54 +0800</pubDate>
+        <link>https://yjyuanshuai.github.io/2017/07/24/iOS%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95/</link>
+        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/07/24/iOS%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8%E5%85%B6%E4%BB%96%E6%96%B9%E6%B3%95/</guid>
         
         <category>iOS</category>
         
