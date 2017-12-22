@@ -239,7 +239,7 @@
 <p>UIView 动画大致分两种，一种是 block，一种是多种 API 组合。</p>
 
 <h2 id="block-动画">Block 动画</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 一般动画
+<div class="highlighter-rouge"><pre class="highlight"><code>// 一般动画
 + (void)animateWithDuration: animations: completion:;
 + (void)animateWithDuration: animations:;
 + (void)animateWithDuration: delay: options: animations: completion:;
@@ -261,10 +261,11 @@
 
 //
 + (void)performSystemAnimation: onViews: options: animations: completion:;
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="一一般动画">一、一般动画</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 回调
+<div class="highlighter-rouge"><pre class="highlight"><code>// 回调
 + (void)animateWithDuration: animations: completion:;
 
 // 无回调
@@ -272,21 +273,23 @@
 
 // 延时 + 动画类型 + 回调
 + (void)animateWithDuration: delay: options: animations: completion:;
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="二弹簧动画">二、弹簧动画</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// usingSpringWithDamping：弹簧的阻尼，0-1，若为 1，则动画平稳减速没有振荡
+<div class="highlighter-rouge"><pre class="highlight"><code>// usingSpringWithDamping：弹簧的阻尼，0-1，若为 1，则动画平稳减速没有振荡
 
 // initialSpringVelocity：初速度，数值越小，动力越小，弹簧的拉伸幅度就越小。
 // 如：总共的动画运行距离是200 pt，你希望每秒 100pt 时，值为 0.5。
 
 + (void)animateWithDuration: delay: usingSpringWithDamping: initialSpringVelocity: options: animations: completion:;
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="弹簧动画实例">弹簧动画实例</h4>
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/2016/12/20161221_01_05.gif" alt="" /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[UIView animateWithDuration:0.7
+<div class="highlighter-rouge"><pre class="highlight"><code>[UIView animateWithDuration:0.7
                       delay:0.0
      usingSpringWithDamping:0.5
       initialSpringVelocity:0.9         options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionAllowUserInteraction
@@ -295,15 +298,17 @@
     } completion:^(BOOL finished) {
 
 }];
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="三转场动画">三、转场动画</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+ (void)transitionWithView: duration:  options: animations: completion:;
+<div class="highlighter-rouge"><pre class="highlight"><code>+ (void)transitionWithView: duration:  options: animations: completion:;
 + (void)transitionFromView: toView: duration: options: completion:;
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="uiviewanimationoptions-枚举值">UIViewAnimationOptions 枚举值</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 动画效果相关
+<div class="highlighter-rouge"><pre class="highlight"><code>// 动画效果相关
 UIViewAnimationOptionLayoutSubviews            //提交动画的时候布局子控件，表示子控件将和父控件一同动画。
 UIViewAnimationOptionAllowUserInteraction      //动画时允许用户交流，比如触摸
 UIViewAnimationOptionBeginFromCurrentState     //从当前状态开始动画
@@ -332,18 +337,20 @@ UIViewAnimationOptionTransitionCurlDown        //下卷转场
 UIViewAnimationOptionTransitionCrossDissolve   //转场交叉消失
 UIViewAnimationOptionTransitionFlipFromTop     //转场从上翻转
 UIViewAnimationOptionTransitionFlipFromBottom  //转场从下翻转
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="四关键帧动画">四、关键帧动画</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+ (void)animateKeyframesWithDuration: delay: options: animations: completion: ;
+<div class="highlighter-rouge"><pre class="highlight"><code>+ (void)animateKeyframesWithDuration: delay: options: animations: completion: ;
 
 // StartTime：相对开始时间
 // relativeDuration: 相对持续时间
 + (void)addKeyframeWithRelativeStartTime: relativeDuration: animations: ;
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="uiviewkeyframeanimationoptions-枚举值">UIViewKeyframeAnimationOptions 枚举值</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 UIViewKeyframeAnimationOptionLayoutSubviews             //提交动画的时候布局子控件，表示子控件将和父控件一同动画。
 UIViewKeyframeAnimationOptionAllowUserInteraction       //动画时允许用户交流，比如触摸    
 UIViewKeyframeAnimationOptionBeginFromCurrentState      //从当前状态开始动画
@@ -359,14 +366,15 @@ UIViewKeyframeAnimationOptionCalculationModeDiscrete   //选择不插入关键�
 UIViewKeyframeAnimationOptionCalculationModePaced      //选择计算中间帧数值算法使用一个简单的节奏。这个选项的结果在一个均匀的动画。
 UIViewKeyframeAnimationOptionCalculationModeCubic      //选择计算中间帧使用默认卡特莫尔罗花键,通过关键帧的值。你不能调整该算法的参数。 这个动画好像会更圆滑一些..
 UIViewKeyframeAnimationOptionCalculationModeCubicPaced //选择计算中间帧使用立方计划而忽略的时间属性动画。相反,时间参数计算隐式地给动画一个恒定的速度。
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="关键帧动画实例">关键帧动画实例</h4>
 <p>示例：将一个按钮从原来尺寸放大到1.5倍，在缩小到0.8，再恢复到原始大小。</p>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/2016/12/20161221_01_02.gif" alt="" /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[UIView animateKeyframesWithDuration:0.5 delay:0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
+<div class="highlighter-rouge"><pre class="highlight"><code>[UIView animateKeyframesWithDuration:0.5 delay:0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
 
         [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:1/3.0 animations:^{
             customBtn.transform = CGAffineTransformMakeScale(1.5, 1.5);
@@ -379,18 +387,21 @@ UIViewKeyframeAnimationOptionCalculationModeCubicPaced //选择计算中间帧�
         }];
 
 } completion:nil];
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="五performsystemanimation">五、performSystemAnimation</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+ (void)performSystemAnimation: onViews: options: animations: completion:;
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>+ (void)performSystemAnimation: onViews: options: animations: completion:;
+</code></pre>
+</div>
 
 <h4 id="uisystemanimation">UISystemAnimation</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UISystemAnimationDelete
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>UISystemAnimationDelete
+</code></pre>
+</div>
 
 <h2 id="api-动画">API 动画</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+ (void)beginAnimations:(NSString *)animationID context:(void *)context;
+<div class="highlighter-rouge"><pre class="highlight"><code>+ (void)beginAnimations:(NSString *)animationID context:(void *)context;
 
 + (void)commitAnimations;  
 
@@ -429,10 +440,11 @@ UIViewKeyframeAnimationOptionCalculationModeCubicPaced //选择计算中间帧�
 + (void)setAnimationsEnabled:(BOOL)enabled;
 
 + (void)performWithoutAnimation:(void (NS_NOESCAPE^)(void))actionsWithoutAnimation;
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="api-调用实例">API 调用实例</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[UIView beginAnimations:@"centerAnimation" context:nil];
+<div class="highlighter-rouge"><pre class="highlight"><code>[UIView beginAnimations:@"centerAnimation" context:nil];
 [UIView setAnimationCurve:UIViewAnimationCurveLinear];
 [UIView setAnimationDuration:2.0];
 [UIView setAnimationDelegate:self];
@@ -440,7 +452,8 @@ UIViewKeyframeAnimationOptionCalculationModeCubicPaced //选择计算中间帧�
 
 self.squareView.center = CGPointMake(50, 50);
 [UIView commitAnimations];
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <blockquote>
   <p>要先设置完动画参数，然后在修改视图的动画属性，否则动画参数可能不起作用。因此，修改视图动画属性的语句写在 commitAnimatons上一行。</p>

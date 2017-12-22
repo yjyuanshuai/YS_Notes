@@ -256,19 +256,21 @@
 | fill | 内部填充的 view |</p>
 
 <h4 id="linejoinstyle连接点样式">lineJoinStyle（连接点样式）</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kCGLineJoinMiter  // 斜接
+<div class="highlighter-rouge"><pre class="highlight"><code>kCGLineJoinMiter  // 斜接
 kCGLineJoinRound  // 圆滑
 kCGLineJoinBevel  // 斜角
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="linecapstyle终点样式">lineCapStyle（终点样式）</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>kCGLineCapButt    // 默认值，即不绘制端点
+<div class="highlighter-rouge"><pre class="highlight"><code>kCGLineCapButt    // 默认值，即不绘制端点
 kCGLineCapRound   // 圆形端点
 kCGLineCapSquare  // 方形端点
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="初始化方法">初始化方法</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 构造bezierPath对象，一般用于自定义路径。
+<div class="highlighter-rouge"><pre class="highlight"><code>// 构造bezierPath对象，一般用于自定义路径。
 + bezierPath;
 
 // 绘制圆弧路径，参数1是中心点位置，参数2是半径，参数3是开始的弧度值，参数4是结束的弧度值，参数5是是否顺时针(YES是顺时针方向，NO逆时针)。
@@ -298,11 +300,12 @@ kCGLineCapSquare  // 方形端点
 // 绘制每个角都是圆角的矩形，参数2是半径。
 + bezierPathWithRoundedRect: cornerRadius:
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="自定义路径常用">自定义路径常用</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 设置起点
+<div class="highlighter-rouge"><pre class="highlight"><code>// 设置起点
 - (void)moveToPoint:(CGPoint)point;   
 
 // 绘制直线  
@@ -320,14 +323,15 @@ kCGLineCapSquare  // 方形端点
 // 拼接曲线
 - (void)appendPath:(UIBezierPath *)bezierPath;
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="应用">应用</h2>
 <h3 id="直线">直线</h3>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_09.png" alt="" /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UIColor *color = [UIColor redColor];
+<div class="highlighter-rouge"><pre class="highlight"><code>UIColor *color = [UIColor redColor];
 [color set]; //设置线条颜色
 
 UIBezierPath* path = [UIBezierPath bezierPath];
@@ -348,13 +352,14 @@ path.lineJoinStyle = kCGLineJoinRound; //终点处理
 // [path stroke];//Draws line 根据坐标点连线
 [path fill];    //颜色填充
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="矩形">矩形</h3>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_10.png" alt="" /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UIColor *color = [UIColor redColor];
+<div class="highlighter-rouge"><pre class="highlight"><code>UIColor *color = [UIColor redColor];
 [color set]; //设置线条颜色
 
 UIBezierPath* path = [UIBezierPath bezierPathWithRect:CGRectMake(20, 20, 100, 80)];
@@ -365,13 +370,14 @@ path.lineJoinStyle = kCGLineJoinRound; //终点处理
 
 [path stroke];
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="圆形">圆形</h3>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_11.png" alt="" /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UIColor *color = [UIColor redColor];
+<div class="highlighter-rouge"><pre class="highlight"><code>UIColor *color = [UIColor redColor];
 [color set];
 
 UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(100, 100) radius:90 startAngle:0 endAngle:TO_RADIAUS(120) clockwise:YES];
@@ -381,13 +387,14 @@ path.lineCapStyle = kCGLineCapRound;
 path.lineJoinStyle = kCGLineJoinRound;
 [path stroke];
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="圆弧">圆弧</h3>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_12.png" alt="" /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
+<div class="highlighter-rouge"><pre class="highlight"><code>/**
   * center：原点
   * radius：半径
   * startAngle：开始角度
@@ -397,20 +404,23 @@ path.lineJoinStyle = kCGLineJoinRound;
 
 + (UIBezierPath *)bezierPathWithArcCenter:(CGPoint)center radius:(CGFloat)radius startAngle:(CGFloat)startAngle endAngle:(CGFloat)endAngle clockwise:(BOOL)clockwise
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="二次贝塞尔曲线">二次贝塞尔曲线</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (void)addQuadCurveToPoint:(CGPoint)endPoint controlPoint:(CGPoint)controlPoint
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>- (void)addQuadCurveToPoint:(CGPoint)endPoint controlPoint:(CGPoint)controlPoint
+</code></pre>
+</div>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_13.jpeg" alt="" /></p>
 
 <h3 id="三次贝塞尔曲线">三次贝塞尔曲线</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (void)addCurveToPoint:(CGPoint)endPoint controlPoint1:(CGPoint)controlPoint1 controlPoint2:(CGPoint)controlPoint2  
+<div class="highlighter-rouge"><pre class="highlight"><code>- (void)addCurveToPoint:(CGPoint)endPoint controlPoint1:(CGPoint)controlPoint1 controlPoint2:(CGPoint)controlPoint2  
 Parameters
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_14.jpeg" alt="" /></p>
 
@@ -418,7 +428,7 @@ Parameters
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_15.png" alt="" /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UIColor *color = [UIColor redColor];
+<div class="highlighter-rouge"><pre class="highlight"><code>UIColor *color = [UIColor redColor];
     [color set]; //设置线条颜色
 
 UIBezierPath* path = [UIBezierPath bezierPathWithRect:CGRectMake(20, 20, 100, 80)];
@@ -429,13 +439,14 @@ path.lineJoinStyle = kCGLineJoinRound; //终点处理
 
 [path stroke];
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="制定矩形的某个角为圆角">制定矩形的某个角为圆角</h3>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_16.png" alt="" /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UIColor *color = [UIColor redColor];
+<div class="highlighter-rouge"><pre class="highlight"><code>UIColor *color = [UIColor redColor];
 [color set];
 
 UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(0, 0, 100, 100) byRoundingCorners:UIRectCornerTopRight cornerRadii:CGSizeMake(20, 20)];
@@ -446,7 +457,8 @@ path.lineWidth = 5.0;
 
 [path stroke];
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
         </article>
         <hr>
