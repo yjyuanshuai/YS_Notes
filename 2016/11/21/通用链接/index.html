@@ -208,20 +208,153 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#更新" id="markdown-toc-更新">更新</a></li>
-  <li><a href="#" id="markdown-toc-">#</a></li>
+  <li><a href="#更新" id="markdown-toc-更新">更新</a>    <ul>
+      <li><a href="#20160708" id="markdown-toc-20160708">2016.07.08</a></li>
+    </ul>
+  </li>
   <li><a href="#简介" id="markdown-toc-简介">简介</a></li>
+  <li><a href="#优点" id="markdown-toc-优点">优点</a>    <ul>
+      <li><a href="#唯一" id="markdown-toc-唯一">唯一</a></li>
+      <li><a href="#安全" id="markdown-toc-安全">安全</a></li>
+      <li><a href="#可变" id="markdown-toc-可变">可变</a></li>
+      <li><a href="#简单" id="markdown-toc-简单">简单</a></li>
+      <li><a href="#私有" id="markdown-toc-私有">私有</a></li>
+    </ul>
+  </li>
+  <li><a href="#使用" id="markdown-toc-使用">使用</a>    <ul>
+      <li><a href="#1前提" id="markdown-toc-1前提">1、前提</a></li>
+      <li><a href="#2apple-app-site-association" id="markdown-toc-2apple-app-site-association">2、<code class="highlighter-rouge">apple-app-site-association</code></a>        <ul>
+          <li><a href="#appid" id="markdown-toc-appid">appID</a></li>
+          <li><a href="#paths" id="markdown-toc-paths">paths</a></li>
+        </ul>
+      </li>
+      <li><a href="#3在-xcode-里配置" id="markdown-toc-3在-xcode-里配置">3、在 Xcode 里配置</a></li>
+      <li><a href="#4测试" id="markdown-toc-4测试">4、测试</a></li>
+      <li><a href="#5处理代码" id="markdown-toc-5处理代码">5、处理代码</a></li>
+    </ul>
+  </li>
   <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
 </ul>
 
 <h2 id="更新">更新</h2>
-<h2>#</h2>
+<h3 id="20160708">2016.07.08</h3>
+<p>1、iOS 9.3更改了通用链接的请求文件路径，从原来的 <code class="highlighter-rouge">/apple-app-site-association</code> 改为<code class="highlighter-rouge">/.well-known/apple-app-site-association</code>，为了兼容性，若.well-known目录下没有请求到,还是会去网站根目录请求的。</p>
 
 <hr />
 
 <h2 id="简介">简介</h2>
 
-<p>iOS 9 推出的功能，之前若想实现拉起应用的功能，要用 URL Schemes。</p>
+<p>iOS 9 推出的功能，之前若想实现从各种从浏览器,Safari、UIWebView或者 WKWebView中唤醒APP的需求，我们通常只能使用 URL Schemes。</p>
+
+<p>通用链接，即一条普通的 http 链接，当本地已安装 App 时跳转打开本地 App，未安装则跳转到指定的页面。</p>
+
+<p>使用通用链接，就能够方便的通过传统的HTTP链接来启动APP(如果iOS设备上已经安装了你的app,不需要额外做任何判断等), 或者打开网页(iOS设备上没有安装你的app)。</p>
+
+<blockquote>
+  <p>注：微信现已禁止通过 Scheme 打开其他应用。</p>
+</blockquote>
+
+<h2 id="优点">优点</h2>
+<h3 id="唯一">唯一</h3>
+<p>因为它使用标准的http/https链接到你的web站点,所以它不会被其它的app所声明.另外,Custom URL scheme 因为是自定义的协议，所以在没有安装 app 的情况下是无法直接打开的，而 universal links 本身是一个 HTTP/HTTPS 链接，所以有更好的兼容性</p>
+
+<h3 id="安全">安全</h3>
+<p>当用户的手机上安装了你的app,那么iOS将去你的网站上去下载你上传上去的说明文件(这个说明文件声明了你的app可以打开哪些类型的http链接).因为只有你自己才能上传文件到你网站的根目录,所以你的网站和你的app之间的关联是安全的.</p>
+
+<h3 id="可变">可变</h3>
+<p>当用户手机上没有安装你的app的时候,Universal Links也能够工作.如果你愿意,在没有安装你的app的时候,用户点击链接,会在safari中展示你网站的内容.</p>
+
+<h3 id="简单">简单</h3>
+<p>一个URL链接,可以同时作用于网站和app</p>
+
+<h3 id="私有">私有</h3>
+<p>其它app可以在不需要知道你的app是否安装了的情况下和你的app相互通信.</p>
+
+<h2 id="使用">使用</h2>
+<h3 id="1前提">1、前提</h3>
+<ul>
+  <li>一个支持 <code class="highlighter-rouge">https</code> 的域名；</li>
+  <li>上传到 <code class="highlighter-rouge">.well-known</code> 或根目录的权限。</li>
+</ul>
+
+<h3 id="2apple-app-site-association">2、<code class="highlighter-rouge">apple-app-site-association</code></h3>
+
+<p>创建一个 json 格式的文件，文件名 <strong>必须</strong> 为<code class="highlighter-rouge">apple-app-site-association</code>，且 <strong>无后缀名</strong> 。上传到服务器<code class="highlighter-rouge">.well-known</code>或根目录目录下。</p>
+
+<p><a href="https://search.developer.apple.com/appsearch-validation-tool/">苹果提供 - 验证apple-app-site-association是否合法有效</a></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+  "applinks": {
+    "apps": [],
+    "details": [
+        {
+        "appID": "EBNJJGR464.com.yibaomd.YiBaoPatientDis",
+        "paths": ["/yibao-h5/openapp/*"]
+        },
+        {
+        "appID": "EBNJJGR464.com.yibaomd.YiBaoDoctorDis",
+        "paths": ["/yibao-h5/opendoctorapp/*"]
+        },
+        {
+        "appID": "8K7QM5LY52.com.weihua.GuoYiTangPatient",
+        "paths": ["/yibao-h5/opengytapp/*"]
+        },
+        {
+        "appID": "8K7QM5LY52.com.weihua.GuoYiTangDoctor",
+        "paths": ["/yibao-h5/opengytdoctorapp/*"]
+        }
+    ]
+  }
+}
+</code></pre></div></div>
+
+<h4 id="appid">appID</h4>
+<p>teamId（开发者账户-个人中心中找到）. app 的 bundleID；</p>
+
+<h4 id="paths">paths</h4>
+
+<ul>
+  <li>根据 paths 键设定一个你的app支持的路径列表,只有这些指定的路径的链接,才能被app所处理；举个例子:如果你的网站是www.yohunl.com,你的path写的是”/support/* “,那么当用户点击www.yohunl.com/support/myDoucument,就可以进入你的app了,相反www.yohunl.com/other 就不会.</li>
+  <li>paths 是大小写敏感的!</li>
+</ul>
+
+<h3 id="3在-xcode-里配置">3、在 Xcode 里配置</h3>
+<p>打开 Associated Domains，在其中的Domains中填入你想支持的域名(这里不是随便填的,是可以支持你需要的Universal Links的域名), 必须以 applinks: 为前缀。如：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>applinks:yohunl.com  
+applinks:www.yohunl.com  
+</code></pre></div></div>
+
+<p>此时，Xcode 会在工程中添加<code class="highlighter-rouge">.entitlements</code>文件，而开发者中心可以看到<code class="highlighter-rouge">Associated Domains</code>状态为<code class="highlighter-rouge">Enabled</code>。</p>
+
+<h3 id="4测试">4、测试</h3>
+<p>在iOS设备中的备忘录中添加记事本或短信中输入App能识别的链接，然后直接点击此链接,就会直接跳转到你的app了或是长按,在出现的弹出菜单中第二项是“在’XXX’中打开”，这也代表着成功。</p>
+
+<p>或是你将要测试的网址放到safari中一个网页中,然后点击链接,在出现的网页上方,下滑,可以看到有 在”XX”应用中打开。</p>
+
+<h3 id="5处理代码">5、处理代码</h3>
+
+<p>AppDelegate 代理方法中做处理。</p>
+
+<pre><code class="language-objective-c">- (BOOL)application:(UIApplication * )application continueUserActivity:(NSUserActivity * )userActivity restorationHandler:(void (^)(NSArray * ))restorationHandler
+{
+    // NSUserActivityTypeBrowsingWeb 由Universal Links进来的
+
+    if ([userActivity.activityType isEqualToString:NSUserActivityTypeBrowsingWeb]) {
+        NSURL * webpageURL = userActivity.webpageURL;
+        NSString * host = webpageURL.host;
+        if ([host isEqualToString:@"yohunl.com"]) {
+            //进行我们需要的处理
+        }
+        else {
+            [[UIApplication sharedApplication]openURL:webpageURL];
+        }
+
+    }
+    return YES;
+}
+
+</code></pre>
 
 <hr />
 <h2 id="相关链接">相关链接</h2>

@@ -208,7 +208,11 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#arc--mrc" id="markdown-toc-arc--mrc">ARC / MRC</a></li>
+  <li><a href="#arc--mrc" id="markdown-toc-arc--mrc">ARC / MRC</a>    <ul>
+      <li><a href="#mrc" id="markdown-toc-mrc">MRC</a></li>
+      <li><a href="#arc" id="markdown-toc-arc">ARC</a></li>
+    </ul>
+  </li>
   <li><a href="#属性" id="markdown-toc-属性">属性</a>    <ul>
       <li><a href="#property" id="markdown-toc-property">@property</a></li>
       <li><a href="#属性修饰符" id="markdown-toc-属性修饰符">属性修饰符</a>        <ul>
@@ -230,45 +234,160 @@
 </ul>
 
 <h2 id="arc--mrc">ARC / MRC</h2>
+<h3 id="mrc">MRC</h3>
+<p>手动内存管理</p>
+
+<h3 id="arc">ARC</h3>
+<p>自动内存管理，引用计数。</p>
 
 <h2 id="属性">属性</h2>
 <h3 id="property">@property</h3>
 
 <h3 id="属性修饰符">属性修饰符</h3>
 <h4 id="原子性">原子性</h4>
-<p>| 修饰符 | 作用 | 常用于 |
-|:–|:–|:–|
-| nonatomic | 不使用同步锁 |  |
-| atomic | 在默认情况下，由编译器合成的方法会通过锁定机制确保其原子性(atomicity) |  |</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">修饰符</th>
+      <th style="text-align: left">作用</th>
+      <th style="text-align: left">常用于</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">nonatomic</td>
+      <td style="text-align: left">不使用同步锁</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">atomic</td>
+      <td style="text-align: left">在默认情况下，由编译器合成的方法会通过锁定机制确保其原子性(atomicity)</td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="内存管理语义">内存管理语义</h4>
-<p>| 修饰符 | 作用 | 常用于 |
-|:–|:–|:–|
-| retain | retain属性的setter方法是保留新值并释放旧值，然后更新实例变量，令其指向新值。 |  |
-| copy | 表达的所属关系与strong类似。然而设置方法并不保留新值，而是设置方法并不保留新值，而是将其“拷贝”。 | 当属性类型为NSString*时，经常用此特质来保护其封装性，因为传递给设置方法的新值有可能指向一个NSMutableString类的实例。这个类是NSString的子类，表示一种可以修改其值的字符串，此时若是不拷贝字符串，那么设置完属性之后，字符串的值就可能会在对象不知情的情况下遭人更改。所以，这时就要拷贝一份“不可变”的字符串，确保对象中的字符串值不会无意间变动。只要实现属性所用的对象是“可变的”，就应该在设置新属性值时拷贝一份。NSString、NSArray、NSDictionary 等等经常使用copy关键字，是因为他们有对应的可变类型 |
-| strong | 定义了一种“拥有关系”。为这种属性设置新值时，设置方法会先保留新值，并释放旧值，然后再将新值设置上去 |  |
-| weak | 定义了一种“非拥有关系”。为这种属性设置新值时，设置方法既不保留新值，也不释放旧值。此特质同assign类似，然而在属性所指的对象遭到推毁时，属性值也会清空。 |  |
-| assign | 执行针对“纯量”的简单赋值操作 |  |
-| unsafe_unretained | 语义和assign相同，但是它适用于“对象类型”，该特质表达一种“非拥有关系”，当目标对象遭到推毁时，属性值不会自动清空，这一点与weak有区别 |  |</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">修饰符</th>
+      <th style="text-align: left">作用</th>
+      <th style="text-align: left">常用于</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">retain</td>
+      <td style="text-align: left">retain属性的setter方法是保留新值并释放旧值，然后更新实例变量，令其指向新值。</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">copy</td>
+      <td style="text-align: left">表达的所属关系与strong类似。然而设置方法并不保留新值，而是设置方法并不保留新值，而是将其“拷贝”。</td>
+      <td style="text-align: left">当属性类型为NSString*时，经常用此特质来保护其封装性，因为传递给设置方法的新值有可能指向一个NSMutableString类的实例。这个类是NSString的子类，表示一种可以修改其值的字符串，此时若是不拷贝字符串，那么设置完属性之后，字符串的值就可能会在对象不知情的情况下遭人更改。所以，这时就要拷贝一份“不可变”的字符串，确保对象中的字符串值不会无意间变动。只要实现属性所用的对象是“可变的”，就应该在设置新属性值时拷贝一份。NSString、NSArray、NSDictionary 等等经常使用copy关键字，是因为他们有对应的可变类型</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">strong</td>
+      <td style="text-align: left">定义了一种“拥有关系”。为这种属性设置新值时，设置方法会先保留新值，并释放旧值，然后再将新值设置上去</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">weak</td>
+      <td style="text-align: left">定义了一种“非拥有关系”。为这种属性设置新值时，设置方法既不保留新值，也不释放旧值。此特质同assign类似，然而在属性所指的对象遭到推毁时，属性值也会清空。</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">assign</td>
+      <td style="text-align: left">执行针对“纯量”的简单赋值操作</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">unsafe_unretained</td>
+      <td style="text-align: left">语义和assign相同，但是它适用于“对象类型”，该特质表达一种“非拥有关系”，当目标对象遭到推毁时，属性值不会自动清空，这一点与weak有区别</td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="读写权限">读写权限</h4>
-<p>| 修饰符 | 作用 | 常用于 |
-|:–|:–|:–|
-| readwriter |  |  |
-| readonly |  |  |</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">修饰符</th>
+      <th style="text-align: left">作用</th>
+      <th style="text-align: left">常用于</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">readwriter</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">readonly</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="方法名">方法名</h4>
-<p>| 修饰符 | 作用 | 常用于 |
-|:–|:–|:–|
-| getter |  |  |
-| setter |  |  |</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">修饰符</th>
+      <th style="text-align: left">作用</th>
+      <th style="text-align: left">常用于</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">getter</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">setter</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
 
 <h4 id="不常用的">不常用的</h4>
-<p>| 修饰符 | 作用 | 常用于 |
-|:–|:–|:–|
-| nonnull |  |  |
-| null_resettable |  |  |
-| nullable |  |  |</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">修饰符</th>
+      <th style="text-align: left">作用</th>
+      <th style="text-align: left">常用于</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">nonnull</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">null_resettable</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">nullable</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
 
 <h3 id="有关链接">有关链接</h3>
 <p><a href="http://blog.csdn.net/jasonjwl/article/details/49427377">OC的@property属性</a></p>

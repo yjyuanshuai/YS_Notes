@@ -208,19 +208,37 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#url-schemes-是什么" id="markdown-toc-url-schemes-是什么">URL Schemes 是什么</a></li>
-  <li><a href="#url-schemes-使用形式" id="markdown-toc-url-schemes-使用形式">URL Schemes 使用形式</a>    <ul>
+  <li><a href="#是什么" id="markdown-toc-是什么">是什么</a></li>
+  <li><a href="#使用形式" id="markdown-toc-使用形式">使用形式</a>    <ul>
       <li><a href="#1基本" id="markdown-toc-1基本">1、基本</a></li>
       <li><a href="#2复杂" id="markdown-toc-2复杂">2、复杂</a>        <ul>
           <li><a href="#打开某个功能带参数" id="markdown-toc-打开某个功能带参数">打开某个功能（带参数）</a></li>
-          <li><a href="#加-jumpback" id="markdown-toc-加-jumpback">加 jumpback</a></li>
+          <li><a href="#加-jumpback可返回" id="markdown-toc-加-jumpback可返回">加 jumpback，可返回</a></li>
         </ul>
       </li>
-      <li><a href="#3变形" id="markdown-toc-3变形">3、变形</a></li>
+      <li><a href="#3变形" id="markdown-toc-3变形">3、变形</a>        <ul>
+          <li><a href="#1可输入的参数" id="markdown-toc-1可输入的参数">1）可输入的参数</a></li>
+          <li><a href="#2list-列表" id="markdown-toc-2list-列表">2）list 列表</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li><a href="#延伸" id="markdown-toc-延伸">延伸</a>    <ul>
-      <li><a href="#1x-callback-url" id="markdown-toc-1x-callback-url">1、x-callback-URL</a></li>
+      <li><a href="#1x-callback-url" id="markdown-toc-1x-callback-url">1、x-callback-URL</a>        <ul>
+          <li><a href="#x-source" id="markdown-toc-x-source"><code class="highlighter-rouge">x-source</code></a></li>
+          <li><a href="#实例用-drafts-给fantastical-一次性添加多个事件" id="markdown-toc-实例用-drafts-给fantastical-一次性添加多个事件">实例：用 Drafts 给Fantastical 一次性添加多个事件</a></li>
+          <li><a href="#url编码encode" id="markdown-toc-url编码encode">URL编码（Encode）</a>            <ul>
+              <li><a href="#什么时候要编码" id="markdown-toc-什么时候要编码">什么时候要编码？</a></li>
+              <li><a href="#为什么有的-app-不需要编码" id="markdown-toc-为什么有的-app-不需要编码">为什么有的 App 不需要编码？</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#查找-app-的-url-schemes" id="markdown-toc-查找-app-的-url-schemes">查找 App 的 URL Schemes</a>    <ul>
+      <li><a href="#基本" id="markdown-toc-基本">基本</a></li>
+      <li><a href="#复杂--变形--x-callback-url" id="markdown-toc-复杂--变形--x-callback-url">复杂 / 变形 / x-callback-URL</a></li>
     </ul>
   </li>
   <li><a href="#应用" id="markdown-toc-应用">应用</a>    <ul>
@@ -231,27 +249,31 @@
   <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
 </ul>
 
-<h2 id="url-schemes-是什么">URL Schemes 是什么</h2>
+<h2 id="是什么">是什么</h2>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>weixin://dl/moments
 </code></pre></div></div>
 
 <p>说明：</p>
 
-<p><code class="highlighter-rouge">weixin://</code> 指定了是哪个 App，而 <code class="highlighter-rouge">dl/moments</code> 指定了具体的功能，比如此处是微信朋友圈的意思。</p>
+<p>类比URL，<code class="highlighter-rouge">weixin://</code> 指定了是哪个 App，而 <code class="highlighter-rouge">dl/moments</code> 指定了具体的功能，比如此处是微信朋友圈的意思。</p>
 
 <blockquote>
-  <p>注：</p>
+  <p>注： URL Schemes 没有唯一性，也就是说，多个App可以由同样的 URL Schemes；</p>
 </blockquote>
 
 <blockquote>
-  <p>URL Schemes 没有唯一性，也就是说，多个App可以由同样的 URL Schemes</p>
+  <p>iOS 上的 URL Schemes 因为没有统一标准，所以非常难猜，通过猜来获取 iOS 应用的 URL Schemes 是不现实的。</p>
 </blockquote>
 
-<h2 id="url-schemes-使用形式">URL Schemes 使用形式</h2>
+<h2 id="使用形式">使用形式</h2>
 <h3 id="1基本">1、基本</h3>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>YSDevScheme://
 </code></pre></div></div>
+
+<blockquote>
+  <p>如何获取一个应用的基本 URL Schemes</p>
+</blockquote>
 
 <h3 id="2复杂">2、复杂</h3>
 <h4 id="打开某个功能带参数">打开某个功能（带参数）</h4>
@@ -264,7 +286,7 @@ fantastical2://parse?sentence
 fantastical2://parse?sentence=事件描述
 </code></pre></div></div>
 
-<h4 id="加-jumpback">加 jumpback</h4>
+<h4 id="加-jumpback可返回">加 jumpback，可返回</h4>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eudic://dict/想查的单词?jumpback=指定URL
 </code></pre></div></div>
@@ -275,8 +297,90 @@ fantastical2://parse?sentence=事件描述
 
 <p>利用 URL Schemes 的规则和 iOS 系统的一些内置功能，来扩充复杂 URL Schemes，使其中需要输入字符或参数的部分可以预设或输入后再跳转。</p>
 
+<h4 id="1可输入的参数">1）可输入的参数</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 在 Launch Center Pro 里，输入框表示为[prompt]，你只要在变量部分填入这个输入框的表述方式，就会在运行动作时出现输入框让你输入内容，所以我们可以把上面那个 URL 改为：
+
+OmniFocus:///add?name=[prompt]&amp;note=[prompt]
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 在 Launch Center Pro 里最后一条复制了的文本内容表示为[clipboard]，当你想用欧陆词典直接搜索你刚才复制好了的不知道意思的单词的时候，就可以在 Launch Center Pro 里添加一个这样的动作：
+
+eudic://dict/[clipboard]
+</code></pre></div></div>
+
+<h4 id="2list-列表">2）list 列表</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//
+
+onepassword://search/[list|Google=Google|Dropbox=Dropbox|Weibo=Weibo|输入=[prompt]]
+
+// 首先有一个中括号[]，然后括号的最左边是 list 和一个分隔符 |，这三样元素声明了这是一个列表。然后是 Google=Google、微博=Weibo 等常用服务，等号左边，是显示在列表上的名称，而右边是填入 URL 的字符。最后一个 输入=[prompt]，左边同样是列表上的名称，右边是前面提到的输入框。最后这一部分是列表中没有你想要搜索的项目的时候手动输入用的。
+</code></pre></div></div>
+
 <h2 id="延伸">延伸</h2>
 <h3 id="1x-callback-url">1、x-callback-URL</h3>
+
+<p>如果我们还想让应用根据不同的结果有对应的反应，就要用到 x-callback-URL。比如当上一个 URL Schemes 运行成功以后，我是要回到跳转前的应用？还是要接另一个动作（接上另一段 URL Schemes，打开另一个应用的某个功能）？无论是跳转回上个应用还是打开另一个动作，只要你在运行完一个 URL Schemes 后还想再利用一段新的 URL Schemes 做下一件事，就要靠 x-callback-URL</p>
+
+<p>它的固定语法是：</p>
+<ul>
+  <li>在一个 URL Schemes 后面接&amp;x-success，表示前一个 URL 成功以后下一步做什么；</li>
+  <li>在一个 URL Schemes 后面接&amp;x-error，表示前一个 URL 失败以后下一步做什么；</li>
+  <li>在一个 URL Schemes 后面接&amp;x-cancel，表示取消前一个 URL 的操作结果后下一步做什么；</li>
+  <li>还有一个 &amp;x-source ，比上面3个特殊些。</li>
+</ul>
+
+<h4 id="x-source"><code class="highlighter-rouge">x-source</code></h4>
+
+<p>在 x-callback-URL 的四大固定语法中，x-source 是个很小众的用法。它一般和 x-success 连接，构成 x-source=选项名&amp;x-success=的格式。</p>
+
+<p>显示在 App 中则是在上一个动作完成后（一般是跳转后）给出一个选项，选项内容是你写在 URL 中的选项名和 取消，选择选项名后触发 x-success 后的 URL 里的动作，取消则停留在当前 App。也就是说，它给了你一个选择，在这一步到底是继续下一个动作还是停留在当前 App。</p>
+
+<h4 id="实例用-drafts-给fantastical-一次性添加多个事件">实例：用 Drafts 给Fantastical 一次性添加多个事件</h4>
+
+<p>前提：</p>
+
+<p>fantastical 可以识别自然语言，从一句话里提取出事件、时间自动添加到默认日历中。</p>
+
+<p>draft 可将多个 URL 绑在一起发送给 fantastical，实现一次添加多个事件。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 把多个发送事件到 Fantastical 的 URL 绑在了一起，做到一个运行成功以后运行下一个，直到运行完，实现这样的 URL 就只有 x-callback-URL 才可以，具体的 URL 可以说很复杂，是这样的：
+
+fantastical2://x-callback-url/parse?sentence=[[line|1]]&amp;add=1&amp;x-success=&amp;x-cancel=
+</code></pre></div></div>
+
+<p>分析：</p>
+
+<ul>
+  <li><code class="highlighter-rouge">fantastical2://x-callback-url/parse?sentence=</code> 比 <code class="highlighter-rouge">fantastical2://parse?sentence=</code> 多了一截儿 <code class="highlighter-rouge">x-callback-url/</code>，这就是在声明，各单位注意，我下面的 URL 要用到 x-callback-URL 了。</li>
+  <li>紧接着是 <code class="highlighter-rouge">[[line|1]]</code>，这一段是 Drafts 的变形 URL，意味取文本中第一行的值。</li>
+  <li><code class="highlighter-rouge">add=1</code>是 fantastical 的语法，再加一项任务。</li>
+  <li><code class="highlighter-rouge">&amp;x-success=</code>是 <code class="highlighter-rouge">x-callback-URL</code> 的标准声明，即成功后做什么。</li>
+  <li><code class="highlighter-rouge">x-callback-URL</code>中出现在固定语法之后的``````意味着，双括号后是一个完整的动作，这个动作在 <code class="highlighter-rouge">success/error/cancel</code> 后执行。</li>
+  <li><code class="highlighter-rouge">runAction?</code>是 Drafts 的运行某个动作的起始声明，代表 Drafts 要运行一个动作了，后面的不远处肯定能找到要运行的动作的名称。</li>
+  <li><code class="highlighter-rouge">text=[[line|2..]]</code>并不是动作名称，而是动作的内容。<code class="highlighter-rouge">text=</code> 是 Drafts 里的一个语法，等号后面决定了该动作使用的文本是什么。然后<code class="highlighter-rouge">[[line|2...]]</code>这句跟我们之前见过的<code class="highlighter-rouge">[[line|1]]</code>不太一样，如果数字 2 后面没有点点点，就特指的是第一句，但是如果有点点点了，意思就是对下面每行都重复该动作。</li>
+  <li><code class="highlighter-rouge">&amp;allowEmpty=NO</code>这一句在 Drafts 的语法中意味：不允许发送空内容。</li>
+  <li><code class="highlighter-rouge">&amp;action=Events%20in%20Fantastical-Quick</code>提出了动作名，动作名是Events%20in%20Fantastical-Quick。</li>
+  <li><code class="highlighter-rouge">%20</code>涉及到什么时候要在 URL 中使用编码，什么时候不使用的问题。</li>
+  <li><code class="highlighter-rouge">&amp;x-cancel=</code>取消任务以后会回到（实际是打开）Drafts，但什么都不做。</li>
+</ul>
+
+<p>这一整段的 x-callback-URL，如果想正常工作，必须要保存为 Drafts 中的一个动作，动作名要和 URL 中提到的 Events in Fantastical-Quick 一致，改的话两个都要改。这是最复杂的 URL Schemes 的一种形式之一：在一个 App （Fantastical）的 URL 中嵌套另一个 App（Drafts） 的 URL，同时 Drafts 的 URL 本身指涉的动作实际上还是不断自指的。</p>
+
+<h4 id="url编码encode">URL编码（Encode）</h4>
+<h5 id="什么时候要编码">什么时候要编码？</h5>
+
+<p>URL 中的字符可以分为两类，一部分可以正常显示，一部分不能正常显示。在链接中正常显示，比如字母、数字还有/等一部分符号。除此之外，全部不能正常显示，需要进行编码才能够作为 URL 的一部分出现。比如空格，在 URL 中就必须表示为 %20转换的规则不用深究，网上有很多工具（比如 URL 解码工具）提供 URL 的编码和解码功能，可以把编码过的乱七八糟的 URL 解码为我们看得清爽的字符：</p>
+
+<h5 id="为什么有的-app-不需要编码">为什么有的 App 不需要编码？</h5>
+
+<p>因为那些不用编码的时候，是 App 私下替你编了。</p>
+
+<h2 id="查找-app-的-url-schemes">查找 App 的 URL Schemes</h2>
+<h3 id="基本">基本</h3>
+<p>App 的 info.plist 文件</p>
+
+<h3 id="复杂--变形--x-callback-url">复杂 / 变形 / x-callback-URL</h3>
+<p>搜 App 名 URL Schemes，相关文档。</p>
 
 <h2 id="应用">应用</h2>
 <h3 id="1为-app-创建桌面快捷方式">1、为 App 创建桌面快捷方式</h3>
