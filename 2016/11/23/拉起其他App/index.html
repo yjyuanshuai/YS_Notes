@@ -207,8 +207,104 @@
         </div>
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
-        
-<p>##</p>
+        <ul id="markdown-toc">
+  <li><a href="#唤醒-app-的几种方式" id="markdown-toc-唤醒-app-的几种方式">唤醒 App 的几种方式</a></li>
+  <li><a href="#url-scheme-拉起-app-实例" id="markdown-toc-url-scheme-拉起-app-实例">URL Scheme 拉起 App 实例</a>    <ul>
+      <li><a href="#拉起别人的-app" id="markdown-toc-拉起别人的-app">拉起别人的 App</a>        <ul>
+          <li><a href="#示例" id="markdown-toc-示例">示例</a></li>
+          <li><a href="#添加白名单" id="markdown-toc-添加白名单">添加白名单</a></li>
+        </ul>
+      </li>
+      <li><a href="#让其他应用拉起自己的-app" id="markdown-toc-让其他应用拉起自己的-app">让其他应用拉起自己的 App</a>        <ul>
+          <li><a href="#注册-url-scheme" id="markdown-toc-注册-url-scheme">注册 URL Scheme</a></li>
+          <li><a href="#代理方法" id="markdown-toc-代理方法">代理方法</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
+</ul>
+
+<h2 id="唤醒-app-的几种方式">唤醒 App 的几种方式</h2>
+<ul>
+  <li>URL Scheme</li>
+  <li>从浏览器、webview</li>
+</ul>
+
+<h2 id="url-scheme-拉起-app-实例">URL Scheme 拉起 App 实例</h2>
+<h3 id="拉起别人的-app">拉起别人的 App</h3>
+<p>基本流程：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1、确认其他 App 的 URL Scheme;
+2、调用 canOpenUrl，对不可打开的情况给出提示。可打开的调用 openUrl。
+</code></pre></div></div>
+
+<blockquote>
+  <p>注：iOS 9 后需要添加 URL Scheme 白名单，才能使用 canOpenURL 来判断，白名单最多 50 个。</p>
+</blockquote>
+
+<h4 id="示例">示例</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//先判断再打开WXApp
+- (void)demo2 {
+    //创建一个url，这个url就是WXApp的url，记得加上：//
+    NSURL *url = [NSURL URLWithString:@"weixin://"];
+
+    //先判断是否能打开该url
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+        //打开url
+        [[UIApplication sharedApplication] openURL:url];
+    }else {
+        //给个提示或者做点别的事情
+        NSLog(@"U四不四洒，没安装WXApp，怎么打开啊！");
+}
+</code></pre></div></div>
+
+<h4 id="添加白名单">添加白名单</h4>
+<p>点击info.plist-&gt;右键-&gt;Open As-&gt;Source Code-&gt;添加下面的代码</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+    &lt;array&gt;
+        &lt;string&gt;weixin&lt;/string&gt;
+    &lt;/array&gt;
+</code></pre></div></div>
+
+<h3 id="让其他应用拉起自己的-app">让其他应用拉起自己的 App</h3>
+<p>基本的流程：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1、在工程中注册 URL Scheme；
+2、其他应用，通过 openUrl: 方法，即可拉起 App；
+3、AppDelegate 代理方法，处理拉气后的操作。
+</code></pre></div></div>
+
+<h4 id="注册-url-scheme">注册 URL Scheme</h4>
+
+<p>添加过 URL Scheme 后，info.plist 中可以看到 URL types 组中即为添加的内容。</p>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_07_20161123/B00_001_07_20161123_01.png" alt="" /></p>
+
+<h4 id="代理方法">代理方法</h4>
+
+<p>共有 3 个代理方法，分别对应不同的系统，有优先级。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 2.0 - 9.0 有效，优先级最低
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url NS_DEPRECATED_IOS(2_0, 9_0, "Please use application:openURL:options:") __TVOS_PROHIBITED;
+
+
+// 4.2 - 9.0 有效，优先级次之
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation NS_DEPRECATED_IOS(4_2, 9_0, "Please use application:openURL:options:") __TVOS_PROHIBITED;
+
+// 9.0 - 后有效，优先级最高
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;NSString*, id&gt; *)options NS_AVAILABLE_IOS(9_0);
+
+</code></pre></div></div>
+
+<hr />
+<h2 id="相关链接">相关链接</h2>
+
+<p><a href="http://www.jianshu.com/p/0811ccd6a65d">打开另一个 App</a></p>
+
+<p><a href="https://blog.html5funny.com/2015/06/19/open-app-from-mobile-web-browser-or-webview/">从浏览器或者Webview 中唤醒APP</a></p>
 
         </article>
         <hr>

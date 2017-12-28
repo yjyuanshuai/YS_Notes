@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>iOS 内存管理</title>
+    <meta name="description" content="iOS内存管理，包括 ARC、MRC、属性修饰符等。">
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <!-- 菜单前的图标，需要下面这句 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2016/03/01/iOS-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?cf8506e0ef223e57ff6239944e5d46a4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-72449510-4', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
+    "HTML-CSS": {
+      linebreaks: { automatic: true, width: "container" }
+    }
+});
+</script>
+<!-- <script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+</head>
+
+
+  <body>
+
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">YJ`s notes</a>
+        <small></small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>类别
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>标签
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>关于我
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>iOS 内存管理</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2016-03-01
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
+        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#ios-内存管理机制" id="markdown-toc-ios-内存管理机制">iOS 内存管理机制</a>    <ul>
+      <li><a href="#引用计数" id="markdown-toc-引用计数">引用计数</a></li>
+      <li><a href="#关键字" id="markdown-toc-关键字">关键字</a>        <ul>
+          <li><a href="#1alloc" id="markdown-toc-1alloc">1）alloc</a></li>
+          <li><a href="#2retainreleaseretaincount" id="markdown-toc-2retainreleaseretaincount">2）retain、release、retainCount</a></li>
+        </ul>
+      </li>
+      <li><a href="#autorelease-pool自动释放池" id="markdown-toc-autorelease-pool自动释放池">Autorelease Pool（自动释放池）</a></li>
+      <li><a href="#block" id="markdown-toc-block">Block</a></li>
+    </ul>
+  </li>
+  <li><a href="#mrc-手动内存管理" id="markdown-toc-mrc-手动内存管理">MRC 手动内存管理</a></li>
+  <li><a href="#arc-自动内存管理" id="markdown-toc-arc-自动内存管理">ARC 自动内存管理</a>    <ul>
+      <li><a href="#ownership-qualifiers4个" id="markdown-toc-ownership-qualifiers4个">ownership qualifiers（4个）</a></li>
+      <li><a href="#property属性" id="markdown-toc-property属性">property（属性）</a>        <ul>
+          <li><a href="#1原子性" id="markdown-toc-1原子性">1）原子性</a></li>
+          <li><a href="#2属性修饰符property-modifier" id="markdown-toc-2属性修饰符property-modifier">2）属性修饰符（property modifier）</a></li>
+          <li><a href="#3不常用的" id="markdown-toc-3不常用的">3）不常用的</a>            <ul>
+              <li><a href="#ios-9-新特性" id="markdown-toc-ios-9-新特性">iOS 9 新特性</a></li>
+            </ul>
+          </li>
+        </ul>
+      </li>
+      <li><a href="#其他" id="markdown-toc-其他">其他</a>        <ul>
+          <li><a href="#1对象和-core-foundation-style-对象直接的转换修饰符" id="markdown-toc-1对象和-core-foundation-style-对象直接的转换修饰符">1）对象和 Core Foundation-style 对象直接的转换修饰符</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
+</ul>
+
+<h2 id="ios-内存管理机制">iOS 内存管理机制</h2>
+<h3 id="引用计数">引用计数</h3>
+<p>通过散列表来管理引用计数。</p>
+
+<ul>
+  <li>自己生成的对象，自己持有</li>
+</ul>
+
+<blockquote>
+  <p>在iOS内存管理中有四个关键字，alloc、new、copy、mutableCopy，自身使用这些关键字产生对象,那么自身就持有了对象</p>
+</blockquote>
+
+<ul>
+  <li>非自己生成的，可以持有</li>
+  <li>不需要自己持有的对象时，释放</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    id obj = [NSMutableArray array];  
+    [obj retain];
+
+// 当obj不在需要持有的对象，那么，obj应该发送release消息
+    [obj release];
+</code></pre></div></div>
+
+<ul>
+  <li>非自己持有的对象，无法释放</li>
+</ul>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    // 1. 释放一个已经释放的对象
+    id obj = [[NSObject alloc] init];
+
+    // 已经释放对象
+    [obj release];
+
+    // 释放了对象还进行释放
+    [obj release];
+
+
+    // 2. 释放一个不属于自己的对象
+    id obj1 = [obj object];
+
+    // obj1没有进行retain操作而进行release操作，使得obj持有对象释放，造成了野指针错误
+    [obj1 release];
+</code></pre></div></div>
+
+<h3 id="关键字">关键字</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">关键字</th>
+      <th style="text-align: left">对引用计数的影响</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">alloc / new / copy / mutableCopy</td>
+      <td style="text-align: left">+1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">retain</td>
+      <td style="text-align: left">+1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">release</td>
+      <td style="text-align: left">-1</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">dealloc</td>
+      <td style="text-align: left">释放内存</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="1alloc">1）alloc</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id obj = [[NSObject alloc] init];
+
++ (id)alloc {
+  return [self allocWithZone:NSDefaultMallocZone()];
+}
+
++ (id)allocWithZone:(NSZone*)z {
+
+  // 调用NSAllocateObject函数对内存进行分配
+  return NSAllocateObject(self,0,z);
+}
+</code></pre></div></div>
+
+<h4 id="2retainreleaseretaincount">2）retain、release、retainCount</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (NSUInteger)retainCount
+{
+    return (NSUInteger)__CFDoExternRefOperation(OPERATION_retainCount,self);
+}
+
+- (id)retain
+{
+    return (id)__CFDoExternRefOperation(OPERATION_retain,self);
+}
+
+- (void)release
+{
+    return __CFDoExternRefOperation(OPERATION_release,self);
+}
+
+int __CFDoExternRefOperation(uintptr_r op,id obj) {
+
+    // 获取引用计数表
+    CFBasicHashRef table = 取得对象对应的散列表(obj);
+    int count;
+
+    switch(op) {
+        case OPERATION_retainCount:
+
+            // 返回引用计数数值
+            count = CFBasicHashGetCountOfKey(table,obj);
+                return count;
+
+            // 引用计数 + 1
+            case OPERATION_retain:
+                CFBasicHashAddValue(table,obj);
+                return obj;
+
+            // 引用计数 - 1
+            case OPERATION_release:
+
+                // CFBasicHashRemoveValue 中引用计数为0时会调用 dealloc，从而调用 NDDeallocateObject、free函数，释放内存
+                count = CFBasicHashRemoveValue(table,obj):
+                return 0 == count;
+        }
+}
+</code></pre></div></div>
+
+<h3 id="autorelease-pool自动释放池">Autorelease Pool（自动释放池）</h3>
+
+<p>将对象放入自动释放池中，当自从释放池销毁时对自动释放池中的对象都进行一次release操作</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// MRC 写法
+// 1. 创建 NSAutoreleasePool 对象
+NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+
+// 2. 在autorelease pool块的对象调用autorelease方法
+id obj = [[NSObject alloc] init];
+[obj autorelease];
+
+// 3. 释放NSAutoreleasePool对象
+[pool drain];
+
+
+// ARC 写法
+@autorelease {
+    // ...
+}
+</code></pre></div></div>
+
+<p>自动释放池是通过数组完成的，在调用 autorelease 时，将对象加入到待释放的释放池数组中。自动释放池销毁时对数组中进行一次 release 操作。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class AutoreleasePoolPage {
+  static inline void *push()
+  {
+      // 相当于生成或持有 NSAutoreleasePool 类对象
+  }
+
+  static inline void *pop(void *token)
+  {
+      // 相当于废弃 NSAutoreleasePool 类对象
+      releaseAll();
+  }
+
+  static inline id autorelease(id obj)
+  {
+      // 相当于NSAutoreleasePool类的addObject类方法   
+      AutoreleasePoolPage *autoreleasePoolPage = 取得正在使用的AutoreleasePoolPage实例;
+      autoreleasePoolPage-&gt;add(obj);
+  }
+
+  id *add(id obj)
+  {
+      // 将对象追加到内部数组中
+  }
+
+  void releaseAll()
+  {
+      // 调用内部数组中对象的release实例方法
+  }
+};
+
+void *objc_autoreleasePoolPush(void)
+{
+    return AutoreleasePoolPage::push();
+}
+
+void objc_autoreleasePoolPage(void *ctxt)
+{
+    AutoreleasePoolPage::pop(ctxt);
+}
+
+id *objc_autorelease(id obj)
+{
+    return AutoreleasePoolPage::autorelease(obj);
+}
+</code></pre></div></div>
+
+<h3 id="block">Block</h3>
+
+<p>block一般使用 <code class="highlighter-rouge">copy</code> 关键之进行修饰，block使用copy是从MRC遗留下来的“传统”，在MRC中，方法内容的block是在栈区的，使用copy可以把它放到堆区。但在ARC中写不写都行：编译器自动对block进行了copy操作。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">变量关键字</th>
+      <th style="text-align: left">作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">_block</td>
+      <td style="text-align: left">使用_block修饰的变量在block代码块中会被retain(ARC下，MRC下不会retain)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_weak</td>
+      <td style="text-align: left">使用_weak修饰的变量不会在block代码块中被retain</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="mrc-手动内存管理">MRC 手动内存管理</h2>
+<p>略</p>
+
+<h2 id="arc-自动内存管理">ARC 自动内存管理</h2>
+<h3 id="ownership-qualifiers4个">ownership qualifiers（4个）</h3>
+
+<p>在ARC内存管理机制中，id和其他对象类型变量必须是四个所有权符号（ownership qualifiers）其中一个来修饰。默认的是 strong。</p>
+
+<ul>
+  <li>__ strong;</li>
+  <li>__ weak;</li>
+  <li>__ unsafe_unretained</li>
+  <li>__ autoreleasing</li>
+</ul>
+
+<h3 id="property属性">property（属性）</h3>
+<h4 id="1原子性">1）原子性</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">修饰符</th>
+      <th style="text-align: left">作用</th>
+      <th style="text-align: left">使用情况</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">nonatomic</td>
+      <td style="text-align: left">不使用同步锁</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">atomic</td>
+      <td style="text-align: left">在默认情况下，由编译器合成的方法会通过锁定机制确保其原子性(atomicity)</td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="2属性修饰符property-modifier">2）属性修饰符（property modifier）</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">属性修饰符</th>
+      <th style="text-align: left">所有权符号</th>
+      <th style="text-align: left">作用</th>
+      <th style="text-align: left">使用情况</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">retain</td>
+      <td style="text-align: left">__strong</td>
+      <td style="text-align: left">retain属性的setter方法是保留新值并释放旧值，然后更新实例变量，令其指向新值。</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">copy</td>
+      <td style="text-align: left">__strong</td>
+      <td style="text-align: left">所属关系与strong类似。然而设置方法并不保留新值，而是将其“拷贝”。</td>
+      <td style="text-align: left">当属性类型为NSString*时，经常用此特质来保护其封装性，因为传递给设置方法的新值有可能指向一个NSMutableString类的实例。这个类是NSString的子类，表示一种可以修改其值的字符串，此时若是不拷贝字符串，那么设置完属性之后，字符串的值就可能会在对象不知情的情况下遭人更改。所以，这时就要拷贝一份“不可变”的字符串，确保对象中的字符串值不会无意间变动。只要实现属性所用的对象是“可变的”，就应该在设置新属性值时拷贝一份。NSString、NSArray、NSDictionary 等等经常使用copy关键字，是因为他们有对应的可变类型</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">strong</td>
+      <td style="text-align: left">__strong</td>
+      <td style="text-align: left">定义了一种“拥有关系”。设置新值时，设置方法会先保留新值，并释放旧值，然后再将新值设置上去</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">weak</td>
+      <td style="text-align: left">__weak</td>
+      <td style="text-align: left">定义了一种“非拥有关系”。设置新值时，设置方法既不保留新值，也不释放旧值。此特质同assign类似，然而在属性所指的对象遭到推毁时，属性值也会清空。</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">assign</td>
+      <td style="text-align: left">__unsafe_unretained</td>
+      <td style="text-align: left">执行针对“纯量”的简单赋值操作</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">unsafe_unretained</td>
+      <td style="text-align: left">__unsafe_unretained</td>
+      <td style="text-align: left">语义和assign相同，但是它适用于“对象类型”，该特质表达一种“非拥有关系”，当目标对象遭到推毁时，属性值不会自动清空，这一点与weak有区别</td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>weak 与 unsafe_unretained 的区别</p>
+</blockquote>
+
+<h4 id="3不常用的">3）不常用的</h4>
+<h5 id="ios-9-新特性">iOS 9 新特性</h5>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">修饰符</th>
+      <th style="text-align: left">作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">nonnull</td>
+      <td style="text-align: left">非空，不能赋值为nil</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">null_resettable</td>
+      <td style="text-align: left">声明属性set方法可以为nil，但是get一定不能为nil</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">nullable</td>
+      <td style="text-align: left">表示可以为空</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">NS_ASSUME_NONNULL_BEGIN －－ NS_ASSUME_NONNULL_END标签</td>
+      <td style="text-align: left">相当于夹在标签中间的属性，默认都是nonnull。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="其他">其他</h3>
+<h4 id="1对象和-core-foundation-style-对象直接的转换修饰符">1）对象和 Core Foundation-style 对象直接的转换修饰符</h4>
+
+<ul>
+  <li>__ bridge；</li>
+  <li>__ bridge_retained 或 CFBridgingRetain；</li>
+  <li>__ bridge_transfer 或 CFBridgingRelease。</li>
+</ul>
+
+<blockquote>
+  <p>注意： __ bridge不会引起对象的引用计数变化，因此，安全性不太好。相比较，__ bridge_retained不仅仅实现了__bridge的功能而且能让p调用retain方法使p持有对象。另外，
+__ bridge_transfer也是和release方法类似，使用__bridge_transfer进行转化，既让对象p调用一次retain方法，而且原来指针obj会调用一次release方法也非常安全</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// id 与 void * 转换
+
+非ARC下:  
+id obj = [[NSObject alloc] init];
+void *p = obj;
+这样的代码是可行的，id和void*可以方便得自由转化 ，但是，在ARC下是不一样的
+
+ARC下id和void*有三个转换的关键字 __bridge、__bridge_retained、__bridge_transfer:
+id obj = [[NSObject alloc] init];
+void *p = (__bridge void*)obj;
+</code></pre></div></div>
+
+<hr />
+<h2 id="相关链接">相关链接</h2>
+
+<p><a href="https://www.jianshu.com/p/4f49c5c81021">简书iOS内存管理 - Objective-C高级编程:iOS与OS X多线程和内存管理</a></p>
+
+<p><a href="http://www.cocoachina.com/ios/20160219/15330.html">iOS/OS X内存管理(一)：基本概念与原理</a></p>
+
+<p><a href="http://www.cocoachina.com/ios/20160222/15333.html">iOS/OS X 内存管理(二)：借助工具解决内存问题</a></p>
+
+<p><a href="http://blog.csdn.net/jasonjwl/article/details/49427377">OC的@property属性</a></p>
+
+<p><a href="https://yq.aliyun.com/articles/16425">云栖社区-ios属性修饰符总结</a></p>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/07/Apple%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A6%E5%8F%B7%E7%94%B3%E8%AF%B7/">Apple Developer账号申请
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/">iOS WWDC更新总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/">自定义 CollectionView 布局
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/">iOS资源整合
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2016/03/02/Runloop/">Runloop</a></p>
+        
+    </div>
+</div>
+
+
+        <h2 id="comments">Comments</h2>
+        
+
+
+
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
+                    
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            <!-- Contact me at: -->
+            
+            
+            
+            
+            
+            
+            
+            
+        </p>
+        <!-- <p>
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p> -->
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<!-- <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+    </script>
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>
