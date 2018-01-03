@@ -211,16 +211,26 @@
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
   <li><a href="#简介" id="markdown-toc-简介">简介</a></li>
-  <li><a href="#概述过程" id="markdown-toc-概述过程">概述过程</a></li>
-  <li><a href="#1-创建远端私有版本库略" id="markdown-toc-1-创建远端私有版本库略">1. 创建远端私有版本库（略）</a></li>
-  <li><a href="#2-创建远端私有代码库略" id="markdown-toc-2-创建远端私有代码库略">2. 创建远端私有代码库（略）</a></li>
-  <li><a href="#3-代码库添加文件" id="markdown-toc-3-代码库添加文件">3. 代码库添加文件</a></li>
-  <li><a href="#4-验证-podspec-文件" id="markdown-toc-4-验证-podspec-文件">4. 验证 .podspec 文件</a></li>
-  <li><a href="#5-将-podspec-文件传到版本库中" id="markdown-toc-5-将-podspec-文件传到版本库中">5. 将 .podspec 文件传到版本库中</a></li>
-  <li><a href="#6-查找使用" id="markdown-toc-6-查找使用">6. 查找、使用</a></li>
-  <li><a href="#7-维护" id="markdown-toc-7-维护">7. 维护</a>    <ul>
-      <li><a href="#更改" id="markdown-toc-更改">更改</a></li>
-      <li><a href="#删除" id="markdown-toc-删除">删除</a></li>
+  <li><a href="#概述过程" id="markdown-toc-概述过程">概述过程</a>    <ul>
+      <li><a href="#1-创建远端私有版本库略" id="markdown-toc-1-创建远端私有版本库略">1. 创建远端私有版本库（略）</a></li>
+      <li><a href="#2-创建远端私有代码库略" id="markdown-toc-2-创建远端私有代码库略">2. 创建远端私有代码库（略）</a></li>
+      <li><a href="#3-代码库添加文件" id="markdown-toc-3-代码库添加文件">3. 代码库添加文件</a></li>
+      <li><a href="#4-验证-podspec-文件" id="markdown-toc-4-验证-podspec-文件">4. 验证 .podspec 文件</a></li>
+      <li><a href="#5-将-podspec-文件传到版本库中" id="markdown-toc-5-将-podspec-文件传到版本库中">5. 将 .podspec 文件传到版本库中</a>        <ul>
+          <li><a href="#1将远端版本库添加到本地-repos-中" id="markdown-toc-1将远端版本库添加到本地-repos-中">1）将远端版本库添加到本地 repos 中</a></li>
+          <li><a href="#2将-podspec-文件-push-至版本库中" id="markdown-toc-2将-podspec-文件-push-至版本库中">2）将 .podspec 文件 push 至版本库中</a></li>
+        </ul>
+      </li>
+      <li><a href="#6-查找使用" id="markdown-toc-6-查找使用">6. 查找、使用</a>        <ul>
+          <li><a href="#1查找" id="markdown-toc-1查找">1）查找</a></li>
+          <li><a href="#2使用" id="markdown-toc-2使用">2）使用</a></li>
+        </ul>
+      </li>
+      <li><a href="#7-维护" id="markdown-toc-7-维护">7. 维护</a>        <ul>
+          <li><a href="#更改" id="markdown-toc-更改">更改</a></li>
+          <li><a href="#删除" id="markdown-toc-删除">删除</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
   <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
@@ -260,16 +270,7 @@
   </li>
 </ol>
 
-<h2 id="1-创建远端私有版本库略">1. 创建远端私有版本库（略）</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// pod repo add 本地版本库名 远端版本库URL
-
-pod repo add YSPrivateRepo https://git.coding.net/TimerYJ/YSPrivateRepo.git
-</code></pre></div></div>
-
-<p>完成之后，进入磁盘目录 <code class="highlighter-rouge">~/.cocoapods/repos</code> 可以看到增加了一个 <code class="highlighter-rouge">YSPrivateRepo</code> 目录。</p>
-
-<p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/20170721_03_01.png" alt="" /></p>
-
+<h3 id="1-创建远端私有版本库略">1. 创建远端私有版本库（略）</h3>
 <blockquote>
   <p>注意：创建仓库时要选择 LICENSE 文件，类型一般为 MIT。</p>
 </blockquote>
@@ -278,31 +279,33 @@ pod repo add YSPrivateRepo https://git.coding.net/TimerYJ/YSPrivateRepo.git
   <p>注意：区分 <strong>代码库</strong> 和 <strong>版本库</strong>。</p>
 </blockquote>
 
-<h2 id="2-创建远端私有代码库略">2. 创建远端私有代码库（略）</h2>
+<h3 id="2-创建远端私有代码库略">2. 创建远端私有代码库（略）</h3>
 
-<h2 id="3-代码库添加文件">3. 代码库添加文件</h2>
+<h3 id="3-代码库添加文件">3. 代码库添加文件</h3>
 <p>创建 .podspec 文件模板：</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pod spec create YSCocoapodsPrivateSpec
 </code></pre></div></div>
 
 <p>修改完后的内容：( <a href="">附：podspec文件各属性与值含义</a> )</p>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Pod::Spec.new do |s|
-  s.name         = "YSCocoapodsPrivateSpec"
-  s.version      = "1.0.0"
-  s.summary      = "私有 Pod Spec 库测试"
-  s.description  = "制作一个私有的 Pod Spec 库，用于测试模块化项目"
-  s.homepage     = "https://coding.net/u/TimerYJ/p/YSCocoapodsPrivateSpec/git"
-  s.license      = { :type =&gt; "MIT", :file =&gt; "LICENSE" }
+  s.name         = "YSCocoapodsPrivateSpec"          # 项目名称
+  s.version      = "1.0.0"                           # 版本号 与 你仓库的 标签号 对应
+  s.summary      = "私有 Pod Spec 库测试"             # 项目简介
+  s.description  = "制作一个私有的 Pod Spec 库，用于测试模块化项目"     # 项目描述
+  s.homepage     = "https://coding.net/u/TimerYJ/p/YSCocoapodsPrivateSpec/git"    # 仓库的主页
+  s.license      = { :type =&gt; "MIT", :file =&gt; "LICENSE" }         # 开源证书
 
-  s.author       = { "YJ" =&gt; "yuan***@gmail.com" }
-  s.platform     = :ios, "8.0"
-
-  s.source       = { :git =&gt; "https://git.coding.net/TimerYJ/YSCocoapodsPrivateSpec.git", :tag =&gt; "#{s.version}" }
-  s.source_files  = "Classes/**/*.{h,m}"
+  s.source       = { :git =&gt; "https://git.coding.net/TimerYJ/YSCocoapodsPrivateSpec.git", :tag =&gt; "#{s.version}" }    #你的仓库地址，不能用SSH地址
+  s.source_files  = "Classes/**/*.{h,m}"            # 你代码的位置， BYPhoneNumTF/*.{h,m} 表示 BYPhoneNumTF 文件夹下所有的.h和.m文件
   s.public_header_files = "Classes/**/*.h"
 
-  # s.framework  = "SomeFramework"
-  # s.frameworks = "SomeFramework", "AnotherFramework"
+  s.platform     = :ios, "8.0"                      # 平台及支持的最低版本
+  # s.frameworks = "SomeFramework", "AnotherFramework"  # 支持的框架
+  # s.dependency = "AFNetworking"                   # 依赖库
+
+  # User
+  s.author       = { "YJ" =&gt; "yuan***@gmail.com" }  # 作者信息
+  # s.social_media_url   = "http://qiubaiying.github.io"          # 个人主页
 end
 </code></pre></div></div>
 
@@ -310,7 +313,7 @@ end
   <p>注意：有的代码托管平台（如 oschina）建立的私有库使用 <code class="highlighter-rouge">s.license = "MIT"</code> 可能找不到 LICENSE 正式，可以改为上述写法指明文件。</p>
 </blockquote>
 
-<h2 id="4-验证-podspec-文件">4. 验证 .podspec 文件</h2>
+<h3 id="4-验证-podspec-文件">4. 验证 .podspec 文件</h3>
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// pod lib lint (YSCocoapodsPrivateSpec.podspec)(--private)(--allow-warnings)
 
 pod lib lint  
@@ -329,7 +332,20 @@ pod lib lint
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/20170721_03_03.png" alt="" /></p>
 
-<h2 id="5-将-podspec-文件传到版本库中">5. 将 .podspec 文件传到版本库中</h2>
+<h3 id="5-将-podspec-文件传到版本库中">5. 将 .podspec 文件传到版本库中</h3>
+<h4 id="1将远端版本库添加到本地-repos-中">1）将远端版本库添加到本地 repos 中</h4>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// pod repo add 本地版本库名 远端版本库URL
+
+pod repo add YSPrivateRepo https://git.coding.net/TimerYJ/YSPrivateRepo.git
+</code></pre></div></div>
+
+<p>完成之后，进入磁盘目录 <code class="highlighter-rouge">~/.cocoapods/repos</code> 可以看到增加了一个 <code class="highlighter-rouge">YSPrivateRepo</code> 目录。</p>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/20170721_03_01.png" alt="" /></p>
+
+<h4 id="2将-podspec-文件-push-至版本库中">2）将 .podspec 文件 push 至版本库中</h4>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// pod repo push 本地版本库名 .podspec文件名
 
 pod repo push YSPrivateRepo YSCocoapodsPrivateSpec.podspec
@@ -345,18 +361,32 @@ pod repo update YSPrivateRepo
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/20170721_03_04.png" alt="" /></p>
 
-<h2 id="6-查找使用">6. 查找、使用</h2>
+<h3 id="6-查找使用">6. 查找、使用</h3>
+<h4 id="1查找">1）查找</h4>
+
+<p>与查找其他第三方库一样。</p>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pod search YSCocoapodsPrivateSpec
 </code></pre></div></div>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/2017/07/20170721_03_05.png" alt="" /></p>
 
+<blockquote>
+  <p>注：YSCocoapodsPrivateSpec 是 <code class="highlighter-rouge">.podspec</code>文件的前缀名，而非本地 repos 中的文件名。</p>
+</blockquote>
+
+<blockquote>
+  <p>注：只有当本地 repos 下有本地索引（如：<code class="highlighter-rouge">YSPrivateRepo</code>）或相应版本库（如：<code class="highlighter-rouge">coding-timeryj-ystestprivatepodsrepo</code>）</p>
+</blockquote>
+
+<h4 id="2使用">2）使用</h4>
+
 <p>成功查找就可以导入到项目中使用了，要注意的是，含私有 Pods 时，Podfile 文件开头要给出私有库的版本库地址。而同时包含公有和私有库时，还需要加上公有库的版本库地址。</p>
 
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// Podfile 内容
-
-source 'https://git.coding.net/TimerYJ/YSPrivateRepo.git'    #私有版本库
-source 'https://github.com/CocoaPods/Specs.git'      #公有版本库
+// 注意：这里私有库地址，指的是版本库！！！而非代码库！
+source 'https://git.coding.net/TimerYJ/YSPrivateRepo.git'   #私有版本库
+source 'https://github.com/CocoaPods/Specs.git'             #公有库
 
 platform:ios,'8.0'
 target "YSCocoapodsTest" do
@@ -369,11 +399,12 @@ pod 'YSCocoapodsPrivateSpec'
 end
 </code></pre></div></div>
 
-<h2 id="7-维护">7. 维护</h2>
-<h3 id="更改">更改</h3>
+<h3 id="7-维护">7. 维护</h3>
+<h4 id="更改">更改</h4>
 <p>重复 3、4、5</p>
 
-<h3 id="删除">删除</h3>
+<h4 id="删除">删除</h4>
+
 <div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pod repo remove YSPrivateRepo
 </code></pre></div></div>
 
@@ -398,13 +429,6 @@ end
                     
                 
             
-        
-            
-            
-                
-                    
-                
-            
                 
                     
                 
@@ -481,6 +505,17 @@ end
             
         
             
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
             
         
             
