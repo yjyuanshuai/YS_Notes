@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Runtime与黑魔法应用</title>
-    <meta name="description" content="iOS Runtime与黑魔法的应用。">
+    <title>Method Swizzling</title>
+    <meta name="description" content="Method Swizzling 俗称为黑魔法，根据 Runtime 的原理，在实际开发过程中很有用。">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2016/03/03/Runtime%E4%B8%8E%E9%BB%91%E9%AD%94%E6%B3%95%E5%BA%94%E7%94%A8/">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2016/03/03/Method-Swizzling/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
 
 
@@ -158,7 +158,7 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Runtime与黑魔法应用</h1>
+        <h1>Method Swizzling</h1>
         <div class="label">
 
             <div class="label-card">
@@ -200,7 +200,10 @@
   
     
         <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
-        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>
+        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
+    
+        <!--a href="/tag/#Runtime" title="Tag: Runtime" rel="tag">Runtime</a-->
+        <a href="/tag/#Runtime" title="Tag: Runtime" rel="tag">Runtime</a>
     
   
 
@@ -212,15 +215,14 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
+  <li><a href="#在第三方库中的使用" id="markdown-toc-在第三方库中的使用">在第三方库中的使用</a></li>
   <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
 </ul>
 
+<h2 id="在第三方库中的使用">在第三方库中的使用</h2>
+
 <hr />
 <h2 id="相关链接">相关链接</h2>
-
-<p><a href="http://blog.csdn.net/coyote1994/article/details/52355026">runtime从入门到精通（一）—— 初识runtime</a></p>
-
-<p><a href="http://blog.csdn.net/coyote1994/article/details/52441513"></a></p>
 
         </article>
         <hr>
@@ -229,6 +231,8 @@
         
             
             
+                
+                    
                 
                     
                 
@@ -251,6 +255,8 @@
                         
                     
                 
+                    
+                
             
         
             
@@ -267,7 +273,11 @@
                         
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -278,7 +288,11 @@
                 
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -298,7 +312,11 @@
                         
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -318,11 +336,17 @@
                         
                     
                 
+                    
+                
             
                 
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -342,18 +366,17 @@
                         
                     
                 
-            
-                
                     
                 
             
                 
                     
                 
+                    
+                
             
-        
-            
-            
+                
+                    
                 
                     
                 
@@ -373,7 +396,11 @@
                         
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -384,10 +411,17 @@
                 
                     
                 
+                    
+                
             
                 
                     
                 
+                    
+                
+            
+        
+            
             
         
         
@@ -397,7 +431,7 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2016/03/02/Runloop/">Runloop</a></p>
+        <p><strong>上一篇</strong> <a href="/2016/03/03/Runtime/">Runtime</a></p>
         
     </div>
     <div class="nex">
