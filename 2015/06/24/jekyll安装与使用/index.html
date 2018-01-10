@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>jekyll安装与使用</title>
+    <meta name="description" content="记录 jekyll 安装与使用及过程中的问题">
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <!-- 菜单前的图标，需要下面这句 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2015/06/24/jekyll%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?cf8506e0ef223e57ff6239944e5d46a4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-72449510-4', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
+    "HTML-CSS": {
+      linebreaks: { automatic: true, width: "container" }
+    }
+});
+</script>
+<!-- <script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+</head>
+
+
+  <body>
+
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">YJ`s notes</a>
+        <small></small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>类别
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>标签
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>关于我
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>jekyll安装与使用</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2015-06-24
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#jekyll" title="Category: jekyll" rel="category">jekyll</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a-->
+        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#安装" id="markdown-toc-安装">安装</a>    <ul>
+      <li><a href="#1安装命令" id="markdown-toc-1安装命令">1、安装命令</a></li>
+    </ul>
+  </li>
+  <li><a href="#基本用法" id="markdown-toc-基本用法">基本用法</a>    <ul>
+      <li><a href="#1build" id="markdown-toc-1build">1、build</a></li>
+      <li><a href="#2使用开发服务器预览" id="markdown-toc-2使用开发服务器预览">2、使用开发服务器，预览</a></li>
+    </ul>
+  </li>
+  <li><a href="#问题" id="markdown-toc-问题">问题</a>    <ul>
+      <li><a href="#1-安装时" id="markdown-toc-1-安装时">1. 安装时</a></li>
+      <li><a href="#2-使用中" id="markdown-toc-2-使用中">2. 使用中</a></li>
+    </ul>
+  </li>
+  <li><a href="#目录结构" id="markdown-toc-目录结构">目录结构</a></li>
+  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接：</a></li>
+</ul>
+
+<h2 id="安装">安装</h2>
+<h3 id="1安装命令">1、安装命令</h3>
+
+<blockquote>
+  <p>安装之前，查看 ruby 和 gem 版本，更新至最高版本</p>
+</blockquote>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+// 10.11 前
+sudo gem install jekyll
+
+// 10.11 及以后
+sudo gem install -n /usr/local/bin jekyll
+
+</code></pre></div></div>
+
+<h2 id="基本用法">基本用法</h2>
+<h3 id="1build">1、build</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll build
+
+// 当前文件夹中的内容将会生成到 ./site 文件夹中。
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll build --destination &lt;destination&gt;
+
+// 当前文件夹中的内容将会生成到目标文件夹&lt;destination&gt;中。
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll build --source &lt;source&gt; --destination &lt;destination&gt;
+
+// 指定源文件夹&lt;source&gt;中的内容将会生成到目标文件夹&lt;destination&gt;中。
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll build --watch
+// 当前文件夹中的内容将会生成到 ./site 文件夹中，查看改变，并且自动再生成。
+</code></pre></div></div>
+
+<h3 id="2使用开发服务器预览">2、使用开发服务器，预览</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll serve  //(--source &lt;source&gt; --destination &lt;destination&gt;)
+</code></pre></div></div>
+<p>本地浏览器访问 <code class="highlighter-rouge">http://localhost:4000</code> 或 <code class="highlighter-rouge">127.0.0.1:4000</code>，是否正常访问</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll serve --detach
+
+# =&gt; 功能和`jekyll serve`命令相同，但是会脱离终端在后台运行。
+#    如果你想关闭服务器，可以使用`kill -9 1234`命令，"1234" 是进程号（PID）。
+#    如果你找不到进程号，那么就用`ps aux | grep jekyll`命令来查看，然后关闭服务器。[更多](http://unixhelp.ed.ac.uk/shell/jobz5.html).
+</code></pre></div></div>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll serve --watch
+
+# =&gt; 和`jekyll serve`相同，但是会查看变更并且自动再生成。
+</code></pre></div></div>
+
+<h2 id="问题">问题</h2>
+<h3 id="1-安装时">1. 安装时</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERROR:  Error installing jekyll:
+    ERROR: Failed to build gem native extension.
+</code></pre></div></div>
+
+<p>安装 Command Line Tools</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xcode-select --install
+</code></pre></div></div>
+
+<h3 id="2-使用中">2. 使用中</h3>
+<p><code class="highlighter-rouge">jekyll serve</code></p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Dependency Error: Yikes! It looks like you don't have XXX or one of its dependencies installed.
+
+</code></pre></div></div>
+
+<p>类似这种错误，安装对应的 XXX 即可。如 jekyll-paginate，bundler等。</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo gem install -n /usr/local/bin bundler
+</code></pre></div></div>
+
+<h2 id="目录结构">目录结构</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">文件/目录</th>
+      <th style="text-align: left">含义</th>
+      <th style="text-align: left">语法</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">_config.yml</td>
+      <td style="text-align: left">全局配置</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_drafts</td>
+      <td style="text-align: left">草稿</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_includes</td>
+      <td style="text-align: left">文章中可以重用的部分，可以放这里</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_layouts</td>
+      <td style="text-align: left">各种文章外部的模板（可以在文章头信息中选择，layout:XXX ）</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_posts</td>
+      <td style="text-align: left">所有的文件（有一定的格式，后缀有 md/textile）</td>
+      <td style="text-align: left">yyyy-MM-dd-文章名.md</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_data</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_site</td>
+      <td style="text-align: left">生成的可视化的主页</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">index.html</td>
+      <td style="text-align: left">站点的首页，整个站的入口</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_plugins</td>
+      <td style="text-align: left">插件放置的目录</td>
+      <td style="text-align: left"> </td>
+    </tr>
+  </tbody>
+</table>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">自定义目录</th>
+      <th style="text-align: left">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">sitemap.txt</td>
+      <td style="text-align: left"> </td>
+    </tr>
+    <tr>
+      <td style="text-align: left">_assets</td>
+      <td style="text-align: left">用到的资源文件，如图片</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+<h2 id="相关链接">相关链接：</h2>
+
+<p><a href="http://jekyll.com.cn/docs/usage/">jekyll官方-中文</a></p>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2015/06/24/Github-Pages/">Gihub Pages</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2015/06/24/github+jekyll%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">github+jekyll搭建个人博客</a></p>
+        
+    </div>
+</div>
+
+
+        <h2 id="comments">Comments</h2>
+        
+
+
+
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            <!-- Contact me at: -->
+            
+            <a href="https://github.com/yjyuanshuai" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a> 
+            
+            <a href="mailto:TimerYJ@163.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> 
+            
+            <a href="http://weibo.com/2480605254" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a> 
+            
+            
+            
+            
+            
+        </p>
+        <!-- <p>
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p> -->
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<!-- <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+    </script>
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>

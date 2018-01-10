@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>github+jekyll搭建个人博客</title>
-    <meta name="description" content="记录个人博客搭建过程">
+    <title>iOS 11 与 iPhone X 的适配</title>
+    <meta name="description" content="iOS 11 与 iPhone X 的适配问题">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2016/12/24/github+jekyll%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/11/20/%E7%BB%84%E4%BB%B6%E5%8C%96/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
 
 
@@ -156,11 +156,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>github+jekyll搭建个人博客</h1>
+        <h1>iOS 11 与 iPhone X 的适配</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2016-12-24
+                <i class="fa fa-calendar"></i>2017-11-20
             </div>
 
             <div class="label-card">
@@ -180,9 +180,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#jekyll" title="Category: jekyll" rel="category">jekyll</a>&nbsp;
-    
-        <a href="/category/#Github" title="Category: Github" rel="category">Github</a>
+        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>
     
   
 
@@ -199,11 +197,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a-->
-        <a href="/tag/#jekyll" title="Tag: jekyll" rel="tag">jekyll</a>&nbsp;
+        <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
+        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
     
-        <!--a href="/tag/#Github" title="Tag: Github" rel="tag">Github</a-->
-        <a href="/tag/#Github" title="Tag: Github" rel="tag">Github</a>
+        <!--a href="/tag/#%E9%80%82%E9%85%8D" title="Tag: 适配" rel="tag">适配</a-->
+        <a href="/tag/#适配" title="Tag: 适配" rel="tag">适配</a>
     
   
 
@@ -214,193 +212,7 @@
         </div>
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
-        <ul id="markdown-toc">
-  <li><a href="#需求" id="markdown-toc-需求">需求</a></li>
-  <li><a href="#注意" id="markdown-toc-注意">注意</a></li>
-  <li><a href="#准备" id="markdown-toc-准备">准备</a></li>
-  <li><a href="#实践" id="markdown-toc-实践">实践</a>    <ul>
-      <li><a href="#1-新建项目仓库" id="markdown-toc-1-新建项目仓库">1. 新建项目仓库</a></li>
-      <li><a href="#2-本地操作" id="markdown-toc-2-本地操作">2. 本地操作</a></li>
-      <li><a href="#3-访问主页" id="markdown-toc-3-访问主页">3. 访问主页</a></li>
-    </ul>
-  </li>
-  <li><a href="#整理" id="markdown-toc-整理">整理</a>    <ul>
-      <li><a href="#阶段一初始功能实现" id="markdown-toc-阶段一初始功能实现">阶段一，初始功能实现</a></li>
-      <li><a href="#阶段二使用-makefile-简化阶段一种的步骤" id="markdown-toc-阶段二使用-makefile-简化阶段一种的步骤">阶段二，使用 makefile 简化阶段一种的步骤</a></li>
-      <li><a href="#阶段三分开管理" id="markdown-toc-阶段三分开管理">阶段三，分开管理</a></li>
-    </ul>
-  </li>
-  <li><a href="#参考文章" id="markdown-toc-参考文章">参考文章：</a></li>
-</ul>
-
-<h2 id="需求">需求</h2>
-
-<ul>
-  <li>
-    <p>简介的界面，有分类、标签功能，能够按时间顺序排列，看到自己哪天都记录了些什么；</p>
-  </li>
-  <li>
-    <p>界面、域名自定义；</p>
-  </li>
-  <li>
-    <p>管理方便；</p>
-  </li>
-</ul>
-
-<p>这个阶段在网上查了较多资料，因为没有网页开发的经验，考虑到学习成本，选择了 github+jekyll 的方式来实现。</p>
-
-<h2 id="注意">注意</h2>
-
-<p>Github 主页虽然有很多好处，但也有相应的缺陷。如：</p>
-
-<blockquote>
-  <p>开源，注意隐私保护和敏感数据；</p>
-</blockquote>
-
-<blockquote>
-  <p>生成的是静态网页，动态功能需要依靠外部服务器，比如评论功能需要disqus等；</p>
-</blockquote>
-
-<blockquote>
-  <p>没有用到数据库，每次运行都遍历全部的文本文件，不适合大型网站。</p>
-</blockquote>
-
-<h2 id="准备">准备</h2>
-
-<p>安装/更新 Gem、jekyll 版本，没 Github 账号的要注册一个。</p>
-
-<p>了解 <a href="/2016/12/24/Github-Pages/index.html">Github Pages</a> 与 <a href="/2016/12/24/jekyll安装与使用/index.html">jekyll</a>。</p>
-
-<h2 id="实践">实践</h2>
-
-<p>采用项目主页，即新建项目仓库，创建 gh-pages 分支的方法，实现主页博客。</p>
-
-<p>以下为首次实现时的过程记录，个人认为实际用起来不够简便，后面根据自己的需要继续整理修改。</p>
-
-<h3 id="1-新建项目仓库">1. 新建项目仓库</h3>
-<ul>
-  <li>
-    <p>登录 Github 账号，创建项目仓库 <code class="highlighter-rouge">YS_Notes</code>；</p>
-  </li>
-  <li>
-    <p>创建 gh-pages 分支，克隆仓库到本地；</p>
-  </li>
-</ul>
-
-<h3 id="2-本地操作">2. 本地操作</h3>
-<ul>
-  <li>
-    <p>自己写一个或者找一个符合自己需求的 jekyll theme，还可以 fork 其他人的。此处感谢 <a href="https://github.com/Gaohaoyang">Github-HyG</a> 提供的主题；</p>
-  </li>
-  <li>
-    <p>本地仓库切换到 <code class="highlighter-rouge">master</code>分支，将源码拷入；</p>
-  </li>
-</ul>
-
-<p>{
-  // 自定义域名，可省略</p>
-<ul>
-  <li>新建 <code class="highlighter-rouge">CNAME（注意：全部大写，且无后缀名）</code> 文件，无后缀名。写入自定义的域名；</li>
-  <li>域名解析；</li>
-</ul>
-
-<p>}</p>
-
-<ul>
-  <li>
-    <p>本地测试（<code class="highlighter-rouge">jekyll serve</code>），将生成的主页代码（默认在<code class="highlighter-rouge">_site</code>中），拷到本地指定的目录下（随便哪个目录，能找到就行，如：桌面新建一个<code class="highlighter-rouge">tmp</code>文件夹）；</p>
-  </li>
-  <li>
-    <p>本地仓库切换到<code class="highlighter-rouge">gh-pages</code>分支，将<code class="highlighter-rouge">tmp</code>内容拷入，push 到远程仓库<code class="highlighter-rouge">gh-pages</code>中；</p>
-  </li>
-</ul>
-
-<h3 id="3-访问主页">3. 访问主页</h3>
-<ul>
-  <li>
-    <p>浏览器访问<code class="highlighter-rouge">https://用户名.github.io/YS_Notes</code>，即可看到主页；</p>
-  </li>
-  <li>
-    <p>有自定义域名的，用浏览器访问<code class="highlighter-rouge">https://用户名.github.io/YS_Notes</code>后自动跳转到对应的域名。也可以直接访问该域名。</p>
-  </li>
-</ul>
-
-<h2 id="整理">整理</h2>
-<h3 id="阶段一初始功能实现">阶段一，初始功能实现</h3>
-
-<p>一个仓库，两个分支。<code class="highlighter-rouge">master</code>分支放源码，<code class="highlighter-rouge">gh-pages</code>分支放生成的主页文件。</p>
-
-<ul>
-  <li>
-    <p>将网站源码放在 <code class="highlighter-rouge">YS_Notes  master</code> 分支上；</p>
-  </li>
-  <li>
-    <p>每次本地测试（<code class="highlighter-rouge">jekyll serve</code>）后，将<code class="highlighter-rouge">_site</code>拷到本地<code class="highlighter-rouge">tmp</code>中；</p>
-  </li>
-  <li>
-    <p>再切换到<code class="highlighter-rouge">YS_Notes  gh-pages</code>分支，将<code class="highlighter-rouge">tmp</code>内容复制进去，上传到远程<code class="highlighter-rouge">gh-pages</code>分支。</p>
-  </li>
-</ul>
-
-<h3 id="阶段二使用-makefile-简化阶段一种的步骤">阶段二，使用 makefile 简化阶段一种的步骤</h3>
-
-<p>过程同阶段一，区别是将手动过程用 makefile 文件代替了。在本地<code class="highlighter-rouge">YS_Notes</code>仓库下执行 <code class="highlighter-rouge">make makefile</code>命令。</p>
-
-<p>makefile 内容：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>deploy:
-	git checkout master
-	jekyll build
-	git add -A
-	git commit -m "update master"
-	cp -r _site/ /tmp/
-	git checkout gh-pages
-	rm -r ./*
-	cp -r /tmp/_site/* ./
-	git add -A
-	git commit -m "deploy blog"
-	git push origin gh-pages
-	git checkout master
-	echo "deploy succeed"
-	git push origin master
-	echo "push master"
-</code></pre></div></div>
-
-<h3 id="阶段三分开管理">阶段三，分开管理</h3>
-
-<p>用两个仓库来管理，一个用于放源码，另一个用于放最终生成的主页。</p>
-
-<ul>
-  <li>
-    <p>创建2个空的远程仓库<code class="highlighter-rouge">YS_Notes_Source（源码）、YS_Notes（主页）</code>；</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">YS_Notes</code> 新建分支，分支名必须为 <code class="highlighter-rouge">gh-pages</code>；</p>
-  </li>
-  <li>
-    <p>克隆 <code class="highlighter-rouge">YS_Notes_Source</code>至本地 <code class="highlighter-rouge">YS_Blog</code>，在 <code class="highlighter-rouge">YS_Blog</code> 中创建 2 个子目录 <code class="highlighter-rouge">source、finnal_site</code>；</p>
-  </li>
-  <li>
-    <p><code class="highlighter-rouge">source</code> 中存放源码，<code class="highlighter-rouge">finnal_site</code> 关联远程仓库 <code class="highlighter-rouge">YS_Notes</code>；</p>
-  </li>
-  <li>
-    <p>jekyll 测试或生成时不能直接使用 <code class="highlighter-rouge">jekyll serve</code>，而要加上源和目的地址<code class="highlighter-rouge">jekyll serve [--watch] --source source (YS_Notes_Source中的子目录) --destination finnal_site (YS_Notes_Source中的子目录)</code>；</p>
-  </li>
-  <li>
-    <p>这样修改源码后，上传至 <code class="highlighter-rouge">YS_Notes_Source</code>，本地测试主页后，上传至 <code class="highlighter-rouge">YS_Notes</code>。</p>
-  </li>
-</ul>
-
-<hr />
-<h2 id="参考文章">参考文章：</h2>
-
-<p><a href="http://www.cnblogs.com/wangfupeng1988/p/5702324.html">jekyll安装与使用</a></p>
-
-<p><a href="http://www.tuicool.com/articles/RZbEV3">使用jelyll+github搭建自己的静态网站</a></p>
-
-<p><a href="https://help.github.com/articles/adding-a-cname-file-to-your-repository/">Github官网-绑定域名</a></p>
-
-<p><a href="http://blog.csdn.net/on_1y/article/details/19259435">CSDN - 使用 GitHub, Jekyll 打造自己的免费独立博客</a></p>
-
+        
         </article>
         <hr>
 
@@ -414,6 +226,177 @@
                     
                 
             
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/20/iOS-11+iPhone-X-%E9%80%82%E9%85%8D/">iOS 11 与 iPhone X 的适配
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/">iOS WWDC更新总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/">自定义 CollectionView 布局
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/07/24/Keychain/">iOS Keychain
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
                 
                     
                 
@@ -436,132 +419,20 @@
                 
             
         
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
         
-            
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
+            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2016/12/24/cocoapods%E5%AE%89%E8%A3%85%E6%9C%89%E5%85%B3%E9%97%AE%E9%A2%98/">CocoaPods 有关问题汇总</a></p>
+        <p><strong>上一篇</strong> <a href="/2017/11/20/iOS-11+iPhone-X-%E9%80%82%E9%85%8D/">iOS 11 与 iPhone X 的适配</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2016/12/25/%E6%97%B6%E9%97%B4/">NSDate 时间问题</a></p>
+        <p><strong>下一篇</strong> <a href="/2017/12/31/2017%E6%80%BB%E7%BB%93/">2017总结</a></p>
         
     </div>
 </div>
@@ -585,6 +456,8 @@
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
                     
                     <li><a href="#comments">Comments</a></li>
                 </ul>
@@ -619,8 +492,11 @@
         <p class="contact">
             <!-- Contact me at: -->
             
+            <a href="https://github.com/yjyuanshuai" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a> 
             
+            <a href="mailto:TimerYJ@163.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> 
             
+            <a href="http://weibo.com/2480605254" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a> 
             
             
             

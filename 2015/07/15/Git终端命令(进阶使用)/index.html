@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Git push到多个仓库</title>
-    <meta name="description" content="同一份代码关联 2 个远程仓库，终端或SourceTree实现自动同时 push 到多个仓库，或者手动选择推送指定仓库。">
+    <title>Git终端命令(进阶使用)</title>
+    <meta name="description" content="Git终端命令，进阶应用">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/07/21/Git%E5%90%8C%E6%97%B6push%E5%88%B0%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2015/07/15/Git%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4(%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8)/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
 
 
@@ -156,11 +156,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Git push到多个仓库</h1>
+        <h1>Git终端命令(进阶使用)</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2017-07-21
+                <i class="fa fa-calendar"></i>2015-07-15
             </div>
 
             <div class="label-card">
@@ -210,122 +210,188 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#需求" id="markdown-toc-需求">需求</a></li>
-  <li><a href="#实现" id="markdown-toc-实现">实现</a>    <ul>
-      <li><a href="#在-github-和-coding-上分别建仓库" id="markdown-toc-在-github-和-coding-上分别建仓库">在 github 和 coding 上分别建仓库</a></li>
-      <li><a href="#关联远程仓库修改配置文件" id="markdown-toc-关联远程仓库修改配置文件">关联远程仓库，修改配置文件</a>        <ul>
-          <li><a href="#terminal-实现" id="markdown-toc-terminal-实现">terminal 实现</a></li>
-          <li><a href="#直接打开配置文件修改" id="markdown-toc-直接打开配置文件修改">直接打开配置文件修改</a></li>
-        </ul>
-      </li>
-      <li><a href="#pullpush-测试" id="markdown-toc-pullpush-测试">pull/push 测试</a>        <ul>
-          <li><a href="#terminal" id="markdown-toc-terminal">terminal</a></li>
-          <li><a href="#sourcetree" id="markdown-toc-sourcetree">SourceTree</a></li>
+  <li><a href="#一查看改动" id="markdown-toc-一查看改动">一、查看改动</a>    <ul>
+      <li><a href="#1查看当前仓库状态" id="markdown-toc-1查看当前仓库状态">1、查看当前仓库状态</a></li>
+      <li><a href="#2查看改动的内容" id="markdown-toc-2查看改动的内容">2、查看改动的内容</a></li>
+    </ul>
+  </li>
+  <li><a href="#二版本回退" id="markdown-toc-二版本回退">二、版本回退</a>    <ul>
+      <li><a href="#1查看log" id="markdown-toc-1查看log">1、查看log</a></li>
+      <li><a href="#2版本回退" id="markdown-toc-2版本回退">2、版本回退</a>        <ul>
+          <li><a href="#1向前回退" id="markdown-toc-1向前回退">1）向前回退</a></li>
+          <li><a href="#2向后回退" id="markdown-toc-2向后回退">2）向后回退</a></li>
         </ul>
       </li>
     </ul>
   </li>
-  <li><a href="#拓展" id="markdown-toc-拓展">拓展</a></li>
-  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接：</a></li>
+  <li><a href="#三撤销--删除" id="markdown-toc-三撤销--删除">三、撤销 / 删除</a>    <ul>
+      <li><a href="#1撤销修改commit之前" id="markdown-toc-1撤销修改commit之前">1、撤销修改（commit之前）</a></li>
+      <li><a href="#2删除文件" id="markdown-toc-2删除文件">2、删除文件</a></li>
+    </ul>
+  </li>
+  <li><a href="#四解决冲突" id="markdown-toc-四解决冲突">四、解决冲突</a>    <ul>
+      <li><a href="#1查看冲突的文件" id="markdown-toc-1查看冲突的文件">1、查看冲突的文件</a></li>
+      <li><a href="#2查看分支合并图" id="markdown-toc-2查看分支合并图">2、查看分支合并图</a></li>
+      <li><a href="#3bug-分支stash" id="markdown-toc-3bug-分支stash">3、bug 分支（stash）</a></li>
+    </ul>
+  </li>
+  <li><a href="#五git-的-submodule-使用" id="markdown-toc-五git-的-submodule-使用">五、Git 的 submodule 使用</a></li>
 </ul>
 
-<h2 id="需求">需求</h2>
+<h2 id="一查看改动">一、查看改动</h2>
+
+<h3 id="1查看当前仓库状态">1、查看当前仓库状态</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
+</code></pre></div></div>
+
+<p>有需要提交的改动 / 冲突时，会有提示。</p>
+
+<h3 id="2查看改动的内容">2、查看改动的内容</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git diff 文件名
+</code></pre></div></div>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_03_01.png" alt="" /></p>
+
+<hr />
+
+<h2 id="二版本回退">二、版本回退</h2>
+
+<h3 id="1查看log">1、查看log</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log
+
+// 获取简要的 log
+git log --pretty=oneline
+</code></pre></div></div>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_03_02.png" alt="" /></p>
+
+<h3 id="2版本回退">2、版本回退</h3>
+<h4 id="1向前回退">1）向前回退</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 回退到上一个版本
+git reset --hard HEAD^
+
+// 回退到上上的版本，以此推类
+git reset --hard HEAD^^
+
+// 回退到前100个版本，以此推类
+git reset --hard HEAD~100
+</code></pre></div></div>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_03_03.png" alt="" /></p>
+
+<h4 id="2向后回退">2）向后回退</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 获取版本号
+git reflog
+
+// 回退到对应版本
+git reset --hard 版本号
+</code></pre></div></div>
+
+<p><img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_03_04.png" alt="" /></p>
+
+<hr />
+
+<h2 id="三撤销--删除">三、撤销 / 删除</h2>
+<h3 id="1撤销修改commit之前">1、撤销修改（commit之前）</h3>
+
+<p>1）手动将文件修改回去；</p>
+
+<p>2）按上面的方法，回退版本；</p>
+
+<p>3）使用撤销命令。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout --文件名
+</code></pre></div></div>
+
+<p>checkout –文件名的意思是把文件在工作区做的修改全部撤销，有两种情况。</p>
 
 <ul>
-  <li>同一份代码存在 2 个不同的远程仓库；</li>
-  <li>一次 push，同时推送到 2 个仓库；</li>
+  <li>
+    <p>文件修改，还未放到暂存区，撤销即回到和版本库一样的状态；
+<img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_03_05.png" alt="" /></p>
+  </li>
+  <li>
+    <p>已放入暂存区，后又做了修改，撤销即回到添加暂存区后的状态。
+<img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_03_06.png" alt="" /></p>
+  </li>
 </ul>
 
-<p>Github 有时访问速度过慢，为了及时的获取或推送到远程仓库，我希望将同一份代码同时存到 2 个不同的远程仓库，比如一个是 Github，一个是 coding，这样在一个仓库不给力的时候，可以及时用另一个仓库。</p>
-
-<h2 id="实现">实现</h2>
-
-<p>通过配置 <code class="highlighter-rouge">.git/config</code>文件，可以实现我的需求。</p>
-
-<p>配置完后，基本的信息如下：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[core]
-	repositoryformatversion = 0
-	filemode = true
-	bare = false
-	logallrefupdates = true
-	ignorecase = true
-	precomposeunicode = true
-[remote "remote名"]
-	url = 仓库一地址
-	url = 仓库二地址
-	fetch = +refs/heads/*:refs/remotes/remote名/*
-[branch "master"]
-	remote = remote名
-	merge = refs/heads/master
-</code></pre></div></div>
-
-<h3 id="在-github-和-coding-上分别建仓库">在 github 和 coding 上分别建仓库</h3>
-
-<p>以下简称 git@github_repo1，和 git@coding_repo2。</p>
-
-<h3 id="关联远程仓库修改配置文件">关联远程仓库，修改配置文件</h3>
-
-<h4 id="terminal-实现">terminal 实现</h4>
-<p>打开 terminal，进入项目目录下。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add remote名(自定义，如：guroad、origin等) git@github_repo1
-
-git remote set-url --add remote名(与上面的保持一致) git@coding_repo2
-</code></pre></div></div>
-
 <blockquote>
-  <p>注：上面 2 个 remote 名可以不同，这里保持相同，是为了实现<code class="highlighter-rouge">一次推送到 2 个仓库</code>。remote 名不同时，需分开推送。</p>
+  <p>注意：“– 文件名”，是2横，且与文件名间有空隙。</p>
 </blockquote>
 
-<h4 id="直接打开配置文件修改">直接打开配置文件修改</h4>
+<h3 id="2删除文件">2、删除文件</h3>
+<p>1）手动删除；</p>
 
-<h3 id="pullpush-测试">pull/push 测试</h3>
-
-<h4 id="terminal">terminal</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull guroad master
-
-git push guroad --all
+<p>2）终端命令；</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rm test3.txt
 </code></pre></div></div>
 
-<p>若<code class="highlighter-rouge">remote 名</code>是 origin，可省略，即：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull
+<p>若想在版本库中删除，删完commit即可。</p>
 
-git push (--all)
+<p>__ WT __ ：是否 commit 后就不能再撤销了？？</p>
+
+<hr />
+
+<h2 id="四解决冲突">四、解决冲突</h2>
+
+<h3 id="1查看冲突的文件">1、查看冲突的文件</h3>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
 </code></pre></div></div>
 
-<h4 id="sourcetree">SourceTree</h4>
+<p>打开冲突文件，修改 «««&lt; ======= »»&gt; 中的冲突部分，再提交</p>
 
-<p>配置文件设置好后，正常推送即可。</p>
+<h3 id="2查看分支合并图">2、查看分支合并图</h3>
 
-<h2 id="拓展">拓展</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log --graph
+</code></pre></div></div>
 
-<p>一份代码关联 2 个远程仓库，每次只推送到一个指定远程仓库。修改文件内容 <code class="highlighter-rouge">.git/config</code>如下：</p>
+<h3 id="3bug-分支stash">3、bug 分支（stash）</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[core]
-    repositoryformatversion = 0
-    filemode = false
-    bare = false
-    logallrefupdates = true
-    symlinks = false
-    ignorecase = true
-    hideDotFiles = dotGitOnly
-[remote "origin"]
-    url = https://git.oschina.net/shuguang/cmsdev.git
-    fetch = +refs/heads/*:refs/remotes/origin/*
-[remote "coding"]
-    url = https://git.coding.net/bagesoft/cmsdev.git
-    fetch = +refs/heads/*:refs/remotes/origin/*
-[branch "master"]
-    remote = origin
-    merge = refs/heads/master
+<p>当你接到一个修复一个代号101的bug的任务时，很自然地，你想创建一个分支issue-101来修复它，但是，等等，当前正在dev上进行的工作还没有提交.</p>
+
+<p>并不是你不想提交，而是工作只进行到一半，还没法提交，预计完成还需1天时间。但是，必须在两个小时内修复该bug，怎么办？</p>
+
+<p>幸好，Git还提供了一个stash功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash
+</code></pre></div></div>
+
+<p>现在，用git status查看工作区，就是干净的（除非有没有被Git管理的文件），因此可以放心地创建分支来修复bug。</p>
+
+<p>bug 修改完成后，要继续之前打断的工作。</p>
+
+<p>查看被保存的现场：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash list
+// stash@{0}: WIP on dev: 6224937 add merge
+</code></pre></div></div>
+<p>恢复现场：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash apply   // 恢复
+git stash drop    // 删除记录
+</code></pre></div></div>
+
+<p>相当于：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash list
+</code></pre></div></div>
+
+<p>当有多个 stash 时，可以恢复到指定的：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash apply stash@{0}
 </code></pre></div></div>
 
 <hr />
-<h2 id="相关链接">相关链接：</h2>
 
-<p><a href="https://segmentfault.com/q/1010000008366409">git push到多个远程仓库</a></p>
+<h2 id="五git-的-submodule-使用">五、Git 的 submodule 使用</h2>
 
-<p><a href="https://blog.digua.co/post/76/sourcetree-simultaneously-submits-multiple-remote-repositories">SourceTree push 到多个远程仓库</a></p>
+<p>相关链接：</p>
+
+<p><a href="http://blog.csdn.net/wangjia55/article/details/24400501">git submodule的使用</a></p>
+
+<p><a href="http://www.open-open.com/lib/view/open1396404725356.html">git submodule的详细使用</a></p>
+
+<p><a href="http://www.tuicool.com/articles/jqiEJzU">git submodule使用简介</a></p>
+
+<hr />
 
         </article>
         <hr>
@@ -338,49 +404,8 @@ git push (--all)
                     
                 
             
-                
-                    
-                
-            
         
             
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
             
                 
                     
@@ -415,6 +440,18 @@ git push (--all)
         
             
             
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
         
             
             
@@ -425,6 +462,35 @@ git push (--all)
                 
                     
                 
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
             
         
             
@@ -443,13 +509,13 @@ git push (--all)
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/07/20/%E7%BB%88%E7%AB%AF%E5%B7%A5%E5%85%B7/">终端工具</a></p>
+        <p><strong>上一篇</strong> <a href="/2015/07/15/Git%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4(%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8)/">Git终端命令(基本使用)</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2017/07/21/CocoaPods%E5%8E%9F%E7%90%86/">CocoaPods 原理</a></p>
+        <p><strong>下一篇</strong> <a href="/2015/07/21/Git%E5%90%8C%E6%97%B6push%E5%88%B0%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">Git push到多个仓库</a></p>
         
     </div>
 </div>
@@ -507,8 +573,11 @@ git push (--all)
         <p class="contact">
             <!-- Contact me at: -->
             
+            <a href="https://github.com/yjyuanshuai" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a> 
             
+            <a href="mailto:TimerYJ@163.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> 
             
+            <a href="http://weibo.com/2480605254" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a> 
             
             
             

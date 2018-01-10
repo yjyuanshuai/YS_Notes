@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Makedown语法手册</title>
-    <meta name="description" content="Makedown语法手册">
+    <title>Git终端命令(基本使用)</title>
+    <meta name="description" content="Git终端命令，基本应用">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2016/12/20/MakeDown%E8%AF%AD%E6%B3%95/">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2015/07/15/Git%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4(%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8)/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
 
 
@@ -156,11 +156,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Makedown语法手册</h1>
+        <h1>Git终端命令(基本使用)</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2016-12-20
+                <i class="fa fa-calendar"></i>2015-07-15
             </div>
 
             <div class="label-card">
@@ -180,7 +180,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#其他" title="Category: 其他" rel="category">其他</a>
+        <a href="/category/#Git" title="Category: Git" rel="category">Git</a>
     
   
 
@@ -197,8 +197,8 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Makedown" title="Tag: Makedown" rel="tag">Makedown</a-->
-        <a href="/tag/#Makedown" title="Tag: Makedown" rel="tag">Makedown</a>
+        <!--a href="/tag/#Git" title="Tag: Git" rel="tag">Git</a-->
+        <a href="/tag/#Git" title="Tag: Git" rel="tag">Git</a>
     
   
 
@@ -210,145 +210,158 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#标题" id="markdown-toc-标题">标题</a></li>
-  <li><a href="#列表" id="markdown-toc-列表">列表</a>    <ul>
-      <li><a href="#无序列表" id="markdown-toc-无序列表">无序列表</a></li>
-      <li><a href="#有序列表" id="markdown-toc-有序列表">有序列表</a></li>
+  <li><a href="#基本使用" id="markdown-toc-基本使用">基本使用</a>    <ul>
+      <li><a href="#仓库" id="markdown-toc-仓库">仓库</a>        <ul>
+          <li><a href="#1-从本地关联远端仓库" id="markdown-toc-1-从本地关联远端仓库">1. 从本地关联远端仓库</a></li>
+          <li><a href="#2-克隆远端仓库至本地" id="markdown-toc-2-克隆远端仓库至本地">2. 克隆远端仓库至本地</a></li>
+          <li><a href="#3-建立本地分支与远程分支的联系" id="markdown-toc-3-建立本地分支与远程分支的联系">3. 建立本地分支与远程分支的联系</a></li>
+        </ul>
+      </li>
+      <li><a href="#分支" id="markdown-toc-分支">分支</a>        <ul>
+          <li><a href="#1-创建分支" id="markdown-toc-1-创建分支">1. 创建分支</a></li>
+          <li><a href="#2-查看分支" id="markdown-toc-2-查看分支">2. 查看分支</a></li>
+          <li><a href="#3-切换分支" id="markdown-toc-3-切换分支">3. 切换分支</a></li>
+          <li><a href="#4-合并分支" id="markdown-toc-4-合并分支">4. 合并分支</a></li>
+          <li><a href="#5-删除分支" id="markdown-toc-5-删除分支">5. 删除分支</a></li>
+        </ul>
+      </li>
+      <li><a href="#标签" id="markdown-toc-标签">标签</a>        <ul>
+          <li><a href="#1-查看标签" id="markdown-toc-1-查看标签">1. 查看标签</a></li>
+          <li><a href="#2-添加标签" id="markdown-toc-2-添加标签">2. 添加标签</a></li>
+          <li><a href="#3-删除标签" id="markdown-toc-3-删除标签">3. 删除标签</a></li>
+        </ul>
+      </li>
+      <li><a href="#推送下拉" id="markdown-toc-推送下拉">推送/下拉</a>        <ul>
+          <li><a href="#1-commit" id="markdown-toc-1-commit">1. commit</a></li>
+          <li><a href="#2-pull" id="markdown-toc-2-pull">2. pull</a></li>
+          <li><a href="#3-push" id="markdown-toc-3-push">3. push</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
-  <li><a href="#引用" id="markdown-toc-引用">引用</a></li>
-  <li><a href="#图片与链接" id="markdown-toc-图片与链接">图片与链接</a>    <ul>
-      <li><a href="#链接" id="markdown-toc-链接">链接</a></li>
-      <li><a href="#图片" id="markdown-toc-图片">图片</a></li>
-    </ul>
-  </li>
-  <li><a href="#字体" id="markdown-toc-字体">字体</a>    <ul>
-      <li><a href="#粗体" id="markdown-toc-粗体"><strong>粗体</strong></a></li>
-      <li><a href="#斜体" id="markdown-toc-斜体"><em>斜体</em></a></li>
-    </ul>
-  </li>
-  <li><a href="#表格" id="markdown-toc-表格">表格</a></li>
-  <li><a href="#代码框" id="markdown-toc-代码框">代码框</a></li>
-  <li><a href="#数学公式" id="markdown-toc-数学公式">数学公式</a></li>
-  <li><a href="#上下标" id="markdown-toc-上下标">上下标</a>    <ul>
-      <li><a href="#x-的-n-次方xn" id="markdown-toc-x-的-n-次方xn">x 的 n 次方：x<sup>n</sup></a></li>
-      <li><a href="#log-2-log2" id="markdown-toc-log-2-log2">log 2 ：log<sub>2</sub></a></li>
-    </ul>
-  </li>
+  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
 </ul>
 
-<h2 id="标题">标题</h2>
-<pre><code class="language-makedown"># 一级标题
-## 二级标题
-...
-###### 六级标题
-</code></pre>
+<h2 id="基本使用">基本使用</h2>
+<h3 id="仓库">仓库</h3>
+<h4 id="1-从本地关联远端仓库">1. 从本地关联远端仓库</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add origin https://github.com/username/reponame.git
 
-<h2 id="列表">列表</h2>
-<h3 id="无序列表">无序列表</h3>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>* 1
-* 2
-* 3
+// 首次推送 master 分支所有内容
+git push -u origin master
 </code></pre></div></div>
 
-<ul>
-  <li>1</li>
-  <li>2</li>
-  <li>3</li>
-</ul>
-
-<h3 id="有序列表">有序列表</h3>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>1. 1
-2. 2
-3. 3
+<h4 id="2-克隆远端仓库至本地">2. 克隆远端仓库至本地</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:michaelliao/gitskills.git
 </code></pre></div></div>
 
-<ol>
-  <li>1</li>
-  <li>2</li>
-  <li>3</li>
-</ol>
+<h4 id="3-建立本地分支与远程分支的联系">3. 建立本地分支与远程分支的联系</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch --set-upstream-to=origin/branch-name branch-name
+</code></pre></div></div>
 
-<h2 id="引用">引用</h2>
+<p>可能遇到的问题：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&gt; 这里是引用（注意有空格）
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> “fatal: refusing to merge unrelated histories”
+</code></pre></div></div>
+<p>解决：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin master --allow-unrelated-histories
+</code></pre></div></div>
+
+<h3 id="分支">分支</h3>
+<h4 id="1-创建分支">1. 创建分支</h4>
+<p>创建并切换到分支</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout -b 新建分支名
+</code></pre></div></div>
+
+<p>相当于：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch 新建分支
+git checkout 新建分支
+</code></pre></div></div>
+
+<h4 id="2-查看分支">2. 查看分支</h4>
+
+<p>会列出所有分支，当前分支前用 * 表示</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch
+</code></pre></div></div>
+
+<h4 id="3-切换分支">3. 切换分支</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout 分支名
+</code></pre></div></div>
+
+<h4 id="4-合并分支">4. 合并分支</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git merge 想要合并进当前分支的分支
+</code></pre></div></div>
+
+<h4 id="5-删除分支">5. 删除分支</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch -d 将被删除的分支
+</code></pre></div></div>
+
+<p>强行删除一个未被合并的分支：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch -D 将被删除的分支
+</code></pre></div></div>
+
+<h3 id="标签">标签</h3>
+<h4 id="1-查看标签">1. 查看标签</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git tag
+</code></pre></div></div>
+
+<h4 id="2-添加标签">2. 添加标签</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git tag 标签名
+
+git tag -a 标签名 -m "备注信息"
+</code></pre></div></div>
+
+<h4 id="3-删除标签">3. 删除标签</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git tag -d 标签名
+
+git push origin --tags
 </code></pre></div></div>
 
 <blockquote>
-  <p>这里是引用（注意有空格）</p>
+  <p>注：我在 coding 上测试的私有仓库，上面的方法无法删除标签，要用下面的才能删除。</p>
 </blockquote>
 
-<h2 id="图片与链接">图片与链接</h2>
-<h3 id="链接">链接</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[这是网址链接：Baidu](https://www.baidu.com)
-</code></pre></div></div>
-<p><a href="https://www.baidu.com">这是网址链接：Baidu</a></p>
-
-<h3 id="图片">图片</h3>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>![插入一张图片]( 图片url )
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin --delete tag "标签名"
 </code></pre></div></div>
 
-<p><img src="http://ouo1r7usa.bkt.clouddn.com/2016/12/20161221_01_01.png" alt="插入一张图片" /></p>
-
-<h2 id="字体">字体</h2>
-<h3 id="粗体"><strong>粗体</strong></h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>**粗体**
+<h3 id="推送下拉">推送/下拉</h3>
+<h4 id="1-commit">1. commit</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git init    //初始化git仓库（已存在，则省略）
+git add 被修改的文件（. 或 * 表示全部文件）
+git commit -m "备注的信息"
 </code></pre></div></div>
 
-<h3 id="斜体"><em>斜体</em></h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>*斜体*
+<h4 id="2-pull">2. pull</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 默认下拉对应分支
+git pull
+
+// 下拉
+git pull origin（remote名） 目标分支
 </code></pre></div></div>
 
-<h2 id="表格">表格</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// : 用于对齐方式
+<h4 id="3-push">3. push</h4>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 首次推送
+git push -u origin（仓库名） master（分支名）
 
-|Tables    |Are    |Cool    |
-| -------- |:-----:| ------:|
-|1        |2|3|
-|2        |2|3|
+// 推送到远程分支
+git push origin（remote名） 目标分支
+
+// 默认推送到当前对应分支
+git push
 </code></pre></div></div>
 
-<table>
-  <thead>
-    <tr>
-      <th>Tables</th>
-      <th style="text-align: center">Are</th>
-      <th style="text-align: right">Cool</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>1</td>
-      <td style="text-align: center">2</td>
-      <td style="text-align: right">3</td>
-    </tr>
-    <tr>
-      <td>2</td>
-      <td style="text-align: center">2</td>
-      <td style="text-align: right">3</td>
-    </tr>
-  </tbody>
-</table>
+<hr />
+<h2 id="相关链接">相关链接</h2>
 
-<h2 id="代码框">代码框</h2>
+<p><a href="https://git-scm.com/book/zh/v2">Pro Git 2-书籍</a></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[self.navigationController.navigationBar setBarTintColor:MAIN_GREEN_TITLE_COLOR];
-[self.navigationController.navigationBar setTintColor:[UIColor whiteColor]];
-</code></pre></div></div>
+<p><a href="http://blog.csdn.net/safiri/article/details/45537073">git终端命令</a></p>
 
-<h2 id="数学公式">数学公式</h2>
-
-<h2 id="上下标">上下标</h2>
-<h3 id="x-的-n-次方xn">x 的 n 次方：x<sup>n</sup></h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>x&lt;sup&gt;n&lt;/sup&gt;
-</code></pre></div></div>
-
-<h3 id="log-2-log2">log 2 ：log<sub>2</sub></h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>log&lt;sub&gt;2&lt;/sub&gt;
-</code></pre></div></div>
+<p><a href="http://blog.csdn.net/free_wind22/article/details/50967723">git使用详解</a></p>
 
         </article>
         <hr>
@@ -361,49 +374,8 @@
                     
                 
             
-                
-                    
-                
-            
         
             
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
             
                 
                     
@@ -438,6 +410,18 @@
         
             
             
+                
+                    
+                
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
         
             
             
@@ -448,6 +432,35 @@
                 
                     
                 
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
             
         
             
@@ -466,13 +479,13 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2016/11/23/%E6%8B%89%E8%B5%B7%E5%85%B6%E4%BB%96App/">iOS 拉起其他 App</a></p>
+        <p><strong>上一篇</strong> <a href="/2015/07/15/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">版本控制</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2016/12/20/makefile%E6%96%87%E4%BB%B6%E7%BC%96%E5%86%99%E4%B8%8E%E4%BD%BF%E7%94%A8/">makefile文件编写与使用</a></p>
+        <p><strong>下一篇</strong> <a href="/2015/07/15/Git%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4(%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8)/">Git终端命令(进阶使用)</a></p>
         
     </div>
 </div>
@@ -530,8 +543,11 @@
         <p class="contact">
             <!-- Contact me at: -->
             
+            <a href="https://github.com/yjyuanshuai" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a> 
             
+            <a href="mailto:TimerYJ@163.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> 
             
+            <a href="http://weibo.com/2480605254" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a> 
             
             
             

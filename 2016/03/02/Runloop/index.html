@@ -223,7 +223,6 @@
     </ul>
   </li>
   <li><a href="#runloop-内部逻辑" id="markdown-toc-runloop-内部逻辑">RunLoop 内部逻辑</a></li>
-  <li><a href="#runloop-底层实现" id="markdown-toc-runloop-底层实现">RunLoop 底层实现</a></li>
   <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
 </ul>
 
@@ -243,7 +242,7 @@
 
 <p>苹果不允许直接创建 RunLoop，它只提供了两个自动获取的函数：CFRunLoopGetMain() 和 CFRunLoopGetCurrent()。 这两个函数内部的逻辑大概是下面这样:</p>
 
-<pre><code class="language-C">/// 全局的Dictionary，key 是 pthread_t， value 是 CFRunLoopRef
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/// 全局的Dictionary，key 是 pthread_t， value 是 CFRunLoopRef
 static CFMutableDictionaryRef loopsDic;
 /// 访问 loopsDic 时的锁
 static CFSpinLock_t loopsLock;
@@ -281,7 +280,7 @@ CFRunLoopRef CFRunLoopGetMain() {
 CFRunLoopRef CFRunLoopGetCurrent() {
     return _CFRunLoopGet(pthread_self());
 }
-</code></pre>
+</code></pre></div></div>
 
 <h2 id="runloop-api">RunLoop API</h2>
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_02_20160302/B00_001_02_20160302_01.png" alt="" /></p>
@@ -298,19 +297,20 @@ CFRunLoopRef CFRunLoopGetCurrent() {
 
 <p>CFRunLoopRef 的大致结构：</p>
 
-<pre><code class="language-C">struct __CFRunLoop {
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struct __CFRunLoop {
     CFMutableSetRef _ commonModes;     // Set
     CFMutableSetRef _ commonModeItems; // Set&lt;Source/Observer/Timer&gt;
     CFRunLoopModeRef _ currentMode;    // Current Runloop Mode
     CFMutableSetRef _ modes;           // Set
     ...
 };
-</code></pre>
+</code></pre></div></div>
 
 <p>CFRunLoop 对外暴露的管理 mode 接口（只有 2 个）：</p>
-<pre><code class="language-C">CFRunLoopAddCommonMode(CFRunLoopRef runloop, CFStringRef modeName);
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CFRunLoopAddCommonMode(CFRunLoopRef runloop, CFStringRef modeName);
 CFRunLoopRunInMode(CFStringRef modeName, ...);
-</code></pre>
+</code></pre></div></div>
 
 <p>只能通过 mode name 来操作内部的 mode，当你传入一个新的 mode name 但 RunLoop 内部没有对应 mode 时，RunLoop会自动帮你创建对应的 CFRunLoopModeRef。对于一个 RunLoop 来说，其内部的 mode 只能增加不能删除。</p>
 
@@ -322,7 +322,7 @@ CFRunLoopRunInMode(CFStringRef modeName, ...);
 
 <p>CFRunLoopModeRef 的大致结构：</p>
 
-<pre><code class="language-C">struct __CFRunLoopMode {
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struct __CFRunLoopMode {
     CFStringRef _ name;            // Mode Name, 例如 @"kCFRunLoopDefaultMode"
     CFMutableSetRef _ sources0;    // Set
     CFMutableSetRef _ sources1;    // Set
@@ -330,19 +330,20 @@ CFRunLoopRunInMode(CFStringRef modeName, ...);
     CFMutableArrayRef _ timers;    // Array
     ...
 };
-</code></pre>
+</code></pre></div></div>
 
 <p>CFRunLoopModeRef 类并没有对外暴露，只是通过 CFRunLoopRef 的接口进行了封装。</p>
 
 <p>mode 暴露的管理 mode item  的接口：</p>
-<pre><code class="language-C">CFRunLoopAddSource(CFRunLoopRef rl, CFRunLoopSourceRef source, CFStringRef modeName);
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CFRunLoopAddSource(CFRunLoopRef rl, CFRunLoopSourceRef source, CFStringRef modeName);
 CFRunLoopAddObserver(CFRunLoopRef rl, CFRunLoopObserverRef observer, CFStringRef modeName);
 CFRunLoopAddTimer(CFRunLoopRef rl, CFRunLoopTimerRef timer, CFStringRef mode);
 CFRunLoopRemoveSource(CFRunLoopRef rl, CFRunLoopSourceRef source, CFStringRef modeName);
 CFRunLoopRemoveObserver(CFRunLoopRef rl, CFRunLoopObserverRef observer, CFStringRef modeName);
 CFRunLoopRemoveTimer(CFRunLoopRef rl, CFRunLoopTimerRef timer, CFStringRef mode);
 
-</code></pre>
+</code></pre></div></div>
 
 <h3 id="cfrunloopsourceref">CFRunLoopSourceRef</h3>
 
@@ -378,7 +379,7 @@ CFRunLoopRemoveTimer(CFRunLoopRef rl, CFRunLoopTimerRef timer, CFStringRef mode)
 
 <p>每个 Observer 都包含了一个回调（函数指针），当 RunLoop 的状态发生变化时，观察者就能通过回调接受到这个变化。可以观测的时间点有以下几个：</p>
 
-<pre><code class="language-C">typedef CF_OPTIONS(CFOptionFlags, CFRunLoopActivity) {
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>typedef CF_OPTIONS(CFOptionFlags, CFRunLoopActivity) {
     kCFRunLoopEntry         = (1UL &lt;&lt; 0), // 即将进入Loop
     kCFRunLoopBeforeTimers  = (1UL &lt;&lt; 1), // 即将处理 Timer
     kCFRunLoopBeforeSources = (1UL &lt;&lt; 2), // 即将处理 Source
@@ -386,13 +387,13 @@ CFRunLoopRemoveTimer(CFRunLoopRef rl, CFRunLoopTimerRef timer, CFStringRef mode)
     kCFRunLoopAfterWaiting  = (1UL &lt;&lt; 6), // 刚从休眠中唤醒
     kCFRunLoopExit          = (1UL &lt;&lt; 7), // 即将退出Loop
 };
-</code></pre>
+</code></pre></div></div>
 
 <h2 id="runloop-内部逻辑">RunLoop 内部逻辑</h2>
 
 <p><img src="https://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_1.png" alt="" /></p>
 
-<pre><code class="language-C">/// 用DefaultMode启动
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/// 用DefaultMode启动
 void CFRunLoopRun(void) {
     CFRunLoopRunSpecific(CFRunLoopGetCurrent(), kCFRunLoopDefaultMode, 1.0e10, false);
 }
@@ -502,9 +503,7 @@ int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
     /// 10. 通知 Observers: RunLoop 即将退出。
     __CFRunLoopDoObservers(rl, currentMode, kCFRunLoopExit);
 }
-</code></pre>
-
-<h2 id="runloop-底层实现">RunLoop 底层实现</h2>
+</code></pre></div></div>
 
 <hr />
 <h2 id="相关链接">相关链接</h2>
@@ -528,6 +527,13 @@ int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
                     
                 
             
+        
+            
+            
+                
+                    
+                
+            
                 
                     
                 
@@ -540,6 +546,26 @@ int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
                         
                         <h2 id="similar_posts">Similar Posts</h2>
                         <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/20/%E7%BB%84%E4%BB%B6%E5%8C%96/">iOS 11 与 iPhone X 的适配
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
                         
                         <li class="relatedPost">
                             <a href="/2017/11/20/iOS-11+iPhone-X-%E9%80%82%E9%85%8D/">iOS 11 与 iPhone X 的适配
@@ -576,22 +602,6 @@ int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
                 
             
                 
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/11/07/Apple%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A6%E5%8F%B7%E7%94%B3%E8%AF%B7/">Apple Developer账号申请
-                            
-                            </a>
-                        </li>
-                        
-                        
                     
                 
             
@@ -661,17 +671,6 @@ int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
             
         
             
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
             
         
             
@@ -758,8 +757,11 @@ int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
         <p class="contact">
             <!-- Contact me at: -->
             
+            <a href="https://github.com/yjyuanshuai" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a> 
             
+            <a href="mailto:TimerYJ@163.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> 
             
+            <a href="http://weibo.com/2480605254" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a> 
             
             
             

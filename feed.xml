@@ -5,9 +5,23 @@
     <description></description>
     <link>https://yjyuanshuai.github.io/</link>
     <atom:link href="https://yjyuanshuai.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 03 Jan 2018 17:44:58 +0800</pubDate>
-    <lastBuildDate>Wed, 03 Jan 2018 17:44:58 +0800</lastBuildDate>
+    <pubDate>Wed, 10 Jan 2018 14:08:54 +0800</pubDate>
+    <lastBuildDate>Wed, 10 Jan 2018 14:08:54 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
+    
+      <item>
+        <title>参与Github开源库</title>
+        <description>记录一下，参与Github开源库的大致流程。</description>
+        <pubDate>Tue, 09 Jan 2018 15:14:54 +0800</pubDate>
+        <link>https://yjyuanshuai.github.io/2018/01/09/%E5%8F%82%E4%B8%8EGithub%E5%BC%80%E6%BA%90%E5%BA%93/</link>
+        <guid isPermaLink="true">https://yjyuanshuai.github.io/2018/01/09/%E5%8F%82%E4%B8%8EGithub%E5%BC%80%E6%BA%90%E5%BA%93/</guid>
+        
+        <category>Github</category>
+        
+        
+        <category>Github</category>
+        
+      </item>
     
       <item>
         <title>2017总结</title>
@@ -22,6 +36,22 @@
         
         
         <category>总结</category>
+        
+      </item>
+    
+      <item>
+        <title>iOS 11 与 iPhone X 的适配</title>
+        <description>iOS 11 与 iPhone X 的适配问题</description>
+        <pubDate>Mon, 20 Nov 2017 17:14:54 +0800</pubDate>
+        <link>https://yjyuanshuai.github.io/2017/11/20/%E7%BB%84%E4%BB%B6%E5%8C%96/</link>
+        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/11/20/%E7%BB%84%E4%BB%B6%E5%8C%96/</guid>
+        
+        <category>iOS</category>
+        
+        <category>适配</category>
+        
+        
+        <category>iOS</category>
         
       </item>
     
@@ -58,20 +88,6 @@
         <category>iOS</category>
         
         <category>Xcode</category>
-        
-      </item>
-    
-      <item>
-        <title>Apple Developer账号申请</title>
-        <description>开发者账号申请流程</description>
-        <pubDate>Tue, 07 Nov 2017 08:14:54 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2017/11/07/Apple%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A6%E5%8F%B7%E7%94%B3%E8%AF%B7/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/11/07/Apple%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A6%E5%8F%B7%E7%94%B3%E8%AF%B7/</guid>
-        
-        <category>iOS</category>
-        
-        
-        <category>iOS</category>
         
       </item>
     
@@ -133,22 +149,6 @@
         <link>https://yjyuanshuai.github.io/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/</link>
         <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/</guid>
         
-        
-      </item>
-    
-      <item>
-        <title>iOS资源整合</title>
-        <description>各方搜集的 iOS 资源，包括大牛博客、网站、视频资料。</description>
-        <pubDate>Wed, 26 Jul 2017 17:14:54 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/07/26/iOS%E8%B5%84%E6%BA%90%E6%95%B4%E5%90%88/</guid>
-        
-        <category>iOS</category>
-        
-        <category>资源</category>
-        
-        
-        <category>iOS</category>
         
       </item>
     
