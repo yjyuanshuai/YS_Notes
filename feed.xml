@@ -5,8 +5,8 @@
     <description></description>
     <link>https://yjyuanshuai.github.io/</link>
     <atom:link href="https://yjyuanshuai.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 10 Jan 2018 14:08:54 +0800</pubDate>
-    <lastBuildDate>Wed, 10 Jan 2018 14:08:54 +0800</lastBuildDate>
+    <pubDate>Wed, 10 Jan 2018 16:27:10 +0800</pubDate>
+    <lastBuildDate>Wed, 10 Jan 2018 16:27:10 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
@@ -20,6 +20,46 @@
         
         
         <category>Github</category>
+        
+      </item>
+    
+      <item>
+        <title>SDK</title>
+        <description>&lt;ul id=&quot;markdown-toc&quot;&gt;
+  &lt;li&gt;&lt;a href=&quot;#相关链接&quot; id=&quot;markdown-toc-相关链接&quot;&gt;相关链接&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+&lt;h2 id=&quot;相关链接&quot;&gt;相关链接&lt;/h2&gt;
+
+http://www.jianshu.com/p/dd8d1b7ce1e4
+
+http://www.cocoachina.com/ios/20150127/11022.html
+</description>
+        <pubDate>Mon, 08 Jan 2018 17:14:54 +0800</pubDate>
+        <link>https://yjyuanshuai.github.io/2018/01/08/SDK/</link>
+        <guid isPermaLink="true">https://yjyuanshuai.github.io/2018/01/08/SDK/</guid>
+        
+        <category>iOS</category>
+        
+        
+        <category>iOS</category>
+        
+      </item>
+    
+      <item>
+        <title>组件化</title>
+        <description>iOS开发，项目慢慢变大之后，开始考虑组件化。</description>
+        <pubDate>Thu, 04 Jan 2018 17:14:54 +0800</pubDate>
+        <link>https://yjyuanshuai.github.io/2018/01/04/%E7%BB%84%E4%BB%B6%E5%8C%96/</link>
+        <guid isPermaLink="true">https://yjyuanshuai.github.io/2018/01/04/%E7%BB%84%E4%BB%B6%E5%8C%96/</guid>
+        
+        <category>iOS</category>
+        
+        <category>组件化</category>
+        
+        
+        <category>iOS</category>
         
       </item>
     
@@ -40,23 +80,7 @@
       </item>
     
       <item>
-        <title>iOS 11 与 iPhone X 的适配</title>
-        <description>iOS 11 与 iPhone X 的适配问题</description>
-        <pubDate>Mon, 20 Nov 2017 17:14:54 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2017/11/20/%E7%BB%84%E4%BB%B6%E5%8C%96/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/11/20/%E7%BB%84%E4%BB%B6%E5%8C%96/</guid>
-        
-        <category>iOS</category>
-        
-        <category>适配</category>
-        
-        
-        <category>iOS</category>
-        
-      </item>
-    
-      <item>
-        <title>iOS 11 与 iPhone X 的适配</title>
+        <title>iOS开发之适配</title>
         <description>iOS 11 与 iPhone X 的适配问题</description>
         <pubDate>Mon, 20 Nov 2017 17:14:54 +0800</pubDate>
         <link>https://yjyuanshuai.github.io/2017/11/20/iOS-11+iPhone-X-%E9%80%82%E9%85%8D/</link>
@@ -110,6 +134,22 @@
       </item>
     
       <item>
+        <title>Java</title>
+        <description>试卷生成系统，是用 Java 实现的小项目，在此记录下主要需求，实现的主要技术和过程。</description>
+        <pubDate>Mon, 06 Nov 2017 17:14:54 +0800</pubDate>
+        <link>https://yjyuanshuai.github.io/2017/11/06/%E8%AF%95%E5%8D%B7%E7%94%9F%E6%88%90%E7%B3%BB%E7%BB%9F/</link>
+        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/11/06/%E8%AF%95%E5%8D%B7%E7%94%9F%E6%88%90%E7%B3%BB%E7%BB%9F/</guid>
+        
+        <category>Java</category>
+        
+        
+        <category>Java</category>
+        
+        <category>项目</category>
+        
+      </item>
+    
+      <item>
         <title>iOS 开发技术总结</title>
         <description>iOS 开发技术总结</description>
         <pubDate>Mon, 06 Nov 2017 17:14:54 +0800</pubDate>
@@ -135,33 +175,6 @@
         <category>iOS</category>
         
         <category>UICollectionView布局</category>
-        
-        
-        <category>iOS</category>
-        
-      </item>
-    
-      <item>
-        <title>自定义collectionview布局之瀑布流</title>
-        <description>
-</description>
-        <pubDate>Thu, 03 Aug 2017 00:00:00 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/</guid>
-        
-        
-      </item>
-    
-      <item>
-        <title>iOS Keychain</title>
-        <description>iOS 钥匙串存储</description>
-        <pubDate>Mon, 24 Jul 2017 17:14:54 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2017/07/24/Keychain/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/07/24/Keychain/</guid>
-        
-        <category>iOS</category>
-        
-        <category>数据存储</category>
         
         
         <category>iOS</category>

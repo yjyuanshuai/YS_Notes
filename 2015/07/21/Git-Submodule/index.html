@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Git终端命令(进阶使用)</title>
-    <meta name="description" content="Git终端命令，进阶应用">
+    <title>Git Submodule</title>
+    <meta name="description" content="在实际开发中，想将可以通用的模块抽离出来，独自整成一个仓库，方便引用。这就需要用到子项目（Submodule）了。">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2015/07/15/Git%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4(%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8)/">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2015/07/21/Git-Submodule/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
 
 
@@ -158,11 +158,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Git终端命令(进阶使用)</h1>
+        <h1>Git Submodule</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2015-07-15
+                <i class="fa fa-calendar"></i>2015-07-21
             </div>
 
             <div class="label-card">
@@ -212,188 +212,18 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#一查看改动" id="markdown-toc-一查看改动">一、查看改动</a>    <ul>
-      <li><a href="#1查看当前仓库状态" id="markdown-toc-1查看当前仓库状态">1、查看当前仓库状态</a></li>
-      <li><a href="#2查看改动的内容" id="markdown-toc-2查看改动的内容">2、查看改动的内容</a></li>
-    </ul>
-  </li>
-  <li><a href="#二版本回退" id="markdown-toc-二版本回退">二、版本回退</a>    <ul>
-      <li><a href="#1查看log" id="markdown-toc-1查看log">1、查看log</a></li>
-      <li><a href="#2版本回退" id="markdown-toc-2版本回退">2、版本回退</a>        <ul>
-          <li><a href="#1向前回退" id="markdown-toc-1向前回退">1）向前回退</a></li>
-          <li><a href="#2向后回退" id="markdown-toc-2向后回退">2）向后回退</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
-  <li><a href="#三撤销--删除" id="markdown-toc-三撤销--删除">三、撤销 / 删除</a>    <ul>
-      <li><a href="#1撤销修改commit之前" id="markdown-toc-1撤销修改commit之前">1、撤销修改（commit之前）</a></li>
-      <li><a href="#2删除文件" id="markdown-toc-2删除文件">2、删除文件</a></li>
-    </ul>
-  </li>
-  <li><a href="#四解决冲突" id="markdown-toc-四解决冲突">四、解决冲突</a>    <ul>
-      <li><a href="#1查看冲突的文件" id="markdown-toc-1查看冲突的文件">1、查看冲突的文件</a></li>
-      <li><a href="#2查看分支合并图" id="markdown-toc-2查看分支合并图">2、查看分支合并图</a></li>
-      <li><a href="#3bug-分支stash" id="markdown-toc-3bug-分支stash">3、bug 分支（stash）</a></li>
-    </ul>
-  </li>
-  <li><a href="#五git-的-submodule-使用" id="markdown-toc-五git-的-submodule-使用">五、Git 的 submodule 使用</a></li>
+  <li><a href="#submodule-简介" id="markdown-toc-submodule-简介">Submodule 简介</a></li>
+  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
 </ul>
 
-<h2 id="一查看改动">一、查看改动</h2>
+<h2 id="submodule-简介">Submodule 简介</h2>
 
-<h3 id="1查看当前仓库状态">1、查看当前仓库状态</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
-</code></pre></div></div>
-
-<p>有需要提交的改动 / 冲突时，会有提示。</p>
-
-<h3 id="2查看改动的内容">2、查看改动的内容</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git diff 文件名
-</code></pre></div></div>
-
-<p><img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_03_01.png" alt="" /></p>
+<p>git Submodule 是一个很好的多项目使用共同类库的工具，他允许类库项目做为repository,子项目做为一个单独的git项目存在父项目中，子项目可以有自己的独立的commit，push，pull。而父项目以Submodule的形式包含子项目，父项目可以指定子项目header，父项目中会的提交信息包含Submodule的信息，再clone父项目的时候可以把Submodule初始化。</p>
 
 <hr />
+<h2 id="相关链接">相关链接</h2>
 
-<h2 id="二版本回退">二、版本回退</h2>
-
-<h3 id="1查看log">1、查看log</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log
-
-// 获取简要的 log
-git log --pretty=oneline
-</code></pre></div></div>
-
-<p><img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_03_02.png" alt="" /></p>
-
-<h3 id="2版本回退">2、版本回退</h3>
-<h4 id="1向前回退">1）向前回退</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 回退到上一个版本
-git reset --hard HEAD^
-
-// 回退到上上的版本，以此推类
-git reset --hard HEAD^^
-
-// 回退到前100个版本，以此推类
-git reset --hard HEAD~100
-</code></pre></div></div>
-
-<p><img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_03_03.png" alt="" /></p>
-
-<h4 id="2向后回退">2）向后回退</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 获取版本号
-git reflog
-
-// 回退到对应版本
-git reset --hard 版本号
-</code></pre></div></div>
-
-<p><img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_03_04.png" alt="" /></p>
-
-<hr />
-
-<h2 id="三撤销--删除">三、撤销 / 删除</h2>
-<h3 id="1撤销修改commit之前">1、撤销修改（commit之前）</h3>
-
-<p>1）手动将文件修改回去；</p>
-
-<p>2）按上面的方法，回退版本；</p>
-
-<p>3）使用撤销命令。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout --文件名
-</code></pre></div></div>
-
-<p>checkout –文件名的意思是把文件在工作区做的修改全部撤销，有两种情况。</p>
-
-<ul>
-  <li>
-    <p>文件修改，还未放到暂存区，撤销即回到和版本库一样的状态；
-<img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_03_05.png" alt="" /></p>
-  </li>
-  <li>
-    <p>已放入暂存区，后又做了修改，撤销即回到添加暂存区后的状态。
-<img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_03_06.png" alt="" /></p>
-  </li>
-</ul>
-
-<blockquote>
-  <p>注意：“– 文件名”，是2横，且与文件名间有空隙。</p>
-</blockquote>
-
-<h3 id="2删除文件">2、删除文件</h3>
-<p>1）手动删除；</p>
-
-<p>2）终端命令；</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rm test3.txt
-</code></pre></div></div>
-
-<p>若想在版本库中删除，删完commit即可。</p>
-
-<p>__ WT __ ：是否 commit 后就不能再撤销了？？</p>
-
-<hr />
-
-<h2 id="四解决冲突">四、解决冲突</h2>
-
-<h3 id="1查看冲突的文件">1、查看冲突的文件</h3>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
-</code></pre></div></div>
-
-<p>打开冲突文件，修改 «««&lt; ======= »»&gt; 中的冲突部分，再提交</p>
-
-<h3 id="2查看分支合并图">2、查看分支合并图</h3>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log --graph
-</code></pre></div></div>
-
-<h3 id="3bug-分支stash">3、bug 分支（stash）</h3>
-
-<p>当你接到一个修复一个代号101的bug的任务时，很自然地，你想创建一个分支issue-101来修复它，但是，等等，当前正在dev上进行的工作还没有提交.</p>
-
-<p>并不是你不想提交，而是工作只进行到一半，还没法提交，预计完成还需1天时间。但是，必须在两个小时内修复该bug，怎么办？</p>
-
-<p>幸好，Git还提供了一个stash功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作：</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash
-</code></pre></div></div>
-
-<p>现在，用git status查看工作区，就是干净的（除非有没有被Git管理的文件），因此可以放心地创建分支来修复bug。</p>
-
-<p>bug 修改完成后，要继续之前打断的工作。</p>
-
-<p>查看被保存的现场：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash list
-// stash@{0}: WIP on dev: 6224937 add merge
-</code></pre></div></div>
-<p>恢复现场：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash apply   // 恢复
-git stash drop    // 删除记录
-</code></pre></div></div>
-
-<p>相当于：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash list
-</code></pre></div></div>
-
-<p>当有多个 stash 时，可以恢复到指定的：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash apply stash@{0}
-</code></pre></div></div>
-
-<hr />
-
-<h2 id="五git-的-submodule-使用">五、Git 的 submodule 使用</h2>
-
-<p>相关链接：</p>
-
-<p><a href="http://blog.csdn.net/wangjia55/article/details/24400501">git submodule的使用</a></p>
-
-<p><a href="http://www.open-open.com/lib/view/open1396404725356.html">git submodule的详细使用</a></p>
-
-<p><a href="http://www.tuicool.com/articles/jqiEJzU">git submodule使用简介</a></p>
-
-<hr />
+<p><a href="https://segmentfault.com/a/1190000003076028">Git Submodule</a></p>
 
         </article>
         <hr>
@@ -511,13 +341,13 @@ git stash drop    // 删除记录
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2015/07/15/Git%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4(%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8)/">Git终端命令(基本使用)</a></p>
+        <p><strong>上一篇</strong> <a href="/2015/07/21/Git%E5%90%8C%E6%97%B6push%E5%88%B0%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">Git push到多个仓库</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2015/07/21/Git%E5%90%8C%E6%97%B6push%E5%88%B0%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">Git push到多个仓库</a></p>
+        <p><strong>下一篇</strong> <a href="/2015/11/07/Apple%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A6%E5%8F%B7%E7%94%B3%E8%AF%B7/">Apple Developer账号申请</a></p>
         
     </div>
 </div>
