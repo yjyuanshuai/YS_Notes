@@ -5,8 +5,8 @@
     <description></description>
     <link>https://yjyuanshuai.github.io/</link>
     <atom:link href="https://yjyuanshuai.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Wed, 10 Jan 2018 16:50:17 +0800</pubDate>
-    <lastBuildDate>Wed, 10 Jan 2018 16:50:17 +0800</lastBuildDate>
+    <pubDate>Fri, 12 Jan 2018 16:51:28 +0800</pubDate>
+    <lastBuildDate>Fri, 12 Jan 2018 16:51:28 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
@@ -158,7 +158,9 @@ http://www.cocoachina.com/ios/20150127/11022.html
         
         <category>iOS</category>
         
-        <category>UICollectionView布局</category>
+        <category>UICollectionView</category>
+        
+        <category>自定义</category>
         
         
         <category>iOS</category>

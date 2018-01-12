@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>FMDB使用</title>
+    <meta name="description" content="FMDB 在开发过程中的使用。">
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <!-- 菜单前的图标，需要下面这句 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2016/04/08/FMDB%E4%BD%BF%E7%94%A8/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?cf8506e0ef223e57ff6239944e5d46a4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-72449510-4', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
+    "HTML-CSS": {
+      linebreaks: { automatic: true, width: "container" }
+    }
+});
+</script>
+<!-- <script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+</head>
+
+ 
+  <body>
+
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">YJ`s notes</a>
+        <small></small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>类别
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>标签
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>关于我
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>FMDB使用</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2016-04-08
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
+        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
+    
+        <!--a href="/tag/#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93" title="Tag: 第三方库" rel="tag">第三方库</a-->
+        <a href="/tag/#第三方库" title="Tag: 第三方库" rel="tag">第三方库</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#简介" id="markdown-toc-简介">简介</a></li>
+  <li><a href="#基本结构" id="markdown-toc-基本结构">基本结构</a>    <ul>
+      <li><a href="#核心类" id="markdown-toc-核心类">核心类</a></li>
+      <li><a href="#数据库路径" id="markdown-toc-数据库路径">数据库路径</a></li>
+    </ul>
+  </li>
+  <li><a href="#使用" id="markdown-toc-使用">使用</a>    <ul>
+      <li><a href="#数据库队列" id="markdown-toc-数据库队列">数据库队列</a></li>
+      <li><a href="#更新--查询" id="markdown-toc-更新--查询">更新 &amp; 查询</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="简介">简介</h2>
+
+<p>在 iOS 实际开发过程中，常需要本地缓存数据，sqlite是一种轻量级的数据库，非常适用于移动端的数据缓存。iOS 提供的方法过于复杂，所以我们会考虑使用第三方库，<a href="https://github.com/ccgus/fmdb">FMDB</a>是最常用的 sqlite 第三方库。</p>
+
+<h2 id="基本结构">基本结构</h2>
+<h3 id="核心类">核心类</h3>
+
+<ul>
+  <li>FMDatabase
+    <blockquote>
+      <p>一个FMDatabase对象就代表一个单独的SQLite数据库</p>
+    </blockquote>
+  </li>
+</ul>
+
+<blockquote>
+  <p>用来执行SQL语句</p>
+</blockquote>
+
+<ul>
+  <li>FMResultSet</li>
+  <li>FMDatabaseQueue</li>
+</ul>
+
+<blockquote>
+  <p>用于在多线程中执行多个查询或更新，它是线程安全的</p>
+</blockquote>
+
+<h3 id="数据库路径">数据库路径</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">FMDatabase</span> <span class="o">*</span><span class="n">db</span> <span class="o">=</span> <span class="p">[</span><span class="n">FMDatabase</span> <span class="n">databaseWithPath</span><span class="p">:</span><span class="n">path</span><span class="p">];</span>
+
+<span class="k">if</span> <span class="p">(</span><span class="err">!</span><span class="p">[</span><span class="n">db</span> <span class="nb">open</span><span class="p">])</span> <span class="p">{</span>
+
+    <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">"数据库打开失败！"</span><span class="p">);</span>
+
+<span class="p">}</span>
+
+</code></pre></div></div>
+
+<p>文件路径（3种）：</p>
+
+<ul>
+  <li>
+    <p>具体文件路径，如果不存在会自动创建</p>
+  </li>
+  <li>
+    <p>空字符串@”“，会在临时目录创建一个空的数据库，当FMDatabase连接关闭时，数据库文件也被删除。</p>
+  </li>
+  <li>
+    <p>nil，会创建一个内存中临时数据库，当FMDatabase连接关闭时，数据库会被销毁。</p>
+  </li>
+</ul>
+
+<p>事务</p>
+
+<blockquote>
+  <p>把多条语句放到同一个事务中，要么全部成功，要不全部失败（如果中途出现问题，那么会自动回滚）。事务的执行具有原子性。</p>
+</blockquote>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">//</span><span class="err">插入数据</span>
+<span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">queue</span> <span class="n">inDatabase</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">FMDatabase</span> <span class="o">*</span><span class="n">db</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">db</span> <span class="n">beginTransaction</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s">"INSERT INTO t_person (name, age) VALUES (?, ?);"</span><span class="p">,</span><span class="err">@</span><span class="s">"wendingding"</span><span class="p">,</span> <span class="err">@</span><span class="mi">22</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s">"INSERT INTO t_person (name, age) VALUES (?, ?);"</span><span class="p">,</span><span class="err">@</span><span class="s">"wendingding"</span><span class="p">,</span> <span class="err">@</span><span class="mi">23</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s">"INSERT INTO t_person (name, age) VALUES (?, ?);"</span><span class="p">,</span><span class="err">@</span><span class="s">"wendingding"</span><span class="p">,</span> <span class="err">@</span><span class="mi">24</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s">"INSERT INTO t_person (name, age) VALUES (?, ?);"</span><span class="p">,</span><span class="err">@</span><span class="s">"wendingding"</span><span class="p">,</span> <span class="err">@</span><span class="mi">25</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">db</span> <span class="n">commit</span><span class="p">];</span>
+<span class="p">}];</span>
+
+</code></pre></div></div>
+
+<p>如果中途出现问题，那么会自动回滚，也可以选择手动回滚。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">//</span><span class="err">插入数据</span>
+<span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">queue</span> <span class="n">inDatabase</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">FMDatabase</span> <span class="o">*</span><span class="n">db</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">db</span> <span class="n">beginTransaction</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s">"INSERT INTO t_person (name, age) VALUES (?, ?);"</span><span class="p">,</span><span class="err">@</span><span class="s">"wendingding"</span><span class="p">,</span> <span class="err">@</span><span class="mi">22</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s">"INSERT INTO t_person (name, age) VALUES (?, ?);"</span><span class="p">,</span><span class="err">@</span><span class="s">"wendingding"</span><span class="p">,</span> <span class="err">@</span><span class="mi">23</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s">"INSERT INTO t_person (name, age) VALUES (?, ?);"</span><span class="p">,</span><span class="err">@</span><span class="s">"wendingding"</span><span class="p">,</span> <span class="err">@</span><span class="mi">24</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">db</span> <span class="n">rollback</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s">"INSERT INTO t_person (name, age) VALUES (?, ?);"</span><span class="p">,</span><span class="err">@</span><span class="s">"wendingding"</span><span class="p">,</span> <span class="err">@</span><span class="mi">25</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">db</span> <span class="n">commit</span><span class="p">];</span>
+<span class="p">}];</span>
+
+</code></pre></div></div>
+
+<p>上面的代码。前三条插入语句是作废的。</p>
+
+<p>事务的另一种方式：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">queue</span> <span class="n">inTransaction</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">FMDatabase</span> <span class="o">*</span><span class="n">db</span><span class="p">,</span> <span class="n">BOOL</span> <span class="o">*</span><span class="n">rollback</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s">"INSERT INTO t_person (name, age) VALUES (?, ?);"</span><span class="p">,</span><span class="err">@</span><span class="s">"wendingding"</span><span class="p">,</span> <span class="err">@</span><span class="mi">22</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s">"INSERT INTO t_person (name, age) VALUES (?, ?);"</span><span class="p">,</span><span class="err">@</span><span class="s">"wendingding"</span><span class="p">,</span> <span class="err">@</span><span class="mi">23</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s">"INSERT INTO t_person (name, age) VALUES (?, ?);"</span><span class="p">,</span><span class="err">@</span><span class="s">"wendingding"</span><span class="p">,</span> <span class="err">@</span><span class="mi">24</span><span class="p">];</span>
+<span class="p">}];</span>
+
+</code></pre></div></div>
+
+<h2 id="使用">使用</h2>
+
+<blockquote>
+  <p>libsqlite</p>
+</blockquote>
+
+<h3 id="数据库队列">数据库队列</h3>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">//</span> <span class="mi">1</span><span class="err">、获取文件路径</span>
+
+<span class="n">NSString</span> <span class="o">*</span><span class="n">doc</span><span class="o">=</span><span class="p">[</span><span class="n">NSSearchPathForDirectoriesInDomains</span><span class="p">(</span><span class="n">NSDocumentDirectory</span><span class="p">,</span> <span class="n">NSUserDomainMask</span><span class="p">,</span> <span class="n">YES</span><span class="p">)</span> <span class="n">lastObject</span><span class="p">];</span>
+
+<span class="n">NSString</span> <span class="o">*</span><span class="n">fileName</span><span class="o">=</span><span class="p">[</span><span class="n">doc</span> <span class="n">stringByAppendingPathComponent</span><span class="p">:</span><span class="err">@</span><span class="s">"person.sqlite"</span><span class="p">];</span>
+
+
+<span class="o">//</span> <span class="mi">2</span><span class="err">、获取队列</span>
+
+<span class="n">FMDatabaseQueue</span> <span class="o">*</span><span class="n">queue</span><span class="o">=</span><span class="p">[</span><span class="n">FMDatabaseQueue</span> <span class="n">databaseQueueWithPath</span><span class="p">:</span><span class="n">fileName</span><span class="p">];</span>
+
+<span class="o">//</span> <span class="mi">3</span><span class="err">、打开数据库</span>
+<span class="p">[</span><span class="n">queue</span> <span class="n">inDatabase</span><span class="p">:</span><span class="o">^</span><span class="p">(</span><span class="n">FMDatabase</span> <span class="o">*</span><span class="n">db</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">BOOL</span> <span class="n">result</span><span class="o">=</span><span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s">"CREATE TABLE IF NOT EXISTS t_person (id integer PRIMARY KEY AUTOINCREMENT, name text NOT NULL, age integer NOT NULL);"</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">result</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">"创表成功"</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="n">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s">"创表失败"</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}];</span>
+
+</code></pre></div></div>
+
+<h3 id="更新--查询">更新 &amp; 查询</h3>
+
+<p>1、更新（create、drop、insert、update、delete等）</p>
+
+<p>-(BOOL)executeUpdate:(NSString*)sql, …</p>
+
+<p>-(BOOL)executeUpdateWithFormat:(NSString*)format, …</p>
+
+<p>-(BOOL)executeUpdate:(NSString*)sql withArgumentsInArray:(NSArray *)arguments</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s">"UPDATE t_student SET age = ? WHERE name = ?;"</span><span class="p">,</span> <span class="err">@</span><span class="mi">20</span><span class="p">,</span> <span class="err">@</span><span class="s">"Jack"</span><span class="p">]</span>
+
+</code></pre></div></div>
+
+<p>2、查询</p>
+
+<p>-(FMResultSet <em>)executeQuery:(NSString</em>)sql, …</p>
+
+<p>-(FMResultSet <em>)executeQueryWithFormat:(NSString</em>)format, …</p>
+
+<p>-(FMResultSet *)executeQuery:(NSString *)sql withArgumentsInArray:(NSArray *)arguments</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">FMResultSet</span> <span class="o">*</span><span class="n">rs</span> <span class="o">=</span> <span class="p">[</span><span class="n">db</span> <span class="n">executeQuery</span><span class="p">:</span><span class="err">@</span><span class="s">"SELECT * FROM t_student"</span><span class="p">];</span>
+<span class="k">while</span> <span class="p">([</span><span class="n">rs</span> <span class="nb">next</span><span class="p">])</span> <span class="p">{</span>
+
+    <span class="n">NSString</span> <span class="o">*</span><span class="n">name</span> <span class="o">=</span> <span class="p">[</span><span class="n">rs</span> <span class="n">stringForColumn</span><span class="p">:</span><span class="err">@</span><span class="s">"name"</span><span class="p">];</span>
+
+    <span class="nb">int</span> <span class="n">age</span> <span class="o">=</span> <span class="p">[</span><span class="n">rs</span> <span class="n">intForColumn</span><span class="p">:</span><span class="err">@</span><span class="s">"age"</span><span class="p">];</span>
+
+    <span class="n">double</span> <span class="n">score</span> <span class="o">=</span> <span class="p">[</span><span class="n">rs</span> <span class="n">doubleForColumn</span><span class="p">:</span><span class="err">@</span><span class="s">"score"</span><span class="p">];</span>
+
+<span class="p">}</span>
+</code></pre></div></div>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/01/08/SDK/">SDK
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/01/04/%E7%BB%84%E4%BB%B6%E5%8C%96/">组件化
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/20/iOS-11+iPhone-X-%E9%80%82%E9%85%8D/">iOS开发之适配
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/">iOS WWDC更新总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2016/03/04/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">iOS 多线程</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2016/04/08/Masonry%E4%BD%BF%E7%94%A8/">Masonry使用</a></p>
+        
+    </div>
+</div>
+
+
+        <h2 id="comments">Comments</h2>
+        
+
+
+
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
+                    
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            <!-- Contact me at: -->
+            
+            <a href="https://github.com/yjyuanshuai" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a> 
+            
+            <a href="mailto:TimerYJ@163.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> 
+            
+            <a href="http://weibo.com/2480605254" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a> 
+            
+            
+            
+            
+            
+        </p>
+        <!-- <p>
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p> -->
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<!-- <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+    </script>
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>
