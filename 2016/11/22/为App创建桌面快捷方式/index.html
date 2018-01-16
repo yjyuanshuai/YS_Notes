@@ -9,6 +9,9 @@
     <title>为 App 创建桌面快捷方式</title>
     <meta name="description" content="为 App 创建桌面快捷方式，点击快捷方式时，拉起应用到指定页面。">
 
+    <!-- 高亮 -->
+    <link href="/css/rouge.css" rel="stylesheet"/>
+
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <!-- 菜单前的图标，需要下面这句 -->
@@ -250,14 +253,14 @@
 <p>用于内嵌一些小的图片等内容，减少 HTTP 请求。</p>
 
 <p>URI 语法：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;img src="data:image/png;base64;iVB0..."&gt;
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">img</span> <span class="n">src</span><span class="o">=</span><span class="s2">"data:image/png;base64;iVB0..."</span><span class="o">&gt;</span>
 </code></pre></div></div>
 
 <p>语法分析：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data: 取数据协议名称，此处为 image/png
-image/png: 数据类型名称
-base64: 数据的编码方法
-iVBOR...: 编码后的数据
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="ss">data: </span><span class="err">取数据协议名称，此处为</span> <span class="n">image</span><span class="o">/</span><span class="n">png</span>
+<span class="n">image</span><span class="o">/</span><span class="ss">png: </span><span class="err">数据类型名称</span>
+<span class="ss">base64: </span><span class="err">数据的编码方法</span>
+<span class="n">iVBOR</span><span class="o">...</span><span class="p">:</span> <span class="err">编码后的数据</span>
 </code></pre></div></div>
 
 <h3 id="2base64">2、Base64</h3>
@@ -270,35 +273,35 @@ iVBOR...: 编码后的数据
 
 <h3 id="2核心代码">2、核心代码</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (IBAction)action:(id)sender
-{
-    [DDLog addLogger:[DDTTYLogger sharedInstance]];
-    _httpServer = [[HTTPServer alloc] init];
-    [_httpServer setType:@"_http._tcp."];
-    NSString *webPath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:@"Web"];
-    DDLogInfo(@"Setting document root: %@", webPath);
-    [_httpServer setDocumentRoot:webPath];
-    [self startServer];
-}
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span> <span class="p">(</span><span class="no">IBAction</span><span class="p">)</span><span class="n">action</span><span class="p">:(</span><span class="nb">id</span><span class="p">)</span><span class="n">sender</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="no">DDLog</span> <span class="n">addLogger</span><span class="p">:[</span><span class="no">DDTTYLogger</span> <span class="n">sharedInstance</span><span class="p">]];</span>
+    <span class="n">_httpServer</span> <span class="o">=</span> <span class="p">[[</span><span class="no">HTTPServer</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">_httpServer</span> <span class="n">setType</span><span class="p">:</span><span class="err">@</span><span class="s2">"_http._tcp."</span><span class="p">];</span>
+    <span class="no">NSString</span> <span class="o">*</span><span class="n">webPath</span> <span class="o">=</span> <span class="p">[[[</span><span class="no">NSBundle</span> <span class="n">mainBundle</span><span class="p">]</span> <span class="n">resourcePath</span><span class="p">]</span> <span class="n">stringByAppendingPathComponent</span><span class="p">:</span><span class="err">@</span><span class="s2">"Web"</span><span class="p">];</span>
+    <span class="no">DDLogInfo</span><span class="p">(</span><span class="err">@</span><span class="s2">"Setting document root: %@"</span><span class="p">,</span> <span class="n">webPath</span><span class="p">);</span>
+    <span class="p">[</span><span class="n">_httpServer</span> <span class="n">setDocumentRoot</span><span class="ss">:webPath</span><span class="p">];</span>
+    <span class="p">[</span><span class="nb">self</span> <span class="n">startServer</span><span class="p">];</span>
+<span class="p">}</span>
 
 
-- (void)startServer
-{
-    // Start the server (and check for problems)
+<span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">startServer</span>
+<span class="p">{</span>
+    <span class="sr">//</span> <span class="no">Start</span> <span class="n">the</span> <span class="n">server</span> <span class="p">(</span><span class="n">and</span> <span class="n">check</span> <span class="k">for</span> <span class="n">problems</span><span class="p">)</span>
 
-    NSError *error;
-    if([_httpServer start:&amp;error])
-    {
-        DDLogInfo(@"Started HTTP Server on port %hu", [_httpServer listeningPort]);
-        // open the url.
-        NSString *urlStrWithPort = [NSString stringWithFormat:@"http://localhost:%d",[_httpServer listeningPort]];
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:urlStrWithPort]];
-    }
-    else
-    {
-        DDLogError(@"Error starting HTTP Server: %@", error);
-    }
-}
+    <span class="no">NSError</span> <span class="o">*</span><span class="n">error</span><span class="p">;</span>
+    <span class="k">if</span><span class="p">([</span><span class="n">_httpServer</span> <span class="n">start</span><span class="ss">:&amp;</span><span class="n">error</span><span class="p">])</span>
+    <span class="p">{</span>
+        <span class="no">DDLogInfo</span><span class="p">(</span><span class="err">@</span><span class="s2">"Started HTTP Server on port %hu"</span><span class="p">,</span> <span class="p">[</span><span class="n">_httpServer</span> <span class="n">listeningPort</span><span class="p">]);</span>
+        <span class="sr">//</span> <span class="nb">open</span> <span class="n">the</span> <span class="n">url</span><span class="o">.</span>
+        <span class="no">NSString</span> <span class="o">*</span><span class="n">urlStrWithPort</span> <span class="o">=</span> <span class="p">[</span><span class="no">NSString</span> <span class="n">stringWithFormat</span><span class="p">:</span><span class="err">@</span><span class="s2">"http://localhost:%d"</span><span class="p">,[</span><span class="n">_httpServer</span> <span class="n">listeningPort</span><span class="p">]];</span>
+        <span class="p">[[</span><span class="no">UIApplication</span> <span class="n">sharedApplication</span><span class="p">]</span> <span class="n">openURL</span><span class="p">:[</span><span class="no">NSURL</span> <span class="no">URLWithString</span><span class="ss">:urlStrWithPort</span><span class="p">]];</span>
+    <span class="p">}</span>
+    <span class="k">else</span>
+    <span class="p">{</span>
+        <span class="no">DDLogError</span><span class="p">(</span><span class="err">@</span><span class="s2">"Error starting HTTP Server: %@"</span><span class="p">,</span> <span class="n">error</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="3html-文件">3、html 文件</h3>
@@ -570,6 +573,10 @@ iVBOR...: 编码后的数据
             
         
             
+            
+                
+                    
+                
             
         
         

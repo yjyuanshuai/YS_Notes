@@ -9,6 +9,9 @@
     <title>iOS 内存管理</title>
     <meta name="description" content="iOS内存管理，包括 ARC、MRC、属性修饰符等。">
 
+    <!-- 高亮 -->
+    <link href="/css/rouge.css" rel="stylesheet"/>
+
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <!-- 菜单前的图标，需要下面这句 -->
@@ -264,32 +267,32 @@
   <li>不需要自己持有的对象时，释放</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    id obj = [NSMutableArray array];  
-    [obj retain];
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">id</span> <span class="n">obj</span> <span class="o">=</span> <span class="p">[</span><span class="no">NSMutableArray</span> <span class="n">array</span><span class="p">];</span>  
+    <span class="p">[</span><span class="n">obj</span> <span class="n">retain</span><span class="p">];</span>
 
-// 当obj不在需要持有的对象，那么，obj应该发送release消息
-    [obj release];
+<span class="sr">//</span> <span class="err">当</span><span class="n">obj</span><span class="err">不在需要持有的对象，那么，</span><span class="n">obj</span><span class="err">应该发送</span><span class="n">release</span><span class="err">消息</span>
+    <span class="p">[</span><span class="n">obj</span> <span class="n">release</span><span class="p">];</span>
 </code></pre></div></div>
 
 <ul>
   <li>非自己持有的对象，无法释放</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    // 1. 释放一个已经释放的对象
-    id obj = [[NSObject alloc] init];
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="sr">//</span> <span class="mi">1</span><span class="o">.</span> <span class="err">释放一个已经释放的对象</span>
+    <span class="nb">id</span> <span class="n">obj</span> <span class="o">=</span> <span class="p">[[</span><span class="no">NSObject</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
 
-    // 已经释放对象
-    [obj release];
+    <span class="sr">//</span> <span class="err">已经释放对象</span>
+    <span class="p">[</span><span class="n">obj</span> <span class="n">release</span><span class="p">];</span>
 
-    // 释放了对象还进行释放
-    [obj release];
+    <span class="sr">//</span> <span class="err">释放了对象还进行释放</span>
+    <span class="p">[</span><span class="n">obj</span> <span class="n">release</span><span class="p">];</span>
 
 
-    // 2. 释放一个不属于自己的对象
-    id obj1 = [obj object];
+    <span class="sr">//</span> <span class="mi">2</span><span class="o">.</span> <span class="err">释放一个不属于自己的对象</span>
+    <span class="nb">id</span> <span class="n">obj1</span> <span class="o">=</span> <span class="p">[</span><span class="n">obj</span> <span class="n">object</span><span class="p">];</span>
 
-    // obj1没有进行retain操作而进行release操作，使得obj持有对象释放，造成了野指针错误
-    [obj1 release];
+    <span class="sr">//</span> <span class="n">obj1</span><span class="err">没有进行</span><span class="n">retain</span><span class="err">操作而进行</span><span class="n">release</span><span class="err">操作，使得</span><span class="n">obj</span><span class="err">持有对象释放，造成了野指针错误</span>
+    <span class="p">[</span><span class="n">obj1</span> <span class="n">release</span><span class="p">];</span>
 </code></pre></div></div>
 
 <h3 id="关键字">关键字</h3>
@@ -323,132 +326,132 @@
 
 <h4 id="1alloc">1）alloc</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>id obj = [[NSObject alloc] init];
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">id</span> <span class="n">obj</span> <span class="o">=</span> <span class="p">[[</span><span class="no">NSObject</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
 
-+ (id)alloc {
-  return [self allocWithZone:NSDefaultMallocZone()];
-}
+<span class="o">+</span> <span class="p">(</span><span class="nb">id</span><span class="p">)</span><span class="n">alloc</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">allocWithZone</span><span class="ss">:NSDefaultMallocZone</span><span class="p">()];</span>
+<span class="p">}</span>
 
-+ (id)allocWithZone:(NSZone*)z {
+<span class="o">+</span> <span class="p">(</span><span class="nb">id</span><span class="p">)</span><span class="n">allocWithZone</span><span class="p">:(</span><span class="no">NSZone</span><span class="o">*</span><span class="p">)</span><span class="n">z</span> <span class="p">{</span>
 
-  // 调用NSAllocateObject函数对内存进行分配
-  return NSAllocateObject(self,0,z);
-}
+  <span class="sr">//</span> <span class="err">调用</span><span class="no">NSAllocateObject</span><span class="err">函数对内存进行分配</span>
+  <span class="k">return</span> <span class="no">NSAllocateObject</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">z</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h4 id="2retainreleaseretaincount">2）retain、release、retainCount</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (NSUInteger)retainCount
-{
-    return (NSUInteger)__CFDoExternRefOperation(OPERATION_retainCount,self);
-}
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span> <span class="p">(</span><span class="no">NSUInteger</span><span class="p">)</span><span class="n">retainCount</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="no">NSUInteger</span><span class="p">)</span><span class="n">__CFDoExternRefOperation</span><span class="p">(</span><span class="no">OPERATION_retainCount</span><span class="p">,</span><span class="nb">self</span><span class="p">);</span>
+<span class="p">}</span>
 
-- (id)retain
-{
-    return (id)__CFDoExternRefOperation(OPERATION_retain,self);
-}
+<span class="o">-</span> <span class="p">(</span><span class="nb">id</span><span class="p">)</span><span class="n">retain</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="nb">id</span><span class="p">)</span><span class="n">__CFDoExternRefOperation</span><span class="p">(</span><span class="no">OPERATION_retain</span><span class="p">,</span><span class="nb">self</span><span class="p">);</span>
+<span class="p">}</span>
 
-- (void)release
-{
-    return __CFDoExternRefOperation(OPERATION_release,self);
-}
+<span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">release</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="n">__CFDoExternRefOperation</span><span class="p">(</span><span class="no">OPERATION_release</span><span class="p">,</span><span class="nb">self</span><span class="p">);</span>
+<span class="p">}</span>
 
-int __CFDoExternRefOperation(uintptr_r op,id obj) {
+<span class="n">int</span> <span class="n">__CFDoExternRefOperation</span><span class="p">(</span><span class="n">uintptr_r</span> <span class="n">op</span><span class="p">,</span><span class="nb">id</span> <span class="n">obj</span><span class="p">)</span> <span class="p">{</span>
 
-    // 获取引用计数表
-    CFBasicHashRef table = 取得对象对应的散列表(obj);
-    int count;
+    <span class="sr">//</span> <span class="err">获取引用计数表</span>
+    <span class="no">CFBasicHashRef</span> <span class="n">table</span> <span class="o">=</span> <span class="err">取得对象对应的散列表</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+    <span class="n">int</span> <span class="n">count</span><span class="p">;</span>
 
-    switch(op) {
-        case OPERATION_retainCount:
+    <span class="n">switch</span><span class="p">(</span><span class="n">op</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">case</span> <span class="no">OPERATION_retainCount</span><span class="p">:</span>
 
-            // 返回引用计数数值
-            count = CFBasicHashGetCountOfKey(table,obj);
-                return count;
+            <span class="sr">//</span> <span class="err">返回引用计数数值</span>
+            <span class="n">count</span> <span class="o">=</span> <span class="no">CFBasicHashGetCountOfKey</span><span class="p">(</span><span class="n">table</span><span class="p">,</span><span class="n">obj</span><span class="p">);</span>
+                <span class="k">return</span> <span class="n">count</span><span class="p">;</span>
 
-            // 引用计数 + 1
-            case OPERATION_retain:
-                CFBasicHashAddValue(table,obj);
-                return obj;
+            <span class="sr">//</span> <span class="err">引用计数</span> <span class="o">+</span> <span class="mi">1</span>
+            <span class="k">case</span> <span class="no">OPERATION_retain</span><span class="p">:</span>
+                <span class="no">CFBasicHashAddValue</span><span class="p">(</span><span class="n">table</span><span class="p">,</span><span class="n">obj</span><span class="p">);</span>
+                <span class="k">return</span> <span class="n">obj</span><span class="p">;</span>
 
-            // 引用计数 - 1
-            case OPERATION_release:
+            <span class="sr">//</span> <span class="err">引用计数</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="k">case</span> <span class="no">OPERATION_release</span><span class="p">:</span>
 
-                // CFBasicHashRemoveValue 中引用计数为0时会调用 dealloc，从而调用 NDDeallocateObject、free函数，释放内存
-                count = CFBasicHashRemoveValue(table,obj):
-                return 0 == count;
-        }
-}
+                <span class="sr">//</span> <span class="no">CFBasicHashRemoveValue</span> <span class="err">中引用计数为</span><span class="mi">0</span><span class="err">时会调用</span> <span class="n">dealloc</span><span class="err">，从而调用</span> <span class="no">NDDeallocateObject</span><span class="err">、</span><span class="n">free</span><span class="err">函数，释放内存</span>
+                <span class="n">count</span> <span class="o">=</span> <span class="no">CFBasicHashRemoveValue</span><span class="p">(</span><span class="n">table</span><span class="p">,</span><span class="n">obj</span><span class="p">):</span>
+                <span class="k">return</span> <span class="mi">0</span> <span class="o">==</span> <span class="n">count</span><span class="p">;</span>
+        <span class="p">}</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="autorelease-pool自动释放池">Autorelease Pool（自动释放池）</h3>
 
 <p>将对象放入自动释放池中，当自从释放池销毁时对自动释放池中的对象都进行一次release操作</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// MRC 写法
-// 1. 创建 NSAutoreleasePool 对象
-NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="no">MRC</span> <span class="err">写法</span>
+<span class="sr">//</span> <span class="mi">1</span><span class="o">.</span> <span class="err">创建</span> <span class="no">NSAutoreleasePool</span> <span class="err">对象</span>
+<span class="no">NSAutoreleasePool</span> <span class="o">*</span><span class="n">pool</span> <span class="o">=</span> <span class="p">[[</span><span class="no">NSAutoreleasePool</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
 
-// 2. 在autorelease pool块的对象调用autorelease方法
-id obj = [[NSObject alloc] init];
-[obj autorelease];
+<span class="sr">//</span> <span class="mi">2</span><span class="o">.</span> <span class="err">在</span><span class="n">autorelease</span> <span class="n">pool</span><span class="err">块的对象调用</span><span class="n">autorelease</span><span class="err">方法</span>
+<span class="nb">id</span> <span class="n">obj</span> <span class="o">=</span> <span class="p">[[</span><span class="no">NSObject</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+<span class="p">[</span><span class="n">obj</span> <span class="n">autorelease</span><span class="p">];</span>
 
-// 3. 释放NSAutoreleasePool对象
-[pool drain];
+<span class="sr">//</span> <span class="mi">3</span><span class="o">.</span> <span class="err">释放</span><span class="no">NSAutoreleasePool</span><span class="err">对象</span>
+<span class="p">[</span><span class="n">pool</span> <span class="n">drain</span><span class="p">];</span>
 
 
-// ARC 写法
-@autorelease {
-    // ...
-}
+<span class="sr">//</span> <span class="no">ARC</span> <span class="err">写法</span>
+<span class="vi">@autorelease</span> <span class="p">{</span>
+    <span class="sr">//</span> <span class="o">...</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <p>自动释放池是通过数组完成的，在调用 autorelease 时，将对象加入到待释放的释放池数组中。自动释放池销毁时对数组中进行一次 release 操作。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class AutoreleasePoolPage {
-  static inline void *push()
-  {
-      // 相当于生成或持有 NSAutoreleasePool 类对象
-  }
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">AutoreleasePoolPage</span> <span class="p">{</span>
+  <span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="o">*</span><span class="n">push</span><span class="p">()</span>
+  <span class="p">{</span>
+      <span class="sr">//</span> <span class="err">相当于生成或持有</span> <span class="no">NSAutoreleasePool</span> <span class="err">类对象</span>
+  <span class="p">}</span>
 
-  static inline void *pop(void *token)
-  {
-      // 相当于废弃 NSAutoreleasePool 类对象
-      releaseAll();
-  }
+  <span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="o">*</span><span class="n">pop</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">token</span><span class="p">)</span>
+  <span class="p">{</span>
+      <span class="sr">//</span> <span class="err">相当于废弃</span> <span class="no">NSAutoreleasePool</span> <span class="err">类对象</span>
+      <span class="n">releaseAll</span><span class="p">();</span>
+  <span class="p">}</span>
 
-  static inline id autorelease(id obj)
-  {
-      // 相当于NSAutoreleasePool类的addObject类方法   
-      AutoreleasePoolPage *autoreleasePoolPage = 取得正在使用的AutoreleasePoolPage实例;
-      autoreleasePoolPage-&gt;add(obj);
-  }
+  <span class="n">static</span> <span class="n">inline</span> <span class="nb">id</span> <span class="n">autorelease</span><span class="p">(</span><span class="nb">id</span> <span class="n">obj</span><span class="p">)</span>
+  <span class="p">{</span>
+      <span class="sr">//</span> <span class="err">相当于</span><span class="no">NSAutoreleasePool</span><span class="err">类的</span><span class="n">addObject</span><span class="err">类方法</span>   
+      <span class="no">AutoreleasePoolPage</span> <span class="o">*</span><span class="n">autoreleasePoolPage</span> <span class="o">=</span> <span class="err">取得正在使用的</span><span class="no">AutoreleasePoolPage</span><span class="err">实例</span><span class="p">;</span>
+      <span class="n">autoreleasePoolPage</span><span class="o">-&gt;</span><span class="n">add</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+  <span class="p">}</span>
 
-  id *add(id obj)
-  {
-      // 将对象追加到内部数组中
-  }
+  <span class="nb">id</span> <span class="o">*</span><span class="n">add</span><span class="p">(</span><span class="nb">id</span> <span class="n">obj</span><span class="p">)</span>
+  <span class="p">{</span>
+      <span class="sr">//</span> <span class="err">将对象追加到内部数组中</span>
+  <span class="p">}</span>
 
-  void releaseAll()
-  {
-      // 调用内部数组中对象的release实例方法
-  }
-};
+  <span class="n">void</span> <span class="n">releaseAll</span><span class="p">()</span>
+  <span class="p">{</span>
+      <span class="sr">//</span> <span class="err">调用内部数组中对象的</span><span class="n">release</span><span class="err">实例方法</span>
+  <span class="p">}</span>
+<span class="p">};</span>
 
-void *objc_autoreleasePoolPush(void)
-{
-    return AutoreleasePoolPage::push();
-}
+<span class="n">void</span> <span class="o">*</span><span class="n">objc_autoreleasePoolPush</span><span class="p">(</span><span class="n">void</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="no">AutoreleasePoolPage</span><span class="o">::</span><span class="n">push</span><span class="p">();</span>
+<span class="p">}</span>
 
-void objc_autoreleasePoolPage(void *ctxt)
-{
-    AutoreleasePoolPage::pop(ctxt);
-}
+<span class="n">void</span> <span class="n">objc_autoreleasePoolPage</span><span class="p">(</span><span class="n">void</span> <span class="o">*</span><span class="n">ctxt</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="no">AutoreleasePoolPage</span><span class="o">::</span><span class="n">pop</span><span class="p">(</span><span class="n">ctxt</span><span class="p">);</span>
+<span class="p">}</span>
 
-id *objc_autorelease(id obj)
-{
-    return AutoreleasePoolPage::autorelease(obj);
-}
+<span class="nb">id</span> <span class="o">*</span><span class="n">objc_autorelease</span><span class="p">(</span><span class="nb">id</span> <span class="n">obj</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="k">return</span> <span class="no">AutoreleasePoolPage</span><span class="o">::</span><span class="n">autorelease</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
+<span class="p">}</span>
 </code></pre></div></div>
 
 <h3 id="block">Block</h3>
@@ -613,16 +616,16 @@ id *objc_autorelease(id obj)
 __ bridge_transfer也是和release方法类似，使用__bridge_transfer进行转化，既让对象p调用一次retain方法，而且原来指针obj会调用一次release方法也非常安全</p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// id 与 void * 转换
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="nb">id</span> <span class="err">与</span> <span class="n">void</span> <span class="o">*</span> <span class="err">转换</span>
 
-非ARC下:  
-id obj = [[NSObject alloc] init];
-void *p = obj;
-这样的代码是可行的，id和void*可以方便得自由转化 ，但是，在ARC下是不一样的
+<span class="err">非</span><span class="no">ARC</span><span class="err">下</span><span class="p">:</span>  
+<span class="nb">id</span> <span class="n">obj</span> <span class="o">=</span> <span class="p">[[</span><span class="no">NSObject</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+<span class="n">void</span> <span class="o">*</span><span class="nb">p</span> <span class="o">=</span> <span class="n">obj</span><span class="p">;</span>
+<span class="err">这样的代码是可行的，</span><span class="n">id</span><span class="err">和</span><span class="n">void</span><span class="o">*</span><span class="err">可以方便得自由转化</span> <span class="err">，但是，在</span><span class="no">ARC</span><span class="err">下是不一样的</span>
 
-ARC下id和void*有三个转换的关键字 __bridge、__bridge_retained、__bridge_transfer:
-id obj = [[NSObject alloc] init];
-void *p = (__bridge void*)obj;
+<span class="no">ARC</span><span class="err">下</span><span class="n">id</span><span class="err">和</span><span class="n">void</span><span class="o">*</span><span class="err">有三个转换的关键字</span> <span class="n">__bridge</span><span class="err">、</span><span class="n">__bridge_retained</span><span class="err">、</span><span class="ss">__bridge_transfer:
+</span><span class="nb">id</span> <span class="n">obj</span> <span class="o">=</span> <span class="p">[[</span><span class="no">NSObject</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+<span class="n">void</span> <span class="o">*</span><span class="nb">p</span> <span class="o">=</span> <span class="p">(</span><span class="n">__bridge</span> <span class="n">void</span><span class="o">*</span><span class="p">)</span><span class="n">obj</span><span class="p">;</span>
 </code></pre></div></div>
 
 <hr />
@@ -842,6 +845,12 @@ void *p = (__bridge void*)obj;
             
         
             
+            
+                
+                    
+                
+                    
+                
             
         
         

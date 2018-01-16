@@ -9,6 +9,9 @@
     <title>UIView动画</title>
     <meta name="description" content="iOS UIView简单动画">
 
+    <!-- 高亮 -->
+    <link href="/css/rouge.css" rel="stylesheet"/>
+
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <!-- 菜单前的图标，需要下面这句 -->
@@ -243,126 +246,127 @@
 <p>UIView 动画大致分两种，一种是 block，一种是多种 API 组合。</p>
 
 <h2 id="block-动画">Block 动画</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 一般动画
-+ (void)animateWithDuration: animations: completion:;
-+ (void)animateWithDuration: animations:;
-+ (void)animateWithDuration: delay: options: animations: completion:;
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="err">一般动画</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">animateWithDuration: animations: </span><span class="n">completion</span><span class="p">:;</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">animateWithDuration: </span><span class="n">animations</span><span class="p">:;</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">animateWithDuration: delay: options: animations: </span><span class="n">completion</span><span class="p">:;</span>
 
 
-// 弹簧动画
-+ (void)animateWithDuration: delay: usingSpringWithDamping: initialSpringVelocity: options: animations: completion:;
+<span class="sr">//</span> <span class="err">弹簧动画</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">animateWithDuration: delay: usingSpringWithDamping: initialSpringVelocity: options: animations: </span><span class="n">completion</span><span class="p">:;</span>
 
 
-// 转场动画
-+ (void)transitionWithView: duration:  options: animations: completion:;
-+ (void)transitionFromView: toView: duration: options: completion:;
+<span class="sr">//</span> <span class="err">转场动画</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">transitionWithView: duration:  options: animations: </span><span class="n">completion</span><span class="p">:;</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">transitionFromView: toView: duration: options: </span><span class="n">completion</span><span class="p">:;</span>
 
 
-// 关键帧动画
-+ (void)animateKeyframesWithDuration: delay: options: animations: completion: ;
-+ (void)addKeyframeWithRelativeStartTime: relativeDuration: animations: ;
+<span class="sr">//</span> <span class="err">关键帧动画</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">animateKeyframesWithDuration: delay: options: animations: completion: </span><span class="p">;</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">addKeyframeWithRelativeStartTime: relativeDuration: animations: </span><span class="p">;</span>
 
 
-//
-+ (void)performSystemAnimation: onViews: options: animations: completion:;
+<span class="sr">//</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">performSystemAnimation: onViews: options: animations: </span><span class="n">completion</span><span class="p">:;</span>
 </code></pre></div></div>
 
 <h3 id="一一般动画">一、一般动画</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 回调
-+ (void)animateWithDuration: animations: completion:;
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="sr">//</span> <span class="err">回调</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">animateWithDuration: animations: </span><span class="n">completion</span><span class="p">:;</span>
 
-// 无回调
-+ (void)animateWithDuration: animations:;
+<span class="sr">//</span> <span class="err">无回调</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">animateWithDuration: </span><span class="n">animations</span><span class="p">:;</span>
 
-// 延时 + 动画类型 + 回调
-+ (void)animateWithDuration: delay: options: animations: completion:;
+<span class="sr">//</span> <span class="err">延时</span> <span class="o">+</span> <span class="err">动画类型</span> <span class="o">+</span> <span class="err">回调</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">animateWithDuration: delay: options: animations: </span><span class="n">completion</span><span class="p">:;</span>
 </code></pre></div></div>
 
 <h3 id="二弹簧动画">二、弹簧动画</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// usingSpringWithDamping：弹簧的阻尼，0-1，若为 1，则动画平稳减速没有振荡
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="n">usingSpringWithDamping</span><span class="err">：弹簧的阻尼，</span><span class="mi">0</span><span class="o">-</span><span class="mi">1</span><span class="err">，若为</span> <span class="mi">1</span><span class="err">，则动画平稳减速没有振荡</span>
 
-// initialSpringVelocity：初速度，数值越小，动力越小，弹簧的拉伸幅度就越小。
-// 如：总共的动画运行距离是200 pt，你希望每秒 100pt 时，值为 0.5。
+<span class="sr">//</span> <span class="n">initialSpringVelocity</span><span class="err">：初速度，数值越小，动力越小，弹簧的拉伸幅度就越小。</span>
+<span class="sr">//</span> <span class="err">如：总共的动画运行距离是</span><span class="mi">200</span> <span class="n">pt</span><span class="err">，你希望每秒</span> <span class="mi">100</span><span class="n">pt</span> <span class="err">时，值为</span> <span class="mf">0.5</span><span class="err">。</span>
 
-+ (void)animateWithDuration: delay: usingSpringWithDamping: initialSpringVelocity: options: animations: completion:;
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">animateWithDuration: delay: usingSpringWithDamping: initialSpringVelocity: options: animations: </span><span class="n">completion</span><span class="p">:;</span>
 </code></pre></div></div>
 
 <h4 id="弹簧动画实例">弹簧动画实例</h4>
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/2016/12/20161221_01_05.gif" alt="" /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[UIView animateWithDuration:0.7
-                      delay:0.0
-     usingSpringWithDamping:0.5
-      initialSpringVelocity:0.9         options:UIViewAnimationOptionBeginFromCurrentState|UIViewAnimationOptionAllowUserInteraction
-                 animations:^{
-                   _someView.frame = CGRectMake(50, 50, 100, 100);
-    } completion:^(BOOL finished) {
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="no">UIView</span> <span class="n">animateWithDuration</span><span class="p">:</span><span class="mf">0.7</span>
+                      <span class="n">delay</span><span class="p">:</span><span class="mf">0.0</span>
+     <span class="n">usingSpringWithDamping</span><span class="p">:</span><span class="mf">0.5</span>
+      <span class="n">initialSpringVelocity</span><span class="p">:</span><span class="mf">0.9</span>         <span class="n">options</span><span class="ss">:UIViewAnimationOptionBeginFromCurrentState</span><span class="o">|</span><span class="no">UIViewAnimationOptionAllowUserInteraction</span>
+                 <span class="n">animations</span><span class="ss">:^</span><span class="p">{</span>
+                   <span class="n">_someView</span><span class="p">.</span><span class="nf">frame</span> <span class="o">=</span> <span class="no">CGRectMake</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+    <span class="p">}</span> <span class="n">completion</span><span class="ss">:^</span><span class="p">(</span><span class="no">BOOL</span> <span class="n">finished</span><span class="p">)</span> <span class="p">{</span>
 
-}];
+<span class="p">}];</span>
 </code></pre></div></div>
 
 <h3 id="三转场动画">三、转场动画</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+ (void)transitionWithView: duration:  options: animations: completion:;
-+ (void)transitionFromView: toView: duration: options: completion:;
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">transitionWithView: duration:  options: animations: </span><span class="n">completion</span><span class="p">:;</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">transitionFromView: toView: duration: options: </span><span class="n">completion</span><span class="p">:;</span>
 </code></pre></div></div>
 
 <h3 id="uiviewanimationoptions-枚举值">UIViewAnimationOptions 枚举值</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 动画效果相关
-UIViewAnimationOptionLayoutSubviews            //提交动画的时候布局子控件，表示子控件将和父控件一同动画。
-UIViewAnimationOptionAllowUserInteraction      //动画时允许用户交流，比如触摸
-UIViewAnimationOptionBeginFromCurrentState     //从当前状态开始动画
-UIViewAnimationOptionRepeat                    //动画无限重复
-UIViewAnimationOptionAutoreverse               //执行动画回路,前提是设置动画无限重复
-UIViewAnimationOptionOverrideInheritedDuration //忽略外层动画嵌套的执行时间
-UIViewAnimationOptionOverrideInheritedCurve    //忽略外层动画嵌套的时间变化曲线
-UIViewAnimationOptionAllowAnimatedContent      //通过改变属性和重绘实现动画效果，如果key没有提交动画将使用快照
-UIViewAnimationOptionShowHideTransitionViews   //用显隐的方式替代添加移除图层的动画效果
-UIViewAnimationOptionOverrideInheritedOptions  //忽略嵌套继承的选项
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="err">动画效果相关</span>
+<span class="no">UIViewAnimationOptionLayoutSubviews</span>            <span class="sr">//</span><span class="err">提交动画的时候布局子控件，表示子控件将和父控件一同动画。</span>
+<span class="no">UIViewAnimationOptionAllowUserInteraction</span>      <span class="sr">//</span><span class="err">动画时允许用户交流，比如触摸</span>
+<span class="no">UIViewAnimationOptionBeginFromCurrentState</span>     <span class="sr">//</span><span class="err">从当前状态开始动画</span>
+<span class="no">UIViewAnimationOptionRepeat</span>                    <span class="sr">//</span><span class="err">动画无限重复</span>
+<span class="no">UIViewAnimationOptionAutoreverse</span>               <span class="sr">//</span><span class="err">执行动画回路</span><span class="p">,</span><span class="err">前提是设置动画无限重复</span>
+<span class="no">UIViewAnimationOptionOverrideInheritedDuration</span> <span class="sr">//</span><span class="err">忽略外层动画嵌套的执行时间</span>
+<span class="no">UIViewAnimationOptionOverrideInheritedCurve</span>    <span class="sr">//</span><span class="err">忽略外层动画嵌套的时间变化曲线</span>
+<span class="no">UIViewAnimationOptionAllowAnimatedContent</span>      <span class="sr">//</span><span class="err">通过改变属性和重绘实现动画效果，如果</span><span class="n">key</span><span class="err">没有提交动画将使用快照</span>
+<span class="no">UIViewAnimationOptionShowHideTransitionViews</span>   <span class="sr">//</span><span class="err">用显隐的方式替代添加移除图层的动画效果</span>
+<span class="no">UIViewAnimationOptionOverrideInheritedOptions</span>  <span class="sr">//</span><span class="err">忽略嵌套继承的选项</span>
 
 
-// 时间函数曲线
-UIViewAnimationOptionCurveEaseInOut            //时间曲线函数，由慢到快
-UIViewAnimationOptionCurveEaseIn               //时间曲线函数，由慢到特别快
-UIViewAnimationOptionCurveEaseOut              //时间曲线函数，由快到慢
-UIViewAnimationOptionCurveLinear               //时间曲线函数，匀速
+<span class="sr">//</span> <span class="err">时间函数曲线</span>
+<span class="no">UIViewAnimationOptionCurveEaseInOut</span>            <span class="sr">//</span><span class="err">时间曲线函数，由慢到快</span>
+<span class="no">UIViewAnimationOptionCurveEaseIn</span>               <span class="sr">//</span><span class="err">时间曲线函数，由慢到特别快</span>
+<span class="no">UIViewAnimationOptionCurveEaseOut</span>              <span class="sr">//</span><span class="err">时间曲线函数，由快到慢</span>
+<span class="no">UIViewAnimationOptionCurveLinear</span>               <span class="sr">//</span><span class="err">时间曲线函数，匀速</span>
 
 
-// 转场动画
-UIViewAnimationOptionTransitionNone            //无转场动画
-UIViewAnimationOptionTransitionFlipFromLeft    //转场从左翻转
-UIViewAnimationOptionTransitionFlipFromRight   //转场从右翻转
-UIViewAnimationOptionTransitionCurlUp          //上卷转场
-UIViewAnimationOptionTransitionCurlDown        //下卷转场
-UIViewAnimationOptionTransitionCrossDissolve   //转场交叉消失
-UIViewAnimationOptionTransitionFlipFromTop     //转场从上翻转
-UIViewAnimationOptionTransitionFlipFromBottom  //转场从下翻转
+<span class="sr">//</span> <span class="err">转场动画</span>
+<span class="no">UIViewAnimationOptionTransitionNone</span>            <span class="sr">//</span><span class="err">无转场动画</span>
+<span class="no">UIViewAnimationOptionTransitionFlipFromLeft</span>    <span class="sr">//</span><span class="err">转场从左翻转</span>
+<span class="no">UIViewAnimationOptionTransitionFlipFromRight</span>   <span class="sr">//</span><span class="err">转场从右翻转</span>
+<span class="no">UIViewAnimationOptionTransitionCurlUp</span>          <span class="sr">//</span><span class="err">上卷转场</span>
+<span class="no">UIViewAnimationOptionTransitionCurlDown</span>        <span class="sr">//</span><span class="err">下卷转场</span>
+<span class="no">UIViewAnimationOptionTransitionCrossDissolve</span>   <span class="sr">//</span><span class="err">转场交叉消失</span>
+<span class="no">UIViewAnimationOptionTransitionFlipFromTop</span>     <span class="sr">//</span><span class="err">转场从上翻转</span>
+<span class="no">UIViewAnimationOptionTransitionFlipFromBottom</span>  <span class="sr">//</span><span class="err">转场从下翻转</span>
 </code></pre></div></div>
 
 <h3 id="四关键帧动画">四、关键帧动画</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+ (void)animateKeyframesWithDuration: delay: options: animations: completion: ;
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">animateKeyframesWithDuration: delay: options: animations: completion: </span><span class="p">;</span>
 
-// StartTime：相对开始时间
-// relativeDuration: 相对持续时间
-+ (void)addKeyframeWithRelativeStartTime: relativeDuration: animations: ;
+<span class="sr">//</span> <span class="no">StartTime</span><span class="err">：相对开始时间</span>
+<span class="sr">//</span> <span class="ss">relativeDuration: </span><span class="err">相对持续时间</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">addKeyframeWithRelativeStartTime: relativeDuration: animations: </span><span class="p">;</span>
 </code></pre></div></div>
 
 <h4 id="uiviewkeyframeanimationoptions-枚举值">UIViewKeyframeAnimationOptions 枚举值</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
-UIViewKeyframeAnimationOptionLayoutSubviews             //提交动画的时候布局子控件，表示子控件将和父控件一同动画。
-UIViewKeyframeAnimationOptionAllowUserInteraction       //动画时允许用户交流，比如触摸    
-UIViewKeyframeAnimationOptionBeginFromCurrentState      //从当前状态开始动画
-UIViewKeyframeAnimationOptionRepeat                     //动画无限重复
-UIViewKeyframeAnimationOptionAutoreverse                //执行动画回路,前提是设置动画无限重复
-UIViewKeyframeAnimationOptionOverrideInheritedDuration  //忽略外层动画嵌套的执行时间
-UIViewKeyframeAnimationOptionOverrideInheritedOptions   //忽略嵌套继承的选项
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="no">UIViewKeyframeAnimationOptionLayoutSubviews</span>             <span class="sr">//</span><span class="err">提交动画的时候布局子控件，表示子控件将和父控件一同动画。</span>
+<span class="no">UIViewKeyframeAnimationOptionAllowUserInteraction</span>       <span class="sr">//</span><span class="err">动画时允许用户交流，比如触摸</span>    
+<span class="no">UIViewKeyframeAnimationOptionBeginFromCurrentState</span>      <span class="sr">//</span><span class="err">从当前状态开始动画</span>
+<span class="no">UIViewKeyframeAnimationOptionRepeat</span>                     <span class="sr">//</span><span class="err">动画无限重复</span>
+<span class="no">UIViewKeyframeAnimationOptionAutoreverse</span>                <span class="sr">//</span><span class="err">执行动画回路</span><span class="p">,</span><span class="err">前提是设置动画无限重复</span>
+<span class="no">UIViewKeyframeAnimationOptionOverrideInheritedDuration</span>  <span class="sr">//</span><span class="err">忽略外层动画嵌套的执行时间</span>
+<span class="no">UIViewKeyframeAnimationOptionOverrideInheritedOptions</span>   <span class="sr">//</span><span class="err">忽略嵌套继承的选项</span>
 
 
-// 关键帧动画独有
-UIViewKeyframeAnimationOptionCalculationModeLinear     //选择使用一个简单的线性插值计算的时候关键帧之间的值。
-UIViewKeyframeAnimationOptionCalculationModeDiscrete   //选择不插入关键帧之间的值,而是直接跳到每个新的关键帧的值。
-UIViewKeyframeAnimationOptionCalculationModePaced      //选择计算中间帧数值算法使用一个简单的节奏。这个选项的结果在一个均匀的动画。
-UIViewKeyframeAnimationOptionCalculationModeCubic      //选择计算中间帧使用默认卡特莫尔罗花键,通过关键帧的值。你不能调整该算法的参数。 这个动画好像会更圆滑一些..
-UIViewKeyframeAnimationOptionCalculationModeCubicPaced //选择计算中间帧使用立方计划而忽略的时间属性动画。相反,时间参数计算隐式地给动画一个恒定的速度。
+<span class="sr">//</span> <span class="err">关键帧动画独有</span>
+<span class="no">UIViewKeyframeAnimationOptionCalculationModeLinear</span>     <span class="sr">//</span><span class="err">选择使用一个简单的线性插值计算的时候关键帧之间的值。</span>
+<span class="no">UIViewKeyframeAnimationOptionCalculationModeDiscrete</span>   <span class="sr">//</span><span class="err">选择不插入关键帧之间的值</span><span class="p">,</span><span class="err">而是直接跳到每个新的关键帧的值。</span>
+<span class="no">UIViewKeyframeAnimationOptionCalculationModePaced</span>      <span class="sr">//</span><span class="err">选择计算中间帧数值算法使用一个简单的节奏。这个选项的结果在一个均匀的动画。</span>
+<span class="no">UIViewKeyframeAnimationOptionCalculationModeCubic</span>      <span class="sr">//</span><span class="err">选择计算中间帧使用默认卡特莫尔罗花键</span><span class="p">,</span><span class="err">通过关键帧的值。你不能调整该算法的参数。</span> <span class="err">这个动画好像会更圆滑一些</span><span class="o">..</span>
+<span class="no">UIViewKeyframeAnimationOptionCalculationModeCubicPaced</span> <span class="sr">//</span><span class="err">选择计算中间帧使用立方计划而忽略的时间属性动画。相反</span><span class="p">,</span><span class="err">时间参数计算隐式地给动画一个恒定的速度。</span>
 </code></pre></div></div>
 
 <h4 id="关键帧动画实例">关键帧动画实例</h4>
@@ -370,80 +374,80 @@ UIViewKeyframeAnimationOptionCalculationModeCubicPaced //选择计算中间帧�
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/2016/12/20161221_01_02.gif" alt="" /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[UIView animateKeyframesWithDuration:0.5 delay:0 options:UIViewKeyframeAnimationOptionLayoutSubviews animations:^{
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="no">UIView</span> <span class="n">animateKeyframesWithDuration</span><span class="p">:</span><span class="mf">0.5</span> <span class="n">delay</span><span class="p">:</span><span class="mi">0</span> <span class="n">options</span><span class="ss">:UIViewKeyframeAnimationOptionLayoutSubviews</span> <span class="n">animations</span><span class="ss">:^</span><span class="p">{</span>
 
-        [UIView addKeyframeWithRelativeStartTime:0 relativeDuration:1/3.0 animations:^{
-            customBtn.transform = CGAffineTransformMakeScale(1.5, 1.5);
-        }];
-        [UIView addKeyframeWithRelativeStartTime:1/3.0 relativeDuration:1/3.0 animations:^{
-            customBtn.transform = CGAffineTransformMakeScale(0.8, 0.8);
-        }];
-        [UIView addKeyframeWithRelativeStartTime:2/3.0 relativeDuration:1/3.0 animations:^{
-            customBtn.transform = CGAffineTransformIdentity;
-        }];
+        <span class="p">[</span><span class="no">UIView</span> <span class="n">addKeyframeWithRelativeStartTime</span><span class="p">:</span><span class="mi">0</span> <span class="n">relativeDuration</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">3.0</span> <span class="n">animations</span><span class="ss">:^</span><span class="p">{</span>
+            <span class="n">customBtn</span><span class="p">.</span><span class="nf">transform</span> <span class="o">=</span> <span class="no">CGAffineTransformMakeScale</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">);</span>
+        <span class="p">}];</span>
+        <span class="p">[</span><span class="no">UIView</span> <span class="n">addKeyframeWithRelativeStartTime</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">3.0</span> <span class="n">relativeDuration</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">3.0</span> <span class="n">animations</span><span class="ss">:^</span><span class="p">{</span>
+            <span class="n">customBtn</span><span class="p">.</span><span class="nf">transform</span> <span class="o">=</span> <span class="no">CGAffineTransformMakeScale</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">);</span>
+        <span class="p">}];</span>
+        <span class="p">[</span><span class="no">UIView</span> <span class="n">addKeyframeWithRelativeStartTime</span><span class="p">:</span><span class="mi">2</span><span class="o">/</span><span class="mf">3.0</span> <span class="n">relativeDuration</span><span class="p">:</span><span class="mi">1</span><span class="o">/</span><span class="mf">3.0</span> <span class="n">animations</span><span class="ss">:^</span><span class="p">{</span>
+            <span class="n">customBtn</span><span class="p">.</span><span class="nf">transform</span> <span class="o">=</span> <span class="no">CGAffineTransformIdentity</span><span class="p">;</span>
+        <span class="p">}];</span>
 
-} completion:nil];
+<span class="p">}</span> <span class="n">completion</span><span class="ss">:nil</span><span class="p">];</span>
 </code></pre></div></div>
 
 <h3 id="五performsystemanimation">五、performSystemAnimation</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+ (void)performSystemAnimation: onViews: options: animations: completion:;
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="ss">performSystemAnimation: onViews: options: animations: </span><span class="n">completion</span><span class="p">:;</span>
 </code></pre></div></div>
 
 <h4 id="uisystemanimation">UISystemAnimation</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>UISystemAnimationDelete
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">UISystemAnimationDelete</span>
 </code></pre></div></div>
 
 <h2 id="api-动画">API 动画</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>+ (void)beginAnimations:(NSString *)animationID context:(void *)context;
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">beginAnimations</span><span class="p">:(</span><span class="no">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">animationID</span> <span class="n">context</span><span class="p">:(</span><span class="n">void</span> <span class="o">*</span><span class="p">)</span><span class="n">context</span><span class="p">;</span>
 
-+ (void)commitAnimations;  
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">commitAnimations</span><span class="p">;</span>  
 
-//设置动画代理对象，当动画开始或者结束时会发消息给代理对象
-+ (void)setAnimationDelegate:(nullable id)delegate;
+<span class="sr">//</span><span class="err">设置动画代理对象，当动画开始或者结束时会发消息给代理对象</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">setAnimationDelegate</span><span class="p">:(</span><span class="n">nullable</span> <span class="nb">id</span><span class="p">)</span><span class="n">delegate</span><span class="p">;</span>
 
-// 当动画即将开始时，执行delegate对象的selector，并且把beginAnimations:context:中传入的参数传进selector
-+ (void)setAnimationWillStartSelector:(nullable SEL)selector;
+<span class="sr">//</span> <span class="err">当动画即将开始时，执行</span><span class="n">delegate</span><span class="err">对象的</span><span class="n">selector</span><span class="err">，并且把</span><span class="n">beginAnimations</span><span class="ss">:context</span><span class="p">:</span><span class="err">中传入的参数传进</span><span class="n">selector</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">setAnimationWillStartSelector</span><span class="p">:(</span><span class="n">nullable</span> <span class="no">SEL</span><span class="p">)</span><span class="n">selector</span><span class="p">;</span>
 
-// 当动画结束时，执行delegate对象的selector，并且把beginAnimations:context:中传入的参数传进selector
-+ (void)setAnimationDidStopSelector:(nullable SEL)selector;
+<span class="sr">//</span> <span class="err">当动画结束时，执行</span><span class="n">delegate</span><span class="err">对象的</span><span class="n">selector</span><span class="err">，并且把</span><span class="n">beginAnimations</span><span class="ss">:context</span><span class="p">:</span><span class="err">中传入的参数传进</span><span class="n">selector</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">setAnimationDidStopSelector</span><span class="p">:(</span><span class="n">nullable</span> <span class="no">SEL</span><span class="p">)</span><span class="n">selector</span><span class="p">;</span>
 
-// 动画的持续时间，秒为单位
-+ (void)setAnimationDuration:(NSTimeInterval)duration;
+<span class="sr">//</span> <span class="err">动画的持续时间，秒为单位</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">setAnimationDuration</span><span class="p">:(</span><span class="no">NSTimeInterval</span><span class="p">)</span><span class="n">duration</span><span class="p">;</span>
 
-// 动画延迟delay秒后再开始
-+ (void)setAnimationDelay:(NSTimeInterval)delay;
+<span class="sr">//</span> <span class="err">动画延迟</span><span class="n">delay</span><span class="err">秒后再开始</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">setAnimationDelay</span><span class="p">:(</span><span class="no">NSTimeInterval</span><span class="p">)</span><span class="n">delay</span><span class="p">;</span>
 
-// 动画的开始时间，默认为now
-+ (void)setAnimationStartDate:(NSDate *)startDate;  
+<span class="sr">//</span> <span class="err">动画的开始时间，默认为</span><span class="n">now</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">setAnimationStartDate</span><span class="p">:(</span><span class="no">NSDate</span> <span class="o">*</span><span class="p">)</span><span class="n">startDate</span><span class="p">;</span>  
 
-// 动画的节奏控制
-+ (void)setAnimationCurve:(UIViewAnimationCurve)curve;
+<span class="sr">//</span> <span class="err">动画的节奏控制</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">setAnimationCurve</span><span class="p">:(</span><span class="no">UIViewAnimationCurve</span><span class="p">)</span><span class="n">curve</span><span class="p">;</span>
 
-// 动画的重复次数
-+ (void)setAnimationRepeatCount:(float)repeatCount;
+<span class="sr">//</span> <span class="err">动画的重复次数</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">setAnimationRepeatCount</span><span class="p">:(</span><span class="n">float</span><span class="p">)</span><span class="n">repeatCount</span><span class="p">;</span>
 
-// 如果设置为YES,代表动画每次重复执行的效果会跟上一次相反
-+ (void)setAnimationRepeatAutoreverses:(BOOL)repeatAutoreverses;
+<span class="sr">//</span> <span class="err">如果设置为</span><span class="no">YES</span><span class="p">,</span><span class="err">代表动画每次重复执行的效果会跟上一次相反</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">setAnimationRepeatAutoreverses</span><span class="p">:(</span><span class="no">BOOL</span><span class="p">)</span><span class="n">repeatAutoreverses</span><span class="p">;</span>
 
 
-// 转场动画
-// 设置视图view的过渡效果, transition指定过渡类型, cache设置YES代表使用视图缓存，性能较好
-+ (void)setAnimationTransition:(UIViewAnimationTransition)transition forView:(UIView *)view cache:(BOOL)cache;
+<span class="sr">//</span> <span class="err">转场动画</span>
+<span class="sr">//</span> <span class="err">设置视图</span><span class="n">view</span><span class="err">的过渡效果</span><span class="p">,</span> <span class="n">transition</span><span class="err">指定过渡类型</span><span class="p">,</span> <span class="n">cache</span><span class="err">设置</span><span class="no">YES</span><span class="err">代表使用视图缓存，性能较好</span>
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">setAnimationTransition</span><span class="p">:(</span><span class="no">UIViewAnimationTransition</span><span class="p">)</span><span class="n">transition</span> <span class="n">forView</span><span class="p">:(</span><span class="no">UIView</span> <span class="o">*</span><span class="p">)</span><span class="n">view</span> <span class="n">cache</span><span class="p">:(</span><span class="no">BOOL</span><span class="p">)</span><span class="n">cache</span><span class="p">;</span>
 
-+ (void)setAnimationsEnabled:(BOOL)enabled;
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">setAnimationsEnabled</span><span class="p">:(</span><span class="no">BOOL</span><span class="p">)</span><span class="n">enabled</span><span class="p">;</span>
 
-+ (void)performWithoutAnimation:(void (NS_NOESCAPE^)(void))actionsWithoutAnimation;
+<span class="o">+</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">performWithoutAnimation</span><span class="p">:(</span><span class="n">void</span> <span class="p">(</span><span class="no">NS_NOESCAPE</span><span class="o">^</span><span class="p">)(</span><span class="n">void</span><span class="p">))</span><span class="n">actionsWithoutAnimation</span><span class="p">;</span>
 </code></pre></div></div>
 
 <h4 id="api-调用实例">API 调用实例</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[UIView beginAnimations:@"centerAnimation" context:nil];
-[UIView setAnimationCurve:UIViewAnimationCurveLinear];
-[UIView setAnimationDuration:2.0];
-[UIView setAnimationDelegate:self];
-[UIView setAnimationWillStartSelector:@selector(animationWillStart)];
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">[</span><span class="no">UIView</span> <span class="n">beginAnimations</span><span class="p">:</span><span class="err">@</span><span class="s2">"centerAnimation"</span> <span class="n">context</span><span class="ss">:nil</span><span class="p">];</span>
+<span class="p">[</span><span class="no">UIView</span> <span class="n">setAnimationCurve</span><span class="ss">:UIViewAnimationCurveLinear</span><span class="p">];</span>
+<span class="p">[</span><span class="no">UIView</span> <span class="n">setAnimationDuration</span><span class="p">:</span><span class="mf">2.0</span><span class="p">];</span>
+<span class="p">[</span><span class="no">UIView</span> <span class="n">setAnimationDelegate</span><span class="ss">:self</span><span class="p">];</span>
+<span class="p">[</span><span class="no">UIView</span> <span class="n">setAnimationWillStartSelector</span><span class="ss">:@selector</span><span class="p">(</span><span class="n">animationWillStart</span><span class="p">)];</span>
 
-self.squareView.center = CGPointMake(50, 50);
-[UIView commitAnimations];
+<span class="nb">self</span><span class="p">.</span><span class="nf">squareView</span><span class="p">.</span><span class="nf">center</span> <span class="o">=</span> <span class="no">CGPointMake</span><span class="p">(</span><span class="mi">50</span><span class="p">,</span> <span class="mi">50</span><span class="p">);</span>
+<span class="p">[</span><span class="no">UIView</span> <span class="n">commitAnimations</span><span class="p">];</span>
 </code></pre></div></div>
 
 <blockquote>
@@ -658,6 +662,12 @@ self.squareView.center = CGPointMake(50, 50);
             
         
             
+            
+                
+                    
+                
+                    
+                
             
         
         

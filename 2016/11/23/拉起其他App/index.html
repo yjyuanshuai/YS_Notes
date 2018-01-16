@@ -9,6 +9,9 @@
     <title>iOS 拉起其他 App</title>
     <meta name="description" content="在本应用中拉起其他应用，iOS 9及以后用通用链接的方式，iOS 9 以前用 URL Scheme 实现。">
 
+    <!-- 高亮 -->
+    <link href="/css/rouge.css" rel="stylesheet"/>
+
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <!-- 菜单前的图标，需要下面这句 -->
@@ -250,10 +253,10 @@
 
 <h4 id="示例">示例</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//先判断再打开WXApp
-- (void)demo2 {
-    //创建一个url，这个url就是WXApp的url，记得加上：//
-    NSURL *url = [NSURL URLWithString:@"weixin://"];
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span><span class="err">先判断再打开</span><span class="no">WXApp</span>
+<span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">demo2</span> <span class="p">{</span>
+    <span class="sr">//</span><span class="err">创建一个</span><span class="n">url</span><span class="err">，这个</span><span class="n">url</span><span class="err">就是</span><span class="no">WXApp</span><span class="err">的</span><span class="n">url</span><span class="err">，记得加上：</span><span class="o">/</span><span class="sr">/
+    NSURL *url = [NSURL URLWithString:@"weixin:/</span><span class="o">/</span><span class="s2">"];
 
     //先判断是否能打开该url
     if ([[UIApplication sharedApplication] canOpenURL:url]) {
@@ -261,18 +264,18 @@
         [[UIApplication sharedApplication] openURL:url];
     }else {
         //给个提示或者做点别的事情
-        NSLog(@"U四不四洒，没安装WXApp，怎么打开啊！");
+        NSLog(@"</span><span class="no">U</span><span class="err">四不四洒，没安装</span><span class="no">WXApp</span><span class="err">，怎么打开啊！</span><span class="s2">");
 }
-</code></pre></div></div>
+</span></code></pre></div></div>
 
 <h4 id="添加白名单">添加白名单</h4>
 <p>点击info.plist-&gt;右键-&gt;Open As-&gt;Source Code-&gt;添加下面的代码</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;key&gt;LSApplicationQueriesSchemes&lt;/key&gt;
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">&lt;</span><span class="n">key</span><span class="o">&gt;</span><span class="no">LSApplicationQueriesSchemes</span><span class="o">&lt;</span><span class="sr">/key&gt;
     &lt;array&gt;
-        &lt;string&gt;weixin&lt;/string&gt;
-    &lt;/array&gt;
-</code></pre></div></div>
+        &lt;string&gt;weixin&lt;/s</span><span class="n">tring</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="sr">/array&gt;
+</span></code></pre></div></div>
 
 <h3 id="让其他应用拉起自己的-app">让其他应用拉起自己的 App</h3>
 <p>基本的流程：</p>
@@ -292,16 +295,15 @@
 
 <p>共有 3 个代理方法，分别对应不同的系统，有优先级。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 2.0 - 9.0 有效，优先级最低
-- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url NS_DEPRECATED_IOS(2_0, 9_0, "Please use application:openURL:options:") __TVOS_PROHIBITED;
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="mf">2.0</span> <span class="o">-</span> <span class="mf">9.0</span> <span class="err">有效，优先级最低</span>
+<span class="o">-</span> <span class="p">(</span><span class="no">BOOL</span><span class="p">)</span><span class="n">application</span><span class="p">:(</span><span class="no">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="n">application</span> <span class="n">handleOpenURL</span><span class="p">:(</span><span class="no">NSURL</span> <span class="o">*</span><span class="p">)</span><span class="n">url</span> <span class="no">NS_DEPRECATED_IOS</span><span class="p">(</span><span class="mi">2_0</span><span class="p">,</span> <span class="mi">9_0</span><span class="p">,</span> <span class="s2">"Please use application:openURL:options:"</span><span class="p">)</span> <span class="n">__TVOS_PROHIBITED</span><span class="p">;</span>
 
 
-// 4.2 - 9.0 有效，优先级次之
-- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(nullable NSString *)sourceApplication annotation:(id)annotation NS_DEPRECATED_IOS(4_2, 9_0, "Please use application:openURL:options:") __TVOS_PROHIBITED;
+<span class="sr">//</span> <span class="mf">4.2</span> <span class="o">-</span> <span class="mf">9.0</span> <span class="err">有效，优先级次之</span>
+<span class="o">-</span> <span class="p">(</span><span class="no">BOOL</span><span class="p">)</span><span class="n">application</span><span class="p">:(</span><span class="no">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="n">application</span> <span class="n">openURL</span><span class="p">:(</span><span class="no">NSURL</span> <span class="o">*</span><span class="p">)</span><span class="n">url</span> <span class="n">sourceApplication</span><span class="p">:(</span><span class="n">nullable</span> <span class="no">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">sourceApplication</span> <span class="n">annotation</span><span class="p">:(</span><span class="nb">id</span><span class="p">)</span><span class="n">annotation</span> <span class="no">NS_DEPRECATED_IOS</span><span class="p">(</span><span class="mi">4_2</span><span class="p">,</span> <span class="mi">9_0</span><span class="p">,</span> <span class="s2">"Please use application:openURL:options:"</span><span class="p">)</span> <span class="n">__TVOS_PROHIBITED</span><span class="p">;</span>
 
-// 9.0 - 后有效，优先级最高
-- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url options:(NSDictionary&lt;NSString*, id&gt; *)options NS_AVAILABLE_IOS(9_0);
-
+<span class="sr">//</span> <span class="mf">9.0</span> <span class="o">-</span> <span class="err">后有效，优先级最高</span>
+<span class="o">-</span> <span class="p">(</span><span class="no">BOOL</span><span class="p">)</span><span class="n">application</span><span class="p">:(</span><span class="no">UIApplication</span> <span class="o">*</span><span class="p">)</span><span class="n">app</span> <span class="n">openURL</span><span class="p">:(</span><span class="no">NSURL</span> <span class="o">*</span><span class="p">)</span><span class="n">url</span> <span class="n">options</span><span class="p">:(</span><span class="no">NSDictionary</span><span class="o">&lt;</span><span class="no">NSString</span><span class="o">*</span><span class="p">,</span> <span class="nb">id</span><span class="o">&gt;</span> <span class="o">*</span><span class="p">)</span><span class="n">options</span> <span class="no">NS_AVAILABLE_IOS</span><span class="p">(</span><span class="mi">9_0</span><span class="p">);</span>
 </code></pre></div></div>
 
 <hr />
@@ -485,6 +487,10 @@
             
         
             
+            
+                
+                    
+                
             
         
         

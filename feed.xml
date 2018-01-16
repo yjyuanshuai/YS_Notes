@@ -5,8 +5,8 @@
     <description></description>
     <link>https://yjyuanshuai.github.io/</link>
     <atom:link href="https://yjyuanshuai.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Mon, 15 Jan 2018 16:39:51 +0800</pubDate>
-    <lastBuildDate>Mon, 15 Jan 2018 16:39:51 +0800</lastBuildDate>
+    <pubDate>Tue, 16 Jan 2018 10:09:19 +0800</pubDate>
+    <lastBuildDate>Tue, 16 Jan 2018 10:09:19 +0800</lastBuildDate>
     <generator>Jekyll v3.6.2</generator>
     
       <item>
@@ -168,13 +168,18 @@ http://www.cocoachina.com/ios/20150127/11022.html
       </item>
     
       <item>
-        <title>自定义collectionview布局之瀑布流</title>
-        <description>
-</description>
-        <pubDate>Thu, 03 Aug 2017 00:00:00 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/</guid>
+        <title>试卷生成系统</title>
+        <description>试卷生成系统，是用 Java 实现的小项目，在此记录下主要需求，实现的主要技术和过程。</description>
+        <pubDate>Thu, 27 Jul 2017 17:14:54 +0800</pubDate>
+        <link>https://yjyuanshuai.github.io/2017/07/27/%E8%AF%95%E5%8D%B7%E7%94%9F%E6%88%90%E7%B3%BB%E7%BB%9F/</link>
+        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/07/27/%E8%AF%95%E5%8D%B7%E7%94%9F%E6%88%90%E7%B3%BB%E7%BB%9F/</guid>
         
+        <category>Java</category>
+        
+        
+        <category>Java</category>
+        
+        <category>项目</category>
         
       </item>
     

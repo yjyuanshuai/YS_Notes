@@ -9,6 +9,9 @@
     <title>URL Schemes</title>
     <meta name="description" content="iOS 9 前，拉起 App 用 URL Schemes。iOS 9 后用通用链接方式拉起 App。">
 
+    <!-- 高亮 -->
+    <link href="/css/rouge.css" rel="stylesheet"/>
+
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <!-- 菜单前的图标，需要下面这句 -->
@@ -272,7 +275,7 @@
 <h2 id="使用形式">使用形式</h2>
 <h3 id="1基本">1、基本</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>YSDevScheme://
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">YSDevScheme</span><span class="ss">:/</span><span class="o">/</span>
 </code></pre></div></div>
 
 <blockquote>
@@ -282,17 +285,17 @@
 <h3 id="2复杂">2、复杂</h3>
 <h4 id="打开某个功能带参数">打开某个功能（带参数）</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 打开某个功能界面
-fantastical2://parse?sentence
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="err">打开某个功能界面</span>
+<span class="n">fantastical2</span><span class="ss">:/</span><span class="o">/</span><span class="n">parse?sentence</span>
 
 
-// 打开某个功能，并且带参数过去
-fantastical2://parse?sentence=事件描述
+<span class="sr">//</span> <span class="err">打开某个功能，并且带参数过去</span>
+<span class="n">fantastical2</span><span class="ss">:/</span><span class="o">/</span><span class="n">parse?sentence</span><span class="o">=</span><span class="err">事件描述</span>
 </code></pre></div></div>
 
 <h4 id="加-jumpback可返回">加 jumpback，可返回</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>eudic://dict/想查的单词?jumpback=指定URL
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">eudic</span><span class="ss">:/</span><span class="o">/</span><span class="n">dict</span><span class="o">/</span><span class="err">想查的单词</span><span class="p">?</span><span class="n">jumpback</span><span class="o">=</span><span class="err">指定</span><span class="no">URL</span>
 </code></pre></div></div>
 
 <p>如 B App 的 URL Schemes 如上，在 A App 中拉起 B，然后点击返回，回到指定的 URL（可以是 A，也可以是其他的 App）。</p>
@@ -302,22 +305,22 @@ fantastical2://parse?sentence=事件描述
 <p>利用 URL Schemes 的规则和 iOS 系统的一些内置功能，来扩充复杂 URL Schemes，使其中需要输入字符或参数的部分可以预设或输入后再跳转。</p>
 
 <h4 id="1可输入的参数">1）可输入的参数</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 在 Launch Center Pro 里，输入框表示为[prompt]，你只要在变量部分填入这个输入框的表述方式，就会在运行动作时出现输入框让你输入内容，所以我们可以把上面那个 URL 改为：
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="err">在</span> <span class="no">Launch</span> <span class="no">Center</span> <span class="no">Pro</span> <span class="err">里，输入框表示为</span><span class="p">[</span><span class="n">prompt</span><span class="p">]</span><span class="err">，你只要在变量部分填入这个输入框的表述方式，就会在运行动作时出现输入框让你输入内容，所以我们可以把上面那个</span> <span class="no">URL</span> <span class="err">改为：</span>
 
-OmniFocus:///add?name=[prompt]&amp;note=[prompt]
-</code></pre></div></div>
+<span class="no">OmniFocus</span><span class="ss">:/</span><span class="o">/</span><span class="sr">/add?name=[prompt]&amp;note=[prompt]
+</span></code></pre></div></div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 在 Launch Center Pro 里最后一条复制了的文本内容表示为[clipboard]，当你想用欧陆词典直接搜索你刚才复制好了的不知道意思的单词的时候，就可以在 Launch Center Pro 里添加一个这样的动作：
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="err">在</span> <span class="no">Launch</span> <span class="no">Center</span> <span class="no">Pro</span> <span class="err">里最后一条复制了的文本内容表示为</span><span class="p">[</span><span class="n">clipboard</span><span class="p">]</span><span class="err">，当你想用欧陆词典直接搜索你刚才复制好了的不知道意思的单词的时候，就可以在</span> <span class="no">Launch</span> <span class="no">Center</span> <span class="no">Pro</span> <span class="err">里添加一个这样的动作：</span>
 
-eudic://dict/[clipboard]
+<span class="n">eudic</span><span class="ss">:/</span><span class="o">/</span><span class="n">dict</span><span class="o">/</span><span class="p">[</span><span class="n">clipboard</span><span class="p">]</span>
 </code></pre></div></div>
 
 <h4 id="2list-列表">2）list 列表</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span>
 
-onepassword://search/[list|Google=Google|Dropbox=Dropbox|Weibo=Weibo|输入=[prompt]]
+<span class="n">onepassword</span><span class="ss">:/</span><span class="o">/</span><span class="n">search</span><span class="o">/</span><span class="p">[</span><span class="n">list</span><span class="o">|</span><span class="no">Google</span><span class="o">=</span><span class="no">Google</span><span class="o">|</span><span class="no">Dropbox</span><span class="o">=</span><span class="no">Dropbox</span><span class="o">|</span><span class="no">Weibo</span><span class="o">=</span><span class="no">Weibo</span><span class="o">|</span><span class="err">输入</span><span class="o">=</span><span class="p">[</span><span class="n">prompt</span><span class="p">]]</span>
 
-// 首先有一个中括号[]，然后括号的最左边是 list 和一个分隔符 |，这三样元素声明了这是一个列表。然后是 Google=Google、微博=Weibo 等常用服务，等号左边，是显示在列表上的名称，而右边是填入 URL 的字符。最后一个 输入=[prompt]，左边同样是列表上的名称，右边是前面提到的输入框。最后这一部分是列表中没有你想要搜索的项目的时候手动输入用的。
+<span class="sr">//</span> <span class="err">首先有一个中括号</span><span class="p">[]</span><span class="err">，然后括号的最左边是</span> <span class="n">list</span> <span class="err">和一个分隔符</span> <span class="o">|</span><span class="err">，这三样元素声明了这是一个列表。然后是</span> <span class="no">Google</span><span class="o">=</span><span class="no">Google</span><span class="err">、微博</span><span class="o">=</span><span class="no">Weibo</span> <span class="err">等常用服务，等号左边，是显示在列表上的名称，而右边是填入</span> <span class="no">URL</span> <span class="err">的字符。最后一个</span> <span class="err">输入</span><span class="o">=</span><span class="p">[</span><span class="n">prompt</span><span class="p">]</span><span class="err">，左边同样是列表上的名称，右边是前面提到的输入框。最后这一部分是列表中没有你想要搜索的项目的时候手动输入用的。</span>
 </code></pre></div></div>
 
 <h2 id="延伸">延伸</h2>
@@ -347,9 +350,9 @@ onepassword://search/[list|Google=Google|Dropbox=Dropbox|Weibo=Weibo|输入=[pro
 
 <p>draft 可将多个 URL 绑在一起发送给 fantastical，实现一次添加多个事件。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 把多个发送事件到 Fantastical 的 URL 绑在了一起，做到一个运行成功以后运行下一个，直到运行完，实现这样的 URL 就只有 x-callback-URL 才可以，具体的 URL 可以说很复杂，是这样的：
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="err">把多个发送事件到</span> <span class="no">Fantastical</span> <span class="err">的</span> <span class="no">URL</span> <span class="err">绑在了一起，做到一个运行成功以后运行下一个，直到运行完，实现这样的</span> <span class="no">URL</span> <span class="err">就只有</span> <span class="n">x</span><span class="o">-</span><span class="n">callback</span><span class="o">-</span><span class="no">URL</span> <span class="err">才可以，具体的</span> <span class="no">URL</span> <span class="err">可以说很复杂，是这样的：</span>
 
-fantastical2://x-callback-url/parse?sentence=[[line|1]]&amp;add=1&amp;x-success=&amp;x-cancel=
+<span class="n">fantastical2</span><span class="ss">:/</span><span class="o">/</span><span class="n">x</span><span class="o">-</span><span class="n">callback</span><span class="o">-</span><span class="n">url</span><span class="o">/</span><span class="n">parse?sentence</span><span class="o">=</span><span class="p">[[</span><span class="n">line</span><span class="o">|</span><span class="mi">1</span><span class="p">]]</span><span class="o">&amp;</span><span class="n">add</span><span class="o">=</span><span class="mi">1</span><span class="o">&amp;</span><span class="n">x</span><span class="o">-</span><span class="n">success</span><span class="o">=&amp;</span><span class="n">x</span><span class="o">-</span><span class="n">cancel</span><span class="o">=</span>
 </code></pre></div></div>
 
 <p>分析：</p>
@@ -566,6 +569,10 @@ fantastical2://x-callback-url/parse?sentence=[[line|1]]&amp;add=1&amp;x-success=
             
         
             
+            
+                
+                    
+                
             
         
         
