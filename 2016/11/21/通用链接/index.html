@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2016/11/21/%E9%80%9A%E7%94%A8%E9%93%BE%E6%8E%A5/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2016/11/21/%E9%80%9A%E7%94%A8%E9%93%BE%E6%8E%A5/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -129,6 +129,8 @@
                             <i class="fa fa-heart"></i>关于我
                         </a>
                     </li>
+                    
+                
                     
                 
                     
@@ -290,7 +292,7 @@
 
 <p><a href="https://search.developer.apple.com/appsearch-validation-tool/">苹果提供 - 验证apple-app-site-association是否合法有效</a></p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="p">{</span>
   <span class="s2">"applinks"</span><span class="p">:</span> <span class="p">{</span>
     <span class="s2">"apps"</span><span class="p">:</span> <span class="p">[],</span>
     <span class="s2">"details"</span><span class="p">:</span> <span class="p">[</span>
@@ -313,7 +315,8 @@
     <span class="p">]</span>
   <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="appid">appID</h4>
 <p>teamId（开发者账户-个人中心中找到）. app 的 bundleID；</p>
@@ -328,9 +331,10 @@
 <h3 id="3在-xcode-里配置">3、在 Xcode 里配置</h3>
 <p>打开 Associated Domains，在其中的Domains中填入你想支持的域名(这里不是随便填的,是可以支持你需要的Universal Links的域名), 必须以 applinks: 为前缀。如：</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">applinks</span><span class="ss">:yohunl</span><span class="p">.</span><span class="nf">com</span>  
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">applinks</span><span class="ss">:yohunl</span><span class="p">.</span><span class="nf">com</span>  
 <span class="n">applinks</span><span class="ss">:www</span><span class="p">.</span><span class="nf">yohunl</span><span class="p">.</span><span class="nf">com</span>  
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>此时，Xcode 会在工程中添加<code class="highlighter-rouge">.entitlements</code>文件，而开发者中心可以看到<code class="highlighter-rouge">Associated Domains</code>状态为<code class="highlighter-rouge">Enabled</code>。</p>
 
@@ -343,7 +347,7 @@
 
 <p>AppDelegate 代理方法中做处理。</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span> <span class="p">(</span><span class="no">BOOL</span><span class="p">)</span><span class="n">application</span><span class="p">:(</span><span class="no">UIApplication</span> <span class="o">*</span> <span class="p">)</span><span class="n">application</span> <span class="n">continueUserActivity</span><span class="p">:(</span><span class="no">NSUserActivity</span> <span class="o">*</span> <span class="p">)</span><span class="n">userActivity</span> <span class="n">restorationHandler</span><span class="p">:(</span><span class="n">void</span> <span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="no">NSArray</span> <span class="o">*</span> <span class="p">))</span><span class="n">restorationHandler</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="o">-</span> <span class="p">(</span><span class="no">BOOL</span><span class="p">)</span><span class="n">application</span><span class="p">:(</span><span class="no">UIApplication</span> <span class="o">*</span> <span class="p">)</span><span class="n">application</span> <span class="n">continueUserActivity</span><span class="p">:(</span><span class="no">NSUserActivity</span> <span class="o">*</span> <span class="p">)</span><span class="n">userActivity</span> <span class="n">restorationHandler</span><span class="p">:(</span><span class="n">void</span> <span class="p">(</span><span class="o">^</span><span class="p">)(</span><span class="no">NSArray</span> <span class="o">*</span> <span class="p">))</span><span class="n">restorationHandler</span>
 <span class="p">{</span>
     <span class="sr">//</span> <span class="no">NSUserActivityTypeBrowsingWeb</span> <span class="err">由</span><span class="no">Universal</span> <span class="no">Links</span><span class="err">进来的</span>
 
@@ -361,7 +365,8 @@
     <span class="k">return</span> <span class="no">YES</span><span class="p">;</span>
 <span class="p">}</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <hr />
 <h2 id="相关链接">相关链接</h2>

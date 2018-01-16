@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2016/03/01/iOS-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2016/03/01/iOS-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -129,6 +129,8 @@
                             <i class="fa fa-heart"></i>关于我
                         </a>
                     </li>
+                    
+                
                     
                 
                     
@@ -267,18 +269,19 @@
   <li>不需要自己持有的对象时，释放</li>
 </ul>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="nb">id</span> <span class="n">obj</span> <span class="o">=</span> <span class="p">[</span><span class="no">NSMutableArray</span> <span class="n">array</span><span class="p">];</span>  
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>    <span class="nb">id</span> <span class="n">obj</span> <span class="o">=</span> <span class="p">[</span><span class="no">NSMutableArray</span> <span class="n">array</span><span class="p">];</span>  
     <span class="p">[</span><span class="n">obj</span> <span class="n">retain</span><span class="p">];</span>
 
 <span class="sr">//</span> <span class="err">当</span><span class="n">obj</span><span class="err">不在需要持有的对象，那么，</span><span class="n">obj</span><span class="err">应该发送</span><span class="n">release</span><span class="err">消息</span>
     <span class="p">[</span><span class="n">obj</span> <span class="n">release</span><span class="p">];</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <ul>
   <li>非自己持有的对象，无法释放</li>
 </ul>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    <span class="sr">//</span> <span class="mi">1</span><span class="o">.</span> <span class="err">释放一个已经释放的对象</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>    <span class="sr">//</span> <span class="mi">1</span><span class="o">.</span> <span class="err">释放一个已经释放的对象</span>
     <span class="nb">id</span> <span class="n">obj</span> <span class="o">=</span> <span class="p">[[</span><span class="no">NSObject</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
 
     <span class="sr">//</span> <span class="err">已经释放对象</span>
@@ -293,7 +296,8 @@
 
     <span class="sr">//</span> <span class="n">obj1</span><span class="err">没有进行</span><span class="n">retain</span><span class="err">操作而进行</span><span class="n">release</span><span class="err">操作，使得</span><span class="n">obj</span><span class="err">持有对象释放，造成了野指针错误</span>
     <span class="p">[</span><span class="n">obj1</span> <span class="n">release</span><span class="p">];</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="关键字">关键字</h3>
 
@@ -326,7 +330,7 @@
 
 <h4 id="1alloc">1）alloc</h4>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">id</span> <span class="n">obj</span> <span class="o">=</span> <span class="p">[[</span><span class="no">NSObject</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="nb">id</span> <span class="n">obj</span> <span class="o">=</span> <span class="p">[[</span><span class="no">NSObject</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
 
 <span class="o">+</span> <span class="p">(</span><span class="nb">id</span><span class="p">)</span><span class="n">alloc</span> <span class="p">{</span>
   <span class="k">return</span> <span class="p">[</span><span class="nb">self</span> <span class="n">allocWithZone</span><span class="ss">:NSDefaultMallocZone</span><span class="p">()];</span>
@@ -337,11 +341,12 @@
   <span class="sr">//</span> <span class="err">调用</span><span class="no">NSAllocateObject</span><span class="err">函数对内存进行分配</span>
   <span class="k">return</span> <span class="no">NSAllocateObject</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">z</span><span class="p">);</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="2retainreleaseretaincount">2）retain、release、retainCount</h4>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span> <span class="p">(</span><span class="no">NSUInteger</span><span class="p">)</span><span class="n">retainCount</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="o">-</span> <span class="p">(</span><span class="no">NSUInteger</span><span class="p">)</span><span class="n">retainCount</span>
 <span class="p">{</span>
     <span class="k">return</span> <span class="p">(</span><span class="no">NSUInteger</span><span class="p">)</span><span class="n">__CFDoExternRefOperation</span><span class="p">(</span><span class="no">OPERATION_retainCount</span><span class="p">,</span><span class="nb">self</span><span class="p">);</span>
 <span class="p">}</span>
@@ -382,13 +387,14 @@
                 <span class="k">return</span> <span class="mi">0</span> <span class="o">==</span> <span class="n">count</span><span class="p">;</span>
         <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="autorelease-pool自动释放池">Autorelease Pool（自动释放池）</h3>
 
 <p>将对象放入自动释放池中，当自从释放池销毁时对自动释放池中的对象都进行一次release操作</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="no">MRC</span> <span class="err">写法</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sr">//</span> <span class="no">MRC</span> <span class="err">写法</span>
 <span class="sr">//</span> <span class="mi">1</span><span class="o">.</span> <span class="err">创建</span> <span class="no">NSAutoreleasePool</span> <span class="err">对象</span>
 <span class="no">NSAutoreleasePool</span> <span class="o">*</span><span class="n">pool</span> <span class="o">=</span> <span class="p">[[</span><span class="no">NSAutoreleasePool</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
 
@@ -402,13 +408,14 @@
 
 <span class="sr">//</span> <span class="no">ARC</span> <span class="err">写法</span>
 <span class="vi">@autorelease</span> <span class="p">{</span>
-    <span class="sr">//</span> <span class="o">...</span>
+    <span class="sr">//</span> <span class="p">.</span><span class="nf">.</span><span class="o">.</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>自动释放池是通过数组完成的，在调用 autorelease 时，将对象加入到待释放的释放池数组中。自动释放池销毁时对数组中进行一次 release 操作。</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">class</span> <span class="nc">AutoreleasePoolPage</span> <span class="p">{</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">class</span> <span class="nc">AutoreleasePoolPage</span> <span class="p">{</span>
   <span class="n">static</span> <span class="n">inline</span> <span class="n">void</span> <span class="o">*</span><span class="n">push</span><span class="p">()</span>
   <span class="p">{</span>
       <span class="sr">//</span> <span class="err">相当于生成或持有</span> <span class="no">NSAutoreleasePool</span> <span class="err">类对象</span>
@@ -452,7 +459,8 @@
 <span class="p">{</span>
     <span class="k">return</span> <span class="no">AutoreleasePoolPage</span><span class="o">::</span><span class="n">autorelease</span><span class="p">(</span><span class="n">obj</span><span class="p">);</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="block">Block</h3>
 
@@ -616,7 +624,7 @@
 __ bridge_transfer也是和release方法类似，使用__bridge_transfer进行转化，既让对象p调用一次retain方法，而且原来指针obj会调用一次release方法也非常安全</p>
 </blockquote>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="nb">id</span> <span class="err">与</span> <span class="n">void</span> <span class="o">*</span> <span class="err">转换</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sr">//</span> <span class="nb">id</span> <span class="err">与</span> <span class="n">void</span> <span class="o">*</span> <span class="err">转换</span>
 
 <span class="err">非</span><span class="no">ARC</span><span class="err">下</span><span class="p">:</span>  
 <span class="nb">id</span> <span class="n">obj</span> <span class="o">=</span> <span class="p">[[</span><span class="no">NSObject</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
@@ -626,7 +634,8 @@ __ bridge_transfer也是和release方法类似，使用__bridge_transfer进行�
 <span class="no">ARC</span><span class="err">下</span><span class="n">id</span><span class="err">和</span><span class="n">void</span><span class="o">*</span><span class="err">有三个转换的关键字</span> <span class="n">__bridge</span><span class="err">、</span><span class="n">__bridge_retained</span><span class="err">、</span><span class="ss">__bridge_transfer:
 </span><span class="nb">id</span> <span class="n">obj</span> <span class="o">=</span> <span class="p">[[</span><span class="no">NSObject</span> <span class="n">alloc</span><span class="p">]</span> <span class="n">init</span><span class="p">];</span>
 <span class="n">void</span> <span class="o">*</span><span class="nb">p</span> <span class="o">=</span> <span class="p">(</span><span class="n">__bridge</span> <span class="n">void</span><span class="o">*</span><span class="p">)</span><span class="n">obj</span><span class="p">;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <hr />
 <h2 id="相关链接">相关链接</h2>
@@ -866,7 +875,7 @@ __ bridge_transfer也是和release方法类似，使用__bridge_transfer进行�
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2015/11/07/Apple%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A6%E5%8F%B7%E7%94%B3%E8%AF%B7/">Apple Developer账号申请</a></p>
+        <p><strong>上一篇</strong> <a href="/2015/11/07/Apple%E8%AF%81%E4%B9%A6%E4%B8%8E%E9%85%8D%E7%BD%AE/">Apple Developer账号申请</a></p>
         
     </div>
     <div class="nex">

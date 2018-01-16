@@ -3,18 +3,18 @@
   <channel>
     <title>YJ`s notes</title>
     <description></description>
-    <link>https://yjyuanshuai.github.io/</link>
-    <atom:link href="https://yjyuanshuai.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <pubDate>Tue, 16 Jan 2018 15:30:48 +0800</pubDate>
-    <lastBuildDate>Tue, 16 Jan 2018 15:30:48 +0800</lastBuildDate>
-    <generator>Jekyll v3.6.2</generator>
+    <link>http://localhost:4000/</link>
+    <atom:link href="http://localhost:4000/feed.xml" rel="self" type="application/rss+xml"/>
+    <pubDate>Tue, 16 Jan 2018 23:24:40 +0800</pubDate>
+    <lastBuildDate>Tue, 16 Jan 2018 23:24:40 +0800</lastBuildDate>
+    <generator>Jekyll v3.5.2</generator>
     
       <item>
         <title>参与Github开源库</title>
         <description>记录一下，参与Github开源库的大致流程。</description>
         <pubDate>Tue, 09 Jan 2018 15:14:54 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2018/01/09/%E5%8F%82%E4%B8%8EGithub%E5%BC%80%E6%BA%90%E5%BA%93/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2018/01/09/%E5%8F%82%E4%B8%8EGithub%E5%BC%80%E6%BA%90%E5%BA%93/</guid>
+        <link>http://localhost:4000/2018/01/09/%E5%8F%82%E4%B8%8EGithub%E5%BC%80%E6%BA%90%E5%BA%93/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/01/09/%E5%8F%82%E4%B8%8EGithub%E5%BC%80%E6%BA%90%E5%BA%93/</guid>
         
         <category>Github</category>
         
@@ -37,8 +37,8 @@ http://www.jianshu.com/p/dd8d1b7ce1e4
 http://www.cocoachina.com/ios/20150127/11022.html
 </description>
         <pubDate>Mon, 08 Jan 2018 17:14:54 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2018/01/08/SDK/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2018/01/08/SDK/</guid>
+        <link>http://localhost:4000/2018/01/08/SDK/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/01/08/SDK/</guid>
         
         <category>iOS</category>
         
@@ -51,8 +51,8 @@ http://www.cocoachina.com/ios/20150127/11022.html
         <title>组件化</title>
         <description>iOS开发，项目慢慢变大之后，开始考虑组件化。</description>
         <pubDate>Thu, 04 Jan 2018 17:14:54 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2018/01/04/%E7%BB%84%E4%BB%B6%E5%8C%96/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2018/01/04/%E7%BB%84%E4%BB%B6%E5%8C%96/</guid>
+        <link>http://localhost:4000/2018/01/04/%E7%BB%84%E4%BB%B6%E5%8C%96/</link>
+        <guid isPermaLink="true">http://localhost:4000/2018/01/04/%E7%BB%84%E4%BB%B6%E5%8C%96/</guid>
         
         <category>iOS</category>
         
@@ -67,8 +67,8 @@ http://www.cocoachina.com/ios/20150127/11022.html
         <title>2017总结</title>
         <description>2017年工作学习总结</description>
         <pubDate>Sun, 31 Dec 2017 17:14:54 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2017/12/31/2017%E6%80%BB%E7%BB%93/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/12/31/2017%E6%80%BB%E7%BB%93/</guid>
+        <link>http://localhost:4000/2017/12/31/2017%E6%80%BB%E7%BB%93/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/12/31/2017%E6%80%BB%E7%BB%93/</guid>
         
         <category>总结</category>
         
@@ -83,8 +83,8 @@ http://www.cocoachina.com/ios/20150127/11022.html
         <title>iOS开发之适配</title>
         <description>iOS 11 与 iPhone X 的适配问题</description>
         <pubDate>Mon, 20 Nov 2017 17:14:54 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2017/11/20/iOS-11+iPhone-X-%E9%80%82%E9%85%8D/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/11/20/iOS-11+iPhone-X-%E9%80%82%E9%85%8D/</guid>
+        <link>http://localhost:4000/2017/11/20/iOS-11+iPhone-X-%E9%80%82%E9%85%8D/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/11/20/iOS-11+iPhone-X-%E9%80%82%E9%85%8D/</guid>
         
         <category>iOS</category>
         
@@ -99,8 +99,8 @@ http://www.cocoachina.com/ios/20150127/11022.html
         <title>开发工具</title>
         <description>收集一些开发过程中用到的工具，包含iOS、Java等。</description>
         <pubDate>Fri, 17 Nov 2017 16:00:54 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2017/11/17/%E5%B7%A5%E5%85%B7/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/11/17/%E5%B7%A5%E5%85%B7/</guid>
+        <link>http://localhost:4000/2017/11/17/%E5%B7%A5%E5%85%B7/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/11/17/%E5%B7%A5%E5%85%B7/</guid>
         
         <category>iOS</category>
         
@@ -117,8 +117,8 @@ http://www.cocoachina.com/ios/20150127/11022.html
         <title>开发效率Tips</title>
         <description>总结 iOS 开发中可以提高开发效率的方法/工具。</description>
         <pubDate>Fri, 17 Nov 2017 09:00:54 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/</guid>
+        <link>http://localhost:4000/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/</guid>
         
         <category>iOS</category>
         
@@ -137,8 +137,8 @@ http://www.cocoachina.com/ios/20150127/11022.html
         <title>iOS WWDC更新总结</title>
         <description>历年 iOS WWDC 的技术点总结</description>
         <pubDate>Mon, 06 Nov 2017 18:14:54 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/</guid>
+        <link>http://localhost:4000/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/</guid>
         
         <category>iOS</category>
         
@@ -155,8 +155,8 @@ http://www.cocoachina.com/ios/20150127/11022.html
         <title>iOS 开发技术总结</title>
         <description>iOS 开发技术总结</description>
         <pubDate>Mon, 06 Nov 2017 17:14:54 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/</guid>
+        <link>http://localhost:4000/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/</guid>
         
         <category>iOS</category>
         
@@ -171,8 +171,8 @@ http://www.cocoachina.com/ios/20150127/11022.html
         <title>自定义 CollectionView 布局</title>
         <description>iOS UICollectionView 自定义布局，瀑布流、导航风火轮</description>
         <pubDate>Thu, 03 Aug 2017 16:14:54 +0800</pubDate>
-        <link>https://yjyuanshuai.github.io/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/</link>
-        <guid isPermaLink="true">https://yjyuanshuai.github.io/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/</guid>
+        <link>http://localhost:4000/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/</link>
+        <guid isPermaLink="true">http://localhost:4000/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/</guid>
         
         <category>iOS</category>
         

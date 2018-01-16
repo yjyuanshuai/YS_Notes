@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2016/12/21/CoreAnimation%E5%8A%A8%E7%94%BB/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2016/12/21/CoreAnimation%E5%8A%A8%E7%94%BB/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -129,6 +129,8 @@
                             <i class="fa fa-heart"></i>关于我
                         </a>
                     </li>
+                    
+                
                     
                 
                     
@@ -302,20 +304,22 @@
 
 <h2 id="常用的方法">常用的方法</h2>
 <h3 id="初始化方法">初始化方法</h3>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">+</span> <span class="p">(</span><span class="n">instancetype</span><span class="p">)</span><span class="n">animation</span><span class="p">;</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="o">+</span> <span class="p">(</span><span class="n">instancetype</span><span class="p">)</span><span class="n">animation</span><span class="p">;</span>
 
 <span class="sr">//</span> <span class="no">CAPropertyAnimation</span> <span class="err">的子类还可以通过如下方法初始化</span>
 <span class="o">+</span> <span class="p">(</span><span class="n">instancetype</span><span class="p">)</span><span class="n">animationWithKeyPath</span><span class="p">:(</span><span class="n">nullable</span> <span class="no">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">path</span><span class="p">;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="添加删除动画">添加/删除动画</h3>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sr">//</span>
 <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">addAnimation</span><span class="p">:(</span><span class="no">CAAnimation</span> <span class="o">*</span><span class="p">)</span><span class="n">anim</span> <span class="n">forKey</span><span class="p">:(</span><span class="n">nullable</span> <span class="no">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">key</span><span class="p">;</span>
 
 <span class="sr">//</span>
 <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">removeAnimationForKey</span><span class="p">:(</span><span class="no">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">key</span><span class="p">;</span>
 <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">removeAllAnimations</span><span class="p">;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="设置动画属性">设置动画属性</h3>
 <p>设置动画的执行时间，执行曲线，keyPath的目标值，代理等等.</p>
@@ -364,7 +368,7 @@
 </table>
 
 <h4 id="keypath">keyPath</h4>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="n">rotation</span> <span class="err">旋转</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sr">//</span> <span class="n">rotation</span> <span class="err">旋转</span>
 <span class="n">rotation</span><span class="p">.</span><span class="nf">x</span>
 <span class="n">rotation</span><span class="p">.</span><span class="nf">y</span>
 <span class="n">rotation</span><span class="p">.</span><span class="nf">z</span>
@@ -404,10 +408,11 @@
 <span class="n">borderWidth</span>
 <span class="n">contents</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="timingfunction">timingFunction</h4>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>
 <span class="sr">//</span> <span class="n">enum</span> <span class="err">值：</span>
 <span class="n">kCAMediaTimingFunctionLinear</span><span class="err"> 匀速</span>
 <span class="n">kCAMediaTimingFunctionEaseIn</span><span class="err"> 慢进</span>
@@ -415,25 +420,27 @@
 <span class="n">kCAMediaTimingFunctionEaseInEaseOut</span><span class="err"> 慢进慢出</span>
 <span class="n">kCAMediaTimingFunctionDefault</span><span class="err"> 默认值（慢进慢出）</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="delegate">delegate</h4>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>
 <span class="sr">//</span><span class="err">动画开始</span>
 <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">animationDidStart</span><span class="p">:(</span><span class="no">CAAnimation</span> <span class="o">*</span><span class="p">)</span><span class="n">anim</span><span class="p">;</span>  
 
 <span class="sr">//</span><span class="err">动画结束</span>
 <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">animationDidStop</span><span class="p">:(</span><span class="no">CAAnimation</span> <span class="o">*</span><span class="p">)</span><span class="n">anim</span> <span class="n">finished</span><span class="p">:(</span><span class="no">BOOL</span><span class="p">)</span><span class="n">flag</span><span class="p">;</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="cabasicanimation">CABasicAnimation</h2>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_02_02.gif" alt="" /></p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>
 <span class="no">CABasicAnimation</span> <span class="o">*</span><span class="n">postionAnimation</span> <span class="o">=</span> <span class="p">[</span><span class="no">CABasicAnimation</span> <span class="n">animationWithKeyPath</span><span class="p">:</span><span class="err">@</span><span class="s2">"position.y"</span><span class="p">];</span>
-<span class="n">postionAnimation</span><span class="p">.</span><span class="nf">duration</span> <span class="o">=</span> <span class="mf">1.0</span><span class="n">f</span><span class="p">;</span>
+<span class="n">postionAnimation</span><span class="p">.</span><span class="nf">duration</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="n">f</span><span class="p">;</span>
 <span class="n">postionAnimation</span><span class="p">.</span><span class="nf">fromValue</span> <span class="o">=</span> <span class="err">@</span><span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="nf">squareView</span><span class="p">.</span><span class="nf">center</span><span class="p">.</span><span class="nf">y</span><span class="p">);</span>
 <span class="n">postionAnimation</span><span class="p">.</span><span class="nf">toValue</span> <span class="o">=</span> <span class="err">@</span><span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="nf">squareView</span><span class="p">.</span><span class="nf">center</span><span class="p">.</span><span class="nf">y</span> <span class="o">-</span> <span class="mi">300</span><span class="p">);</span>
 <span class="n">postionAnimation</span><span class="p">.</span><span class="nf">removedOnCompletion</span> <span class="o">=</span> <span class="no">NO</span><span class="p">;</span>
@@ -443,7 +450,8 @@
 <span class="n">postionAnimation</span><span class="p">.</span><span class="nf">timingFunction</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAMediaTimingFunction</span> <span class="n">functionWithName</span><span class="ss">:kCAMediaTimingFunctionEaseInEaseOut</span><span class="p">];</span>
 <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">squareView</span><span class="p">.</span><span class="nf">layer</span> <span class="n">addAnimation</span><span class="ss">:postionAnimation</span> <span class="n">forKey</span><span class="p">:</span><span class="err">@</span><span class="s2">"posstionAnimation"</span><span class="p">];</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>属性说明：</p>
 
@@ -480,40 +488,42 @@
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_02_03.gif" alt="" /></p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>
 <span class="no">CAKeyframeAnimation</span> <span class="o">*</span><span class="n">keyAnimation</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAKeyframeAnimation</span> <span class="n">animationWithKeyPath</span><span class="p">:</span><span class="err">@</span><span class="s2">"transform"</span><span class="p">];</span>
-<span class="n">keyAnimation</span><span class="p">.</span><span class="nf">duration</span> <span class="o">=</span> <span class="mf">1.0</span><span class="n">f</span><span class="p">;</span>
-<span class="n">keyAnimation</span><span class="p">.</span><span class="nf">beginTime</span> <span class="o">=</span> <span class="no">CACurrentMediaTime</span><span class="p">()</span> <span class="o">+</span> <span class="mf">1.0</span><span class="p">;</span>
+<span class="n">keyAnimation</span><span class="p">.</span><span class="nf">duration</span> <span class="o">=</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="n">f</span><span class="p">;</span>
+<span class="n">keyAnimation</span><span class="p">.</span><span class="nf">beginTime</span> <span class="o">=</span> <span class="no">CACurrentMediaTime</span><span class="p">()</span> <span class="o">+</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">;</span>
 
-<span class="no">CATransform3D</span> <span class="n">transform1</span> <span class="o">=</span> <span class="no">CATransform3DMakeScale</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="mf">1.5</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="no">CATransform3D</span> <span class="n">transform2</span> <span class="o">=</span> <span class="no">CATransform3DMakeScale</span><span class="p">(</span><span class="mf">0.8</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="no">CATransform3D</span> <span class="n">transform1</span> <span class="o">=</span> <span class="no">CATransform3DMakeScale</span><span class="p">(</span><span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">1</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="no">CATransform3D</span> <span class="n">transform2</span> <span class="o">=</span> <span class="no">CATransform3DMakeScale</span><span class="p">(</span><span class="mi">0</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="o">.</span><span class="mi">8</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 <span class="no">CATransform3D</span> <span class="n">transform3</span> <span class="o">=</span> <span class="no">CATransform3DMakeScale</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
 
 <span class="n">keyAnimation</span><span class="p">.</span><span class="nf">values</span> <span class="o">=</span> <span class="err">@</span><span class="p">[[</span><span class="no">NSValue</span> <span class="n">valueWithCATransform3D</span><span class="ss">:transform1</span><span class="p">],[</span><span class="no">NSValue</span> <span class="n">valueWithCATransform3D</span><span class="ss">:transform2</span><span class="p">],[</span><span class="no">NSValue</span> <span class="n">valueWithCATransform3D</span><span class="ss">:transform3</span><span class="p">]];</span>
-<span class="n">keyAnimation</span><span class="p">.</span><span class="nf">keyTimes</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="err">@</span><span class="mi">0</span><span class="p">,</span><span class="err">@</span><span class="mf">0.5</span><span class="p">,</span><span class="err">@</span><span class="mi">1</span><span class="p">];</span>
+<span class="n">keyAnimation</span><span class="p">.</span><span class="nf">keyTimes</span> <span class="o">=</span> <span class="err">@</span><span class="p">[</span><span class="err">@</span><span class="mi">0</span><span class="p">,</span><span class="err">@</span><span class="mi">0</span><span class="o">.</span><span class="mi">5</span><span class="p">,</span><span class="err">@</span><span class="mi">1</span><span class="p">];</span>
 <span class="n">keyAnimation</span><span class="p">.</span><span class="nf">timingFunction</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAMediaTimingFunction</span> <span class="n">functionWithName</span><span class="ss">:kCAMediaTimingFunctionEaseInEaseOut</span><span class="p">];</span>
 <span class="n">keyAnimation</span><span class="p">.</span><span class="nf">removedOnCompletion</span> <span class="o">=</span> <span class="no">NO</span><span class="p">;</span>
 <span class="n">keyAnimation</span><span class="p">.</span><span class="nf">fillMode</span> <span class="o">=</span> <span class="n">kCAFillModeForwards</span><span class="p">;</span>
 <span class="p">[</span><span class="n">_someView</span><span class="p">.</span><span class="nf">layer</span> <span class="n">addAnimation</span><span class="ss">:keyAnimation</span> <span class="n">forKey</span><span class="ss">:nil</span><span class="p">];</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="示例代码2-路径">示例代码2-路径</h3>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_07.gif" alt="" /></p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">CAKeyframeAnimation</span> <span class="o">*</span> <span class="n">ani</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAKeyframeAnimation</span> <span class="n">animationWithKeyPath</span><span class="p">:</span><span class="err">@</span><span class="s2">"position"</span><span class="p">];</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="no">CAKeyframeAnimation</span> <span class="o">*</span> <span class="n">ani</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAKeyframeAnimation</span> <span class="n">animationWithKeyPath</span><span class="p">:</span><span class="err">@</span><span class="s2">"position"</span><span class="p">];</span>
 
 <span class="no">CGMutablePathRef</span> <span class="n">path</span> <span class="o">=</span> <span class="no">CGPathCreateMutable</span><span class="p">();</span>
 <span class="no">CGPathAddEllipseInRect</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="no">NULL</span><span class="p">,</span> <span class="no">CGRectMake</span><span class="p">(</span><span class="mi">130</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">));</span>
 <span class="n">ani</span><span class="p">.</span><span class="nf">path</span> <span class="o">=</span> <span class="n">path</span><span class="p">;</span>
 <span class="no">CGPathRelease</span><span class="p">(</span><span class="n">path</span><span class="p">);</span>
 
-<span class="n">ani</span><span class="p">.</span><span class="nf">duration</span> <span class="o">=</span> <span class="mf">4.0</span><span class="p">;</span>
+<span class="n">ani</span><span class="p">.</span><span class="nf">duration</span> <span class="o">=</span> <span class="mi">4</span><span class="o">.</span><span class="mi">0</span><span class="p">;</span>
 <span class="n">ani</span><span class="p">.</span><span class="nf">removedOnCompletion</span> <span class="o">=</span> <span class="no">NO</span><span class="p">;</span>
 <span class="n">ani</span><span class="p">.</span><span class="nf">fillMode</span> <span class="o">=</span> <span class="n">kCAFillModeForwards</span><span class="p">;</span>
 <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">centerShow</span><span class="p">.</span><span class="nf">layer</span> <span class="n">addAnimation</span><span class="ss">:ani</span> <span class="n">forKey</span><span class="p">:</span><span class="err">@</span><span class="s2">"PostionKeyframePathAni"</span><span class="p">];</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="catransition">CATransition</h2>
 
@@ -539,7 +549,7 @@
 </table>
 
 <h3 id="type">type</h3>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="n">enum</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sr">//</span> <span class="n">enum</span>
 <span class="n">kCATransitionFade</span>   <span class="sr">//</span> <span class="err">渐变，淡入淡出</span>
 <span class="n">kCATransitionMoveIn</span> <span class="sr">//</span> <span class="err">覆盖</span>
 <span class="n">kCATransitionPush</span>   <span class="sr">//</span> <span class="err">推出</span>
@@ -560,14 +570,16 @@
 <span class="no">UIViewAnimationTransitionCurlUp</span>         <span class="sr">//</span> <span class="err">上翻转</span>
 <span class="no">UIViewAnimationTransitionFlipFromLeft</span>   <span class="sr">//</span> <span class="err">左翻转</span>
 <span class="no">UIViewAnimationTransitionFlipFromRight</span>  <span class="sr">//</span> <span class="err">右翻转</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="subtype">subtype</h3>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kCATransitionFromRight</span>  <span class="sr">//</span> <span class="err">从右边</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">kCATransitionFromRight</span>  <span class="sr">//</span> <span class="err">从右边</span>
 <span class="n">kCATransitionFromLeft</span>   <span class="sr">//</span> <span class="err">从左边</span>
 <span class="n">kCATransitionFromTop</span>    <span class="sr">//</span> <span class="err">从顶部</span>
 <span class="n">kCATransitionFromBottom</span> <span class="sr">//</span> <span class="err">从底部</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="caspringanimation">CASpringAnimation</h2>
 
@@ -604,12 +616,12 @@
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_08.gif" alt="" /></p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>
 <span class="no">CASpringAnimation</span> <span class="o">*</span> <span class="n">ani</span> <span class="o">=</span> <span class="p">[</span><span class="no">CASpringAnimation</span> <span class="n">animationWithKeyPath</span><span class="p">:</span><span class="err">@</span><span class="s2">"bounds"</span><span class="p">];</span>
 
-<span class="n">ani</span><span class="p">.</span><span class="nf">mass</span> <span class="o">=</span> <span class="mf">10.0</span><span class="p">;</span> <span class="sr">//</span><span class="err">质量，影响图层运动时的弹簧惯性，质量越大，弹簧拉伸和压缩的幅度越大</span>
+<span class="n">ani</span><span class="p">.</span><span class="nf">mass</span> <span class="o">=</span> <span class="mi">10</span><span class="o">.</span><span class="mi">0</span><span class="p">;</span> <span class="sr">//</span><span class="err">质量，影响图层运动时的弹簧惯性，质量越大，弹簧拉伸和压缩的幅度越大</span>
 <span class="n">ani</span><span class="p">.</span><span class="nf">stiffness</span> <span class="o">=</span> <span class="mi">5000</span><span class="p">;</span> <span class="sr">//</span><span class="err">刚度系数</span><span class="p">(</span><span class="err">劲度系数</span><span class="o">/</span><span class="err">弹性系数</span><span class="p">)</span><span class="err">，刚度系数越大，形变产生的力就越大，运动越快</span>
-<span class="n">ani</span><span class="p">.</span><span class="nf">damping</span> <span class="o">=</span> <span class="mf">100.0</span><span class="p">;</span><span class="sr">//</span><span class="err">阻尼系数，阻止弹簧伸缩的系数，阻尼系数越大，停止越快</span>
+<span class="n">ani</span><span class="p">.</span><span class="nf">damping</span> <span class="o">=</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="p">;</span><span class="sr">//</span><span class="err">阻尼系数，阻止弹簧伸缩的系数，阻尼系数越大，停止越快</span>
 <span class="n">ani</span><span class="p">.</span><span class="nf">initialVelocity</span> <span class="o">=</span> <span class="mi">5</span><span class="p">.</span><span class="nf">f</span><span class="p">;</span><span class="sr">//</span><span class="err">初始速率，动画视图的初始速度大小</span><span class="p">;</span><span class="err">速率为正数时，速度方向与运动方向一致，速率为负数时，速度方向与运动方向相反</span>
 <span class="n">ani</span><span class="p">.</span><span class="nf">duration</span> <span class="o">=</span> <span class="n">ani</span><span class="p">.</span><span class="nf">settlingDuration</span><span class="p">;</span>
 <span class="n">ani</span><span class="p">.</span><span class="nf">toValue</span> <span class="o">=</span> <span class="p">[</span><span class="no">NSValue</span> <span class="n">valueWithCGRect</span><span class="ss">:self</span><span class="p">.</span><span class="nf">centerShow</span><span class="p">.</span><span class="nf">bounds</span><span class="p">];</span>
@@ -618,13 +630,14 @@
 <span class="n">ani</span><span class="p">.</span><span class="nf">timingFunction</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAMediaTimingFunction</span> <span class="n">functionWithName</span><span class="ss">:kCAMediaTimingFunctionEaseInEaseOut</span><span class="p">];</span>
 <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">cartCenter</span><span class="p">.</span><span class="nf">layer</span> <span class="n">addAnimation</span><span class="ss">:ani</span> <span class="n">forKey</span><span class="p">:</span><span class="err">@</span><span class="s2">"boundsAni"</span><span class="p">];</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="caanimationgroup">CAAnimationGroup</h2>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_02_04.gif" alt="" /></p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>
 <span class="no">CABasicAnimation</span> <span class="o">*</span><span class="n">rotationYAnimation</span> <span class="o">=</span> <span class="p">[</span><span class="no">CABasicAnimation</span> <span class="n">animationWithKeyPath</span><span class="p">:</span><span class="err">@</span><span class="s2">"transform.rotation.y"</span><span class="p">];</span>
 <span class="n">rotationYAnimation</span><span class="p">.</span><span class="nf">fromValue</span> <span class="o">=</span> <span class="err">@</span><span class="mi">0</span><span class="p">;</span>
 <span class="n">rotationYAnimation</span><span class="p">.</span><span class="nf">toValue</span> <span class="o">=</span> <span class="err">@</span><span class="p">(</span><span class="no">M_PI</span><span class="p">);</span>
@@ -644,7 +657,8 @@
 
 <span class="p">[</span><span class="n">_markView</span><span class="p">.</span><span class="nf">layer</span> <span class="n">addAnimation</span><span class="ss">:animationGroup</span> <span class="n">forKey</span><span class="ss">:kJumpAnimation</span><span class="p">];</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <blockquote>
   <p>注：CAAnimationGroup的 animations 中可以放其他任何动画类（包括CAAnimationGroup），需要注意的是animations里的动画设置了duration之后动画可能会有不同，一般里面不设置，在最外层设置group的duration即可。</p>
@@ -652,7 +666,7 @@
 
 <p>接上面示例之后的动画，实现视图继续绕Y轴旋转90°，下落回原处：</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>
 <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">animationDidStop</span><span class="p">:(</span><span class="no">CAAnimation</span> <span class="o">*</span><span class="p">)</span><span class="n">anim</span> <span class="n">finished</span><span class="p">:(</span><span class="no">BOOL</span><span class="p">)</span><span class="n">flag</span>
 <span class="p">{</span>
     <span class="k">if</span> <span class="p">([</span><span class="n">anim</span> <span class="n">isEqual</span><span class="p">:[</span><span class="n">_someView</span><span class="p">.</span><span class="nf">layer</span> <span class="n">animationForKey</span><span class="p">:</span><span class="err">@</span><span class="s2">"jumpUp"</span><span class="p">]])</span> <span class="p">{</span>
@@ -667,7 +681,7 @@
         <span class="n">postionAnimation</span><span class="p">.</span><span class="nf">timingFunction</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAMediaTimingFunction</span> <span class="n">functionWithName</span><span class="ss">:kCAMediaTimingFunctionEaseInEaseOut</span><span class="p">];</span>
 
         <span class="no">CAAnimationGroup</span> <span class="o">*</span><span class="n">animationGroup</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAAnimationGroup</span> <span class="n">animation</span><span class="p">];</span>
-        <span class="n">animationGroup</span><span class="p">.</span><span class="nf">duration</span> <span class="o">=</span> <span class="mf">0.256</span><span class="p">;</span>
+        <span class="n">animationGroup</span><span class="p">.</span><span class="nf">duration</span> <span class="o">=</span> <span class="mi">0</span><span class="o">.</span><span class="mi">256</span><span class="p">;</span>
         <span class="n">animationGroup</span><span class="p">.</span><span class="nf">removedOnCompletion</span> <span class="o">=</span> <span class="no">NO</span><span class="p">;</span>
         <span class="n">animationGroup</span><span class="p">.</span><span class="nf">fillMode</span> <span class="o">=</span> <span class="n">kCAFillModeForwards</span><span class="p">;</span>
         <span class="n">animationGroup</span><span class="p">.</span><span class="nf">delegate</span> <span class="o">=</span> <span class="nb">self</span><span class="p">;</span>
@@ -677,7 +691,8 @@
     <span class="p">}</span>
 <span class="p">}</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="catransaction-事务">CATransaction 事务</h2>
 
@@ -693,25 +708,27 @@
 <p>　　2.显式：明显调用事务的方法（[CATransaction begin]和 [CATransaction commit]）。</p>
 
 <p>CA事务的可设置属性（会覆盖隐式动画的设置）：</p>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>
 <span class="n">animationDuration</span><span class="err">：动画时间</span>
 <span class="n">animationTimingFunction</span><span class="err">：动画时间曲线</span>
 <span class="n">disableActions</span><span class="err">：是否关闭动画</span>
 <span class="n">completionBlock</span><span class="err">：动画执行完毕的回调</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>事务支持嵌套使用：当最外层的事务commit后动画才会开始。</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>
 <span class="p">[</span><span class="no">CATransaction</span> <span class="k">begin</span><span class="p">];</span>
-<span class="p">[</span><span class="no">CATransaction</span> <span class="n">setAnimationDuration</span><span class="p">:</span><span class="mf">2.0</span><span class="p">];</span>
+<span class="p">[</span><span class="no">CATransaction</span> <span class="n">setAnimationDuration</span><span class="p">:</span><span class="mi">2</span><span class="o">.</span><span class="mi">0</span><span class="p">];</span>
 <span class="p">[</span><span class="no">CATransaction</span> <span class="n">setAnimationTimingFunction</span><span class="p">:[</span><span class="no">CAMediaTimingFunction</span> <span class="n">functionWithName</span><span class="ss">:kCAMediaTimingFunctionEaseInEaseOut</span><span class="p">]];</span>
 <span class="sr">//</span>    <span class="p">[</span><span class="no">CATransaction</span> <span class="n">setDisableActions</span><span class="ss">:YES</span><span class="p">];</span> <span class="sr">//</span><span class="err">设置为</span><span class="no">YES</span><span class="err">就关闭动画</span>
 <span class="nb">self</span><span class="p">.</span><span class="nf">subLayer</span><span class="p">.</span><span class="nf">bounds</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">centerShow</span><span class="p">.</span><span class="nf">layer</span><span class="p">.</span><span class="nf">bounds</span><span class="p">;</span>
 <span class="p">[</span><span class="no">CATransaction</span> <span class="n">commit</span><span class="p">];</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <blockquote>
   <p>注意：只有非root layer才有隐式动画，如果你是直接设置self.cartCenter.layer.bounds = self.centerShow.layer.bounds;是不会有动画效果的。</p>

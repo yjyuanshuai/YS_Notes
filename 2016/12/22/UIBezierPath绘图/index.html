@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2016/12/22/UIBezierPath%E7%BB%98%E5%9B%BE/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2016/12/22/UIBezierPath%E7%BB%98%E5%9B%BE/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -129,6 +129,8 @@
                             <i class="fa fa-heart"></i>关于我
                         </a>
                     </li>
+                    
+                
                     
                 
                     
@@ -263,19 +265,21 @@
 | fill | 内部填充的 view |</p>
 
 <h4 id="linejoinstyle连接点样式">lineJoinStyle（连接点样式）</h4>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kCGLineJoinMiter</span>  <span class="sr">//</span> <span class="err">斜接</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">kCGLineJoinMiter</span>  <span class="sr">//</span> <span class="err">斜接</span>
 <span class="n">kCGLineJoinRound</span>  <span class="sr">//</span> <span class="err">圆滑</span>
 <span class="n">kCGLineJoinBevel</span>  <span class="sr">//</span> <span class="err">斜角</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="linecapstyle终点样式">lineCapStyle（终点样式）</h4>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kCGLineCapButt</span>    <span class="sr">//</span> <span class="err">默认值，即不绘制端点</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">kCGLineCapButt</span>    <span class="sr">//</span> <span class="err">默认值，即不绘制端点</span>
 <span class="n">kCGLineCapRound</span>   <span class="sr">//</span> <span class="err">圆形端点</span>
 <span class="n">kCGLineCapSquare</span>  <span class="sr">//</span> <span class="err">方形端点</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="初始化方法">初始化方法</h3>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="err">构造</span><span class="n">bezierPath</span><span class="err">对象，一般用于自定义路径。</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sr">//</span> <span class="err">构造</span><span class="n">bezierPath</span><span class="err">对象，一般用于自定义路径。</span>
 <span class="o">+</span> <span class="n">bezierPath</span><span class="p">;</span>
 
 <span class="sr">//</span> <span class="err">绘制圆弧路径，参数</span><span class="mi">1</span><span class="err">是中心点位置，参数</span><span class="mi">2</span><span class="err">是半径，参数</span><span class="mi">3</span><span class="err">是开始的弧度值，参数</span><span class="mi">4</span><span class="err">是结束的弧度值，参数</span><span class="mi">5</span><span class="err">是是否顺时针</span><span class="p">(</span><span class="no">YES</span><span class="err">是顺时针方向，</span><span class="no">NO</span><span class="err">逆时针</span><span class="p">)</span><span class="err">。</span>
@@ -304,11 +308,12 @@
 
 </span><span class="sr">//</span> <span class="err">绘制每个角都是圆角的矩形，参数</span><span class="mi">2</span><span class="err">是半径。</span>
 <span class="o">+</span> <span class="ss">bezierPathWithRoundedRect: cornerRadius:
-</span></code></pre></div></div>
+</span></code></pre>
+</div>
 
 <h3 id="自定义路径常用">自定义路径常用</h3>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="err">设置起点</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sr">//</span> <span class="err">设置起点</span>
 <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">moveToPoint</span><span class="p">:(</span><span class="no">CGPoint</span><span class="p">)</span><span class="n">point</span><span class="p">;</span>   
 
 <span class="sr">//</span> <span class="err">绘制直线</span>  
@@ -326,74 +331,78 @@
 <span class="sr">//</span> <span class="err">拼接曲线</span>
 <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">appendPath</span><span class="p">:(</span><span class="no">UIBezierPath</span> <span class="o">*</span><span class="p">)</span><span class="n">bezierPath</span><span class="p">;</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="应用">应用</h2>
 <h3 id="直线">直线</h3>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_09.png" alt="" /></p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">UIColor</span> <span class="o">*</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="no">UIColor</span> <span class="o">*</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
 <span class="p">[</span><span class="n">color</span> <span class="n">set</span><span class="p">];</span> <span class="sr">//</span><span class="err">设置线条颜色</span>
 
 <span class="no">UIBezierPath</span><span class="o">*</span> <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPath</span><span class="p">];</span>
-<span class="n">path</span><span class="p">.</span><span class="nf">lineWidth</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">;</span>
+<span class="n">path</span><span class="p">.</span><span class="nf">lineWidth</span> <span class="o">=</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span><span class="p">;</span>
 
 <span class="n">path</span><span class="p">.</span><span class="nf">lineCapStyle</span> <span class="o">=</span> <span class="n">kCGLineCapRound</span><span class="p">;</span> <span class="sr">//</span><span class="err">线条拐角</span>
 <span class="n">path</span><span class="p">.</span><span class="nf">lineJoinStyle</span> <span class="o">=</span> <span class="n">kCGLineJoinRound</span><span class="p">;</span> <span class="sr">//</span><span class="err">终点处理</span>
 
-<span class="p">[</span><span class="n">path</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="mf">200.0</span><span class="p">,</span> <span class="mf">50.0</span><span class="p">)];</span><span class="sr">//</span><span class="err">起点</span>
+<span class="p">[</span><span class="n">path</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="mi">200</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">50</span><span class="o">.</span><span class="mi">0</span><span class="p">)];</span><span class="sr">//</span><span class="err">起点</span>
 
 <span class="sr">//</span> <span class="no">Draw</span> <span class="n">the</span> <span class="n">lines</span>
-<span class="p">[</span><span class="n">path</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="mf">300.0</span><span class="p">,</span> <span class="mf">100.0</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">path</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="mi">300</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="p">)];</span>
 <span class="p">[</span><span class="n">path</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="mi">260</span><span class="p">,</span> <span class="mi">200</span><span class="p">)];</span>
-<span class="p">[</span><span class="n">path</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="mf">100.0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)];</span>
-<span class="p">[</span><span class="n">path</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mf">70.0</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">path</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="mi">100</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="mi">200</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">path</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">70</span><span class="o">.</span><span class="mi">0</span><span class="p">)];</span>
 <span class="p">[</span><span class="n">path</span> <span class="n">closePath</span><span class="p">];</span> <span class="sr">//</span><span class="err">第五条线通过调用</span><span class="n">closePath</span><span class="err">方法得到的</span>
 
 <span class="sr">//</span> <span class="p">[</span><span class="n">path</span> <span class="n">stroke</span><span class="p">];</span><span class="sr">//</span><span class="no">Draws</span> <span class="n">line</span> <span class="err">根据坐标点连线</span>
 <span class="p">[</span><span class="n">path</span> <span class="n">fill</span><span class="p">];</span>    <span class="sr">//</span><span class="err">颜色填充</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="矩形">矩形</h3>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_10.png" alt="" /></p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">UIColor</span> <span class="o">*</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="no">UIColor</span> <span class="o">*</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
 <span class="p">[</span><span class="n">color</span> <span class="n">set</span><span class="p">];</span> <span class="sr">//</span><span class="err">设置线条颜色</span>
 
 <span class="no">UIBezierPath</span><span class="o">*</span> <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPathWithRect</span><span class="ss">:CGRectMake</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">80</span><span class="p">)];</span>
 
-<span class="n">path</span><span class="p">.</span><span class="nf">lineWidth</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">;</span>
+<span class="n">path</span><span class="p">.</span><span class="nf">lineWidth</span> <span class="o">=</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span><span class="p">;</span>
 <span class="n">path</span><span class="p">.</span><span class="nf">lineCapStyle</span> <span class="o">=</span> <span class="n">kCGLineCapRound</span><span class="p">;</span> <span class="sr">//</span><span class="err">线条拐角</span>
 <span class="n">path</span><span class="p">.</span><span class="nf">lineJoinStyle</span> <span class="o">=</span> <span class="n">kCGLineJoinRound</span><span class="p">;</span> <span class="sr">//</span><span class="err">终点处理</span>
 
 <span class="p">[</span><span class="n">path</span> <span class="n">stroke</span><span class="p">];</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="圆形">圆形</h3>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_11.png" alt="" /></p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">UIColor</span> <span class="o">*</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="no">UIColor</span> <span class="o">*</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
 <span class="p">[</span><span class="n">color</span> <span class="n">set</span><span class="p">];</span>
 
 <span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPathWithArcCenter</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="n">radius</span><span class="p">:</span><span class="mi">90</span> <span class="n">startAngle</span><span class="p">:</span><span class="mi">0</span> <span class="n">endAngle</span><span class="ss">:TO_RADIAUS</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span> <span class="n">clockwise</span><span class="ss">:YES</span><span class="p">];</span>
 
-<span class="n">path</span><span class="p">.</span><span class="nf">lineWidth</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">;</span>
+<span class="n">path</span><span class="p">.</span><span class="nf">lineWidth</span> <span class="o">=</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span><span class="p">;</span>
 <span class="n">path</span><span class="p">.</span><span class="nf">lineCapStyle</span> <span class="o">=</span> <span class="n">kCGLineCapRound</span><span class="p">;</span>
 <span class="n">path</span><span class="p">.</span><span class="nf">lineJoinStyle</span> <span class="o">=</span> <span class="n">kCGLineJoinRound</span><span class="p">;</span>
 <span class="p">[</span><span class="n">path</span> <span class="n">stroke</span><span class="p">];</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="圆弧">圆弧</h3>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_12.png" alt="" /></p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">/**
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sr">/**
   * center：原点
   * radius：半径
   * startAngle：开始角度
@@ -403,20 +412,23 @@
 
 <span class="o">+</span> <span class="p">(</span><span class="no">UIBezierPath</span> <span class="o">*</span><span class="p">)</span><span class="n">bezierPathWithArcCenter</span><span class="p">:(</span><span class="no">CGPoint</span><span class="p">)</span><span class="n">center</span> <span class="n">radius</span><span class="p">:(</span><span class="no">CGFloat</span><span class="p">)</span><span class="n">radius</span> <span class="n">startAngle</span><span class="p">:(</span><span class="no">CGFloat</span><span class="p">)</span><span class="n">startAngle</span> <span class="n">endAngle</span><span class="p">:(</span><span class="no">CGFloat</span><span class="p">)</span><span class="n">endAngle</span> <span class="n">clockwise</span><span class="p">:(</span><span class="no">BOOL</span><span class="p">)</span><span class="n">clockwise</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="二次贝塞尔曲线">二次贝塞尔曲线</h3>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">addQuadCurveToPoint</span><span class="p">:(</span><span class="no">CGPoint</span><span class="p">)</span><span class="n">endPoint</span> <span class="n">controlPoint</span><span class="p">:(</span><span class="no">CGPoint</span><span class="p">)</span><span class="n">controlPoint</span>
-</code></pre></div></div>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">addQuadCurveToPoint</span><span class="p">:(</span><span class="no">CGPoint</span><span class="p">)</span><span class="n">endPoint</span> <span class="n">controlPoint</span><span class="p">:(</span><span class="no">CGPoint</span><span class="p">)</span><span class="n">controlPoint</span>
+</code></pre>
+</div>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_13.jpeg" alt="" /></p>
 
 <h3 id="三次贝塞尔曲线">三次贝塞尔曲线</h3>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">addCurveToPoint</span><span class="p">:(</span><span class="no">CGPoint</span><span class="p">)</span><span class="n">endPoint</span> <span class="n">controlPoint1</span><span class="p">:(</span><span class="no">CGPoint</span><span class="p">)</span><span class="n">controlPoint1</span> <span class="n">controlPoint2</span><span class="p">:(</span><span class="no">CGPoint</span><span class="p">)</span><span class="n">controlPoint2</span>  
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">addCurveToPoint</span><span class="p">:(</span><span class="no">CGPoint</span><span class="p">)</span><span class="n">endPoint</span> <span class="n">controlPoint1</span><span class="p">:(</span><span class="no">CGPoint</span><span class="p">)</span><span class="n">controlPoint1</span> <span class="n">controlPoint2</span><span class="p">:(</span><span class="no">CGPoint</span><span class="p">)</span><span class="n">controlPoint2</span>  
 <span class="no">Parameters</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_14.jpeg" alt="" /></p>
 
@@ -424,35 +436,37 @@
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_15.png" alt="" /></p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">UIColor</span> <span class="o">*</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="no">UIColor</span> <span class="o">*</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
     <span class="p">[</span><span class="n">color</span> <span class="n">set</span><span class="p">];</span> <span class="sr">//</span><span class="err">设置线条颜色</span>
 
 <span class="no">UIBezierPath</span><span class="o">*</span> <span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPathWithRect</span><span class="ss">:CGRectMake</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">80</span><span class="p">)];</span>
 
-<span class="n">path</span><span class="p">.</span><span class="nf">lineWidth</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">;</span>
+<span class="n">path</span><span class="p">.</span><span class="nf">lineWidth</span> <span class="o">=</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span><span class="p">;</span>
 <span class="n">path</span><span class="p">.</span><span class="nf">lineCapStyle</span> <span class="o">=</span> <span class="n">kCGLineCapRound</span><span class="p">;</span> <span class="sr">//</span><span class="err">线条拐角</span>
 <span class="n">path</span><span class="p">.</span><span class="nf">lineJoinStyle</span> <span class="o">=</span> <span class="n">kCGLineJoinRound</span><span class="p">;</span> <span class="sr">//</span><span class="err">终点处理</span>
 
 <span class="p">[</span><span class="n">path</span> <span class="n">stroke</span><span class="p">];</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="制定矩形的某个角为圆角">制定矩形的某个角为圆角</h3>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20161221/B00_001_01_20161221_16.png" alt="" /></p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">UIColor</span> <span class="o">*</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="no">UIColor</span> <span class="o">*</span><span class="n">color</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIColor</span> <span class="n">redColor</span><span class="p">];</span>
 <span class="p">[</span><span class="n">color</span> <span class="n">set</span><span class="p">];</span>
 
 <span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPathWithRoundedRect</span><span class="ss">:CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span> <span class="n">byRoundingCorners</span><span class="ss">:UIRectCornerTopRight</span> <span class="n">cornerRadii</span><span class="ss">:CGSizeMake</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span> <span class="mi">20</span><span class="p">)];</span>
 
 <span class="n">path</span><span class="p">.</span><span class="nf">lineCapStyle</span> <span class="o">=</span> <span class="n">kCGLineCapRound</span><span class="p">;</span>
 <span class="n">path</span><span class="p">.</span><span class="nf">lineJoinStyle</span> <span class="o">=</span> <span class="n">kCGLineJoinRound</span><span class="p">;</span>
-<span class="n">path</span><span class="p">.</span><span class="nf">lineWidth</span> <span class="o">=</span> <span class="mf">5.0</span><span class="p">;</span>
+<span class="n">path</span><span class="p">.</span><span class="nf">lineWidth</span> <span class="o">=</span> <span class="mi">5</span><span class="o">.</span><span class="mi">0</span><span class="p">;</span>
 
 <span class="p">[</span><span class="n">path</span> <span class="n">stroke</span><span class="p">];</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
         </article>
         <hr>

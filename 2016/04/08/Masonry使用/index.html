@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2016/04/08/Masonry%E4%BD%BF%E7%94%A8/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2016/04/08/Masonry%E4%BD%BF%E7%94%A8/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -153,6 +153,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -242,7 +244,7 @@
 <h3 id="2017-11-17-适配-ios-11">2017-11-17 适配 iOS 11</h3>
 <p>为了适配 iOS 11 安全区域的问题，<code class="highlighter-rouge">View+MASAdditions</code>类别中加了一些内容。</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mas_safeAreaLayoutGuide</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">mas_safeAreaLayoutGuide</span>
 
 <span class="n">mas_safeAreaLayoutGuideRight</span>
 <span class="n">mas_safeAreaLayoutGuideLeft</span>
@@ -251,7 +253,8 @@
 
 <span class="n">mas_safeAreaLayoutGuideCenterY</span>
 <span class="n">mas_safeAreaLayoutGuideCenterX</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="简介">简介</h2>
 
@@ -259,7 +262,7 @@
 
 <p>在<code class="highlighter-rouge">MASUtilities.h</code>中，通过宏定义方式区分 2 个平台的独有关键字：</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#if TARGET_OS_IPHONE || TARGET_OS_TV</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1">#if TARGET_OS_IPHONE || TARGET_OS_TV</span>
 
     <span class="c1">#import &lt;UIKit/UIKit.h&gt;</span>
     <span class="c1">#define MAS_VIEW UIView</span>
@@ -273,7 +276,8 @@
     <span class="c1">#define MASEdgeInsets NSEdgeInsets</span>
 
 <span class="c1">#endif</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="使用">使用</h2>
 
@@ -332,7 +336,7 @@
 
 <h3 id="api">API</h3>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>
 <span class="n">mas_makeConstraints</span><span class="p">()</span>    <span class="o">/</span><span class="sr">/添加约束
 mas_remakeConstraints()  /</span><span class="o">/</span><span class="err">移除之前的约束，重新添加新的约束</span>
 <span class="n">mas_updateConstraints</span><span class="p">()</span>  <span class="o">/</span><span class="sr">/更新约束
@@ -344,30 +348,34 @@ mas_lessThanOrEqualTo()
 
 width()         /</span><span class="o">/</span><span class="err">用来表示宽度，例如代表</span><span class="n">view</span><span class="err">的宽度</span>
 <span class="n">mas_width</span><span class="p">()</span>     <span class="o">/</span><span class="sr">/用来获取宽度的值。和上面的区别在于，一个代表某个坐标系对象，一个用来获取坐标系对象的值
-</span></code></pre></div></div>
+</span></code></pre>
+</div>
 
 <h3 id="autoboxing">AutoBoxing</h3>
 <p>如果在当前类引入#import “Masonry.h”之前，用下面两种宏定义声明一下，就不需要区分 mas_ 前缀。</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="err">定义这个常量，就可以不用在开发过程中使用</span><span class="s2">"mas_"</span><span class="err">前缀。</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sr">//</span> <span class="err">定义这个常量，就可以不用在开发过程中使用</span><span class="s2">"mas_"</span><span class="err">前缀。</span>
 <span class="c1">#define MAS_SHORTHAND</span>
 <span class="sr">//</span> <span class="err">定义这个常量，就可以让</span><span class="no">Masonry</span><span class="err">帮我们自动把基础数据类型的数据，自动装箱为对象类型。</span>
 <span class="c1">#define MAS_SHORTHAND_GLOBALS</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="修饰语">修饰语</h3>
 <p>什么也不做，就是为了提高代码的可读性。</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">and</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">and</span>
 <span class="n">with</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="其他">其他</h3>
 <h4 id="mas_key">mas_key</h4>
 <p>当出现约束冲突、缺少等问题时，log中通常只展示冲突 view 的内存地址。为方便调试，加了 mas_key 内存地址会被替换成 view（即实例名），可读性更高。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MASAttachKeys(view1, view2, ... )
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>MASAttachKeys(view1, view2, ... )
+</code></pre>
+</div>
 
 <hr />
 <h2 id="相关链接">相关链接</h2>

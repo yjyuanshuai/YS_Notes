@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -153,6 +153,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -243,7 +245,7 @@
 
 <p>CollectionView 布局使用的是 UICollectionViewLayoutAttributes 类，定义几个可变字典，用于存储段头、Item、段尾的布局。</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>
 <span class="sr">//</span> <span class="p">[</span><span class="no">NSIndexPath</span> <span class="n">indexPathForRow</span><span class="p">:</span><span class="mi">0</span> <span class="n">inSection</span><span class="p">:</span><span class="err">列号</span><span class="p">]</span> <span class="p">:</span> <span class="kp">attr</span>
 <span class="no">NSMutableDictionary</span> <span class="o">*</span> <span class="n">sectionHeadAttrsDic</span><span class="p">;</span>  <span class="sr">//</span> <span class="err">段头（每段只有一个）</span>
 <span class="no">NSMutableDictionary</span> <span class="o">*</span> <span class="n">sectionFootAttrsDic</span><span class="p">;</span>  <span class="sr">//</span> <span class="err">段尾（每段只有一个）</span>
@@ -251,13 +253,14 @@
 <span class="sr">//</span> <span class="n">indexPath</span> <span class="p">:</span> <span class="kp">attr</span>
 <span class="no">NSMutableDictionary</span> <span class="o">*</span> <span class="n">itemAttrsDic</span><span class="p">;</span>   <span class="sr">//</span> <span class="n">item</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="预布局preparelayout">预布局（prepareLayout）</h3>
 
 <p>预布局的作用是根据 <strong>数据模型</strong> 计算所有元素的 attr.frame，并将其存放到对应的可变数组中，供之后使用。</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>
 <span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">prepareLayout</span><span class="p">{</span>
     <span class="p">[</span><span class="k">super</span> <span class="n">prepareLayout</span><span class="p">];</span>
 
@@ -266,7 +269,8 @@
     <span class="sr">//</span> <span class="err">段尾</span>
 <span class="p">}</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <blockquote>
   <p>注：重要的是建立数学模型，这个是难点。</p>
@@ -274,7 +278,7 @@
 
 <h3 id="当前可见区域的布局layoutattributesforelementsinrect">当前可见区域的布局（layoutAttributesForElementsInRect）</h3>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>
 <span class="o">-</span> <span class="p">(</span><span class="no">NSArray</span> <span class="o">*</span> <span class="p">)</span><span class="n">layoutAttributesForElementsInRect</span><span class="p">:(</span><span class="no">CGRect</span><span class="p">)</span><span class="n">rect</span><span class="p">{</span>
     <span class="no">NSMutableArray</span> <span class="o">*</span> <span class="n">allAttrsArr</span> <span class="o">=</span> <span class="p">[</span><span class="no">NSMutableArray</span> <span class="n">array</span><span class="p">];</span>
 
@@ -285,40 +289,44 @@
     <span class="k">return</span> <span class="n">allAttrsArr</span><span class="p">;</span>
 <span class="p">}</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="是否重新布局shouldinvalidatelayoutforboundschange">是否重新布局（shouldInvalidateLayoutForBoundsChange）</h3>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>
 <span class="o">-</span> <span class="p">(</span><span class="no">BOOL</span><span class="p">)</span><span class="n">shouldInvalidateLayoutForBoundsChange</span><span class="p">:(</span><span class="no">CGRect</span><span class="p">)</span><span class="n">newBounds</span><span class="p">{</span>
     <span class="sr">//</span> <span class="no">YES</span><span class="o">-</span><span class="err">重新布局；</span> <span class="no">NO</span><span class="o">-</span><span class="err">不重新布局；</span>
 <span class="p">}</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="设置contentsizecollectionviewcontentsize">设置contentSize（collectionViewContentSize）</h3>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>
 <span class="o">-</span> <span class="p">(</span><span class="no">CGSize</span><span class="p">)</span><span class="n">collectionViewContentSize</span> <span class="p">{</span>
 
 <span class="p">}</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="item-布局">item 布局</h3>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>
 <span class="o">-</span> <span class="p">(</span><span class="no">UICollectionViewLayoutAttributes</span><span class="o">*</span><span class="p">)</span><span class="n">layoutAttributesForItemAtIndexPath</span><span class="p">:(</span><span class="no">NSIndexPath</span><span class="o">*</span><span class="p">)</span><span class="n">indexPath</span>
 <span class="p">{</span>
     <span class="no">UICollectionViewLayoutAttributes</span> <span class="o">*</span> <span class="n">itemAttr</span> <span class="o">=</span> <span class="n">itemAttrsDic</span><span class="p">[</span><span class="n">indexPath</span><span class="p">];</span>
     <span class="k">return</span> <span class="n">itemAttr</span><span class="p">;</span>
 <span class="p">}</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="段头尾布局">段头/尾布局</h3>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code>
 <span class="o">-</span><span class="p">(</span><span class="no">UICollectionViewLayoutAttributes</span><span class="o">*</span><span class="p">)</span><span class="n">layoutAttributesForSupplementaryViewOfKind</span><span class="p">:(</span><span class="no">NSString</span><span class="o">*</span><span class="p">)</span><span class="n">elementKind</span> <span class="n">atIndexPath</span><span class="p">:(</span><span class="no">NSIndexPath</span><span class="o">*</span><span class="p">)</span><span class="n">indexPath</span>
 <span class="p">{</span>
     <span class="no">UICollectionViewLayoutAttributes</span> <span class="o">*</span> <span class="n">supplementAttr</span> <span class="o">=</span> <span class="kp">nil</span><span class="p">;</span>
@@ -331,13 +339,14 @@
     <span class="k">return</span> <span class="n">supplementAttr</span><span class="p">;</span>
 <span class="p">}</span>
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="瀑布流">瀑布流</h2>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20170803/B00_001_01_20170803_01_01.png" alt="" /></p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">prepareLayout</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">prepareLayout</span>
 <span class="p">{</span>
     <span class="p">[</span><span class="k">super</span> <span class="n">prepareLayout</span><span class="p">];</span>
 
@@ -419,7 +428,8 @@
 
     <span class="p">}</span>
 <span class="p">}</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <hr />
 <h2 id="相关链接">相关链接</h2>

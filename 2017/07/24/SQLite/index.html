@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/07/24/SQLite/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2017/07/24/SQLite/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -153,6 +153,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -252,8 +254,9 @@
 
 <h2 id="导入系统支持库">导入系统支持库</h2>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libsqlite3.dylib
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>libsqlite3.dylib
+</code></pre>
+</div>
 
 <h2 id="sqlite-api">SQLite API</h2>
 <p>// 略</p>
@@ -275,29 +278,33 @@
 <h3 id="表操作ddl">表操作（DDL）</h3>
 <h4 id="1创建表">1、创建表</h4>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">create</span> <span class="n">table</span> <span class="err">表名</span> <span class="p">(</span><span class="err">字段名</span><span class="mi">1</span> <span class="err">字段类型</span><span class="mi">1</span><span class="p">,</span> <span class="err">字段名</span><span class="mi">2</span> <span class="err">字段类型</span><span class="mi">2</span><span class="p">,</span> <span class="err">…</span><span class="p">)</span> <span class="p">;</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">create</span> <span class="n">table</span> <span class="err">表名</span> <span class="p">(</span><span class="err">字段名</span><span class="mi">1</span> <span class="err">字段类型</span><span class="mi">1</span><span class="p">,</span> <span class="err">字段名</span><span class="mi">2</span> <span class="err">字段类型</span><span class="mi">2</span><span class="p">,</span> <span class="err">…</span><span class="p">)</span> <span class="p">;</span>
 <span class="n">create</span> <span class="n">table</span> <span class="k">if</span> <span class="n">not</span> <span class="n">exists</span> <span class="err">表名</span> <span class="p">(</span><span class="err">字段名</span><span class="mi">1</span> <span class="err">字段类型</span><span class="mi">1</span><span class="p">,</span> <span class="err">字段名</span><span class="mi">2</span> <span class="err">字段类型</span><span class="mi">2</span><span class="p">,</span> <span class="err">…</span><span class="p">)</span> <span class="p">;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="2删除表">2、删除表</h4>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">drop</span> <span class="n">table</span> <span class="err">表名</span><span class="p">;</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">drop</span> <span class="n">table</span> <span class="err">表名</span><span class="p">;</span>
 <span class="n">drop</span> <span class="n">table</span> <span class="k">if</span> <span class="n">exists</span> <span class="err">表名</span><span class="p">;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="数据操作">数据操作</h3>
 <h4 id="1插入">1、插入</h4>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">insert</span> <span class="n">into</span> <span class="err">表名</span> <span class="p">(</span><span class="err">字段</span><span class="mi">1</span><span class="p">,</span> <span class="err">字段</span><span class="mi">2</span><span class="p">,</span> <span class="err">…</span><span class="p">)</span> <span class="n">values</span> <span class="p">(</span><span class="err">字段</span><span class="mi">1</span><span class="err">的值</span><span class="p">,</span> <span class="err">字段</span><span class="mi">2</span><span class="err">的值</span><span class="p">,</span> <span class="err">…</span><span class="p">)</span> <span class="p">;</span>
-</code></pre></div></div>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">insert</span> <span class="n">into</span> <span class="err">表名</span> <span class="p">(</span><span class="err">字段</span><span class="mi">1</span><span class="p">,</span> <span class="err">字段</span><span class="mi">2</span><span class="p">,</span> <span class="err">…</span><span class="p">)</span> <span class="n">values</span> <span class="p">(</span><span class="err">字段</span><span class="mi">1</span><span class="err">的值</span><span class="p">,</span> <span class="err">字段</span><span class="mi">2</span><span class="err">的值</span><span class="p">,</span> <span class="err">…</span><span class="p">)</span> <span class="p">;</span>
+</code></pre>
+</div>
 
 <h4 id="2删除">2、删除</h4>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">delete</span> <span class="n">from</span> <span class="err">表名</span> <span class="p">;</span>
-</code></pre></div></div>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">delete</span> <span class="n">from</span> <span class="err">表名</span> <span class="p">;</span>
+</code></pre>
+</div>
 
 <h4 id="3查询">3、查询</h4>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="err">限制查询数据范围（</span><span class="mi">0</span> <span class="err">表示起始，</span><span class="mi">3</span> <span class="err">表示需要查询的数目）</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sr">//</span> <span class="err">限制查询数据范围（</span><span class="mi">0</span> <span class="err">表示起始，</span><span class="mi">3</span> <span class="err">表示需要查询的数目）</span>
 <span class="nb">select</span> <span class="o">*</span> <span class="n">from</span> <span class="n">t_person</span> <span class="n">limit</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">;</span>
 
 <span class="sr">//</span> <span class="err">数据升降序（默认升序）</span>
@@ -305,16 +312,18 @@
 
 <span class="sr">//</span> <span class="err">条件（</span><span class="o">+</span><span class="err">模糊查询）</span>
 <span class="nb">select</span> <span class="o">*</span> <span class="n">from</span> <span class="n">t_person</span> <span class="n">where</span> <span class="nb">name</span> <span class="n">like</span> <span class="s1">'wangwu%'</span><span class="p">;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="4更新">4、更新</h4>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">update</span> <span class="err">表名</span> <span class="n">set</span> <span class="err">字段</span><span class="mi">1</span> <span class="o">=</span> <span class="err">字段</span><span class="mi">1</span><span class="err">的值</span><span class="p">,</span> <span class="err">字段</span><span class="mi">2</span> <span class="o">=</span> <span class="err">字段</span><span class="mi">2</span><span class="err">的值</span><span class="p">,</span> <span class="err">…</span> <span class="p">;</span>
-</code></pre></div></div>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">update</span> <span class="err">表名</span> <span class="n">set</span> <span class="err">字段</span><span class="mi">1</span> <span class="o">=</span> <span class="err">字段</span><span class="mi">1</span><span class="err">的值</span><span class="p">,</span> <span class="err">字段</span><span class="mi">2</span> <span class="o">=</span> <span class="err">字段</span><span class="mi">2</span><span class="err">的值</span><span class="p">,</span> <span class="err">…</span> <span class="p">;</span>
+</code></pre>
+</div>
 
 <h4 id="5数据统计">5、数据统计</h4>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="err">取出所有数据的总数目</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sr">//</span> <span class="err">取出所有数据的总数目</span>
 <span class="nb">select</span> <span class="n">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="n">from</span> <span class="n">t_person</span><span class="p">;</span>
 
 <span class="sr">//</span> <span class="err">统计符合条件的记录条数</span>
@@ -331,7 +340,8 @@
 
 <span class="sr">//</span> <span class="err">计算指定列数值的总数</span>
 <span class="nb">select</span> <span class="n">sum</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="n">from</span> <span class="n">t_person</span><span class="p">;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="第三方库fmdb">第三方库（FMDB）</h2>
 
@@ -355,10 +365,11 @@
 <h3 id="基本使用">基本使用</h3>
 
 <h4 id="打开数据库">打开数据库</h4>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">FMDatabase</span> <span class="o">*</span> <span class="n">db</span> <span class="o">=</span> <span class="p">[</span><span class="no">FMDatabase</span> <span class="n">databaseWithPath</span><span class="ss">:filePath</span><span class="p">];</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="no">FMDatabase</span> <span class="o">*</span> <span class="n">db</span> <span class="o">=</span> <span class="p">[</span><span class="no">FMDatabase</span> <span class="n">databaseWithPath</span><span class="ss">:filePath</span><span class="p">];</span>
 
 <span class="p">[</span><span class="n">db</span> <span class="nb">open</span><span class="p">];</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="操作">操作</h4>
 <ul>
@@ -374,11 +385,11 @@
 
 <p>FMDatabase是线程不安全的，当FMDB数据存储想要使用多线程的时候，FMDatabaseQueue就派上用场了。</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span><span class="err">初始化</span><span class="no">FMDatabaseQueue</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sr">//</span><span class="err">初始化</span><span class="no">FMDatabaseQueue</span>
 <span class="no">FMDatabaseQueue</span> <span class="o">*</span><span class="n">dbQueue</span> <span class="o">=</span> <span class="p">[</span><span class="no">FMDatabaseQueue</span> <span class="n">databaseQueueWithPath</span><span class="ss">:filePath</span><span class="p">];</span>
 
 <span class="sr">//</span><span class="err">在</span><span class="n">block</span><span class="err">中执行</span><span class="no">SQLite</span><span class="err">语句命令</span>
-    <span class="p">[</span><span class="n">dbQueue</span> <span class="n">inDatabase</span><span class="ss">:^</span><span class="p">(</span><span class="no">FMDatabase</span> <span class="o">*</span> <span class="n">db</span><span class="p">)?{</span>
+    <span class="p">[</span><span class="n">dbQueue</span> <span class="n">inDatabase</span><span class="ss">:^</span><span class="p">(</span><span class="no">FMDatabase</span> <span class="o">*</span> <span class="n">db</span><span class="p">)</span><span class="sc">?{</span>
         <span class="sr">//</span><span class="err">创建表</span>
         <span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s2">"create table if not exists t_student (...)"</span><span class="p">];</span>
 
@@ -397,7 +408,8 @@
             <span class="no">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s2">"%d,%@,%d"</span><span class="p">,</span><span class="no">ID</span><span class="p">,</span><span class="nb">name</span><span class="p">,</span><span class="n">age</span><span class="p">);</span>
         <span class="p">}</span>
     <span class="p">}];</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="fmdb-中的事务">FMDB 中的事务</h3>
 
@@ -405,7 +417,7 @@
 
 <p>下面代码中，利用事务循环向数据库中添加2000条数据，假如在添加的过程中出现了一些问题，由于执行了*rollback = YES的回滚操作，数据库中一个数据都不会出现。</p>
 
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span><span class="err">初始化</span><span class="no">FMDatabaseQueue</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sr">//</span><span class="err">初始化</span><span class="no">FMDatabaseQueue</span>
 <span class="no">FMDatabaseQueue</span> <span class="o">*</span><span class="n">dbQueue</span> <span class="o">=</span> <span class="p">[</span><span class="no">FMDatabaseQueue</span> <span class="n">databaseQueueWithPath</span><span class="ss">:filePath</span><span class="p">];</span>
 
 <span class="sr">//</span><span class="no">FMDatabaseQueue</span><span class="err">的事务</span><span class="n">inTransaction</span>
@@ -423,7 +435,8 @@
             <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}];</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
         </article>
         <hr>

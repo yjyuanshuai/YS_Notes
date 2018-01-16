@@ -18,8 +18,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/07/21/CocoaPods%E5%8E%9F%E7%90%86/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2017/07/21/CocoaPods%E5%8E%9F%E7%90%86/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -153,6 +153,8 @@
                 
                     
                 
+                    
+                
             </ul>
         </nav>
     </div>
@@ -255,17 +257,19 @@
 <p>这个 gem 组件负责所有工程文件的整合。可以创建并修改 .xcodeproj 和 .xcworkspace 文件。也可以作为单独的一个 gem 包使用。如果你想要写一个脚本来方便的修改工程文件，那么可以使用这个 gem。</p>
 
 <h2 id="pod-install">pod install</h2>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>pod install (--verbose)
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>pod install (--verbose)
+</code></pre>
+</div>
 
 <p>pod install 语句的执行过程如下。</p>
 
 <h3 id="读取-podfile">读取 Podfile</h3>
 <p>首先弄清楚显式 / 隐式的声明了哪些第三方库。在加载 podspec 过程中，CocoaPods 就建立了包括版本信息在内的所有的第三方库的列表。podspecs 被存储在本地路径 ~/.cocoapods 中。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Finding Podfile changes
+<div class="highlighter-rouge"><pre class="highlight"><code>Finding Podfile changes
   - AFNetworking
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="版本控制和冲突">版本控制和冲突</h3>
 <p>CocoaPods使用了 <a href="http://semver.org/lang/zh-CN/">语义版本控制</a> 命名约定来解决对版本的依赖。</p>
@@ -276,10 +280,11 @@
 
 <p>当然，总会有一些冲突需要手动解决。如果一个库依赖于 CocoaLumberjack 的 1.2.5，另外一个库则依赖于 2.3.1，那么只有最终用户通过明确指定使用某个版本来解决冲突。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Downloading dependencies
+<div class="highlighter-rouge"><pre class="highlight"><code>Downloading dependencies
 
 -&gt; Using AFNetworking (1.2.1)
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="加载源文件">加载源文件</h3>
 
@@ -287,14 +292,15 @@
 
 <p>CocoaPods 将依照 Podfile、.podspec 和缓存文件的信息将源文件下载到 Pods 目录中。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Generating Pods project
+<div class="highlighter-rouge"><pre class="highlight"><code>Generating Pods project
   - Creating Pods project
   - Adding source files to Pods project
   - Adding frameworks to Pods project
   - Adding libraries to Pods project
   - Adding resources to Pods project
   - Linking headers
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="生成-podsxcodeproj">生成 Pods.xcodeproj</h3>
 
@@ -311,7 +317,7 @@
   <li>另一个编译必须的文件 dummy.m</li>
 </ul>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Installing libraries
+<div class="highlighter-rouge"><pre class="highlight"><code>- Installing libraries
   - Installing target `Pods-AFNetworking` iOS 6.0
     - Adding Build files
     - Adding resource bundles to Pods project
@@ -319,26 +325,29 @@
     - Generating private xcconfig file at `Pods/Pods-AFNetworking-Private.xcconfig`
     - Generating prefix header at `Pods/Pods-AFNetworking-prefix.pch`
     - Generating dummy source file at `Pods/Pods-AFNetworking-dummy.m`
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>一旦每个 pod 的 target 完成了上面的内容，整个 Pods target 就会被创建。这增加了相同文件的同时，还增加了另外几个文件。如果源码中包含有资源 bundle，将这个 bundle 添加至程序 target 的指令将被添加到 Pods-Resources.sh 文件中。还有一个名为 Pods-environment.h 的文件，文件中包含了一些宏，这些宏可以用来检查某个组件是否来自 pod。最后，将生成两个认可文件，一个是 plist，另一个是 markdown，这两个文件用于给最终用户查阅相关许可信息。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Installing target `Pods` iOS 6.0
+<div class="highlighter-rouge"><pre class="highlight"><code>- Installing target `Pods` iOS 6.0
       - Generating xcconfig file at `Pods/Pods.xcconfig`
       - Generating target environment header at `Pods/Pods-environment.h`
       - Generating copy resources script at `Pods/Pods-resources.sh`
       - Generating acknowledgements at `Pods/Pods-acknowledgements.plist`
       - Generating acknowledgements at `Pods/Pods-acknowledgements.markdown`
       - Generating dummy source file at `Pods/Pods-dummy.m`
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="写入磁盘">写入磁盘</h3>
 <p>直到现在，许多工作都是在内存中进行的。为了让这些成果能被重复利用，我们需要将所有的结果保存到一个文件中。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- Writing Xcode project file to `Pods/Pods.xcodeproj`
+<div class="highlighter-rouge"><pre class="highlight"><code>- Writing Xcode project file to `Pods/Pods.xcodeproj`
 - Writing Lockfile in `Podfile.lock`
 - Writing Manifest in `Pods/Manifest.lock`
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="podfilelock">Podfile.lock</h4>
 <p>这是 CocoaPods 创建的最重要的文件之一。它记录了需要被安装的 pod 的每个已安装的版本。如果你想知道已安装的 pod 是哪个版本，可以查看这个文件。推荐将 Podfile.lock 文件加入到版本控制中，这有助于整个团队的一致性。</p>
