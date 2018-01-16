@@ -9,14 +9,17 @@
     <title>Git终端命令(进阶使用)</title>
     <meta name="description" content="Git终端命令，进阶应用">
 
+    <!-- 高亮 -->
+    <link href="/css/rouge.css" rel="stylesheet"/>
+
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <!-- 菜单前的图标，需要下面这句 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2015/07/15/Git%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4(%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8)/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2015/07/15/Git%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4(%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8)/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
 
 
     <script>
@@ -243,16 +246,14 @@
 <h2 id="一查看改动">一、查看改动</h2>
 
 <h3 id="1查看当前仓库状态">1、查看当前仓库状态</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>git status
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
+</code></pre></div></div>
 
 <p>有需要提交的改动 / 冲突时，会有提示。</p>
 
 <h3 id="2查看改动的内容">2、查看改动的内容</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>git diff 文件名
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git diff 文件名
+</code></pre></div></div>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_03_01.png" alt="" /></p>
 
@@ -261,18 +262,17 @@
 <h2 id="二版本回退">二、版本回退</h2>
 
 <h3 id="1查看log">1、查看log</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>git log
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log
 
 // 获取简要的 log
 git log --pretty=oneline
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_03_02.png" alt="" /></p>
 
 <h3 id="2版本回退">2、版本回退</h3>
 <h4 id="1向前回退">1）向前回退</h4>
-<div class="highlighter-rouge"><pre class="highlight"><code>// 回退到上一个版本
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 回退到上一个版本
 git reset --hard HEAD^
 
 // 回退到上上的版本，以此推类
@@ -280,19 +280,17 @@ git reset --hard HEAD^^
 
 // 回退到前100个版本，以此推类
 git reset --hard HEAD~100
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_03_03.png" alt="" /></p>
 
 <h4 id="2向后回退">2）向后回退</h4>
-<div class="highlighter-rouge"><pre class="highlight"><code>// 获取版本号
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 获取版本号
 git reflog
 
 // 回退到对应版本
 git reset --hard 版本号
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_03_04.png" alt="" /></p>
 
@@ -307,9 +305,8 @@ git reset --hard 版本号
 
 <p>3）使用撤销命令。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>git checkout --文件名
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout --文件名
+</code></pre></div></div>
 
 <p>checkout –文件名的意思是把文件在工作区做的修改全部撤销，有两种情况。</p>
 
@@ -332,9 +329,8 @@ git reset --hard 版本号
 <p>1）手动删除；</p>
 
 <p>2）终端命令；</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>rm test3.txt
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rm test3.txt
+</code></pre></div></div>
 
 <p>若想在版本库中删除，删完commit即可。</p>
 
@@ -346,17 +342,15 @@ git reset --hard 版本号
 
 <h3 id="1查看冲突的文件">1、查看冲突的文件</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>git status
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git status
+</code></pre></div></div>
 
 <p>打开冲突文件，修改 «««&lt; ======= »»&gt; 中的冲突部分，再提交</p>
 
 <h3 id="2查看分支合并图">2、查看分支合并图</h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>git log --graph
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git log --graph
+</code></pre></div></div>
 
 <h3 id="3bug-分支stash">3、bug 分支（stash）</h3>
 
@@ -366,34 +360,29 @@ git reset --hard 版本号
 
 <p>幸好，Git还提供了一个stash功能，可以把当前工作现场“储藏”起来，等以后恢复现场后继续工作：</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>git stash
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash
+</code></pre></div></div>
 
 <p>现在，用git status查看工作区，就是干净的（除非有没有被Git管理的文件），因此可以放心地创建分支来修复bug。</p>
 
 <p>bug 修改完成后，要继续之前打断的工作。</p>
 
 <p>查看被保存的现场：</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>git stash list
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash list
 // stash@{0}: WIP on dev: 6224937 add merge
-</code></pre>
-</div>
+</code></pre></div></div>
 <p>恢复现场：</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>git stash apply   // 恢复
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash apply   // 恢复
 git stash drop    // 删除记录
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <p>相当于：</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>git stash list
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash list
+</code></pre></div></div>
 
 <p>当有多个 stash 时，可以恢复到指定的：</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>git stash apply stash@{0}
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git stash apply stash@{0}
+</code></pre></div></div>
 
 <hr />
 
@@ -471,10 +460,6 @@ git stash drop    // 删除记录
                     
                 
             
-                
-                    
-                
-            
         
             
             
@@ -501,6 +486,21 @@ git stash drop    // 删除记录
                     
                 
             
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
         
             
             
@@ -515,9 +515,6 @@ git stash drop    // 删除记录
                 
                     
                 
-            
-        
-            
             
         
         

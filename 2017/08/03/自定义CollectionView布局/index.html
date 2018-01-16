@@ -9,14 +9,17 @@
     <title>自定义 CollectionView 布局</title>
     <meta name="description" content="iOS UICollectionView 自定义布局，瀑布流、导航风火轮">
 
+    <!-- 高亮 -->
+    <link href="/css/rouge.css" rel="stylesheet"/>
+
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <!-- 菜单前的图标，需要下面这句 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
 
 
     <script>
@@ -229,7 +232,6 @@
     </ul>
   </li>
   <li><a href="#瀑布流" id="markdown-toc-瀑布流">瀑布流</a></li>
-  <li><a href="#导航风火轮" id="markdown-toc-导航风火轮">导航风火轮</a></li>
   <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
 </ul>
 
@@ -241,30 +243,30 @@
 
 <p>CollectionView 布局使用的是 UICollectionViewLayoutAttributes 类，定义几个可变字典，用于存储段头、Item、段尾的布局。</p>
 
-<pre><code class="language-objective-c">
-// [NSIndexPath indexPathForRow:0 inSection:列号] : attr
-NSMutableDictionary * sectionHeadAttrsDic;  // 段头（每段只有一个）
-NSMutableDictionary * sectionFootAttrsDic;  // 段尾（每段只有一个）
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="sr">//</span> <span class="p">[</span><span class="no">NSIndexPath</span> <span class="n">indexPathForRow</span><span class="p">:</span><span class="mi">0</span> <span class="n">inSection</span><span class="p">:</span><span class="err">列号</span><span class="p">]</span> <span class="p">:</span> <span class="kp">attr</span>
+<span class="no">NSMutableDictionary</span> <span class="o">*</span> <span class="n">sectionHeadAttrsDic</span><span class="p">;</span>  <span class="sr">//</span> <span class="err">段头（每段只有一个）</span>
+<span class="no">NSMutableDictionary</span> <span class="o">*</span> <span class="n">sectionFootAttrsDic</span><span class="p">;</span>  <span class="sr">//</span> <span class="err">段尾（每段只有一个）</span>
 
-// indexPath : attr
-NSMutableDictionary * itemAttrsDic;   // item
+<span class="sr">//</span> <span class="n">indexPath</span> <span class="p">:</span> <span class="kp">attr</span>
+<span class="no">NSMutableDictionary</span> <span class="o">*</span> <span class="n">itemAttrsDic</span><span class="p">;</span>   <span class="sr">//</span> <span class="n">item</span>
 
-</code></pre>
+</code></pre></div></div>
 
 <h3 id="预布局preparelayout">预布局（prepareLayout）</h3>
 
 <p>预布局的作用是根据 <strong>数据模型</strong> 计算所有元素的 attr.frame，并将其存放到对应的可变数组中，供之后使用。</p>
 
-<pre><code class="language-objective-c">
-- (void)prepareLayout{
-    [super prepareLayout];
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">prepareLayout</span><span class="p">{</span>
+    <span class="p">[</span><span class="k">super</span> <span class="n">prepareLayout</span><span class="p">];</span>
 
-    // 段头
-    // item
-    // 段尾
-}
+    <span class="sr">//</span> <span class="err">段头</span>
+    <span class="sr">//</span> <span class="n">item</span>
+    <span class="sr">//</span> <span class="err">段尾</span>
+<span class="p">}</span>
 
-</code></pre>
+</code></pre></div></div>
 
 <blockquote>
   <p>注：重要的是建立数学模型，这个是难点。</p>
@@ -272,154 +274,152 @@ NSMutableDictionary * itemAttrsDic;   // item
 
 <h3 id="当前可见区域的布局layoutattributesforelementsinrect">当前可见区域的布局（layoutAttributesForElementsInRect）</h3>
 
-<pre><code class="language-objective-c">
-- (NSArray * )layoutAttributesForElementsInRect:(CGRect)rect{
-    NSMutableArray * allAttrsArr = [NSMutableArray array];
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">-</span> <span class="p">(</span><span class="no">NSArray</span> <span class="o">*</span> <span class="p">)</span><span class="n">layoutAttributesForElementsInRect</span><span class="p">:(</span><span class="no">CGRect</span><span class="p">)</span><span class="n">rect</span><span class="p">{</span>
+    <span class="no">NSMutableArray</span> <span class="o">*</span> <span class="n">allAttrsArr</span> <span class="o">=</span> <span class="p">[</span><span class="no">NSMutableArray</span> <span class="n">array</span><span class="p">];</span>
 
-    // 遍历 段头 布局字典，比较 attr.frame 和 rect，在rect内即将 attr 加入 allAttrsArr.
-    // 遍历 item 布局字典
-    // 遍历 段尾 布局字典
+    <span class="sr">//</span> <span class="err">遍历</span> <span class="err">段头</span> <span class="err">布局字典，比较</span> <span class="kp">attr</span><span class="p">.</span><span class="nf">frame</span> <span class="err">和</span> <span class="n">rect</span><span class="err">，在</span><span class="n">rect</span><span class="err">内即将</span> <span class="kp">attr</span> <span class="err">加入</span> <span class="n">allAttrsArr</span><span class="p">.</span>
+    <span class="nf">/</span><span class="o">/</span> <span class="err">遍历</span> <span class="n">item</span> <span class="err">布局字典</span>
+    <span class="sr">//</span> <span class="err">遍历</span> <span class="err">段尾</span> <span class="err">布局字典</span>
 
-    return allAttrsArr;
-}
+    <span class="k">return</span> <span class="n">allAttrsArr</span><span class="p">;</span>
+<span class="p">}</span>
 
-</code></pre>
+</code></pre></div></div>
 
 <h3 id="是否重新布局shouldinvalidatelayoutforboundschange">是否重新布局（shouldInvalidateLayoutForBoundsChange）</h3>
 
-<pre><code class="language-objective-c">
-- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds{
-    // YES-重新布局； NO-不重新布局；
-}
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">-</span> <span class="p">(</span><span class="no">BOOL</span><span class="p">)</span><span class="n">shouldInvalidateLayoutForBoundsChange</span><span class="p">:(</span><span class="no">CGRect</span><span class="p">)</span><span class="n">newBounds</span><span class="p">{</span>
+    <span class="sr">//</span> <span class="no">YES</span><span class="o">-</span><span class="err">重新布局；</span> <span class="no">NO</span><span class="o">-</span><span class="err">不重新布局；</span>
+<span class="p">}</span>
 
-</code></pre>
+</code></pre></div></div>
 
 <h3 id="设置contentsizecollectionviewcontentsize">设置contentSize（collectionViewContentSize）</h3>
 
-<pre><code class="language-objective-c">
-- (CGSize)collectionViewContentSize {
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">-</span> <span class="p">(</span><span class="no">CGSize</span><span class="p">)</span><span class="n">collectionViewContentSize</span> <span class="p">{</span>
 
-}
+<span class="p">}</span>
 
-</code></pre>
+</code></pre></div></div>
 
 <h3 id="item-布局">item 布局</h3>
 
-<pre><code class="language-objective-c">
-- (UICollectionViewLayoutAttributes*)layoutAttributesForItemAtIndexPath:(NSIndexPath*)indexPath
-{
-    UICollectionViewLayoutAttributes * itemAttr = itemAttrsDic[indexPath];
-    return itemAttr;
-}
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">-</span> <span class="p">(</span><span class="no">UICollectionViewLayoutAttributes</span><span class="o">*</span><span class="p">)</span><span class="n">layoutAttributesForItemAtIndexPath</span><span class="p">:(</span><span class="no">NSIndexPath</span><span class="o">*</span><span class="p">)</span><span class="n">indexPath</span>
+<span class="p">{</span>
+    <span class="no">UICollectionViewLayoutAttributes</span> <span class="o">*</span> <span class="n">itemAttr</span> <span class="o">=</span> <span class="n">itemAttrsDic</span><span class="p">[</span><span class="n">indexPath</span><span class="p">];</span>
+    <span class="k">return</span> <span class="n">itemAttr</span><span class="p">;</span>
+<span class="p">}</span>
 
-</code></pre>
+</code></pre></div></div>
 
 <h3 id="段头尾布局">段头/尾布局</h3>
 
-<pre><code class="language-objective-c">
--(UICollectionViewLayoutAttributes*)layoutAttributesForSupplementaryViewOfKind:(NSString*)elementKind atIndexPath:(NSIndexPath*)indexPath
-{
-    UICollectionViewLayoutAttributes * supplementAttr = nil;
-    if ([elementKind isEqualToString:YSCustemCollectionView_SectionHeadKind]) {
-        supplementAttr = sectionHeadAttrsDic[indexPath];
-    }
-    else if ([elementKind isEqualToString:YSCustemCollectionView_SectionFootKind]) {
-        supplementAttr = sectionFootAttrsDic[indexPath];
-    }
-    return supplementAttr;
-}
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">-</span><span class="p">(</span><span class="no">UICollectionViewLayoutAttributes</span><span class="o">*</span><span class="p">)</span><span class="n">layoutAttributesForSupplementaryViewOfKind</span><span class="p">:(</span><span class="no">NSString</span><span class="o">*</span><span class="p">)</span><span class="n">elementKind</span> <span class="n">atIndexPath</span><span class="p">:(</span><span class="no">NSIndexPath</span><span class="o">*</span><span class="p">)</span><span class="n">indexPath</span>
+<span class="p">{</span>
+    <span class="no">UICollectionViewLayoutAttributes</span> <span class="o">*</span> <span class="n">supplementAttr</span> <span class="o">=</span> <span class="kp">nil</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">([</span><span class="n">elementKind</span> <span class="n">isEqualToString</span><span class="ss">:YSCustemCollectionView_SectionHeadKind</span><span class="p">])</span> <span class="p">{</span>
+        <span class="n">supplementAttr</span> <span class="o">=</span> <span class="n">sectionHeadAttrsDic</span><span class="p">[</span><span class="n">indexPath</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">else</span> <span class="k">if</span> <span class="p">([</span><span class="n">elementKind</span> <span class="n">isEqualToString</span><span class="ss">:YSCustemCollectionView_SectionFootKind</span><span class="p">])</span> <span class="p">{</span>
+        <span class="n">supplementAttr</span> <span class="o">=</span> <span class="n">sectionFootAttrsDic</span><span class="p">[</span><span class="n">indexPath</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">supplementAttr</span><span class="p">;</span>
+<span class="p">}</span>
 
-</code></pre>
+</code></pre></div></div>
 
 <h2 id="瀑布流">瀑布流</h2>
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_01_20170803/B00_001_01_20170803_01_01.png" alt="" /></p>
 
-<pre><code class="language-objective-c">- (void)prepareLayout
-{
-    [super prepareLayout];
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">prepareLayout</span>
+<span class="p">{</span>
+    <span class="p">[</span><span class="k">super</span> <span class="n">prepareLayout</span><span class="p">];</span>
 
-    [self.itemsMaxYDic removeAllObjects];
-    [self.itemAttrsDic removeAllObjects];
-    [self.sectionHeadAttrsDic removeAllObjects];
-    [self.sectionFootAttrsDic removeAllObjects];
+    <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">itemsMaxYDic</span> <span class="n">removeAllObjects</span><span class="p">];</span>
+    <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">itemAttrsDic</span> <span class="n">removeAllObjects</span><span class="p">];</span>
+    <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">sectionHeadAttrsDic</span> <span class="n">removeAllObjects</span><span class="p">];</span>
+    <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">sectionFootAttrsDic</span> <span class="n">removeAllObjects</span><span class="p">];</span>
 
-    // item 宽度
-    CGFloat itemWidth = (self.collectionView.frame.size.width - self.ysSectionInset.left - self.ysSectionInset.right - (self.ysColumntCount-1) * self.ysSpaceHor)/self.ysColumntCount;
+    <span class="sr">//</span> <span class="n">item</span> <span class="err">宽度</span>
+    <span class="no">CGFloat</span> <span class="n">itemWidth</span> <span class="o">=</span> <span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="nf">collectionView</span><span class="p">.</span><span class="nf">frame</span><span class="p">.</span><span class="nf">size</span><span class="p">.</span><span class="nf">width</span> <span class="o">-</span> <span class="nb">self</span><span class="p">.</span><span class="nf">ysSectionInset</span><span class="p">.</span><span class="nf">left</span> <span class="o">-</span> <span class="nb">self</span><span class="p">.</span><span class="nf">ysSectionInset</span><span class="p">.</span><span class="nf">right</span> <span class="o">-</span> <span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="nf">ysColumntCount</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="nb">self</span><span class="p">.</span><span class="nf">ysSpaceHor</span><span class="p">)</span><span class="o">/</span><span class="nb">self</span><span class="p">.</span><span class="nf">ysColumntCount</span><span class="p">;</span>
 
-    NSInteger sectionNum = self.collectionView.numberOfSections;
-    for (int i = 0; i &lt; sectionNum; i++) {
+    <span class="no">NSInteger</span> <span class="n">sectionNum</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">collectionView</span><span class="p">.</span><span class="nf">numberOfSections</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">sectionNum</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 
-        NSIndexPath * currentSectionIndexPath = [NSIndexPath indexPathForRow:0 inSection:i];
-        // 段头
-        CGFloat currentSectionHeadHeight = 0;
-        if (i &lt; [self.ysSectionHeadHeightArr count]) {
-            currentSectionHeadHeight = [self.ysSectionHeadHeightArr[i] floatValue];
-        }
-        if (currentSectionHeadHeight &gt; 0 &amp;&amp; [self.collectionView.delegate respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
+        <span class="no">NSIndexPath</span> <span class="o">*</span> <span class="n">currentSectionIndexPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">NSIndexPath</span> <span class="n">indexPathForRow</span><span class="p">:</span><span class="mi">0</span> <span class="n">inSection</span><span class="ss">:i</span><span class="p">];</span>
+        <span class="sr">//</span> <span class="err">段头</span>
+        <span class="no">CGFloat</span> <span class="n">currentSectionHeadHeight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">ysSectionHeadHeightArr</span> <span class="n">count</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">currentSectionHeadHeight</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">ysSectionHeadHeightArr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="n">floatValue</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">currentSectionHeadHeight</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">collectionView</span><span class="p">.</span><span class="nf">delegate</span> <span class="n">respondsToSelector</span><span class="ss">:@selector</span><span class="p">(</span><span class="n">collectionView</span><span class="ss">:viewForSupplementaryElementOfKind:atIndexPath</span><span class="p">:)])</span> <span class="p">{</span>
 
-            UICollectionViewLayoutAttributes * attr = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:YSCustemCollectionView_SectionHeadKind withIndexPath:currentSectionIndexPath];
-            attr.frame = CGRectMake(0, [self currentMaxY], kScreenWidth, currentSectionHeadHeight);
-            // 保存段头
-            self.sectionHeadAttrsDic[currentSectionIndexPath] = attr;
-            [self setCurrentMaxY:[self currentMaxY] + self.ysSectionInset.top + currentSectionHeadHeight row:nil];
-        }
-        else {
-            // 没有段头时，加上段边距
-            [self setCurrentMaxY:[self currentMaxY] + self.ysSectionInset.top row:nil];
-        }
+            <span class="no">UICollectionViewLayoutAttributes</span> <span class="o">*</span> <span class="kp">attr</span> <span class="o">=</span> <span class="p">[</span><span class="no">UICollectionViewLayoutAttributes</span> <span class="n">layoutAttributesForSupplementaryViewOfKind</span><span class="ss">:YSCustemCollectionView_SectionHeadKind</span> <span class="n">withIndexPath</span><span class="ss">:currentSectionIndexPath</span><span class="p">];</span>
+            <span class="kp">attr</span><span class="p">.</span><span class="nf">frame</span> <span class="o">=</span> <span class="no">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="nb">self</span> <span class="n">currentMaxY</span><span class="p">],</span> <span class="n">kScreenWidth</span><span class="p">,</span> <span class="n">currentSectionHeadHeight</span><span class="p">);</span>
+            <span class="sr">//</span> <span class="err">保存段头</span>
+            <span class="nb">self</span><span class="p">.</span><span class="nf">sectionHeadAttrsDic</span><span class="p">[</span><span class="n">currentSectionIndexPath</span><span class="p">]</span> <span class="o">=</span> <span class="kp">attr</span><span class="p">;</span>
+            <span class="p">[</span><span class="nb">self</span> <span class="n">setCurrentMaxY</span><span class="p">:[</span><span class="nb">self</span> <span class="n">currentMaxY</span><span class="p">]</span> <span class="o">+</span> <span class="nb">self</span><span class="p">.</span><span class="nf">ysSectionInset</span><span class="p">.</span><span class="nf">top</span> <span class="o">+</span> <span class="n">currentSectionHeadHeight</span> <span class="n">row</span><span class="ss">:nil</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">else</span> <span class="p">{</span>
+            <span class="sr">//</span> <span class="err">没有段头时，加上段边距</span>
+            <span class="p">[</span><span class="nb">self</span> <span class="n">setCurrentMaxY</span><span class="p">:[</span><span class="nb">self</span> <span class="n">currentMaxY</span><span class="p">]</span> <span class="o">+</span> <span class="nb">self</span><span class="p">.</span><span class="nf">ysSectionInset</span><span class="p">.</span><span class="nf">top</span> <span class="n">row</span><span class="ss">:nil</span><span class="p">];</span>
+        <span class="p">}</span>
 
-        // cell
-        NSInteger itemNum = [self.collectionView numberOfItemsInSection:i];
-        for (int j = 0; j &lt; itemNum; j++) {
-            NSIndexPath * currentItemIndexPath = [NSIndexPath indexPathForRow:j inSection:i];
+        <span class="sr">//</span> <span class="n">cell</span>
+        <span class="no">NSInteger</span> <span class="n">itemNum</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">collectionView</span> <span class="n">numberOfItemsInSection</span><span class="ss">:i</span><span class="p">];</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">int</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">itemNum</span><span class="p">;</span> <span class="n">j</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="no">NSIndexPath</span> <span class="o">*</span> <span class="n">currentItemIndexPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">NSIndexPath</span> <span class="n">indexPathForRow</span><span class="ss">:j</span> <span class="n">inSection</span><span class="ss">:i</span><span class="p">];</span>
 
-            // 下一个 item 是接在当前 最短的 item 下面的
-            // row 的排列顺序不是从左到右，而是下一个 row 接在目前 bottem 最小的 row 下面。
-            __ block CGFloat currentMinY = [self.itemsMaxYDic[@(0)] floatValue];
-            __ block NSInteger currentRow = 0;   // 列号
-            [self.itemsMaxYDic enumerateKeysAndObjectsUsingBlock:^(NSNumber * row, NSNumber * rowMaxY, BOOL * _ Nonnull stop) {
-                if (currentMinY &gt; [rowMaxY floatValue]) {
-                    currentMinY = [rowMaxY floatValue];
-                    currentRow = [row integerValue];
-                }
-            }];
+            <span class="sr">//</span> <span class="err">下一个</span> <span class="n">item</span> <span class="err">是接在当前</span> <span class="err">最短的</span> <span class="n">item</span> <span class="err">下面的</span>
+            <span class="sr">//</span> <span class="n">row</span> <span class="err">的排列顺序不是从左到右，而是下一个</span> <span class="n">row</span> <span class="err">接在目前</span> <span class="n">bottem</span> <span class="err">最小的</span> <span class="n">row</span> <span class="err">下面。</span>
+            <span class="n">__</span> <span class="n">block</span> <span class="no">CGFloat</span> <span class="n">currentMinY</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">itemsMaxYDic</span><span class="p">[</span><span class="err">@</span><span class="p">(</span><span class="mi">0</span><span class="p">)]</span> <span class="n">floatValue</span><span class="p">];</span>
+            <span class="n">__</span> <span class="n">block</span> <span class="no">NSInteger</span> <span class="n">currentRow</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>   <span class="sr">//</span> <span class="err">列号</span>
+            <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">itemsMaxYDic</span> <span class="n">enumerateKeysAndObjectsUsingBlock</span><span class="ss">:^</span><span class="p">(</span><span class="no">NSNumber</span> <span class="o">*</span> <span class="n">row</span><span class="p">,</span> <span class="no">NSNumber</span> <span class="o">*</span> <span class="n">rowMaxY</span><span class="p">,</span> <span class="no">BOOL</span> <span class="o">*</span> <span class="n">_</span> <span class="no">Nonnull</span> <span class="n">stop</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">currentMinY</span> <span class="o">&gt;</span> <span class="p">[</span><span class="n">rowMaxY</span> <span class="n">floatValue</span><span class="p">])</span> <span class="p">{</span>
+                    <span class="n">currentMinY</span> <span class="o">=</span> <span class="p">[</span><span class="n">rowMaxY</span> <span class="n">floatValue</span><span class="p">];</span>
+                    <span class="n">currentRow</span> <span class="o">=</span> <span class="p">[</span><span class="n">row</span> <span class="n">integerValue</span><span class="p">];</span>
+                <span class="p">}</span>
+            <span class="p">}];</span>
 
-            CGFloat currentItemX = self.ysSectionInset.left + (itemWidth + self.ysSpaceHor) * currentRow;
-            CGFloat currentItemY = currentMinY;
-            CGFloat currentItemHeight = 0;
-            if (self.delegate &amp;&amp; [self.delegate respondsToSelector:@selector(ysCustemCollectionView:itemHeightWithIndexPath: itemWidth:)]) {
-                currentItemHeight = [self.delegate ysCustemCollectionView:self.collectionView itemHeightWithIndexPath:currentItemIndexPath itemWidth:itemWidth];
-            }
+            <span class="no">CGFloat</span> <span class="n">currentItemX</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">ysSectionInset</span><span class="p">.</span><span class="nf">left</span> <span class="o">+</span> <span class="p">(</span><span class="n">itemWidth</span> <span class="o">+</span> <span class="nb">self</span><span class="p">.</span><span class="nf">ysSpaceHor</span><span class="p">)</span> <span class="o">*</span> <span class="n">currentRow</span><span class="p">;</span>
+            <span class="no">CGFloat</span> <span class="n">currentItemY</span> <span class="o">=</span> <span class="n">currentMinY</span><span class="p">;</span>
+            <span class="no">CGFloat</span> <span class="n">currentItemHeight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+            <span class="k">if</span> <span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="nf">delegate</span> <span class="o">&amp;&amp;</span> <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">delegate</span> <span class="n">respondsToSelector</span><span class="ss">:@selector</span><span class="p">(</span><span class="n">ysCustemCollectionView</span><span class="ss">:itemHeightWithIndexPath</span><span class="p">:</span> <span class="n">itemWidth</span><span class="p">:)])</span> <span class="p">{</span>
+                <span class="n">currentItemHeight</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">delegate</span> <span class="n">ysCustemCollectionView</span><span class="ss">:self</span><span class="p">.</span><span class="nf">collectionView</span> <span class="n">itemHeightWithIndexPath</span><span class="ss">:currentItemIndexPath</span> <span class="n">itemWidth</span><span class="ss">:itemWidth</span><span class="p">];</span>
+            <span class="p">}</span>
 
-            UICollectionViewLayoutAttributes * attr = [UICollectionViewLayoutAttributes layoutAttributesForCellWithIndexPath:currentItemIndexPath];
-            attr.frame = CGRectMake(currentItemX, currentItemY, itemWidth, currentItemHeight);
-            self.itemAttrsDic[currentItemIndexPath] = attr;
-            [self setCurrentMaxY:currentMinY + currentItemHeight + self.ysSpaceVer row:@(currentRow)];
-        }
+            <span class="no">UICollectionViewLayoutAttributes</span> <span class="o">*</span> <span class="kp">attr</span> <span class="o">=</span> <span class="p">[</span><span class="no">UICollectionViewLayoutAttributes</span> <span class="n">layoutAttributesForCellWithIndexPath</span><span class="ss">:currentItemIndexPath</span><span class="p">];</span>
+            <span class="kp">attr</span><span class="p">.</span><span class="nf">frame</span> <span class="o">=</span> <span class="no">CGRectMake</span><span class="p">(</span><span class="n">currentItemX</span><span class="p">,</span> <span class="n">currentItemY</span><span class="p">,</span> <span class="n">itemWidth</span><span class="p">,</span> <span class="n">currentItemHeight</span><span class="p">);</span>
+            <span class="nb">self</span><span class="p">.</span><span class="nf">itemAttrsDic</span><span class="p">[</span><span class="n">currentItemIndexPath</span><span class="p">]</span> <span class="o">=</span> <span class="kp">attr</span><span class="p">;</span>
+            <span class="p">[</span><span class="nb">self</span> <span class="n">setCurrentMaxY</span><span class="ss">:currentMinY</span> <span class="o">+</span> <span class="n">currentItemHeight</span> <span class="o">+</span> <span class="nb">self</span><span class="p">.</span><span class="nf">ysSpaceVer</span> <span class="n">row</span><span class="p">:</span><span class="err">@</span><span class="p">(</span><span class="n">currentRow</span><span class="p">)];</span>
+        <span class="p">}</span>
 
-        // 最后一排 与 段尾 距离为 self.ysSectionInset.bottom
-        [self setCurrentMaxY:[self currentMaxY] - self.ysSpaceVer + self.ysSectionInset.bottom row:nil];
+        <span class="sr">//</span> <span class="err">最后一排</span> <span class="err">与</span> <span class="err">段尾</span> <span class="err">距离为</span> <span class="nb">self</span><span class="p">.</span><span class="nf">ysSectionInset</span><span class="p">.</span><span class="nf">bottom</span>
+        <span class="p">[</span><span class="nb">self</span> <span class="n">setCurrentMaxY</span><span class="p">:[</span><span class="nb">self</span> <span class="n">currentMaxY</span><span class="p">]</span> <span class="o">-</span> <span class="nb">self</span><span class="p">.</span><span class="nf">ysSpaceVer</span> <span class="o">+</span> <span class="nb">self</span><span class="p">.</span><span class="nf">ysSectionInset</span><span class="p">.</span><span class="nf">bottom</span> <span class="n">row</span><span class="ss">:nil</span><span class="p">];</span>
 
-        // 段尾
-        CGFloat currentSectionFootHeight = 0;
-        if (i &lt; [self.ysSectionFootHeightArr count]) {
-            currentSectionFootHeight = [self.ysSectionFootHeightArr[i] floatValue];
-        }
-        if (currentSectionFootHeight &gt; 0 &amp;&amp; [self.collectionView.delegate respondsToSelector:@selector(collectionView:viewForSupplementaryElementOfKind:atIndexPath:)]) {
+        <span class="sr">//</span> <span class="err">段尾</span>
+        <span class="no">CGFloat</span> <span class="n">currentSectionFootHeight</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">&lt;</span> <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">ysSectionFootHeightArr</span> <span class="n">count</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">currentSectionFootHeight</span> <span class="o">=</span> <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">ysSectionFootHeightArr</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="n">floatValue</span><span class="p">];</span>
+        <span class="p">}</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">currentSectionFootHeight</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">collectionView</span><span class="p">.</span><span class="nf">delegate</span> <span class="n">respondsToSelector</span><span class="ss">:@selector</span><span class="p">(</span><span class="n">collectionView</span><span class="ss">:viewForSupplementaryElementOfKind:atIndexPath</span><span class="p">:)])</span> <span class="p">{</span>
 
-            UICollectionViewLayoutAttributes * attr = [UICollectionViewLayoutAttributes layoutAttributesForSupplementaryViewOfKind:YSCustemCollectionView_SectionFootKind withIndexPath:currentSectionIndexPath];
-            attr.frame = CGRectMake(0, [self currentMaxY], kScreenWidth, currentSectionFootHeight);
-            // 保存段尾
-            self.sectionFootAttrsDic[currentSectionIndexPath] = attr;
-            [self setCurrentMaxY:[self currentMaxY] + currentSectionFootHeight row:nil];
-        }
+            <span class="no">UICollectionViewLayoutAttributes</span> <span class="o">*</span> <span class="kp">attr</span> <span class="o">=</span> <span class="p">[</span><span class="no">UICollectionViewLayoutAttributes</span> <span class="n">layoutAttributesForSupplementaryViewOfKind</span><span class="ss">:YSCustemCollectionView_SectionFootKind</span> <span class="n">withIndexPath</span><span class="ss">:currentSectionIndexPath</span><span class="p">];</span>
+            <span class="kp">attr</span><span class="p">.</span><span class="nf">frame</span> <span class="o">=</span> <span class="no">CGRectMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="p">[</span><span class="nb">self</span> <span class="n">currentMaxY</span><span class="p">],</span> <span class="n">kScreenWidth</span><span class="p">,</span> <span class="n">currentSectionFootHeight</span><span class="p">);</span>
+            <span class="sr">//</span> <span class="err">保存段尾</span>
+            <span class="nb">self</span><span class="p">.</span><span class="nf">sectionFootAttrsDic</span><span class="p">[</span><span class="n">currentSectionIndexPath</span><span class="p">]</span> <span class="o">=</span> <span class="kp">attr</span><span class="p">;</span>
+            <span class="p">[</span><span class="nb">self</span> <span class="n">setCurrentMaxY</span><span class="p">:[</span><span class="nb">self</span> <span class="n">currentMaxY</span><span class="p">]</span> <span class="o">+</span> <span class="n">currentSectionFootHeight</span> <span class="n">row</span><span class="ss">:nil</span><span class="p">];</span>
+        <span class="p">}</span>
 
-    }
-}
-</code></pre>
-
-<h2 id="导航风火轮">导航风火轮</h2>
+    <span class="p">}</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <hr />
 <h2 id="相关链接">相关链接</h2>
@@ -550,6 +550,34 @@ NSMutableDictionary * itemAttrsDic;   // item
                     
                         
                         <li class="relatedPost">
+                            <a href="/2017/11/17/%E5%B7%A5%E5%85%B7/">开发工具
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
                             <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
                             
                             </a>
@@ -620,15 +648,6 @@ NSMutableDictionary * itemAttrsDic;   // item
             
                 
                     
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
                 
                     
                 
@@ -642,9 +661,6 @@ NSMutableDictionary * itemAttrsDic;   // item
                 
                     
                 
-            
-        
-            
             
         
             
@@ -665,7 +681,7 @@ NSMutableDictionary * itemAttrsDic;   // item
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80%E4%B9%8B%E7%80%91%E5%B8%83%E6%B5%81/">自定义collectionview布局之瀑布流</a></p>
+        <p><strong>上一篇</strong> <a href="/2017/07/27/%E8%AF%95%E5%8D%B7%E7%94%9F%E6%88%90%E7%B3%BB%E7%BB%9F/">试卷生成系统</a></p>
         
     </div>
     <div class="nex">

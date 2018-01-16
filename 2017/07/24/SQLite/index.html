@@ -9,14 +9,17 @@
     <title>sqlite</title>
     <meta name="description" content="sqlite基本语句，FMDB基本使用。">
 
+    <!-- 高亮 -->
+    <link href="/css/rouge.css" rel="stylesheet"/>
+
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <!-- 菜单前的图标，需要下面这句 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2017/07/24/SQLite/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/07/24/SQLite/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
 
 
     <script>
@@ -249,9 +252,8 @@
 
 <h2 id="导入系统支持库">导入系统支持库</h2>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>libsqlite3.dylib
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>libsqlite3.dylib
+</code></pre></div></div>
 
 <h2 id="sqlite-api">SQLite API</h2>
 <p>// 略</p>
@@ -273,70 +275,63 @@
 <h3 id="表操作ddl">表操作（DDL）</h3>
 <h4 id="1创建表">1、创建表</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>create table 表名 (字段名1 字段类型1, 字段名2 字段类型2, …) ;
-create table if not exists 表名 (字段名1 字段类型1, 字段名2 字段类型2, …) ;
-</code></pre>
-</div>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">create</span> <span class="n">table</span> <span class="err">表名</span> <span class="p">(</span><span class="err">字段名</span><span class="mi">1</span> <span class="err">字段类型</span><span class="mi">1</span><span class="p">,</span> <span class="err">字段名</span><span class="mi">2</span> <span class="err">字段类型</span><span class="mi">2</span><span class="p">,</span> <span class="err">…</span><span class="p">)</span> <span class="p">;</span>
+<span class="n">create</span> <span class="n">table</span> <span class="k">if</span> <span class="n">not</span> <span class="n">exists</span> <span class="err">表名</span> <span class="p">(</span><span class="err">字段名</span><span class="mi">1</span> <span class="err">字段类型</span><span class="mi">1</span><span class="p">,</span> <span class="err">字段名</span><span class="mi">2</span> <span class="err">字段类型</span><span class="mi">2</span><span class="p">,</span> <span class="err">…</span><span class="p">)</span> <span class="p">;</span>
+</code></pre></div></div>
 
 <h4 id="2删除表">2、删除表</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>drop table 表名;
-drop table if exists 表名;
-</code></pre>
-</div>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">drop</span> <span class="n">table</span> <span class="err">表名</span><span class="p">;</span>
+<span class="n">drop</span> <span class="n">table</span> <span class="k">if</span> <span class="n">exists</span> <span class="err">表名</span><span class="p">;</span>
+</code></pre></div></div>
 
 <h3 id="数据操作">数据操作</h3>
 <h4 id="1插入">1、插入</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>insert into 表名 (字段1, 字段2, …) values (字段1的值, 字段2的值, …) ;
-</code></pre>
-</div>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">insert</span> <span class="n">into</span> <span class="err">表名</span> <span class="p">(</span><span class="err">字段</span><span class="mi">1</span><span class="p">,</span> <span class="err">字段</span><span class="mi">2</span><span class="p">,</span> <span class="err">…</span><span class="p">)</span> <span class="n">values</span> <span class="p">(</span><span class="err">字段</span><span class="mi">1</span><span class="err">的值</span><span class="p">,</span> <span class="err">字段</span><span class="mi">2</span><span class="err">的值</span><span class="p">,</span> <span class="err">…</span><span class="p">)</span> <span class="p">;</span>
+</code></pre></div></div>
 
 <h4 id="2删除">2、删除</h4>
-<div class="highlighter-rouge"><pre class="highlight"><code>delete from 表名 ;
-</code></pre>
-</div>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">delete</span> <span class="n">from</span> <span class="err">表名</span> <span class="p">;</span>
+</code></pre></div></div>
 
 <h4 id="3查询">3、查询</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// 限制查询数据范围（0 表示起始，3 表示需要查询的数目）
-select * from t_person limit 0, 3;
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="err">限制查询数据范围（</span><span class="mi">0</span> <span class="err">表示起始，</span><span class="mi">3</span> <span class="err">表示需要查询的数目）</span>
+<span class="nb">select</span> <span class="o">*</span> <span class="n">from</span> <span class="n">t_person</span> <span class="n">limit</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">;</span>
 
-// 数据升降序（默认升序）
-SELECT * FROM t_person ORDER BY age ASC, id DESC;
+<span class="sr">//</span> <span class="err">数据升降序（默认升序）</span>
+<span class="no">SELECT</span> <span class="o">*</span> <span class="no">FROM</span> <span class="n">t_person</span> <span class="no">ORDER</span> <span class="no">BY</span> <span class="n">age</span> <span class="no">ASC</span><span class="p">,</span> <span class="nb">id</span> <span class="no">DESC</span><span class="p">;</span>
 
-// 条件（+模糊查询）
-select * from t_person where name like 'wangwu%';
-</code></pre>
-</div>
+<span class="sr">//</span> <span class="err">条件（</span><span class="o">+</span><span class="err">模糊查询）</span>
+<span class="nb">select</span> <span class="o">*</span> <span class="n">from</span> <span class="n">t_person</span> <span class="n">where</span> <span class="nb">name</span> <span class="n">like</span> <span class="s1">'wangwu%'</span><span class="p">;</span>
+</code></pre></div></div>
 
 <h4 id="4更新">4、更新</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>update 表名 set 字段1 = 字段1的值, 字段2 = 字段2的值, … ;
-</code></pre>
-</div>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">update</span> <span class="err">表名</span> <span class="n">set</span> <span class="err">字段</span><span class="mi">1</span> <span class="o">=</span> <span class="err">字段</span><span class="mi">1</span><span class="err">的值</span><span class="p">,</span> <span class="err">字段</span><span class="mi">2</span> <span class="o">=</span> <span class="err">字段</span><span class="mi">2</span><span class="err">的值</span><span class="p">,</span> <span class="err">…</span> <span class="p">;</span>
+</code></pre></div></div>
 
 <h4 id="5数据统计">5、数据统计</h4>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>// 取出所有数据的总数目
-select count(*) from t_person;
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="err">取出所有数据的总数目</span>
+<span class="nb">select</span> <span class="n">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="n">from</span> <span class="n">t_person</span><span class="p">;</span>
 
-// 统计符合条件的记录条数
-select count(*) from t_person where name like 'wang%';
+<span class="sr">//</span> <span class="err">统计符合条件的记录条数</span>
+<span class="nb">select</span> <span class="n">count</span><span class="p">(</span><span class="o">*</span><span class="p">)</span> <span class="n">from</span> <span class="n">t_person</span> <span class="n">where</span> <span class="nb">name</span> <span class="n">like</span> <span class="s1">'wang%'</span><span class="p">;</span>
 
-// 选择指定列的最大值
-select max(age) from t_person;
+<span class="sr">//</span> <span class="err">选择指定列的最大值</span>
+<span class="nb">select</span> <span class="n">max</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="n">from</span> <span class="n">t_person</span><span class="p">;</span>
 
-// 选择指定列的最小值
-select min(age) from t_person;
+<span class="sr">//</span> <span class="err">选择指定列的最小值</span>
+<span class="nb">select</span> <span class="n">min</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="n">from</span> <span class="n">t_person</span><span class="p">;</span>
 
-// 计算指定列的平均值
-select avg(age) from t_person;
+<span class="sr">//</span> <span class="err">计算指定列的平均值</span>
+<span class="nb">select</span> <span class="n">avg</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="n">from</span> <span class="n">t_person</span><span class="p">;</span>
 
-// 计算指定列数值的总数
-select sum(age) from t_person;
-</code></pre>
-</div>
+<span class="sr">//</span> <span class="err">计算指定列数值的总数</span>
+<span class="nb">select</span> <span class="n">sum</span><span class="p">(</span><span class="n">age</span><span class="p">)</span> <span class="n">from</span> <span class="n">t_person</span><span class="p">;</span>
+</code></pre></div></div>
 
 <h2 id="第三方库fmdb">第三方库（FMDB）</h2>
 
@@ -360,11 +355,10 @@ select sum(age) from t_person;
 <h3 id="基本使用">基本使用</h3>
 
 <h4 id="打开数据库">打开数据库</h4>
-<div class="highlighter-rouge"><pre class="highlight"><code>FMDatabase * db = [FMDatabase databaseWithPath:filePath];
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="no">FMDatabase</span> <span class="o">*</span> <span class="n">db</span> <span class="o">=</span> <span class="p">[</span><span class="no">FMDatabase</span> <span class="n">databaseWithPath</span><span class="ss">:filePath</span><span class="p">];</span>
 
-[db open];
-</code></pre>
-</div>
+<span class="p">[</span><span class="n">db</span> <span class="nb">open</span><span class="p">];</span>
+</code></pre></div></div>
 
 <h4 id="操作">操作</h4>
 <ul>
@@ -380,31 +374,30 @@ select sum(age) from t_person;
 
 <p>FMDatabase是线程不安全的，当FMDB数据存储想要使用多线程的时候，FMDatabaseQueue就派上用场了。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>//初始化FMDatabaseQueue
-FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:filePath];
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span><span class="err">初始化</span><span class="no">FMDatabaseQueue</span>
+<span class="no">FMDatabaseQueue</span> <span class="o">*</span><span class="n">dbQueue</span> <span class="o">=</span> <span class="p">[</span><span class="no">FMDatabaseQueue</span> <span class="n">databaseQueueWithPath</span><span class="ss">:filePath</span><span class="p">];</span>
 
-//在block中执行SQLite语句命令
-    [dbQueue inDatabase:^(FMDatabase * db)?{
-        //创建表
-        [db executeUpdate:@"create table if not exists t_student (...)"];
+<span class="sr">//</span><span class="err">在</span><span class="n">block</span><span class="err">中执行</span><span class="no">SQLite</span><span class="err">语句命令</span>
+    <span class="p">[</span><span class="n">dbQueue</span> <span class="n">inDatabase</span><span class="ss">:^</span><span class="p">(</span><span class="no">FMDatabase</span> <span class="o">*</span> <span class="n">db</span><span class="p">)?{</span>
+        <span class="sr">//</span><span class="err">创建表</span>
+        <span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s2">"create table if not exists t_student (...)"</span><span class="p">];</span>
 
-        //添加数据
-        [db executeUpdate:@"insert into t_student(name,age) values(?,?)",@"jack",@17];
-        [db executeUpdate:@"insert into t_student(name,age) values(?,?)",@"lily",@16];
+        <span class="sr">//</span><span class="err">添加数据</span>
+        <span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s2">"insert into t_student(name,age) values(?,?)"</span><span class="p">,</span><span class="err">@</span><span class="s2">"jack"</span><span class="p">,</span><span class="err">@</span><span class="mi">17</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s2">"insert into t_student(name,age) values(?,?)"</span><span class="p">,</span><span class="err">@</span><span class="s2">"lily"</span><span class="p">,</span><span class="err">@</span><span class="mi">16</span><span class="p">];</span>
 
-        //查询数据
-        FMResultSet *set = [db executeQuery:@"select id, name, age from t_student"];
+        <span class="sr">//</span><span class="err">查询数据</span>
+        <span class="no">FMResultSet</span> <span class="o">*</span><span class="n">set</span> <span class="o">=</span> <span class="p">[</span><span class="n">db</span> <span class="n">executeQuery</span><span class="p">:</span><span class="err">@</span><span class="s2">"select id, name, age from t_student"</span><span class="p">];</span>
 
-        //遍历查询到的数据
-        while ([set next]) {
-            int ID = [set intForColumn:@"id"];
-            NSString * name = [set stringForColumn:@"name"];
-            int age = [set?intForColumn:@"age"];
-            NSLog(@"%d,%@,%d",ID,name,age);
-        }
-    }];
-</code></pre>
-</div>
+        <span class="sr">//</span><span class="err">遍历查询到的数据</span>
+        <span class="k">while</span> <span class="p">([</span><span class="n">set</span> <span class="k">next</span><span class="p">])</span> <span class="p">{</span>
+            <span class="n">int</span> <span class="no">ID</span> <span class="o">=</span> <span class="p">[</span><span class="n">set</span> <span class="n">intForColumn</span><span class="p">:</span><span class="err">@</span><span class="s2">"id"</span><span class="p">];</span>
+            <span class="no">NSString</span> <span class="o">*</span> <span class="nb">name</span> <span class="o">=</span> <span class="p">[</span><span class="n">set</span> <span class="n">stringForColumn</span><span class="p">:</span><span class="err">@</span><span class="s2">"name"</span><span class="p">];</span>
+            <span class="n">int</span> <span class="n">age</span> <span class="o">=</span> <span class="p">[</span><span class="n">set?intForColumn</span><span class="p">:</span><span class="err">@</span><span class="s2">"age"</span><span class="p">];</span>
+            <span class="no">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s2">"%d,%@,%d"</span><span class="p">,</span><span class="no">ID</span><span class="p">,</span><span class="nb">name</span><span class="p">,</span><span class="n">age</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}];</span>
+</code></pre></div></div>
 
 <h3 id="fmdb-中的事务">FMDB 中的事务</h3>
 
@@ -412,26 +405,25 @@ FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:filePath];
 
 <p>下面代码中，利用事务循环向数据库中添加2000条数据，假如在添加的过程中出现了一些问题，由于执行了*rollback = YES的回滚操作，数据库中一个数据都不会出现。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>//初始化FMDatabaseQueue
-FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:filePath];
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span><span class="err">初始化</span><span class="no">FMDatabaseQueue</span>
+<span class="no">FMDatabaseQueue</span> <span class="o">*</span><span class="n">dbQueue</span> <span class="o">=</span> <span class="p">[</span><span class="no">FMDatabaseQueue</span> <span class="n">databaseQueueWithPath</span><span class="ss">:filePath</span><span class="p">];</span>
 
-//FMDatabaseQueue的事务inTransaction
-[dbQueue inTransaction:^(FMDatabase * _Nonnull db, BOOL * _Nonnull rollback) {
-        //创建表
-        [db executeUpdate:@"create table if not exists t_student (id integer primary key autoincrement, name text, age integer)"];
-        //循环添加2000条数据
-        for (int i = 0; i &lt; 2000; i++) {
-            BOOL success = [db executeUpdate:@"insert into t_student(name,age) values(?,?)",@"jack",@(i)];
-            //如果添加数据出现问题，则回滚
-            if (!success) {
-                //数据回滚
-                *rollback = YES;
-                return;
-            }
-        }
-    }];
-</code></pre>
-</div>
+<span class="sr">//</span><span class="no">FMDatabaseQueue</span><span class="err">的事务</span><span class="n">inTransaction</span>
+<span class="p">[</span><span class="n">dbQueue</span> <span class="n">inTransaction</span><span class="ss">:^</span><span class="p">(</span><span class="no">FMDatabase</span> <span class="o">*</span> <span class="n">_Nonnull</span> <span class="n">db</span><span class="p">,</span> <span class="no">BOOL</span> <span class="o">*</span> <span class="n">_Nonnull</span> <span class="n">rollback</span><span class="p">)</span> <span class="p">{</span>
+        <span class="sr">//</span><span class="err">创建表</span>
+        <span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s2">"create table if not exists t_student (id integer primary key autoincrement, name text, age integer)"</span><span class="p">];</span>
+        <span class="sr">//</span><span class="err">循环添加</span><span class="mi">2000</span><span class="err">条数据</span>
+        <span class="k">for</span> <span class="p">(</span><span class="n">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">2000</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+            <span class="no">BOOL</span> <span class="n">success</span> <span class="o">=</span> <span class="p">[</span><span class="n">db</span> <span class="n">executeUpdate</span><span class="p">:</span><span class="err">@</span><span class="s2">"insert into t_student(name,age) values(?,?)"</span><span class="p">,</span><span class="err">@</span><span class="s2">"jack"</span><span class="p">,</span><span class="err">@</span><span class="p">(</span><span class="n">i</span><span class="p">)];</span>
+            <span class="sr">//</span><span class="err">如果添加数据出现问题，则回滚</span>
+            <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">success</span><span class="p">)</span> <span class="p">{</span>
+                <span class="sr">//</span><span class="err">数据回滚</span>
+                <span class="o">*</span><span class="n">rollback</span> <span class="o">=</span> <span class="no">YES</span><span class="p">;</span>
+                <span class="k">return</span><span class="p">;</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">}];</span>
+</code></pre></div></div>
 
         </article>
         <hr>
@@ -537,6 +529,30 @@ FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:filePath];
                     
                         
                         <li class="relatedPost">
+                            <a href="/2017/11/17/%E5%B7%A5%E5%85%B7/">开发工具
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
                             <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
                             
                             </a>
@@ -595,15 +611,6 @@ FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:filePath];
             
                 
                     
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
                 
                     
                 
@@ -634,9 +641,6 @@ FMDatabaseQueue *dbQueue = [FMDatabaseQueue databaseQueueWithPath:filePath];
                 
                     
                 
-            
-        
-            
             
         
         

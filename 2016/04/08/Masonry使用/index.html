@@ -9,14 +9,17 @@
     <title>Masonry使用</title>
     <meta name="description" content="Masonry 的使用">
 
+    <!-- 高亮 -->
+    <link href="/css/rouge.css" rel="stylesheet"/>
+
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <!-- 菜单前的图标，需要下面这句 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2016/04/08/Masonry%E4%BD%BF%E7%94%A8/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2016/04/08/Masonry%E4%BD%BF%E7%94%A8/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
 
 
     <script>
@@ -239,7 +242,7 @@
 <h3 id="2017-11-17-适配-ios-11">2017-11-17 适配 iOS 11</h3>
 <p>为了适配 iOS 11 安全区域的问题，<code class="highlighter-rouge">View+MASAdditions</code>类别中加了一些内容。</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">mas_safeAreaLayoutGuide</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mas_safeAreaLayoutGuide</span>
 
 <span class="n">mas_safeAreaLayoutGuideRight</span>
 <span class="n">mas_safeAreaLayoutGuideLeft</span>
@@ -248,8 +251,7 @@
 
 <span class="n">mas_safeAreaLayoutGuideCenterY</span>
 <span class="n">mas_safeAreaLayoutGuideCenterX</span>
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h2 id="简介">简介</h2>
 
@@ -257,22 +259,21 @@
 
 <p>在<code class="highlighter-rouge">MASUtilities.h</code>中，通过宏定义方式区分 2 个平台的独有关键字：</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="c">#if TARGET_OS_IPHONE || TARGET_OS_TV</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#if TARGET_OS_IPHONE || TARGET_OS_TV</span>
 
-    <span class="c">#import &lt;UIKit/UIKit.h&gt;</span>
-    <span class="c">#define MAS_VIEW UIView</span>
-    <span class="c">#define MAS_VIEW_CONTROLLER UIViewController</span>
-    <span class="c">#define MASEdgeInsets UIEdgeInsets</span>
+    <span class="c1">#import &lt;UIKit/UIKit.h&gt;</span>
+    <span class="c1">#define MAS_VIEW UIView</span>
+    <span class="c1">#define MAS_VIEW_CONTROLLER UIViewController</span>
+    <span class="c1">#define MASEdgeInsets UIEdgeInsets</span>
 
-<span class="c">#elif TARGET_OS_MAC</span>
+<span class="c1">#elif TARGET_OS_MAC</span>
 
-    <span class="c">#import &lt;AppKit/AppKit.h&gt;</span>
-    <span class="c">#define MAS_VIEW NSView</span>
-    <span class="c">#define MASEdgeInsets NSEdgeInsets</span>
+    <span class="c1">#import &lt;AppKit/AppKit.h&gt;</span>
+    <span class="c1">#define MAS_VIEW NSView</span>
+    <span class="c1">#define MASEdgeInsets NSEdgeInsets</span>
 
-<span class="c">#endif</span>
-</code></pre>
-</div>
+<span class="c1">#endif</span>
+</code></pre></div></div>
 
 <h2 id="使用">使用</h2>
 
@@ -331,47 +332,42 @@
 
 <h3 id="api">API</h3>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code>
-<span class="n">mas_makeConstraints</span><span class="p">()</span>    <span class="o">//</span><span class="err">添加约束</span>
-<span class="n">mas_remakeConstraints</span><span class="p">()</span>  <span class="o">//</span><span class="err">移除之前的约束，重新添加新的约束</span>
-<span class="n">mas_updateConstraints</span><span class="p">()</span>  <span class="o">//</span><span class="err">更新约束</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">mas_makeConstraints</span><span class="p">()</span>    <span class="o">/</span><span class="sr">/添加约束
+mas_remakeConstraints()  /</span><span class="o">/</span><span class="err">移除之前的约束，重新添加新的约束</span>
+<span class="n">mas_updateConstraints</span><span class="p">()</span>  <span class="o">/</span><span class="sr">/更新约束
 
-<span class="n">equalTo</span><span class="p">()</span>       <span class="o">//</span><span class="err">参数是对象类型，一般是视图对象或者</span><span class="n">mas_width</span><span class="err">这样的坐标系对象</span>
-<span class="n">mas_equalTo</span><span class="p">()</span>   <span class="o">//</span><span class="err">和上面功能相同，参数可以传递基础数据类型对象，可以理解为比上面的</span><span class="n">API</span><span class="err">更强大</span>
-<span class="n">mas_greaterThanOrEqualTo</span><span class="p">()</span>
-<span class="n">mas_lessThanOrEqualTo</span><span class="p">()</span>
+equalTo()       /</span><span class="o">/</span><span class="err">参数是对象类型，一般是视图对象或者</span><span class="n">mas_width</span><span class="err">这样的坐标系对象</span>
+<span class="n">mas_equalTo</span><span class="p">()</span>   <span class="o">/</span><span class="sr">/和上面功能相同，参数可以传递基础数据类型对象，可以理解为比上面的API更强大
+mas_greaterThanOrEqualTo()
+mas_lessThanOrEqualTo()
 
-<span class="n">width</span><span class="p">()</span>         <span class="o">//</span><span class="err">用来表示宽度，例如代表</span><span class="n">view</span><span class="err">的宽度</span>
-<span class="n">mas_width</span><span class="p">()</span>     <span class="o">//</span><span class="err">用来获取宽度的值。和上面的区别在于，一个代表某个坐标系对象，一个用来获取坐标系对象的值</span>
-
-</code></pre>
-</div>
+width()         /</span><span class="o">/</span><span class="err">用来表示宽度，例如代表</span><span class="n">view</span><span class="err">的宽度</span>
+<span class="n">mas_width</span><span class="p">()</span>     <span class="o">/</span><span class="sr">/用来获取宽度的值。和上面的区别在于，一个代表某个坐标系对象，一个用来获取坐标系对象的值
+</span></code></pre></div></div>
 
 <h3 id="autoboxing">AutoBoxing</h3>
 <p>如果在当前类引入#import “Masonry.h”之前，用下面两种宏定义声明一下，就不需要区分 mas_ 前缀。</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="o">//</span> <span class="err">定义这个常量，就可以不用在开发过程中使用</span><span class="s">"mas_"</span><span class="err">前缀。</span>
-<span class="c">#define MAS_SHORTHAND</span>
-<span class="o">//</span> <span class="err">定义这个常量，就可以让</span><span class="n">Masonry</span><span class="err">帮我们自动把基础数据类型的数据，自动装箱为对象类型。</span>
-<span class="c">#define MAS_SHORTHAND_GLOBALS</span>
-</code></pre>
-</div>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="err">定义这个常量，就可以不用在开发过程中使用</span><span class="s2">"mas_"</span><span class="err">前缀。</span>
+<span class="c1">#define MAS_SHORTHAND</span>
+<span class="sr">//</span> <span class="err">定义这个常量，就可以让</span><span class="no">Masonry</span><span class="err">帮我们自动把基础数据类型的数据，自动装箱为对象类型。</span>
+<span class="c1">#define MAS_SHORTHAND_GLOBALS</span>
+</code></pre></div></div>
 
 <h3 id="修饰语">修饰语</h3>
 <p>什么也不做，就是为了提高代码的可读性。</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="ow">and</span>
-<span class="k">with</span>
-</code></pre>
-</div>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">and</span>
+<span class="n">with</span>
+</code></pre></div></div>
 
 <h3 id="其他">其他</h3>
 <h4 id="mas_key">mas_key</h4>
 <p>当出现约束冲突、缺少等问题时，log中通常只展示冲突 view 的内存地址。为方便调试，加了 mas_key 内存地址会被替换成 view（即实例名），可读性更高。</p>
 
-<div class="language-python highlighter-rouge"><pre class="highlight"><code><span class="n">MASAttachKeys</span><span class="p">(</span><span class="n">view1</span><span class="p">,</span> <span class="n">view2</span><span class="p">,</span> <span class="o">...</span> <span class="p">)</span>
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>MASAttachKeys(view1, view2, ... )
+</code></pre></div></div>
 
 <hr />
 <h2 id="相关链接">相关链接</h2>
@@ -486,6 +482,30 @@
                     
                         
                         <li class="relatedPost">
+                            <a href="/2017/11/17/%E5%B7%A5%E5%85%B7/">开发工具
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
                             <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
                             
                             </a>
@@ -544,15 +564,6 @@
             
                 
                     
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
                 
                     
                 
@@ -583,9 +594,6 @@
                 
                     
                 
-            
-        
-            
             
         
         

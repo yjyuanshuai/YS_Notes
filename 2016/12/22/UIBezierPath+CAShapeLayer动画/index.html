@@ -9,14 +9,17 @@
     <title>CAShapeLayer + UIBezierPath</title>
     <meta name="description" content="UIBezierPath（贝塞尔曲线）结合 CAShapeLayer 绘制图形或路径等。">
 
+    <!-- 高亮 -->
+    <link href="/css/rouge.css" rel="stylesheet"/>
+
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <!-- 菜单前的图标，需要下面这句 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2016/12/22/UIBezierPath+CAShapeLayer%E5%8A%A8%E7%94%BB/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2016/12/22/UIBezierPath+CAShapeLayer%E5%8A%A8%E7%94%BB/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
 
 
     <script>
@@ -241,39 +244,38 @@
 
 <p>UIBezierPath主要是用来绘制路径的，分为一阶、二阶…..n阶。一阶是直线，二阶以上才是曲线。而最终路径的显示还是得依靠CALayer。用CoreGraphics将路径绘制出来，最终也是绘制到CALayer上。</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>
-- (void)drawRect:(CGRect)rect
-{
-    UIColor *fillColor = [UIColor colorWithRed:0.0 green:0.722 blue:1.0 alpha:1.0];
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">drawRect</span><span class="p">:(</span><span class="no">CGRect</span><span class="p">)</span><span class="n">rect</span>
+<span class="p">{</span>
+    <span class="no">UIColor</span> <span class="o">*</span><span class="n">fillColor</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIColor</span> <span class="n">colorWithRed</span><span class="p">:</span><span class="mf">0.0</span> <span class="n">green</span><span class="p">:</span><span class="mf">0.722</span> <span class="n">blue</span><span class="p">:</span><span class="mf">1.0</span> <span class="n">alpha</span><span class="p">:</span><span class="mf">1.0</span><span class="p">];</span>
 
-    UIBezierPath *bezierPath = [UIBezierPath bezierPath];
-    [bezierPath moveToPoint:CGPointMake(0, 0)];
-    [bezierPath addLineToPoint:CGPointMake(rect.size.width - spaceWidth, 0)];
-    [bezierPath addQuadCurveToPoint:CGPointMake(rect.size.width - spaceWidth, rect.size.height) controlPoint:CGPointMake(rect.size.width - spaceWidth + _deltaWith, rect.size.height * 0.5)];
-    [bezierPath addLineToPoint:CGPointMake(0, rect.size.height)];
-    [bezierPath addLineToPoint:CGPointMake(0, 0)];
-    [bezierPath closePath];
+    <span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">bezierPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPath</span><span class="p">];</span>
+    <span class="p">[</span><span class="n">bezierPath</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">bezierPath</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">rect</span><span class="p">.</span><span class="nf">size</span><span class="p">.</span><span class="nf">width</span> <span class="o">-</span> <span class="n">spaceWidth</span><span class="p">,</span> <span class="mi">0</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">bezierPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">rect</span><span class="p">.</span><span class="nf">size</span><span class="p">.</span><span class="nf">width</span> <span class="o">-</span> <span class="n">spaceWidth</span><span class="p">,</span> <span class="n">rect</span><span class="p">.</span><span class="nf">size</span><span class="p">.</span><span class="nf">height</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">rect</span><span class="p">.</span><span class="nf">size</span><span class="p">.</span><span class="nf">width</span> <span class="o">-</span> <span class="n">spaceWidth</span> <span class="o">+</span> <span class="n">_deltaWith</span><span class="p">,</span> <span class="n">rect</span><span class="p">.</span><span class="nf">size</span><span class="p">.</span><span class="nf">height</span> <span class="o">*</span> <span class="mf">0.5</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">bezierPath</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">rect</span><span class="p">.</span><span class="nf">size</span><span class="p">.</span><span class="nf">height</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">bezierPath</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">)];</span>
+    <span class="p">[</span><span class="n">bezierPath</span> <span class="n">closePath</span><span class="p">];</span>
 
-    // 1、bezierPath方法
-    //    [fillColor setFill];
-    //    [bezierPath fill];
+    <span class="sr">//</span> <span class="mi">1</span><span class="err">、</span><span class="n">bezierPath</span><span class="err">方法</span>
+    <span class="sr">//</span>    <span class="p">[</span><span class="n">fillColor</span> <span class="n">setFill</span><span class="p">];</span>
+    <span class="sr">//</span>    <span class="p">[</span><span class="n">bezierPath</span> <span class="n">fill</span><span class="p">];</span>
 
-    // 2、使用CoreGraphics
-    //    CGContextRef ctx = UIGraphicsGetCurrentContext();
-    //    CGContextAddPath(ctx, bezierPath.CGPath);
-    //    CGContextSetFillColorWithColor(ctx, fillColor.CGColor);
-    //    CGContextFillPath(ctx);
+    <span class="sr">//</span> <span class="mi">2</span><span class="err">、使用</span><span class="no">CoreGraphics</span>
+    <span class="sr">//</span>    <span class="no">CGContextRef</span> <span class="n">ctx</span> <span class="o">=</span> <span class="no">UIGraphicsGetCurrentContext</span><span class="p">();</span>
+    <span class="sr">//</span>    <span class="no">CGContextAddPath</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">bezierPath</span><span class="o">.</span><span class="no">CGPath</span><span class="p">);</span>
+    <span class="sr">//</span>    <span class="no">CGContextSetFillColorWithColor</span><span class="p">(</span><span class="n">ctx</span><span class="p">,</span> <span class="n">fillColor</span><span class="o">.</span><span class="no">CGColor</span><span class="p">);</span>
+    <span class="sr">//</span>    <span class="no">CGContextFillPath</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
 
-    // 3.CAShaperLayer
-    [self.layer.sublayers makeObjectsPerformSelector:@selector(removeFromSuperlayer)];
-    CAShapeLayer *shapeLayer = [CAShapeLayer layer];
-    shapeLayer.path = bezierPath.CGPath;
-    shapeLayer.fillColor = fillColor.CGColor;
-    [self.layer addSublayer:shapeLayer];
-}
+    <span class="sr">//</span> <span class="mi">3</span><span class="o">.</span><span class="no">CAShaperLayer</span>
+    <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">layer</span><span class="p">.</span><span class="nf">sublayers</span> <span class="n">makeObjectsPerformSelector</span><span class="ss">:@selector</span><span class="p">(</span><span class="n">removeFromSuperlayer</span><span class="p">)];</span>
+    <span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">shapeLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+    <span class="n">shapeLayer</span><span class="p">.</span><span class="nf">path</span> <span class="o">=</span> <span class="n">bezierPath</span><span class="o">.</span><span class="no">CGPath</span><span class="p">;</span>
+    <span class="n">shapeLayer</span><span class="p">.</span><span class="nf">fillColor</span> <span class="o">=</span> <span class="n">fillColor</span><span class="o">.</span><span class="no">CGColor</span><span class="p">;</span>
+    <span class="p">[</span><span class="nb">self</span><span class="p">.</span><span class="nf">layer</span> <span class="n">addSublayer</span><span class="ss">:shapeLayer</span><span class="p">];</span>
+<span class="p">}</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <blockquote>
   <p>注：在用自定义的CAShapeLayer做动画时，建议在动画开始前先将动画属性与最终的属性值一致，再开始动画，不要使用removedOnCompletion控制最终的状态，这在WWDC苹果这么建议。</p>
@@ -304,225 +306,220 @@
 <p>边线样式的起始位置，如上，就表示第 1 个长度2的线的起始位置。</p>
 
 <h3 id="linecap">lineCap</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>
-kCALineCapButt    // 不设置样式
-kCALineCapRound   // 圆形
-kCALineCapSquare  // 方形
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="n">kCALineCapButt</span>    <span class="sr">//</span> <span class="err">不设置样式</span>
+<span class="n">kCALineCapRound</span>   <span class="sr">//</span> <span class="err">圆形</span>
+<span class="n">kCALineCapSquare</span>  <span class="sr">//</span> <span class="err">方形</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="linejoin">lineJoin</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>
-kCALineJoinMiter  // 三角
-kCALineJoinRound  // 圆形
-kCALineJoinBevel  // 斜切
-
-</code></pre>
-</div>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">kCALineJoinMiter</span>  <span class="sr">//</span> <span class="err">三角</span>
+<span class="n">kCALineJoinRound</span>  <span class="sr">//</span> <span class="err">圆形</span>
+<span class="n">kCALineJoinBevel</span>  <span class="sr">//</span> <span class="err">斜切</span>
+</code></pre></div></div>
 
 <h2 id="机器猫实例">机器猫实例</h2>
-<div class="highlighter-rouge"><pre class="highlight"><code>
-CGFloat arcCenterX = self.view.frame.size.width/2;
-CGFloat arcCenterY = 80;
-CGFloat delay = LanPangZiDuration;
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<span class="no">CGFloat</span> <span class="n">arcCenterX</span> <span class="o">=</span> <span class="nb">self</span><span class="p">.</span><span class="nf">view</span><span class="p">.</span><span class="nf">frame</span><span class="p">.</span><span class="nf">size</span><span class="p">.</span><span class="nf">width</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+<span class="no">CGFloat</span> <span class="n">arcCenterY</span> <span class="o">=</span> <span class="mi">80</span><span class="p">;</span>
+<span class="no">CGFloat</span> <span class="n">delay</span> <span class="o">=</span> <span class="no">LanPangZiDuration</span><span class="p">;</span>
 
-//头
-CAShapeLayer *headLayer = [CAShapeLayer layer];
-UIBezierPath *headPath = [UIBezierPath bezierPathWithRoundedRect:CGRectMake(self.view.frame.size.width/2-80, 0, 160, 160) cornerRadius:80];
-[self setLayer:headLayer path:headPath delay:delay*0];
+<span class="sr">//</span><span class="err">头</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">headLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">headPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPathWithRoundedRect</span><span class="ss">:CGRectMake</span><span class="p">(</span><span class="nb">self</span><span class="p">.</span><span class="nf">view</span><span class="p">.</span><span class="nf">frame</span><span class="p">.</span><span class="nf">size</span><span class="p">.</span><span class="nf">width</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="mi">80</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">160</span><span class="p">,</span> <span class="mi">160</span><span class="p">)</span> <span class="n">cornerRadius</span><span class="p">:</span><span class="mi">80</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:headLayer</span> <span class="n">path</span><span class="ss">:headPath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">0</span><span class="p">];</span>
 
-//脸
-CAShapeLayer *faceLayer = [CAShapeLayer layer];
-UIBezierPath *facePath = [UIBezierPath bezierPath];
-[facePath moveToPoint:CGPointMake(arcCenterX-80*sqrt(2.0)/2, arcCenterY+80*sqrt(2.0)/2)];
-[facePath addCurveToPoint:CGPointMake(arcCenterX-30, arcCenterY-20) controlPoint1:CGPointMake(arcCenterX-80, arcCenterY+25) controlPoint2:CGPointMake(arcCenterX-80, arcCenterY-20)];
-[facePath addLineToPoint:CGPointMake(arcCenterX+30, arcCenterY-20)];
-[facePath addCurveToPoint:CGPointMake(arcCenterX+80*sqrt(2.0)/2, arcCenterY+80*sqrt(2.0)/2) controlPoint1:CGPointMake(arcCenterX+80, arcCenterY-20) controlPoint2:CGPointMake(arcCenterX+80, arcCenterY+25)];
-[facePath addQuadCurveToPoint:CGPointMake(arcCenterX-80*sqrt(2.0)/2, arcCenterY+80*sqrt(2.0)/2) controlPoint:CGPointMake(arcCenterX, arcCenterY+105)];
-[self setLayer:faceLayer path:facePath delay:delay*1];
+<span class="sr">//</span><span class="err">脸</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">faceLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">facePath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPath</span><span class="p">];</span>
+<span class="p">[</span><span class="n">facePath</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">80</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">80</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">facePath</span> <span class="n">addCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">20</span><span class="p">)</span> <span class="n">controlPoint1</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">80</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">25</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">80</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">20</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">facePath</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">30</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">20</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">facePath</span> <span class="n">addCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">80</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">80</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="n">controlPoint1</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">80</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">20</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">80</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">25</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">facePath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">80</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">80</span><span class="o">*</span><span class="n">sqrt</span><span class="p">(</span><span class="mf">2.0</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">105</span><span class="p">)];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:faceLayer</span> <span class="n">path</span><span class="ss">:facePath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">1</span><span class="p">];</span>
 
-//左眼
-CAShapeLayer *leftEyeLayer = [CAShapeLayer layer];
-UIBezierPath *leftEyePath = [UIBezierPath bezierPath];
-[leftEyePath moveToPoint:CGPointMake(arcCenterX-30, arcCenterY-25)];
-[leftEyePath addQuadCurveToPoint:CGPointMake(arcCenterX-15, arcCenterY-45) controlPoint:CGPointMake(arcCenterX-30, arcCenterY-45)];
-[leftEyePath addQuadCurveToPoint:CGPointMake(arcCenterX, arcCenterY-25) controlPoint:CGPointMake(arcCenterX, arcCenterY-45)];
-[leftEyePath addQuadCurveToPoint:CGPointMake(arcCenterX-15, arcCenterY-5) controlPoint:CGPointMake(arcCenterX, arcCenterY-5)];
-[leftEyePath addQuadCurveToPoint:CGPointMake(arcCenterX-30, arcCenterY-25) controlPoint:CGPointMake(arcCenterX-30, arcCenterY-5)];
-[self setLayer:leftEyeLayer path:leftEyePath delay:delay*2];
+<span class="sr">//</span><span class="err">左眼</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">leftEyeLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">leftEyePath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPath</span><span class="p">];</span>
+<span class="p">[</span><span class="n">leftEyePath</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">25</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">leftEyePath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">45</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">45</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">leftEyePath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">25</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">45</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">leftEyePath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">5</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">leftEyePath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">25</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">5</span><span class="p">)];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:leftEyeLayer</span> <span class="n">path</span><span class="ss">:leftEyePath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">2</span><span class="p">];</span>
 
-//左眼珠
-CAShapeLayer *leftEyeBallLayer = [CAShapeLayer layer];
-UIBezierPath *leftEyeBallPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(arcCenterX-5, arcCenterY-30) radius:2.5 startAngle:0 endAngle:2*M_PI clockwise:YES];
-[self setLayer:leftEyeBallLayer path:leftEyeBallPath delay:delay*3];
+<span class="sr">//</span><span class="err">左眼珠</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">leftEyeBallLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">leftEyeBallPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPathWithArcCenter</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">30</span><span class="p">)</span> <span class="n">radius</span><span class="p">:</span><span class="mf">2.5</span> <span class="n">startAngle</span><span class="p">:</span><span class="mi">0</span> <span class="n">endAngle</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="no">M_PI</span> <span class="n">clockwise</span><span class="ss">:YES</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:leftEyeBallLayer</span> <span class="n">path</span><span class="ss">:leftEyeBallPath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">3</span><span class="p">];</span>
 
-//右眼
-CAShapeLayer *rightEyeLayer = [CAShapeLayer layer];
-UIBezierPath *rightEyePath = [UIBezierPath bezierPath];
-[rightEyePath moveToPoint:CGPointMake(arcCenterX, arcCenterY-25)];
-[rightEyePath addQuadCurveToPoint:CGPointMake(arcCenterX+15, arcCenterY-45) controlPoint:CGPointMake(arcCenterX, arcCenterY-45)];
-[rightEyePath addQuadCurveToPoint:CGPointMake(arcCenterX+30, arcCenterY-25) controlPoint:CGPointMake(arcCenterX+30, arcCenterY-45)];
-[rightEyePath addQuadCurveToPoint:CGPointMake(arcCenterX+15, arcCenterY-5) controlPoint:CGPointMake(arcCenterX+30, arcCenterY-5)];
-[rightEyePath addQuadCurveToPoint:CGPointMake(arcCenterX, arcCenterY-25) controlPoint:CGPointMake(arcCenterX, arcCenterY-5)];
-[self setLayer:rightEyeLayer path:rightEyePath delay:delay*4];
+<span class="sr">//</span><span class="err">右眼</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">rightEyeLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">rightEyePath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPath</span><span class="p">];</span>
+<span class="p">[</span><span class="n">rightEyePath</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">25</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">rightEyePath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">15</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">45</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">45</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">rightEyePath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">30</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">25</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">30</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">45</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">rightEyePath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">15</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">30</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">5</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">rightEyePath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">25</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">5</span><span class="p">)];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:rightEyeLayer</span> <span class="n">path</span><span class="ss">:rightEyePath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">4</span><span class="p">];</span>
 
-//右眼珠
-CAShapeLayer *rightEyeBallLayer = [CAShapeLayer layer];
-UIBezierPath *rightEyeBallPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(arcCenterX+5, arcCenterY-30) radius:2.5 startAngle:0 endAngle:2*M_PI clockwise:YES];
-[self setLayer:rightEyeBallLayer path:rightEyeBallPath delay:delay*5];
+<span class="sr">//</span><span class="err">右眼珠</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">rightEyeBallLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">rightEyeBallPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPathWithArcCenter</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">30</span><span class="p">)</span> <span class="n">radius</span><span class="p">:</span><span class="mf">2.5</span> <span class="n">startAngle</span><span class="p">:</span><span class="mi">0</span> <span class="n">endAngle</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="no">M_PI</span> <span class="n">clockwise</span><span class="ss">:YES</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:rightEyeBallLayer</span> <span class="n">path</span><span class="ss">:rightEyeBallPath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">5</span><span class="p">];</span>
 
-//鼻子
-CAShapeLayer *noseLayer  = [CAShapeLayer layer];
-UIBezierPath *nosePath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(arcCenterX, arcCenterY) radius:10 startAngle:0 endAngle:2*M_PI clockwise:YES];
-[self setLayer:noseLayer path:nosePath delay:delay*6];
-//鼻子光晕
-CAShapeLayer *noseHaloLayer = [CAShapeLayer layer];
-UIBezierPath *noseHaloPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(arcCenterX-4, arcCenterY-5) radius:2.5 startAngle:0 endAngle:2*M_PI clockwise:YES];
-[self setLayer:noseHaloLayer path:noseHaloPath delay:delay*7];
+<span class="sr">//</span><span class="err">鼻子</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">noseLayer</span>  <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">nosePath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPathWithArcCenter</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="p">)</span> <span class="n">radius</span><span class="p">:</span><span class="mi">10</span> <span class="n">startAngle</span><span class="p">:</span><span class="mi">0</span> <span class="n">endAngle</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="no">M_PI</span> <span class="n">clockwise</span><span class="ss">:YES</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:noseLayer</span> <span class="n">path</span><span class="ss">:nosePath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">6</span><span class="p">];</span>
+<span class="sr">//</span><span class="err">鼻子光晕</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">noseHaloLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">noseHaloPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPathWithArcCenter</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span> <span class="n">radius</span><span class="p">:</span><span class="mf">2.5</span> <span class="n">startAngle</span><span class="p">:</span><span class="mi">0</span> <span class="n">endAngle</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="no">M_PI</span> <span class="n">clockwise</span><span class="ss">:YES</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:noseHaloLayer</span> <span class="n">path</span><span class="ss">:noseHaloPath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">7</span><span class="p">];</span>
 
-//嘴巴
-CAShapeLayer *mouthLayer = [CAShapeLayer layer];
-UIBezierPath *mouthPath = [UIBezierPath bezierPath];
-[mouthPath moveToPoint:CGPointMake(arcCenterX-60, arcCenterY+25)];
-[mouthPath addQuadCurveToPoint:CGPointMake(arcCenterX+60, arcCenterY+25) controlPoint:CGPointMake(arcCenterX, arcCenterY+90)];
-[self setLayer:mouthLayer path:mouthPath delay:delay*8];
-CAShapeLayer *mouthLayer1 = [CAShapeLayer layer];
-UIBezierPath *mouthPath1 = [UIBezierPath bezierPath];
-[mouthPath1 moveToPoint:CGPointMake(arcCenterX, arcCenterY+10)];
-[mouthPath1 addLineToPoint:CGPointMake(arcCenterX, arcCenterY+55)];
-[self setLayer:mouthLayer1 path:mouthPath1 delay:delay*9];
+<span class="sr">//</span><span class="err">嘴巴</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">mouthLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">mouthPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPath</span><span class="p">];</span>
+<span class="p">[</span><span class="n">mouthPath</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">25</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">mouthPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">60</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">25</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">90</span><span class="p">)];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:mouthLayer</span> <span class="n">path</span><span class="ss">:mouthPath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">8</span><span class="p">];</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">mouthLayer1</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">mouthPath1</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPath</span><span class="p">];</span>
+<span class="p">[</span><span class="n">mouthPath1</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">10</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">mouthPath1</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">55</span><span class="p">)];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:mouthLayer1</span> <span class="n">path</span><span class="ss">:mouthPath1</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">9</span><span class="p">];</span>
 
-//胡子
-[self addBeardFromPoint:CGPointMake(arcCenterX-58, arcCenterY-5) toPoint:CGPointMake(arcCenterX-15, arcCenterY+10) delay:delay*10];
-[self addBeardFromPoint:CGPointMake(arcCenterX-68, arcCenterY+15) toPoint:CGPointMake(arcCenterX-15, arcCenterY+20) delay:delay*11];
-[self addBeardFromPoint:CGPointMake(arcCenterX-61, arcCenterY+45) toPoint:CGPointMake(arcCenterX-15, arcCenterY+30) delay:delay*12];
-[self addBeardFromPoint:CGPointMake(arcCenterX+58, arcCenterY-5) toPoint:CGPointMake(arcCenterX+15, arcCenterY+10) delay:delay*13];
-[self addBeardFromPoint:CGPointMake(arcCenterX+68, arcCenterY+15) toPoint:CGPointMake(arcCenterX+15, arcCenterY+20) delay:delay*14];
-[self addBeardFromPoint:CGPointMake(arcCenterX+61, arcCenterY+45) toPoint:CGPointMake(arcCenterX+15, arcCenterY+30) delay:delay*15];
-//左手
-CAShapeLayer *leftHandLayer = [CAShapeLayer layer];
-UIBezierPath *leftHandPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(arcCenterX-95, arcCenterY+110) radius:20 startAngle:0 endAngle:2*M_PI clockwise:YES];
-[self setLayer:leftHandLayer path:leftHandPath delay:delay*16];
-//左胳膊
-CGFloat distanceXToArcCenter = 80*cos(M_PI_2*4/9);
-CGFloat distanceYToArcCenter = 80*sin(M_PI_2*4/9);
-CAShapeLayer *leftArmLayer = [CAShapeLayer layer];
-UIBezierPath *leftArmPath = [UIBezierPath bezierPath];
-[leftArmPath moveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter, arcCenterY+distanceYToArcCenter)];
-[leftArmPath addLineToPoint:CGPointMake(arcCenterX-95, arcCenterY+90)];
-[leftArmPath addQuadCurveToPoint:CGPointMake(arcCenterX-75, arcCenterY+110) controlPoint:CGPointMake(arcCenterX-92, arcCenterY+107)];
-[leftArmPath addLineToPoint:CGPointMake(arcCenterX-distanceXToArcCenter+1.5, arcCenterY+95)];
-[self setLayer:leftArmLayer path:leftArmPath delay:delay*17];
+<span class="sr">//</span><span class="err">胡子</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">addBeardFromPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">58</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span> <span class="n">toPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">10</span><span class="p">)</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">10</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">addBeardFromPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">68</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">15</span><span class="p">)</span> <span class="n">toPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">20</span><span class="p">)</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">11</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">addBeardFromPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">61</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">45</span><span class="p">)</span> <span class="n">toPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">15</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">30</span><span class="p">)</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">12</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">addBeardFromPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">58</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">5</span><span class="p">)</span> <span class="n">toPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">15</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">10</span><span class="p">)</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">13</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">addBeardFromPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">68</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">15</span><span class="p">)</span> <span class="n">toPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">15</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">20</span><span class="p">)</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">14</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">addBeardFromPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">61</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">45</span><span class="p">)</span> <span class="n">toPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">15</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">30</span><span class="p">)</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">15</span><span class="p">];</span>
+<span class="sr">//</span><span class="err">左手</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">leftHandLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">leftHandPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPathWithArcCenter</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">95</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">110</span><span class="p">)</span> <span class="n">radius</span><span class="p">:</span><span class="mi">20</span> <span class="n">startAngle</span><span class="p">:</span><span class="mi">0</span> <span class="n">endAngle</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="no">M_PI</span> <span class="n">clockwise</span><span class="ss">:YES</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:leftHandLayer</span> <span class="n">path</span><span class="ss">:leftHandPath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">16</span><span class="p">];</span>
+<span class="sr">//</span><span class="err">左胳膊</span>
+<span class="no">CGFloat</span> <span class="n">distanceXToArcCenter</span> <span class="o">=</span> <span class="mi">80</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="no">M_PI_2</span><span class="o">*</span><span class="mi">4</span><span class="o">/</span><span class="mi">9</span><span class="p">);</span>
+<span class="no">CGFloat</span> <span class="n">distanceYToArcCenter</span> <span class="o">=</span> <span class="mi">80</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="no">M_PI_2</span><span class="o">*</span><span class="mi">4</span><span class="o">/</span><span class="mi">9</span><span class="p">);</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">leftArmLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">leftArmPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPath</span><span class="p">];</span>
+<span class="p">[</span><span class="n">leftArmPath</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="n">distanceXToArcCenter</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="n">distanceYToArcCenter</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">leftArmPath</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">95</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">90</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">leftArmPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">75</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">110</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">92</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">107</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">leftArmPath</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="n">distanceXToArcCenter</span><span class="o">+</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">95</span><span class="p">)];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:leftArmLayer</span> <span class="n">path</span><span class="ss">:leftArmPath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">17</span><span class="p">];</span>
 
-//围巾
-CAShapeLayer *mufflerLayer = [CAShapeLayer layer];
-UIBezierPath *mufflerPath = [UIBezierPath bezierPath];
-[mufflerPath moveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter, arcCenterY+distanceYToArcCenter)];
-[mufflerPath addQuadCurveToPoint:CGPointMake(arcCenterX+distanceXToArcCenter, arcCenterY+distanceYToArcCenter) controlPoint:CGPointMake(arcCenterX, arcCenterY+109)];
-[mufflerPath addLineToPoint:CGPointMake(arcCenterX+distanceXToArcCenter+2, arcCenterY+distanceYToArcCenter+7)];
-[mufflerPath addQuadCurveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter-4, arcCenterY+distanceYToArcCenter+5) controlPoint:CGPointMake(arcCenterX, arcCenterY+115)];
-[mufflerPath addLineToPoint:CGPointMake(arcCenterX-distanceXToArcCenter, arcCenterY+distanceYToArcCenter)];
-[self setLayer:mufflerLayer path:mufflerPath delay:delay*18];
-//身体
-CAShapeLayer *bodyLayer = [CAShapeLayer layer];
-UIBezierPath *bodyPath = [UIBezierPath bezierPath];
-[bodyPath moveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter, arcCenterY+distanceYToArcCenter+7)];
-[bodyPath addQuadCurveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter+5, arcCenterY+150) controlPoint:CGPointMake(arcCenterX-distanceXToArcCenter+2, arcCenterY+140)];
-[bodyPath addQuadCurveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter+3, arcCenterY+170) controlPoint:CGPointMake(arcCenterX-distanceXToArcCenter, arcCenterY+160)];
-[bodyPath addQuadCurveToPoint:CGPointMake(arcCenterX-8, arcCenterY+170) controlPoint:CGPointMake(arcCenterX-(distanceXToArcCenter+5)/2, arcCenterY+175)];
-[bodyPath addQuadCurveToPoint:CGPointMake(arcCenterX+8, arcCenterY+170) controlPoint:CGPointMake(arcCenterX, arcCenterY+155)];
-[bodyPath addQuadCurveToPoint:CGPointMake(arcCenterX+distanceXToArcCenter-3, arcCenterY+170) controlPoint:CGPointMake(arcCenterX+(distanceXToArcCenter+5)/2, arcCenterY+175)];
-[bodyPath addQuadCurveToPoint:CGPointMake(arcCenterX+distanceXToArcCenter-5, arcCenterY+150) controlPoint:CGPointMake(arcCenterX+distanceXToArcCenter-2, arcCenterY+160)];
-[bodyPath addQuadCurveToPoint:CGPointMake(arcCenterX+distanceXToArcCenter, arcCenterY+distanceYToArcCenter+8) controlPoint:CGPointMake(arcCenterX+distanceXToArcCenter-2, arcCenterY+140)];
-[bodyPath addQuadCurveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter, arcCenterY+distanceYToArcCenter+7) controlPoint:CGPointMake(arcCenterX, arcCenterY+115)];
-[self setLayer:bodyLayer path:bodyPath delay:delay*19];
-//左脚
-CAShapeLayer *leftFootLayer = [CAShapeLayer layer];
-UIBezierPath *leftFootPath = [UIBezierPath bezierPath];
-[leftFootPath moveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter+3, arcCenterY+170)];
-[leftFootPath addQuadCurveToPoint:CGPointMake(arcCenterX-distanceXToArcCenter+3, arcCenterY+195) controlPoint:CGPointMake(arcCenterX-distanceXToArcCenter-20, arcCenterY+185)];
-[leftFootPath addQuadCurveToPoint:CGPointMake(arcCenterX-13, arcCenterY+195) controlPoint:CGPointMake(arcCenterX-(distanceXToArcCenter+10)/2, arcCenterY+200)];
-[leftFootPath addQuadCurveToPoint:CGPointMake(arcCenterX-10, arcCenterY+170) controlPoint:CGPointMake(arcCenterX+8, arcCenterY+187)];
-[self setLayer:leftFootLayer path:leftFootPath delay:delay*20];
-//右脚
-CAShapeLayer *rightFootLayer = [CAShapeLayer layer];
-UIBezierPath *rightFootPath = [UIBezierPath bezierPath];
-[rightFootPath moveToPoint:CGPointMake(arcCenterX+10, arcCenterY+170)];
-[rightFootPath addQuadCurveToPoint:CGPointMake(arcCenterX+15, arcCenterY+195) controlPoint:CGPointMake(arcCenterX-12, arcCenterY+185)];
-[rightFootPath addQuadCurveToPoint:CGPointMake(arcCenterX+distanceXToArcCenter-5, arcCenterY+195) controlPoint:CGPointMake(arcCenterX+(distanceXToArcCenter+20)/2, arcCenterY+200)];
-[rightFootPath addQuadCurveToPoint:CGPointMake(arcCenterX+distanceXToArcCenter-3, arcCenterY+170) controlPoint:CGPointMake(arcCenterX+distanceXToArcCenter+18, arcCenterY+185)];
-[self setLayer:rightFootLayer path:rightFootPath delay:delay*21];
-//肚子
-CAShapeLayer *bellyLayer = [CAShapeLayer layer];
-UIBezierPath *bellyPath = [UIBezierPath bezierPath];
-[bellyPath moveToPoint:CGPointMake(arcCenterX-30, arcCenterY+80)];
-[bellyPath addCurveToPoint:CGPointMake(arcCenterX-30, arcCenterY+150) controlPoint1:CGPointMake(arcCenterX-65, arcCenterY+95) controlPoint2:CGPointMake(arcCenterX-60, arcCenterY+140)];
-[bellyPath addQuadCurveToPoint:CGPointMake(arcCenterX+30, arcCenterY+150) controlPoint:CGPointMake(arcCenterX, arcCenterY+160)];
-[bellyPath addCurveToPoint:CGPointMake(arcCenterX+30, arcCenterY+80) controlPoint1:CGPointMake(arcCenterX+60, arcCenterY+140) controlPoint2:CGPointMake(arcCenterX+65, arcCenterY+95)];
-[bellyPath addQuadCurveToPoint:CGPointMake(arcCenterX-30, arcCenterY+80) controlPoint:CGPointMake(arcCenterX, arcCenterY+92)];
-[self setLayer:bellyLayer path:bellyPath delay:delay*22];
-//铃铛
-CAShapeLayer *bellLayer = [CAShapeLayer layer];
-UIBezierPath *bellPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(arcCenterX, arcCenterY+97) radius:15 startAngle:0 endAngle:2*M_PI clockwise:YES];
-[self setLayer:bellLayer path:bellPath delay:delay*23];
-//铃铛上的线
-CAShapeLayer *bellLineLayer = [CAShapeLayer layer];
-UIBezierPath *BellLinePath = [UIBezierPath bezierPath];
-[BellLinePath moveToPoint:CGPointMake(arcCenterX-(sqrt(pow(15.0, 2)-pow(5.0, 2))), arcCenterY+92)];
-[BellLinePath addLineToPoint:CGPointMake(arcCenterX+(sqrt(pow(15.0, 2)-pow(5.0, 2))), arcCenterY+92)];
-[BellLinePath moveToPoint:CGPointMake(arcCenterX+(sqrt(pow(15.0, 2)-pow(2.0, 2))), arcCenterY+95)];
-[BellLinePath addLineToPoint:CGPointMake(arcCenterX-(sqrt(pow(15.0, 2)-pow(2.0, 2))), arcCenterY+95)];
-[self setLayer:bellLineLayer path:BellLinePath delay:delay*24];
-//铃铛上的小圆点
-CAShapeLayer *bellCirLayer = [CAShapeLayer layer];
-UIBezierPath *bellCirPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(arcCenterX, arcCenterY+102) radius:2.5 startAngle:0 endAngle:2*M_PI clockwise:YES];
-[bellCirPath moveToPoint:CGPointMake(arcCenterX, arcCenterY+104.5)];
-[bellCirPath addLineToPoint:CGPointMake(arcCenterX, arcCenterY+112)];
-[self setLayer:bellCirLayer path:bellCirPath delay:delay*25];
-//口袋
-CAShapeLayer *bagLayer = [CAShapeLayer layer];
-UIBezierPath *bagPath = [UIBezierPath bezierPath];
-[bagPath moveToPoint:CGPointMake(arcCenterX-40, arcCenterY+112)];
-[bagPath addQuadCurveToPoint:CGPointMake(arcCenterX+40, arcCenterY+112) controlPoint:CGPointMake(arcCenterX, arcCenterY+120)];
-[bagPath addCurveToPoint:CGPointMake(arcCenterX-40, arcCenterY+112) controlPoint1:CGPointMake(arcCenterX+28, arcCenterY+160) controlPoint2:CGPointMake(arcCenterX-28, arcCenterY+160)];
-[self setLayer:bagLayer path:bagPath delay:delay*26];
-//右手
-CAShapeLayer *rightHandLayer = [CAShapeLayer layer];
-UIBezierPath *rightHandPath = [UIBezierPath bezierPathWithArcCenter:CGPointMake(arcCenterX+85*cos(27/180.0*M_PI), arcCenterY-85*sin(27/180.0*M_PI)) radius:20 startAngle:0 endAngle:2*M_PI clockwise:YES];
-[self setLayer:rightHandLayer path:rightHandPath delay:delay*27];
-//右胳膊
-CAShapeLayer *rightArmLayer = [CAShapeLayer layer];
-UIBezierPath *rightArmPath = [UIBezierPath bezierPath];
-[rightArmPath moveToPoint:CGPointMake(arcCenterX+80*cos(13/180.0*M_PI), arcCenterY-80*sin(13/180.0*M_PI))];
-[rightArmPath addQuadCurveToPoint:CGPointMake(arcCenterX+distanceXToArcCenter, arcCenterY+distanceYToArcCenter) controlPoint:CGPointMake(arcCenterX+80*cos(13/180.0*M_PI)+9, arcCenterY+20)];
-[rightArmPath addLineToPoint:CGPointMake(arcCenterX+distanceXToArcCenter, arcCenterY+distanceYToArcCenter+25)];
-[rightArmPath addQuadCurveToPoint:CGPointMake(arcCenterX+93*cos(15/180.0*M_PI), arcCenterY-93*sin(15/180.0*M_PI)) controlPoint:CGPointMake(arcCenterX+90*cos(13/180.0*M_PI)+15, arcCenterY+25)];
-[rightArmPath addQuadCurveToPoint:CGPointMake(arcCenterX+80*cos(13/180.0*M_PI), arcCenterY-80*sin(13/180.0*M_PI)) controlPoint:CGPointMake(arcCenterX+80*cos(13/180.0*M_PI)+5, arcCenterY-93*sin(15/180.0*M_PI)+5)];
-[self setLayer:rightArmLayer path:rightArmPath delay:delay*28];
+<span class="sr">//</span><span class="err">围巾</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">mufflerLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">mufflerPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPath</span><span class="p">];</span>
+<span class="p">[</span><span class="n">mufflerPath</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="n">distanceXToArcCenter</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="n">distanceYToArcCenter</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">mufflerPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="n">distanceXToArcCenter</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="n">distanceYToArcCenter</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">109</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">mufflerPath</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="n">distanceXToArcCenter</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="n">distanceYToArcCenter</span><span class="o">+</span><span class="mi">7</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">mufflerPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="n">distanceXToArcCenter</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="n">distanceYToArcCenter</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">115</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">mufflerPath</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="n">distanceXToArcCenter</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="n">distanceYToArcCenter</span><span class="p">)];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:mufflerLayer</span> <span class="n">path</span><span class="ss">:mufflerPath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">18</span><span class="p">];</span>
+<span class="sr">//</span><span class="err">身体</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">bodyLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">bodyPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPath</span><span class="p">];</span>
+<span class="p">[</span><span class="n">bodyPath</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="n">distanceXToArcCenter</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="n">distanceYToArcCenter</span><span class="o">+</span><span class="mi">7</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">bodyPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="n">distanceXToArcCenter</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">150</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="n">distanceXToArcCenter</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">140</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">bodyPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="n">distanceXToArcCenter</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">170</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="n">distanceXToArcCenter</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">160</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">bodyPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">170</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="p">(</span><span class="n">distanceXToArcCenter</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">175</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">bodyPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">170</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">155</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">bodyPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="n">distanceXToArcCenter</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">170</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="p">(</span><span class="n">distanceXToArcCenter</span><span class="o">+</span><span class="mi">5</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">175</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">bodyPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="n">distanceXToArcCenter</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">150</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="n">distanceXToArcCenter</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">160</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">bodyPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="n">distanceXToArcCenter</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="n">distanceYToArcCenter</span><span class="o">+</span><span class="mi">8</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="n">distanceXToArcCenter</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">140</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">bodyPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="n">distanceXToArcCenter</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="n">distanceYToArcCenter</span><span class="o">+</span><span class="mi">7</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">115</span><span class="p">)];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:bodyLayer</span> <span class="n">path</span><span class="ss">:bodyPath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">19</span><span class="p">];</span>
+<span class="sr">//</span><span class="err">左脚</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">leftFootLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">leftFootPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPath</span><span class="p">];</span>
+<span class="p">[</span><span class="n">leftFootPath</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="n">distanceXToArcCenter</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">170</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">leftFootPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="n">distanceXToArcCenter</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">195</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="n">distanceXToArcCenter</span><span class="o">-</span><span class="mi">20</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">185</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">leftFootPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">13</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">195</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="p">(</span><span class="n">distanceXToArcCenter</span><span class="o">+</span><span class="mi">10</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">200</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">leftFootPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">170</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">8</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">187</span><span class="p">)];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:leftFootLayer</span> <span class="n">path</span><span class="ss">:leftFootPath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">20</span><span class="p">];</span>
+<span class="sr">//</span><span class="err">右脚</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">rightFootLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">rightFootPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPath</span><span class="p">];</span>
+<span class="p">[</span><span class="n">rightFootPath</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">10</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">170</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">rightFootPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">15</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">195</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">12</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">185</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">rightFootPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="n">distanceXToArcCenter</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">195</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="p">(</span><span class="n">distanceXToArcCenter</span><span class="o">+</span><span class="mi">20</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">200</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">rightFootPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="n">distanceXToArcCenter</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">170</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="n">distanceXToArcCenter</span><span class="o">+</span><span class="mi">18</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">185</span><span class="p">)];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:rightFootLayer</span> <span class="n">path</span><span class="ss">:rightFootPath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">21</span><span class="p">];</span>
+<span class="sr">//</span><span class="err">肚子</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">bellyLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">bellyPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPath</span><span class="p">];</span>
+<span class="p">[</span><span class="n">bellyPath</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">80</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">bellyPath</span> <span class="n">addCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">150</span><span class="p">)</span> <span class="n">controlPoint1</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">65</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">95</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">60</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">140</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">bellyPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">30</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">150</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">160</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">bellyPath</span> <span class="n">addCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">30</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">80</span><span class="p">)</span> <span class="n">controlPoint1</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">60</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">140</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">65</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">95</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">bellyPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">30</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">80</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">92</span><span class="p">)];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:bellyLayer</span> <span class="n">path</span><span class="ss">:bellyPath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">22</span><span class="p">];</span>
+<span class="sr">//</span><span class="err">铃铛</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">bellLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">bellPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPathWithArcCenter</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">97</span><span class="p">)</span> <span class="n">radius</span><span class="p">:</span><span class="mi">15</span> <span class="n">startAngle</span><span class="p">:</span><span class="mi">0</span> <span class="n">endAngle</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="no">M_PI</span> <span class="n">clockwise</span><span class="ss">:YES</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:bellLayer</span> <span class="n">path</span><span class="ss">:bellPath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">23</span><span class="p">];</span>
+<span class="sr">//</span><span class="err">铃铛上的线</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">bellLineLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="no">BellLinePath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPath</span><span class="p">];</span>
+<span class="p">[</span><span class="no">BellLinePath</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pow</span><span class="p">(</span><span class="mf">15.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="n">pow</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))),</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">92</span><span class="p">)];</span>
+<span class="p">[</span><span class="no">BellLinePath</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pow</span><span class="p">(</span><span class="mf">15.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="n">pow</span><span class="p">(</span><span class="mf">5.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))),</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">92</span><span class="p">)];</span>
+<span class="p">[</span><span class="no">BellLinePath</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pow</span><span class="p">(</span><span class="mf">15.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="n">pow</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))),</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">95</span><span class="p">)];</span>
+<span class="p">[</span><span class="no">BellLinePath</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="n">pow</span><span class="p">(</span><span class="mf">15.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="n">pow</span><span class="p">(</span><span class="mf">2.0</span><span class="p">,</span> <span class="mi">2</span><span class="p">))),</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">95</span><span class="p">)];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:bellLineLayer</span> <span class="n">path</span><span class="ss">:BellLinePath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">24</span><span class="p">];</span>
+<span class="sr">//</span><span class="err">铃铛上的小圆点</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">bellCirLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">bellCirPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPathWithArcCenter</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">102</span><span class="p">)</span> <span class="n">radius</span><span class="p">:</span><span class="mf">2.5</span> <span class="n">startAngle</span><span class="p">:</span><span class="mi">0</span> <span class="n">endAngle</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="no">M_PI</span> <span class="n">clockwise</span><span class="ss">:YES</span><span class="p">];</span>
+<span class="p">[</span><span class="n">bellCirPath</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mf">104.5</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">bellCirPath</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">112</span><span class="p">)];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:bellCirLayer</span> <span class="n">path</span><span class="ss">:bellCirPath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">25</span><span class="p">];</span>
+<span class="sr">//</span><span class="err">口袋</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">bagLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">bagPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPath</span><span class="p">];</span>
+<span class="p">[</span><span class="n">bagPath</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">112</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">bagPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">40</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">112</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">120</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">bagPath</span> <span class="n">addCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">40</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">112</span><span class="p">)</span> <span class="n">controlPoint1</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">28</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">160</span><span class="p">)</span> <span class="n">controlPoint2</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">-</span><span class="mi">28</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">160</span><span class="p">)];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:bagLayer</span> <span class="n">path</span><span class="ss">:bagPath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">26</span><span class="p">];</span>
+<span class="sr">//</span><span class="err">右手</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">rightHandLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">rightHandPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPathWithArcCenter</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">85</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="mi">27</span><span class="o">/</span><span class="mf">180.0</span><span class="o">*</span><span class="no">M_PI</span><span class="p">),</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">85</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="mi">27</span><span class="o">/</span><span class="mf">180.0</span><span class="o">*</span><span class="no">M_PI</span><span class="p">))</span> <span class="n">radius</span><span class="p">:</span><span class="mi">20</span> <span class="n">startAngle</span><span class="p">:</span><span class="mi">0</span> <span class="n">endAngle</span><span class="p">:</span><span class="mi">2</span><span class="o">*</span><span class="no">M_PI</span> <span class="n">clockwise</span><span class="ss">:YES</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:rightHandLayer</span> <span class="n">path</span><span class="ss">:rightHandPath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">27</span><span class="p">];</span>
+<span class="sr">//</span><span class="err">右胳膊</span>
+<span class="no">CAShapeLayer</span> <span class="o">*</span><span class="n">rightArmLayer</span> <span class="o">=</span> <span class="p">[</span><span class="no">CAShapeLayer</span> <span class="n">layer</span><span class="p">];</span>
+<span class="no">UIBezierPath</span> <span class="o">*</span><span class="n">rightArmPath</span> <span class="o">=</span> <span class="p">[</span><span class="no">UIBezierPath</span> <span class="n">bezierPath</span><span class="p">];</span>
+<span class="p">[</span><span class="n">rightArmPath</span> <span class="n">moveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">80</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="mi">13</span><span class="o">/</span><span class="mf">180.0</span><span class="o">*</span><span class="no">M_PI</span><span class="p">),</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">80</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="mi">13</span><span class="o">/</span><span class="mf">180.0</span><span class="o">*</span><span class="no">M_PI</span><span class="p">))];</span>
+<span class="p">[</span><span class="n">rightArmPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="n">distanceXToArcCenter</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="n">distanceYToArcCenter</span><span class="p">)</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">80</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="mi">13</span><span class="o">/</span><span class="mf">180.0</span><span class="o">*</span><span class="no">M_PI</span><span class="p">)</span><span class="o">+</span><span class="mi">9</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">20</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">rightArmPath</span> <span class="n">addLineToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="n">distanceXToArcCenter</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="n">distanceYToArcCenter</span><span class="o">+</span><span class="mi">25</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">rightArmPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">93</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="mi">15</span><span class="o">/</span><span class="mf">180.0</span><span class="o">*</span><span class="no">M_PI</span><span class="p">),</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">93</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="mi">15</span><span class="o">/</span><span class="mf">180.0</span><span class="o">*</span><span class="no">M_PI</span><span class="p">))</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">90</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="mi">13</span><span class="o">/</span><span class="mf">180.0</span><span class="o">*</span><span class="no">M_PI</span><span class="p">)</span><span class="o">+</span><span class="mi">15</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">+</span><span class="mi">25</span><span class="p">)];</span>
+<span class="p">[</span><span class="n">rightArmPath</span> <span class="n">addQuadCurveToPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">80</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="mi">13</span><span class="o">/</span><span class="mf">180.0</span><span class="o">*</span><span class="no">M_PI</span><span class="p">),</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">80</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="mi">13</span><span class="o">/</span><span class="mf">180.0</span><span class="o">*</span><span class="no">M_PI</span><span class="p">))</span> <span class="n">controlPoint</span><span class="ss">:CGPointMake</span><span class="p">(</span><span class="n">arcCenterX</span><span class="o">+</span><span class="mi">80</span><span class="o">*</span><span class="n">cos</span><span class="p">(</span><span class="mi">13</span><span class="o">/</span><span class="mf">180.0</span><span class="o">*</span><span class="no">M_PI</span><span class="p">)</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="n">arcCenterY</span><span class="o">-</span><span class="mi">93</span><span class="o">*</span><span class="n">sin</span><span class="p">(</span><span class="mi">15</span><span class="o">/</span><span class="mf">180.0</span><span class="o">*</span><span class="no">M_PI</span><span class="p">)</span><span class="o">+</span><span class="mi">5</span><span class="p">)];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayer</span><span class="ss">:rightArmLayer</span> <span class="n">path</span><span class="ss">:rightArmPath</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">28</span><span class="p">];</span>
 
-//上色
-[self setLayerColor:faceLayer color:[UIColor whiteColor] delay:delay*16];
-[self setLayerColor:leftEyeLayer color:[UIColor whiteColor] delay:delay*29];
-[self setLayerColor:rightEyeLayer color:[UIColor whiteColor] delay:delay*29];
-[self setLayerColor:leftEyeBallLayer color:[UIColor blackColor] delay:delay*29];
-[self setLayerColor:rightEyeBallLayer color:[UIColor blackColor] delay:delay*29];
-[self setLayerColor:noseLayer color:[UIColor redColor] delay:delay*29];
-[self setLayerColor:noseHaloLayer color:[UIColor whiteColor] delay:delay*29];
-[self setLayerColor:headLayer color:[UIColor colorWithRed:21/255.0 green:159/255.0 blue:237/255.0 alpha:1] delay:delay*29];
-[self setLayerColor:leftArmLayer color:[UIColor colorWithRed:21/255.0 green:159/255.0 blue:237/255.0 alpha:1] delay:delay*29];
-[self setLayerColor:leftHandLayer color:[UIColor whiteColor] delay:delay*29];
-[self setLayerColor:mufflerLayer color:[UIColor redColor] delay:delay*29];
-[self setLayerColor:bellyLayer color:[UIColor whiteColor] delay:delay*29];
-[self setLayerColor:bellLayer color:[UIColor yellowColor] delay:delay*29];
-[self setLayerColor:bodyLayer color:[UIColor colorWithRed:21/255.0 green:159/255.0 blue:237/255.0 alpha:1] delay:delay*29];
-[self setLayerColor:rightHandLayer color:[UIColor whiteColor] delay:delay*29];
-[self setLayerColor:rightArmLayer color:[UIColor colorWithRed:21/255.0 green:159/255.0 blue:237/255.0 alpha:1] delay:delay*29];
+<span class="sr">//</span><span class="err">上色</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayerColor</span><span class="ss">:faceLayer</span> <span class="n">color</span><span class="p">:[</span><span class="no">UIColor</span> <span class="n">whiteColor</span><span class="p">]</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">16</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayerColor</span><span class="ss">:leftEyeLayer</span> <span class="n">color</span><span class="p">:[</span><span class="no">UIColor</span> <span class="n">whiteColor</span><span class="p">]</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">29</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayerColor</span><span class="ss">:rightEyeLayer</span> <span class="n">color</span><span class="p">:[</span><span class="no">UIColor</span> <span class="n">whiteColor</span><span class="p">]</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">29</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayerColor</span><span class="ss">:leftEyeBallLayer</span> <span class="n">color</span><span class="p">:[</span><span class="no">UIColor</span> <span class="n">blackColor</span><span class="p">]</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">29</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayerColor</span><span class="ss">:rightEyeBallLayer</span> <span class="n">color</span><span class="p">:[</span><span class="no">UIColor</span> <span class="n">blackColor</span><span class="p">]</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">29</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayerColor</span><span class="ss">:noseLayer</span> <span class="n">color</span><span class="p">:[</span><span class="no">UIColor</span> <span class="n">redColor</span><span class="p">]</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">29</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayerColor</span><span class="ss">:noseHaloLayer</span> <span class="n">color</span><span class="p">:[</span><span class="no">UIColor</span> <span class="n">whiteColor</span><span class="p">]</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">29</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayerColor</span><span class="ss">:headLayer</span> <span class="n">color</span><span class="p">:[</span><span class="no">UIColor</span> <span class="n">colorWithRed</span><span class="p">:</span><span class="mi">21</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">green</span><span class="p">:</span><span class="mi">159</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">blue</span><span class="p">:</span><span class="mi">237</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">alpha</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">29</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayerColor</span><span class="ss">:leftArmLayer</span> <span class="n">color</span><span class="p">:[</span><span class="no">UIColor</span> <span class="n">colorWithRed</span><span class="p">:</span><span class="mi">21</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">green</span><span class="p">:</span><span class="mi">159</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">blue</span><span class="p">:</span><span class="mi">237</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">alpha</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">29</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayerColor</span><span class="ss">:leftHandLayer</span> <span class="n">color</span><span class="p">:[</span><span class="no">UIColor</span> <span class="n">whiteColor</span><span class="p">]</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">29</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayerColor</span><span class="ss">:mufflerLayer</span> <span class="n">color</span><span class="p">:[</span><span class="no">UIColor</span> <span class="n">redColor</span><span class="p">]</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">29</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayerColor</span><span class="ss">:bellyLayer</span> <span class="n">color</span><span class="p">:[</span><span class="no">UIColor</span> <span class="n">whiteColor</span><span class="p">]</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">29</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayerColor</span><span class="ss">:bellLayer</span> <span class="n">color</span><span class="p">:[</span><span class="no">UIColor</span> <span class="n">yellowColor</span><span class="p">]</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">29</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayerColor</span><span class="ss">:bodyLayer</span> <span class="n">color</span><span class="p">:[</span><span class="no">UIColor</span> <span class="n">colorWithRed</span><span class="p">:</span><span class="mi">21</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">green</span><span class="p">:</span><span class="mi">159</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">blue</span><span class="p">:</span><span class="mi">237</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">alpha</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">29</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayerColor</span><span class="ss">:rightHandLayer</span> <span class="n">color</span><span class="p">:[</span><span class="no">UIColor</span> <span class="n">whiteColor</span><span class="p">]</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">29</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">setLayerColor</span><span class="ss">:rightArmLayer</span> <span class="n">color</span><span class="p">:[</span><span class="no">UIColor</span> <span class="n">colorWithRed</span><span class="p">:</span><span class="mi">21</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">green</span><span class="p">:</span><span class="mi">159</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">blue</span><span class="p">:</span><span class="mi">237</span><span class="o">/</span><span class="mf">255.0</span> <span class="n">alpha</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span> <span class="n">delay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">29</span><span class="p">];</span>
 
-[self performSelector:@selector(showHello) withObject:nil afterDelay:delay*29];
+<span class="p">[</span><span class="nb">self</span> <span class="n">performSelector</span><span class="ss">:@selector</span><span class="p">(</span><span class="n">showHello</span><span class="p">)</span> <span class="n">withObject</span><span class="ss">:nil</span> <span class="n">afterDelay</span><span class="ss">:delay</span><span class="o">*</span><span class="mi">29</span><span class="p">];</span>
 
-</code></pre>
-</div>
+</code></pre></div></div>
 
         </article>
         <hr>
@@ -644,6 +641,34 @@ UIBezierPath *rightArmPath = [UIBezierPath bezierPath];
                     
                         
                         <li class="relatedPost">
+                            <a href="/2017/11/17/%E5%B7%A5%E5%85%B7/">开发工具
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
                             <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
                             
                             </a>
@@ -714,15 +739,6 @@ UIBezierPath *rightArmPath = [UIBezierPath bezierPath];
             
                 
                     
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
                 
                     
                 
@@ -763,9 +779,6 @@ UIBezierPath *rightArmPath = [UIBezierPath bezierPath];
                 
                     
                 
-            
-        
-            
             
         
         

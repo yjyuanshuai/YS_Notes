@@ -9,14 +9,17 @@
     <title>iOS 文件系统</title>
     <meta name="description" content="iOS 沙盒结构和目录，文件读写。">
 
+    <!-- 高亮 -->
+    <link href="/css/rouge.css" rel="stylesheet"/>
+
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <!-- 菜单前的图标，需要下面这句 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2017/07/24/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/07/24/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
 
 
     <script>
@@ -237,9 +240,8 @@
 <h2 id="沙盒目录获取">沙盒目录获取</h2>
 
 <h3 id="根目录">根目录</h3>
-<div class="highlighter-rouge"><pre class="highlight"><code>  NSHomeDirectory();
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  NSHomeDirectory();
+</code></pre></div></div>
 
 <h3 id="documents">Documents</h3>
 
@@ -251,23 +253,22 @@
   <p>如：游戏存档</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>- (NSString *)dirDoc{
-      // [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span> <span class="p">(</span><span class="no">NSString</span> <span class="o">*</span><span class="p">)</span><span class="n">dirDoc</span><span class="p">{</span>
+      <span class="sr">//</span> <span class="p">[</span><span class="no">NSHomeDirectory</span><span class="p">()</span> <span class="n">stringByAppendingPathComponent</span><span class="p">:</span><span class="err">@</span><span class="s2">"Documents"</span><span class="p">];</span>
 
-      // NSDocumentDirectory: 表明我们正在查找 Documents 目录的路径
-      // NSUserDomainMask: 表示将搜索限制在引用程序的沙盒内
-      // YES: iOS中主目录的全写形式是/User/userName，这个参数填YES就表示全写，填NO就是写成‘‘~’’，我们一般填YES。
-      NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+      <span class="sr">//</span> <span class="no">NSDocumentDirectory</span><span class="p">:</span> <span class="err">表明我们正在查找</span> <span class="no">Documents</span> <span class="err">目录的路径</span>
+      <span class="sr">//</span> <span class="no">NSUserDomainMask</span><span class="p">:</span> <span class="err">表示将搜索限制在引用程序的沙盒内</span>
+      <span class="sr">//</span> <span class="no">YES</span><span class="p">:</span> <span class="n">iOS</span><span class="err">中主目录的全写形式是</span><span class="o">/</span><span class="no">User</span><span class="o">/</span><span class="n">userName</span><span class="err">，这个参数填</span><span class="no">YES</span><span class="err">就表示全写，填</span><span class="no">NO</span><span class="err">就是写成‘‘</span><span class="o">~</span><span class="err">’’，我们一般填</span><span class="no">YES</span><span class="err">。</span>
+      <span class="no">NSArray</span> <span class="o">*</span><span class="n">paths</span> <span class="o">=</span> <span class="no">NSSearchPathForDirectoriesInDomains</span><span class="p">(</span><span class="no">NSDocumentDirectory</span><span class="p">,</span> <span class="no">NSUserDomainMask</span><span class="p">,</span> <span class="no">YES</span><span class="p">);</span>
 
-      // 每个应用只有一份 Documents 目录，因此只需取数组首位
-      NSString *documentsDirectory = [paths objectAtIndex:0];
-      NSLog(@"app_home_doc: %@",documentsDirectory);
-      return documentsDirectory;
+      <span class="sr">//</span> <span class="err">每个应用只有一份</span> <span class="no">Documents</span> <span class="err">目录，因此只需取数组首位</span>
+      <span class="no">NSString</span> <span class="o">*</span><span class="n">documentsDirectory</span> <span class="o">=</span> <span class="p">[</span><span class="n">paths</span> <span class="n">objectAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">];</span>
+      <span class="no">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s2">"app_home_doc: %@"</span><span class="p">,</span><span class="n">documentsDirectory</span><span class="p">);</span>
+      <span class="k">return</span> <span class="n">documentsDirectory</span><span class="p">;</span>
 
-      // stringByAppendingPathComponent + 文件名
-}
-</code></pre>
-</div>
+      <span class="sr">//</span> <span class="n">stringByAppendingPathComponent</span> <span class="o">+</span> <span class="err">文件名</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h3 id="library">Library</h3>
 
@@ -275,15 +276,14 @@
   <p>体积大但相对不重要的数据。</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>-(void)dirLib{
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span><span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">dirLib</span><span class="p">{</span>
 
-    //[NSHomeDirectory() stringByAppendingPathComponent:@"Library"];
-    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
-    NSString *libraryDirectory = [paths objectAtIndex:0];
-    NSLog(@"app_home_lib: %@",libraryDirectory);
-}
-</code></pre>
-</div>
+    <span class="sr">//</span><span class="p">[</span><span class="no">NSHomeDirectory</span><span class="p">()</span> <span class="n">stringByAppendingPathComponent</span><span class="p">:</span><span class="err">@</span><span class="s2">"Library"</span><span class="p">];</span>
+    <span class="no">NSArray</span> <span class="o">*</span><span class="n">paths</span> <span class="o">=</span> <span class="no">NSSearchPathForDirectoriesInDomains</span><span class="p">(</span><span class="no">NSLibraryDirectory</span><span class="p">,</span> <span class="no">NSUserDomainMask</span><span class="p">,</span> <span class="no">YES</span><span class="p">);</span>
+    <span class="no">NSString</span> <span class="o">*</span><span class="n">libraryDirectory</span> <span class="o">=</span> <span class="p">[</span><span class="n">paths</span> <span class="n">objectAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">];</span>
+    <span class="no">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s2">"app_home_lib: %@"</span><span class="p">,</span><span class="n">libraryDirectory</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h4 id="cache">Cache</h4>
 
@@ -291,13 +291,12 @@
   <p>程序运行时需要持久化存储的数据，iTunes__不会__备份。</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>  -(void)dirCache{
-    NSArray *cacPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
-    NSString *cachePath = [cacPath objectAtIndex:0];
-    NSLog(@"app_home_lib_cache: %@",cachePath);
-}
-</code></pre>
-</div>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="o">-</span><span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">dirCache</span><span class="p">{</span>
+    <span class="no">NSArray</span> <span class="o">*</span><span class="n">cacPath</span> <span class="o">=</span> <span class="no">NSSearchPathForDirectoriesInDomains</span><span class="p">(</span><span class="no">NSCachesDirectory</span><span class="p">,</span> <span class="no">NSUserDomainMask</span><span class="p">,</span> <span class="no">YES</span><span class="p">);</span>
+    <span class="no">NSString</span> <span class="o">*</span><span class="n">cachePath</span> <span class="o">=</span> <span class="p">[</span><span class="n">cacPath</span> <span class="n">objectAtIndex</span><span class="p">:</span><span class="mi">0</span><span class="p">];</span>
+    <span class="no">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s2">"app_home_lib_cache: %@"</span><span class="p">,</span><span class="n">cachePath</span><span class="p">);</span>
+<span class="p">}</span>
+</code></pre></div></div>
 
 <h4 id="preferences">Preferences</h4>
 
@@ -313,14 +312,13 @@
   <p>临时数据。不备份</p>
 </blockquote>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>-(void)dirTmp{
-    //[NSHomeDirectory() stringByAppendingPathComponent:@"tmp"];
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="o">-</span><span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">dirTmp</span><span class="p">{</span>
+    <span class="sr">//</span><span class="p">[</span><span class="no">NSHomeDirectory</span><span class="p">()</span> <span class="n">stringByAppendingPathComponent</span><span class="p">:</span><span class="err">@</span><span class="s2">"tmp"</span><span class="p">];</span>
 
-    NSString *tmpDirectory = NSTemporaryDirectory();
-    NSLog(@"app_home_tmp: %@",tmpDirectory);
-}  
-</code></pre>
-</div>
+    <span class="no">NSString</span> <span class="o">*</span><span class="n">tmpDirectory</span> <span class="o">=</span> <span class="no">NSTemporaryDirectory</span><span class="p">();</span>
+    <span class="no">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s2">"app_home_tmp: %@"</span><span class="p">,</span><span class="n">tmpDirectory</span><span class="p">);</span>
+<span class="p">}</span>  
+</code></pre></div></div>
 
 <h2 id="文件操作">文件操作</h2>
 
@@ -428,6 +426,30 @@
                     
                         
                         <li class="relatedPost">
+                            <a href="/2017/11/17/%E5%B7%A5%E5%85%B7/">开发工具
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
                             <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
                             
                             </a>
@@ -486,15 +508,6 @@
             
                 
                     
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
                 
                     
                 
@@ -525,9 +538,6 @@
                 
                     
                 
-            
-        
-            
             
         
         

@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Git push到多个仓库</title>
-    <meta name="description" content="同一份代码关联 2 个远程仓库，终端或SourceTree实现自动同时 push 到多个仓库，或者手动选择推送指定仓库。">
+    <title>开发工具</title>
+    <meta name="description" content="收集一些开发过程中用到的工具，包含iOS、Java等。">
 
     <!-- 高亮 -->
     <link href="/css/rouge.css" rel="stylesheet"/>
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2015/07/21/Git%E5%90%8C%E6%97%B6push%E5%88%B0%E5%A4%9A%E4%B8%AA%E8%BF%9C%E7%A8%8B%E4%BB%93%E5%BA%93/">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/11/17/%E5%B7%A5%E5%85%B7/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
 
 
@@ -161,11 +161,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Git push到多个仓库</h1>
+        <h1>开发工具</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2015-07-21
+                <i class="fa fa-calendar"></i>2017-11-17
             </div>
 
             <div class="label-card">
@@ -185,7 +185,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Git" title="Category: Git" rel="category">Git</a>
+        <a href="/category/#工具" title="Category: 工具" rel="category">工具</a>&nbsp;
+    
+        <a href="/category/#其他" title="Category: 其他" rel="category">其他</a>
     
   
 
@@ -202,8 +204,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Git" title="Tag: Git" rel="tag">Git</a-->
-        <a href="/tag/#Git" title="Tag: Git" rel="tag">Git</a>
+        <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
+        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
+    
+        <!--a href="/tag/#%E5%B7%A5%E5%85%B7" title="Tag: 工具" rel="tag">工具</a-->
+        <a href="/tag/#工具" title="Tag: 工具" rel="tag">工具</a>
     
   
 
@@ -215,122 +220,63 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#需求" id="markdown-toc-需求">需求</a></li>
-  <li><a href="#实现" id="markdown-toc-实现">实现</a>    <ul>
-      <li><a href="#在-github-和-coding-上分别建仓库" id="markdown-toc-在-github-和-coding-上分别建仓库">在 github 和 coding 上分别建仓库</a></li>
-      <li><a href="#关联远程仓库修改配置文件" id="markdown-toc-关联远程仓库修改配置文件">关联远程仓库，修改配置文件</a>        <ul>
-          <li><a href="#terminal-实现" id="markdown-toc-terminal-实现">terminal 实现</a></li>
-          <li><a href="#直接打开配置文件修改" id="markdown-toc-直接打开配置文件修改">直接打开配置文件修改</a></li>
-        </ul>
-      </li>
-      <li><a href="#pullpush-测试" id="markdown-toc-pullpush-测试">pull/push 测试</a>        <ul>
-          <li><a href="#terminal" id="markdown-toc-terminal">terminal</a></li>
-          <li><a href="#sourcetree" id="markdown-toc-sourcetree">SourceTree</a></li>
-        </ul>
-      </li>
+  <li><a href="#ios" id="markdown-toc-ios">iOS</a>    <ul>
+      <li><a href="#图片" id="markdown-toc-图片">图片</a></li>
     </ul>
   </li>
-  <li><a href="#拓展" id="markdown-toc-拓展">拓展</a></li>
-  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接：</a></li>
+  <li><a href="#其他" id="markdown-toc-其他">其他</a></li>
 </ul>
 
-<h2 id="需求">需求</h2>
+<h2 id="ios">iOS</h2>
+<h3 id="图片">图片</h3>
 
-<ul>
-  <li>同一份代码存在 2 个不同的远程仓库；</li>
-  <li>一次 push，同时推送到 2 个仓库；</li>
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">软件名</th>
+      <th style="text-align: left">作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">iOSImagesExtractor</td>
+      <td style="text-align: left">获取 App 中的图片</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Instruments-Time Profiler</td>
+      <td style="text-align: left">性能分析</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Instruments-Zombies</td>
+      <td style="text-align: left">检查是否访问了僵尸对象，但是这个工具只能从上往下检查，不智能。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Instruments-Allocations</td>
+      <td style="text-align: left">用来检查内存，写算法的那批人也用这个来检查。</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Instruments-Leaks</td>
+      <td style="text-align: left">检查内存，看是否有内存泄露。</td>
+    </tr>
+  </tbody>
+</table>
 
-<p>Github 有时访问速度过慢，为了及时的获取或推送到远程仓库，我希望将同一份代码同时存到 2 个不同的远程仓库，比如一个是 Github，一个是 coding，这样在一个仓库不给力的时候，可以及时用另一个仓库。</p>
+<h2 id="其他">其他</h2>
 
-<h2 id="实现">实现</h2>
-
-<p>通过配置 <code class="highlighter-rouge">.git/config</code>文件，可以实现我的需求。</p>
-
-<p>配置完后，基本的信息如下：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[core]
-	repositoryformatversion = 0
-	filemode = true
-	bare = false
-	logallrefupdates = true
-	ignorecase = true
-	precomposeunicode = true
-[remote "remote名"]
-	url = 仓库一地址
-	url = 仓库二地址
-	fetch = +refs/heads/*:refs/remotes/remote名/*
-[branch "master"]
-	remote = remote名
-	merge = refs/heads/master
-</code></pre></div></div>
-
-<h3 id="在-github-和-coding-上分别建仓库">在 github 和 coding 上分别建仓库</h3>
-
-<p>以下简称 git@github_repo1，和 git@coding_repo2。</p>
-
-<h3 id="关联远程仓库修改配置文件">关联远程仓库，修改配置文件</h3>
-
-<h4 id="terminal-实现">terminal 实现</h4>
-<p>打开 terminal，进入项目目录下。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add remote名(自定义，如：guroad、origin等) git@github_repo1
-
-git remote set-url --add remote名(与上面的保持一致) git@coding_repo2
-</code></pre></div></div>
-
-<blockquote>
-  <p>注：上面 2 个 remote 名可以不同，这里保持相同，是为了实现<code class="highlighter-rouge">一次推送到 2 个仓库</code>。remote 名不同时，需分开推送。</p>
-</blockquote>
-
-<h4 id="直接打开配置文件修改">直接打开配置文件修改</h4>
-
-<h3 id="pullpush-测试">pull/push 测试</h3>
-
-<h4 id="terminal">terminal</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull guroad master
-
-git push guroad --all
-</code></pre></div></div>
-
-<p>若<code class="highlighter-rouge">remote 名</code>是 origin，可省略，即：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull
-
-git push (--all)
-</code></pre></div></div>
-
-<h4 id="sourcetree">SourceTree</h4>
-
-<p>配置文件设置好后，正常推送即可。</p>
-
-<h2 id="拓展">拓展</h2>
-
-<p>一份代码关联 2 个远程仓库，每次只推送到一个指定远程仓库。修改文件内容 <code class="highlighter-rouge">.git/config</code>如下：</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>[core]
-    repositoryformatversion = 0
-    filemode = false
-    bare = false
-    logallrefupdates = true
-    symlinks = false
-    ignorecase = true
-    hideDotFiles = dotGitOnly
-[remote "origin"]
-    url = https://git.oschina.net/shuguang/cmsdev.git
-    fetch = +refs/heads/*:refs/remotes/origin/*
-[remote "coding"]
-    url = https://git.coding.net/bagesoft/cmsdev.git
-    fetch = +refs/heads/*:refs/remotes/origin/*
-[branch "master"]
-    remote = origin
-    merge = refs/heads/master
-</code></pre></div></div>
-
-<hr />
-<h2 id="相关链接">相关链接：</h2>
-
-<p><a href="https://segmentfault.com/q/1010000008366409">git push到多个远程仓库</a></p>
-
-<p><a href="https://blog.digua.co/post/76/sourcetree-simultaneously-submits-multiple-remote-repositories">SourceTree push 到多个远程仓库</a></p>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">软件名</th>
+      <th style="text-align: left">作用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Kaleidoscope（万花筒）</td>
+      <td style="text-align: left">比较代码变动</td>
+    </tr>
+  </tbody>
+</table>
 
         </article>
         <hr>
@@ -342,11 +288,6 @@ git push (--all)
                 
                     
                 
-            
-        
-            
-            
-                
                     
                 
             
@@ -355,19 +296,18 @@ git push (--all)
             
                 
                     
-                
-            
-                
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/01/08/SDK/">SDK
+                            
+                            </a>
+                        </li>
+                        
+                        
                     
-                
-            
-        
-            
-            
-                
-                    
-                
-            
                 
                     
                 
@@ -377,34 +317,21 @@ git push (--all)
             
                 
                     
-                
-            
-                
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/01/04/%E7%BB%84%E4%BB%B6%E5%8C%96/">组件化
+                            
+                            </a>
+                        </li>
+                        
+                        
                     
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
                 
                     
                 
             
                 
                     
-                
-            
                 
                     
                 
@@ -415,11 +342,119 @@ git push (--all)
                 
                     
                 
+                    
+                
             
                 
                     
                 
+                    
+                
             
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/20/iOS-11+iPhone-X-%E9%80%82%E9%85%8D/">iOS开发之适配
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/">iOS WWDC更新总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
                 
                     
                 
@@ -430,7 +465,17 @@ git push (--all)
                 
                     
                 
+                    
+                
             
+                
+                    
+                
+                    
+                
+            
+                
+                    
                 
                     
                 
@@ -441,28 +486,24 @@ git push (--all)
                 
                     
                 
-            
-                
-                    
-                
-            
-                
                     
                 
             
         
+        
+            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2015/07/15/Git%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4(%E8%BF%9B%E9%98%B6%E4%BD%BF%E7%94%A8)/">Git终端命令(进阶使用)</a></p>
+        <p><strong>上一篇</strong> <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2015/07/21/Git-Submodule/">Git Submodule</a></p>
+        <p><strong>下一篇</strong> <a href="/2017/11/20/iOS-11+iPhone-X-%E9%80%82%E9%85%8D/">iOS开发之适配</a></p>
         
     </div>
 </div>
@@ -486,6 +527,8 @@ git push (--all)
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
                     
                     <li><a href="#comments">Comments</a></li>
                 </ul>

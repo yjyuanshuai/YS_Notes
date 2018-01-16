@@ -9,14 +9,17 @@
     <title>github+jekyll搭建个人博客</title>
     <meta name="description" content="记录个人博客搭建过程">
 
+    <!-- 高亮 -->
+    <link href="/css/rouge.css" rel="stylesheet"/>
+
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <!-- 菜单前的图标，需要下面这句 -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2015/06/24/github+jekyll%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2015/06/24/github+jekyll%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
 
 
     <script>
@@ -349,7 +352,7 @@
 <p>过程同阶段一，区别是将手动过程用 makefile 文件代替了。在本地<code class="highlighter-rouge">YS_Notes</code>仓库下执行 <code class="highlighter-rouge">make makefile</code>命令。</p>
 
 <p>makefile 内容：</p>
-<div class="highlighter-rouge"><pre class="highlight"><code>deploy:
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>deploy:
 	git checkout master
 	jekyll build
 	git add -A
@@ -365,8 +368,7 @@
 	echo "deploy succeed"
 	git push origin master
 	echo "push master"
-</code></pre>
-</div>
+</code></pre></div></div>
 
 <h3 id="阶段三分开管理">阶段三，分开管理</h3>
 
@@ -502,12 +504,6 @@
                     
                 
             
-                
-                    
-                
-                    
-                
-            
         
             
             
@@ -544,6 +540,27 @@
                     
                 
             
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
         
             
             
@@ -564,9 +581,6 @@
                 
                     
                 
-            
-        
-            
             
         
         
