@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2016/03/02/Runloop/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2016/03/02/Runloop/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -59,7 +59,7 @@
 
 </head>
 
-
+ 
   <body>
 
     <header id="top">
@@ -200,7 +200,10 @@
   
     
         <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
-        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>
+        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
+    
+        <!--a href="/tag/#RunLoop" title="Tag: RunLoop" rel="tag">RunLoop</a-->
+        <a href="/tag/#RunLoop" title="Tag: RunLoop" rel="tag">RunLoop</a>
     
   
 
@@ -244,7 +247,7 @@
 
 <p>苹果不允许直接创建 RunLoop，它只提供了两个自动获取的函数：CFRunLoopGetMain() 和 CFRunLoopGetCurrent()。 这两个函数内部的逻辑大概是下面这样:</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/// 全局的Dictionary，key 是 pthread_t， value 是 CFRunLoopRef
+<div class="highlighter-rouge"><pre class="highlight"><code>/// 全局的Dictionary，key 是 pthread_t， value 是 CFRunLoopRef
 static CFMutableDictionaryRef loopsDic;
 /// 访问 loopsDic 时的锁
 static CFSpinLock_t loopsLock;
@@ -282,7 +285,8 @@ CFRunLoopRef CFRunLoopGetMain() {
 CFRunLoopRef CFRunLoopGetCurrent() {
     return _CFRunLoopGet(pthread_self());
 }
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="runloop-api">RunLoop API</h2>
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_02_20160302/B00_001_02_20160302_01.png" alt="" /></p>
@@ -299,20 +303,22 @@ CFRunLoopRef CFRunLoopGetCurrent() {
 
 <p>CFRunLoopRef 的大致结构：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struct __CFRunLoop {
+<div class="highlighter-rouge"><pre class="highlight"><code>struct __CFRunLoop {
     CFMutableSetRef _ commonModes;     // Set
     CFMutableSetRef _ commonModeItems; // Set&lt;Source/Observer/Timer&gt;
     CFRunLoopModeRef _ currentMode;    // Current Runloop Mode
     CFMutableSetRef _ modes;           // Set
     ...
 };
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>CFRunLoop 对外暴露的管理 mode 接口（只有 2 个）：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CFRunLoopAddCommonMode(CFRunLoopRef runloop, CFStringRef modeName);
+<div class="highlighter-rouge"><pre class="highlight"><code>CFRunLoopAddCommonMode(CFRunLoopRef runloop, CFStringRef modeName);
 CFRunLoopRunInMode(CFStringRef modeName, ...);
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>只能通过 mode name 来操作内部的 mode，当你传入一个新的 mode name 但 RunLoop 内部没有对应 mode 时，RunLoop会自动帮你创建对应的 CFRunLoopModeRef。对于一个 RunLoop 来说，其内部的 mode 只能增加不能删除。</p>
 
@@ -324,7 +330,7 @@ CFRunLoopRunInMode(CFStringRef modeName, ...);
 
 <p>CFRunLoopModeRef 的大致结构：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>struct __CFRunLoopMode {
+<div class="highlighter-rouge"><pre class="highlight"><code>struct __CFRunLoopMode {
     CFStringRef _ name;            // Mode Name, 例如 @"kCFRunLoopDefaultMode"
     CFMutableSetRef _ sources0;    // Set
     CFMutableSetRef _ sources1;    // Set
@@ -332,20 +338,22 @@ CFRunLoopRunInMode(CFStringRef modeName, ...);
     CFMutableArrayRef _ timers;    // Array
     ...
 };
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>CFRunLoopModeRef 类并没有对外暴露，只是通过 CFRunLoopRef 的接口进行了封装。</p>
 
 <p>mode 暴露的管理 mode item  的接口：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>CFRunLoopAddSource(CFRunLoopRef rl, CFRunLoopSourceRef source, CFStringRef modeName);
+<div class="highlighter-rouge"><pre class="highlight"><code>CFRunLoopAddSource(CFRunLoopRef rl, CFRunLoopSourceRef source, CFStringRef modeName);
 CFRunLoopAddObserver(CFRunLoopRef rl, CFRunLoopObserverRef observer, CFStringRef modeName);
 CFRunLoopAddTimer(CFRunLoopRef rl, CFRunLoopTimerRef timer, CFStringRef mode);
 CFRunLoopRemoveSource(CFRunLoopRef rl, CFRunLoopSourceRef source, CFStringRef modeName);
 CFRunLoopRemoveObserver(CFRunLoopRef rl, CFRunLoopObserverRef observer, CFStringRef modeName);
 CFRunLoopRemoveTimer(CFRunLoopRef rl, CFRunLoopTimerRef timer, CFStringRef mode);
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="cfrunloopsourceref">CFRunLoopSourceRef</h3>
 
@@ -381,7 +389,7 @@ CFRunLoopRemoveTimer(CFRunLoopRef rl, CFRunLoopTimerRef timer, CFStringRef mode)
 
 <p>每个 Observer 都包含了一个回调（函数指针），当 RunLoop 的状态发生变化时，观察者就能通过回调接受到这个变化。可以观测的时间点有以下几个：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>typedef CF_OPTIONS(CFOptionFlags, CFRunLoopActivity) {
+<div class="highlighter-rouge"><pre class="highlight"><code>typedef CF_OPTIONS(CFOptionFlags, CFRunLoopActivity) {
     kCFRunLoopEntry         = (1UL &lt;&lt; 0), // 即将进入Loop
     kCFRunLoopBeforeTimers  = (1UL &lt;&lt; 1), // 即将处理 Timer
     kCFRunLoopBeforeSources = (1UL &lt;&lt; 2), // 即将处理 Source
@@ -389,13 +397,14 @@ CFRunLoopRemoveTimer(CFRunLoopRef rl, CFRunLoopTimerRef timer, CFStringRef mode)
     kCFRunLoopAfterWaiting  = (1UL &lt;&lt; 6), // 刚从休眠中唤醒
     kCFRunLoopExit          = (1UL &lt;&lt; 7), // 即将退出Loop
 };
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="runloop-内部逻辑">RunLoop 内部逻辑</h2>
 
 <p><img src="https://blog.ibireme.com/wp-content/uploads/2015/05/RunLoop_1.png" alt="" /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/// 用DefaultMode启动
+<div class="highlighter-rouge"><pre class="highlight"><code>/// 用DefaultMode启动
 void CFRunLoopRun(void) {
     CFRunLoopRunSpecific(CFRunLoopGetCurrent(), kCFRunLoopDefaultMode, 1.0e10, false);
 }
@@ -505,7 +514,8 @@ int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
     /// 10. 通知 Observers: RunLoop 即将退出。
     __CFRunLoopDoObservers(rl, currentMode, kCFRunLoopExit);
 }
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <hr />
 <h2 id="相关链接">相关链接</h2>
@@ -528,6 +538,8 @@ int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
                 
                     
                 
+                    
+                
             
         
             
@@ -547,6 +559,8 @@ int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
                         
                     
                 
+                    
+                
             
         
             
@@ -563,7 +577,11 @@ int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
                         
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -574,7 +592,11 @@ int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
                 
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -594,7 +616,11 @@ int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
                         
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -614,11 +640,17 @@ int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
                         
                     
                 
+                    
+                
             
                 
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -638,11 +670,17 @@ int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
                         
                     
                 
+                    
+                
             
                 
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -662,7 +700,11 @@ int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
                         
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -673,7 +715,17 @@ int CFRunLoopRunSpecific(runloop, modeName, seconds, stopAfterHandle) {
                 
                     
                 
+                    
+                
             
+                
+                    
+                
+                    
+                
+            
+                
+                    
                 
                     
                 

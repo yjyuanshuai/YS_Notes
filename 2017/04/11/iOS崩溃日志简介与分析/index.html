@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/04/11/iOS%E5%B4%A9%E6%BA%83%E6%97%A5%E5%BF%97%E7%AE%80%E4%BB%8B%E4%B8%8E%E5%88%86%E6%9E%90/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2017/04/11/iOS%E5%B4%A9%E6%BA%83%E6%97%A5%E5%BF%97%E7%AE%80%E4%BB%8B%E4%B8%8E%E5%88%86%E6%9E%90/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -59,7 +59,7 @@
 
 </head>
 
-
+ 
   <body>
 
     <header id="top">
@@ -470,11 +470,13 @@
 
 <h5 id="2symbolicatecrash-脚本符号化">2）symbolicatecrash 脚本符号化</h5>
 <p>现在打开终端(Terminal)然后输入如下的命令：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
+</code></pre>
+</div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/PrivateFrameworks/DTDeviceKitBase.framework/Versions/A/Resources/symbolicatecrash appName.crash appName.app &gt; appName.log
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>/Applications/Xcode.app/Contents/Developer/Platforms/iPhoneOS.platform/Developer/Library/PrivateFrameworks/DTDeviceKitBase.framework/Versions/A/Resources/symbolicatecrash appName.crash appName.app &gt; appName.log
+</code></pre>
+</div>
 
 <p>现在，符号化的crash log就保存在appName.log中了。</p>
 
@@ -837,6 +839,14 @@
             
         
             
+            
+                
+                    
+                
+                    
+                
+                    
+                
             
                 
                     

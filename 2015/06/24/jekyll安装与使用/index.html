@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2015/06/24/jekyll%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2015/06/24/jekyll%E5%AE%89%E8%A3%85%E4%B8%8E%E4%BD%BF%E7%94%A8/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -59,7 +59,7 @@
 
 </head>
 
-
+ 
   <body>
 
     <header id="top">
@@ -237,73 +237,85 @@
   <p>安装之前，查看 ruby 和 gem 版本，更新至最高版本</p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
+<div class="highlighter-rouge"><pre class="highlight"><code>
 // 10.11 前
 sudo gem install jekyll
 
 // 10.11 及以后
 sudo gem install -n /usr/local/bin jekyll
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="基本用法">基本用法</h2>
 <h3 id="1build">1、build</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll build
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll build
 
 // 当前文件夹中的内容将会生成到 ./site 文件夹中。
-</code></pre></div></div>
+</code></pre>
+</div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll build --destination &lt;destination&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll build --destination &lt;destination&gt;
 
 // 当前文件夹中的内容将会生成到目标文件夹&lt;destination&gt;中。
-</code></pre></div></div>
+</code></pre>
+</div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll build --source &lt;source&gt; --destination &lt;destination&gt;
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll build --source &lt;source&gt; --destination &lt;destination&gt;
 
 // 指定源文件夹&lt;source&gt;中的内容将会生成到目标文件夹&lt;destination&gt;中。
-</code></pre></div></div>
+</code></pre>
+</div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll build --watch
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll build --watch
 // 当前文件夹中的内容将会生成到 ./site 文件夹中，查看改变，并且自动再生成。
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="2使用开发服务器预览">2、使用开发服务器，预览</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll serve  //(--source &lt;source&gt; --destination &lt;destination&gt;)
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll serve  //(--source &lt;source&gt; --destination &lt;destination&gt;)
+</code></pre>
+</div>
 <p>本地浏览器访问 <code class="highlighter-rouge">http://localhost:4000</code> 或 <code class="highlighter-rouge">127.0.0.1:4000</code>，是否正常访问</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll serve --detach
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll serve --detach
 
 # =&gt; 功能和`jekyll serve`命令相同，但是会脱离终端在后台运行。
 #    如果你想关闭服务器，可以使用`kill -9 1234`命令，"1234" 是进程号（PID）。
 #    如果你找不到进程号，那么就用`ps aux | grep jekyll`命令来查看，然后关闭服务器。[更多](http://unixhelp.ed.ac.uk/shell/jobz5.html).
-</code></pre></div></div>
+</code></pre>
+</div>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>jekyll serve --watch
+<div class="highlighter-rouge"><pre class="highlight"><code>jekyll serve --watch
 
 # =&gt; 和`jekyll serve`相同，但是会查看变更并且自动再生成。
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="问题">问题</h2>
 <h3 id="1-安装时">1. 安装时</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ERROR:  Error installing jekyll:
+<div class="highlighter-rouge"><pre class="highlight"><code>ERROR:  Error installing jekyll:
     ERROR: Failed to build gem native extension.
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>安装 Command Line Tools</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>xcode-select --install
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>xcode-select --install
+</code></pre>
+</div>
 
 <h3 id="2-使用中">2. 使用中</h3>
 <p><code class="highlighter-rouge">jekyll serve</code></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Dependency Error: Yikes! It looks like you don't have XXX or one of its dependencies installed.
+<div class="highlighter-rouge"><pre class="highlight"><code>Dependency Error: Yikes! It looks like you don't have XXX or one of its dependencies installed.
 
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>类似这种错误，安装对应的 XXX 即可。如 jekyll-paginate，bundler等。</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo gem install -n /usr/local/bin bundler
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>sudo gem install -n /usr/local/bin bundler
+</code></pre>
+</div>
 
 <h2 id="目录结构">目录结构</h2>
 
@@ -482,6 +494,10 @@ sudo gem install -n /usr/local/bin jekyll
             
         
             
+            
+                
+                    
+                
             
                 
                     

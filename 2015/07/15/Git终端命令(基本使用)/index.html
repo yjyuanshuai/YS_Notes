@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2015/07/15/Git%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4(%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8)/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2015/07/15/Git%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4(%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8)/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -59,7 +59,7 @@
 
 </head>
 
-
+ 
   <body>
 
     <header id="top">
@@ -247,106 +247,124 @@
 <h2 id="基本使用">基本使用</h2>
 <h3 id="仓库">仓库</h3>
 <h4 id="1-从本地关联远端仓库">1. 从本地关联远端仓库</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git remote add origin https://github.com/username/reponame.git
+<div class="highlighter-rouge"><pre class="highlight"><code>git remote add origin https://github.com/username/reponame.git
 
 // 首次推送 master 分支所有内容
 git push -u origin master
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="2-克隆远端仓库至本地">2. 克隆远端仓库至本地</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:michaelliao/gitskills.git
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>git clone git@github.com:michaelliao/gitskills.git
+</code></pre>
+</div>
 
 <h4 id="3-建立本地分支与远程分支的联系">3. 建立本地分支与远程分支的联系</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch --set-upstream-to=origin/branch-name branch-name
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>git branch --set-upstream-to=origin/branch-name branch-name
+</code></pre>
+</div>
 
 <p>可能遇到的问题：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> “fatal: refusing to merge unrelated histories”
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code> “fatal: refusing to merge unrelated histories”
+</code></pre>
+</div>
 <p>解决：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git pull origin master --allow-unrelated-histories
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>git pull origin master --allow-unrelated-histories
+</code></pre>
+</div>
 
 <h3 id="分支">分支</h3>
 <h4 id="1-创建分支">1. 创建分支</h4>
 <p>创建并切换到分支</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout -b 新建分支名
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>git checkout -b 新建分支名
+</code></pre>
+</div>
 
 <p>相当于：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch 新建分支
+<div class="highlighter-rouge"><pre class="highlight"><code>git branch 新建分支
 git checkout 新建分支
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="2-查看分支">2. 查看分支</h4>
 
 <p>会列出所有分支，当前分支前用 * 表示</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>git branch
+</code></pre>
+</div>
 
 <h4 id="3-切换分支">3. 切换分支</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git checkout 分支名
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>git checkout 分支名
+</code></pre>
+</div>
 
 <h4 id="4-合并分支">4. 合并分支</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git merge 想要合并进当前分支的分支
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>git merge 想要合并进当前分支的分支
+</code></pre>
+</div>
 
 <h4 id="5-删除分支">5. 删除分支</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch -d 将被删除的分支
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>git branch -d 将被删除的分支
+</code></pre>
+</div>
 
 <p>强行删除一个未被合并的分支：</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch -D 将被删除的分支
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>git branch -D 将被删除的分支
+</code></pre>
+</div>
 
 <h3 id="标签">标签</h3>
 <h4 id="1-查看标签">1. 查看标签</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git tag
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>git tag
+</code></pre>
+</div>
 
 <h4 id="2-添加标签">2. 添加标签</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git tag 标签名
+<div class="highlighter-rouge"><pre class="highlight"><code>git tag 标签名
 
 git tag -a 标签名 -m "备注信息"
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="3-删除标签">3. 删除标签</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git tag -d 标签名
+<div class="highlighter-rouge"><pre class="highlight"><code>git tag -d 标签名
 
 git push origin --tags
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <blockquote>
   <p>注：我在 coding 上测试的私有仓库，上面的方法无法删除标签，要用下面的才能删除。</p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git push origin --delete tag "标签名"
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>git push origin --delete tag "标签名"
+</code></pre>
+</div>
 
 <h3 id="推送下拉">推送/下拉</h3>
 <h4 id="1-commit">1. commit</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git init    //初始化git仓库（已存在，则省略）
+<div class="highlighter-rouge"><pre class="highlight"><code>git init    //初始化git仓库（已存在，则省略）
 git add 被修改的文件（. 或 * 表示全部文件）
 git commit -m "备注的信息"
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="2-pull">2. pull</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 默认下拉对应分支
+<div class="highlighter-rouge"><pre class="highlight"><code>// 默认下拉对应分支
 git pull
 
 // 下拉
 git pull origin（remote名） 目标分支
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="3-push">3. push</h4>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 首次推送
+<div class="highlighter-rouge"><pre class="highlight"><code>// 首次推送
 git push -u origin（仓库名） master（分支名）
 
 // 推送到远程分支
@@ -354,7 +372,8 @@ git push origin（remote名） 目标分支
 
 // 默认推送到当前对应分支
 git push
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <hr />
 <h2 id="相关链接">相关链接</h2>
@@ -459,6 +478,10 @@ git push
             
         
             
+            
+                
+                    
+                
             
                 
                     

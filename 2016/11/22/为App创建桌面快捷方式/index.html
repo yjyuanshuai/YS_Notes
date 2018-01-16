@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2016/11/22/%E4%B8%BAApp%E5%88%9B%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2016/11/22/%E4%B8%BAApp%E5%88%9B%E5%BB%BA%E6%A1%8C%E9%9D%A2%E5%BF%AB%E6%8D%B7%E6%96%B9%E5%BC%8F/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -59,7 +59,7 @@
 
 </head>
 
-
+ 
   <body>
 
     <header id="top">
@@ -250,15 +250,17 @@
 <p>用于内嵌一些小的图片等内容，减少 HTTP 请求。</p>
 
 <p>URI 语法：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;img src="data:image/png;base64;iVB0..."&gt;
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;img src="data:image/png;base64;iVB0..."&gt;
+</code></pre>
+</div>
 
 <p>语法分析：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>data: 取数据协议名称，此处为 image/png
+<div class="highlighter-rouge"><pre class="highlight"><code>data: 取数据协议名称，此处为 image/png
 image/png: 数据类型名称
 base64: 数据的编码方法
 iVBOR...: 编码后的数据
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="2base64">2、Base64</h3>
 
@@ -270,7 +272,7 @@ iVBOR...: 编码后的数据
 
 <h3 id="2核心代码">2、核心代码</h3>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (IBAction)action:(id)sender
+<div class="highlighter-rouge"><pre class="highlight"><code>- (IBAction)action:(id)sender
 {
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     _httpServer = [[HTTPServer alloc] init];
@@ -299,7 +301,8 @@ iVBOR...: 编码后的数据
         DDLogError(@"Error starting HTTP Server: %@", error);
     }
 }
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="3html-文件">3、html 文件</h3>
 <blockquote>
@@ -313,18 +316,20 @@ iVBOR...: 编码后的数据
 
 <h4 id="indexhtml">index.html</h4>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"Content-Type"</span> <span class="na">content=</span><span class="s">"text/html; charset=utf-8"</span><span class="nt">&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">http-equiv=</span><span class="s">"refresh"</span> <span class="na">content=</span><span class="s">"0;URL=..."</span><span class="nt">&gt;</span>
 <span class="nt">&lt;/head&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>语法分析：</p>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;meta http-equiv="refresh" content="0;URL=..."&gt;
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>&lt;meta http-equiv="refresh" content="0;URL=..."&gt;
+</code></pre>
+</div>
 
 <p>定期刷新页面，content 后是刷新的间隔时间（秒），URL 是刷新后重定向的页面。</p>
 
@@ -332,7 +337,7 @@ iVBOR...: 编码后的数据
 
 <h4 id="contenthtml">content.html</h4>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="cp">&lt;!DOCTYPE html&gt;</span>
 <span class="nt">&lt;html&gt;</span>
 <span class="nt">&lt;head&gt;</span>
     <span class="nt">&lt;meta</span> <span class="na">name=</span><span class="s">"apple-mobile-web-app-capable"</span> <span class="na">content=</span><span class="s">"yes"</span><span class="nt">&gt;</span>
@@ -347,7 +352,7 @@ iVBOR...: 编码后的数据
     <span class="nt">&lt;span</span> <span class="na">id=</span><span class="s">"msg"</span><span class="nt">&gt;&lt;/span&gt;</span>
 <span class="nt">&lt;/body&gt;</span>
 <span class="nt">&lt;script&gt;</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nb">navigator</span><span class="p">.</span><span class="nx">standalone</span> <span class="o">==</span> <span class="kc">true</span><span class="p">)</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">navigator</span><span class="p">.</span><span class="nx">standalone</span> <span class="o">==</span> <span class="kc">true</span><span class="p">)</span>
     <span class="p">{</span>
         <span class="kd">var</span> <span class="nx">lnk</span> <span class="o">=</span> <span class="nb">document</span><span class="p">.</span><span class="nx">getElementById</span><span class="p">(</span><span class="s2">"qbt"</span><span class="p">).</span><span class="nx">click</span><span class="p">();</span>
     <span class="p">}</span>
@@ -357,20 +362,23 @@ iVBOR...: 编码后的数据
     <span class="p">}</span>
 <span class="nt">&lt;/script&gt;</span>
 <span class="nt">&lt;/html&gt;</span>
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>内容分析：</p>
 
 <p>1）link-图标</p>
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">'apple-touch-icon'</span> <span class="na">href=</span><span class="s">'data:image/jpeg;base64,...'</span><span class="nt">&gt;</span>
-</code></pre></div></div>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">'apple-touch-icon'</span> <span class="na">href=</span><span class="s">'data:image/jpeg;base64,...'</span><span class="nt">&gt;</span>
+</code></pre>
+</div>
 
 <p><code class="highlighter-rouge">...</code> 代指的是快捷方式的图标，经过 base64编码后的内容。</p>
 
 <p>2）title-标题</p>
 
-<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;title&gt;</span>YS_Test快捷方式<span class="nt">&lt;/title&gt;</span>
-</code></pre></div></div>
+<div class="language-html highlighter-rouge"><pre class="highlight"><code><span class="nt">&lt;title&gt;</span>YS_Test快捷方式<span class="nt">&lt;/title&gt;</span>
+</code></pre>
+</div>
 
 <p>桌面快捷方式的标题。</p>
 
@@ -555,6 +563,10 @@ iVBOR...: 编码后的数据
             
         
             
+            
+                
+                    
+                
             
                 
                     

@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -59,7 +59,7 @@
 
 </head>
 
-
+ 
   <body>
 
     <header id="top">
@@ -242,8 +242,9 @@
 
 <p><img src="http://ouo1r7usa.bkt.clouddn.com/B00_001_07_20171117/B00_001_01_20171117_01_01.png" alt="" /></p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span>  <span class="o">&lt;</span><span class="err">#</span><span class="n">Class</span><span class="err">#</span><span class="o">&gt;</span> <span class="o">*</span> <span class="o">&lt;</span><span class="err">#</span><span class="n">instance</span><span class="err">#</span><span class="o">&gt;</span><span class="p">;</span>
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="k">@property</span> <span class="p">(</span><span class="n">strong</span><span class="p">,</span> <span class="n">nonatomic</span><span class="p">)</span>  <span class="o">&lt;</span><span class="err">#</span><span class="n">Class</span><span class="err">#</span><span class="o">&gt;</span> <span class="o">*</span> <span class="o">&lt;</span><span class="err">#</span><span class="n">instance</span><span class="err">#</span><span class="o">&gt;</span><span class="p">;</span>
+</code></pre>
+</div>
 
 <blockquote>
   <p>注：<code class="highlighter-rouge">~/Library/Developer/Xcode/UserData/CodeSnippets</code> 文件中即为自定义的代码块。</p>
@@ -251,7 +252,7 @@
 
 <h2 id="pods">Pods</h2>
 <h3 id="导入第三方库">导入第三方库</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// 基本
+<div class="highlighter-rouge"><pre class="highlight"><code>// 基本
 pod 'AFNetworking'
 
 // 带版本
@@ -259,7 +260,8 @@ pod 'AFNetworking', '3.0.0'
 
 // 指定路径
 pod 'ShareSDK3',:git =&gt;'https://git.oschina.net/MobClub/ShareSDK-for-iOS.git'
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="写自己的pods">写自己的Pods</h3>
 <h4 id="1-共有pods库">1. 共有Pods库</h4>
@@ -455,6 +457,14 @@ pod 'ShareSDK3',:git =&gt;'https://git.oschina.net/MobClub/ShareSDK-for-iOS.git'
                         </li>
                         
                         
+                    
+                
+                    
+                
+                    
+                
+            
+                
                     
                 
                     

@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>版本控制</title>
-    <meta name="description" content="版本控制，实际工作中常用的 2 种是 git 和 SVN。">
+    <title>iOS 多线程</title>
+    <meta name="description" content="iOS开发中多线程有关类，及应用。">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
     <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2015/07/15/%E7%89%88%E6%9C%AC%E6%8E%A7%E5%88%B6/">
+    <link rel="canonical" href="http://localhost:4000/2016/03/05/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
@@ -158,11 +158,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>版本控制</h1>
+        <h1>iOS 多线程</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2015-07-15
+                <i class="fa fa-calendar"></i>2016-03-05
             </div>
 
             <div class="label-card">
@@ -182,7 +182,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#版本控制" title="Category: 版本控制" rel="category">版本控制</a>
+        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>
     
   
 
@@ -199,11 +199,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Git" title="Tag: Git" rel="tag">Git</a-->
-        <a href="/tag/#Git" title="Tag: Git" rel="tag">Git</a>&nbsp;
+        <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
+        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
     
-        <!--a href="/tag/#SVN" title="Tag: SVN" rel="tag">SVN</a-->
-        <a href="/tag/#SVN" title="Tag: SVN" rel="tag">SVN</a>
+        <!--a href="/tag/#%E5%A4%9A%E7%BA%BF%E7%A8%8B" title="Tag: 多线程" rel="tag">多线程</a-->
+        <a href="/tag/#多线程" title="Tag: 多线程" rel="tag">多线程</a>
     
   
 
@@ -215,52 +215,121 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#版本控制" id="markdown-toc-版本控制">版本控制</a></li>
-  <li><a href="#git" id="markdown-toc-git">git</a></li>
-  <li><a href="#svn" id="markdown-toc-svn">SVN</a></li>
-  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a>    <ul>
-      <li><a href="#git-1" id="markdown-toc-git-1">git</a></li>
-      <li><a href="#svn-1" id="markdown-toc-svn-1">svn</a></li>
+  <li><a href="#多线程初识" id="markdown-toc-多线程初识">多线程初识</a>    <ul>
+      <li><a href="#原理" id="markdown-toc-原理">原理</a></li>
+      <li><a href="#优缺点" id="markdown-toc-优缺点">优缺点</a>        <ul>
+          <li><a href="#优点" id="markdown-toc-优点">优点</a></li>
+          <li><a href="#缺点" id="markdown-toc-缺点">缺点</a></li>
+        </ul>
+      </li>
     </ul>
   </li>
+  <li><a href="#ios-开发中常用的多线程" id="markdown-toc-ios-开发中常用的多线程">iOS 开发中常用的多线程</a>    <ul>
+      <li><a href="#nsthread" id="markdown-toc-nsthread">NSThread</a></li>
+      <li><a href="#gcd" id="markdown-toc-gcd">GCD</a></li>
+      <li><a href="#nsoperation" id="markdown-toc-nsoperation">NSOperation</a></li>
+    </ul>
+  </li>
+  <li><a href="#其他多线程-api" id="markdown-toc-其他多线程-api">其他多线程 API</a>    <ul>
+      <li><a href="#pthread" id="markdown-toc-pthread">pthread</a></li>
+    </ul>
+  </li>
+  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
 </ul>
 
-<h2 id="版本控制">版本控制</h2>
+<h2 id="多线程初识">多线程初识</h2>
+<h3 id="原理">原理</h3>
+<p>同一时间，CPU只能处理1条线程，只有1条线程在工作（执行），多线程并发（同时）执行，其实是CPU快速地在多条线程之间调度（切换），如果CPU调度线程的时间足够快，就造成了多线程并发执行的假象。</p>
 
-<p>实际开发中，每次项目的修改内容，项目成员之间的协作记录，需要使用版本控制来管理。而常用的版本管理有 Git、SVN。</p>
+<h3 id="优缺点">优缺点</h3>
+<h4 id="优点">优点</h4>
+<ul>
+  <li>提高程序执行效率；</li>
+  <li>能适当提高资源利用率（CPU、内存利用率）；</li>
+</ul>
 
-<h2 id="git">git</h2>
+<h4 id="缺点">缺点</h4>
+<ul>
+  <li>开启线程需要占用一定的内存空间（默认情况下，主线程占用1M，子线程占用512KB），如果开启大量的线程，会占用大量的内存空间，降低程序的性能；</li>
+  <li>线程越多，CPU在调度线程上的开销就越大；</li>
+</ul>
 
-<p><img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_01_01.png" alt="" /></p>
+<h2 id="ios-开发中常用的多线程">iOS 开发中常用的多线程</h2>
 
-<h2 id="svn">SVN</h2>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">多线程 API</th>
+      <th style="text-align: left">说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">NSThread</td>
+      <td style="text-align: left">OC中直接操作线程对象，生命周期由程序员管理</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">GCD</td>
+      <td style="text-align: left">C语言实现，自动管理生命周期</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">NSOperation</td>
+      <td style="text-align: left">基于GCD，自动管理生命周期</td>
+    </tr>
+  </tbody>
+</table>
 
-<p><img src="http://ouo1r7usa.bkt.clouddn.com/D00_20150715/D00_20150715_01_02.png" alt="" /></p>
+<h3 id="nsthread">NSThread</h3>
+<ul>
+  <li>面向对象；</li>
+  <li>
+    <p>简单易用，可以直接操作线程对象。</p>
+  </li>
+  <li>语言：OC；</li>
+  <li>频率：偶尔；</li>
+  <li>线程生命周期：程序员管理。</li>
+</ul>
 
-<p>SVN是一种集中式的版本控制工具。</p>
+<h3 id="gcd">GCD</h3>
+<ul>
+  <li>
+    <p>充分利用设备的多核（自动）。</p>
+  </li>
+  <li>语言：C；</li>
+  <li>频率：经常；</li>
+  <li>生命周期：自动管理。</li>
+</ul>
 
-<p>所有的客户端将自己的代码上传到中央服务器，中央服务器的版本数据库会保存上传的各个版本的代码，并进行统一管理。这里注意，客户端本身是不存在版本数据库的，所以，如果中央服务器离线或宕机，则集中式版本控制则无法使用。</p>
+<h3 id="nsoperation">NSOperation</h3>
+<ul>
+  <li>基于GCD；</li>
+  <li>
+    <p>比GCD 多一些更简单实用的功能。</p>
+  </li>
+  <li>语言：OC；</li>
+  <li>频率：经常；</li>
+  <li>生命周期：自动管理。</li>
+</ul>
 
-<p>SVN是一个增量式的版本控制，它不会讲各个版本的副本都完整的保存下来，而只会记录下版本之间的差异，然后按照顺序更新或者恢复特定版本的数据。这使得服务端的存储量会非常低。</p>
+<h2 id="其他多线程-api">其他多线程 API</h2>
+<h3 id="pthread">pthread</h3>
+<ul>
+  <li>通用的多线程 API；</li>
+  <li>适用于 Unix / Linux / Windows 等系统；</li>
+  <li>跨平台，可移植性；</li>
+  <li>
+    <p>使用难度大。</p>
+  </li>
+  <li>语言：C ；</li>
+  <li>频率：几乎不用；</li>
+  <li>线程生命周期：程序员管理。</li>
+</ul>
 
 <hr />
+
 <h2 id="相关链接">相关链接</h2>
 
-<p><a href="http://blog.csdn.net/zssureqh/article/details/39117601">版本控制：SVN和GIT的一些使用感受</a></p>
-
-<h3 id="git-1">git</h3>
-
-<p><a href="https://git-scm.com/book/zh/v2">Pro Git 2-书籍</a></p>
-
-<p><a href="http://blog.csdn.net/safiri/article/details/45537073">git终端命令</a></p>
-
-<p><a href="http://blog.csdn.net/free_wind22/article/details/50967723">git使用详解</a></p>
-
-<p><a href="http://www.nowamagic.net/academy/detail/48160210">git简介和原理</a></p>
-
-<h3 id="svn-1">svn</h3>
-
-<p><a href="http://bjutmameng.blog.51cto.com/6519404/1743057">SVN与Git</a></p>
+<p><a href="http://mp.weixin.qq.com/s/FIBLT5CGDXF3wydQq5Q3FA">阿里面试题</a></p>
 
         </article>
         <hr>
@@ -280,20 +349,17 @@
             
                 
                     
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/01/08/SDK/">SDK
+                            
+                            </a>
+                        </li>
+                        
+                        
                     
                 
                     
@@ -304,62 +370,14 @@
             
                 
                     
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-                    
-                
-            
-                
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/01/04/%E7%BB%84%E4%BB%B6%E5%8C%96/">组件化
+                            
+                            </a>
+                        </li>
+                        
+                        
                     
                 
                     
@@ -391,6 +409,114 @@
             
                 
                     
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/20/iOS-11+iPhone-X-%E9%80%82%E9%85%8D/">iOS开发之适配
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/">iOS WWDC更新总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
                 
                     
                 
@@ -411,18 +537,20 @@
             
             
         
+        
+            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2015/06/24/github+jekyll%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">github+jekyll搭建个人博客</a></p>
+        <p><strong>上一篇</strong> <a href="/2016/03/04/Block/">Block</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2015/07/15/Git%E7%BB%88%E7%AB%AF%E5%91%BD%E4%BB%A4(%E5%9F%BA%E6%9C%AC%E4%BD%BF%E7%94%A8)/">Git终端命令(基本使用)</a></p>
+        <p><strong>下一篇</strong> <a href="/2016/04/08/FMDB%E4%BD%BF%E7%94%A8/">FMDB使用</a></p>
         
     </div>
 </div>
@@ -446,6 +574,8 @@
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
                     
                     <li><a href="#comments">Comments</a></li>
                 </ul>

@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2018/01/09/%E5%8F%82%E4%B8%8EGithub%E5%BC%80%E6%BA%90%E5%BA%93/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2018/01/09/%E5%8F%82%E4%B8%8EGithub%E5%BC%80%E6%BA%90%E5%BA%93/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -59,7 +59,7 @@
 
 </head>
 
-
+ 
   <body>
 
     <header id="top">
@@ -292,8 +292,9 @@
 
 <h4 id="clone">clone</h4>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:yjyuanshuai/DZNEmptyDataSet.git
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>git clone git@github.com:yjyuanshuai/DZNEmptyDataSet.git
+</code></pre>
+</div>
 
 <h4 id="remote-add">remote add</h4>
 
@@ -303,17 +304,19 @@
 
 <p>复制原作者的项目地址，添加为自己的一个远程仓库，用来实时将原项目的修改更新到咱们本地并合并。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// upstream 是自己写的，写成其他任何字符串皆可
+<div class="highlighter-rouge"><pre class="highlight"><code>// upstream 是自己写的，写成其他任何字符串皆可
 git remote add upstream git@github.com:dzenbot/DZNEmptyDataSet.git
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="创建-branch">创建 branch</h4>
 
 <p>这只是一个约定成俗的方式，当然你也可以在master上添加修改，创建新的branch添加自己的修改的好处是，你可以同时添加多个修改，在一个修改还没有被原作者merge时，你可以用master创建新的branch继续你的其它修改。</p>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch issue376
+<div class="highlighter-rouge"><pre class="highlight"><code>git branch issue376
 git checkout issue376
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <p>然后在这个新分支上修改代码，push 到 <code class="highlighter-rouge">yj/DZNEmptyDataSet</code>。</p>
 
@@ -423,6 +426,10 @@ GitHub —— Codecov 统计单测覆盖率 ？</p>
             
         
             
+            
+                
+                    
+                
             
                 
                     

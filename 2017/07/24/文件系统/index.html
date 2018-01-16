@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>文件系统</title>
+    <title>iOS 文件系统</title>
     <meta name="description" content="iOS 沙盒结构和目录，文件读写。">
 
     <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
@@ -15,8 +15,8 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/07/24/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
-    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
+    <link rel="canonical" href="http://localhost:4000/2017/07/24/%E6%96%87%E4%BB%B6%E7%B3%BB%E7%BB%9F/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
     <script>
@@ -59,7 +59,7 @@
 
 </head>
 
-
+ 
   <body>
 
     <header id="top">
@@ -158,7 +158,7 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>文件系统</h1>
+        <h1>iOS 文件系统</h1>
         <div class="label">
 
             <div class="label-card">
@@ -237,8 +237,9 @@
 <h2 id="沙盒目录获取">沙盒目录获取</h2>
 
 <h3 id="根目录">根目录</h3>
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  NSHomeDirectory();
-</code></pre></div></div>
+<div class="highlighter-rouge"><pre class="highlight"><code>  NSHomeDirectory();
+</code></pre>
+</div>
 
 <h3 id="documents">Documents</h3>
 
@@ -250,7 +251,7 @@
   <p>如：游戏存档</p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>- (NSString *)dirDoc{
+<div class="highlighter-rouge"><pre class="highlight"><code>- (NSString *)dirDoc{
       // [NSHomeDirectory() stringByAppendingPathComponent:@"Documents"];
 
       // NSDocumentDirectory: 表明我们正在查找 Documents 目录的路径
@@ -265,7 +266,8 @@
 
       // stringByAppendingPathComponent + 文件名
 }
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h3 id="library">Library</h3>
 
@@ -273,14 +275,15 @@
   <p>体积大但相对不重要的数据。</p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-(void)dirLib{
+<div class="highlighter-rouge"><pre class="highlight"><code>-(void)dirLib{
 
     //[NSHomeDirectory() stringByAppendingPathComponent:@"Library"];
     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSLibraryDirectory, NSUserDomainMask, YES);
     NSString *libraryDirectory = [paths objectAtIndex:0];
     NSLog(@"app_home_lib: %@",libraryDirectory);
 }
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="cache">Cache</h4>
 
@@ -288,12 +291,13 @@
   <p>程序运行时需要持久化存储的数据，iTunes__不会__备份。</p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  -(void)dirCache{
+<div class="highlighter-rouge"><pre class="highlight"><code>  -(void)dirCache{
     NSArray *cacPath = NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES);
     NSString *cachePath = [cacPath objectAtIndex:0];
     NSLog(@"app_home_lib_cache: %@",cachePath);
 }
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h4 id="preferences">Preferences</h4>
 
@@ -309,13 +313,14 @@
   <p>临时数据。不备份</p>
 </blockquote>
 
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>-(void)dirTmp{
+<div class="highlighter-rouge"><pre class="highlight"><code>-(void)dirTmp{
     //[NSHomeDirectory() stringByAppendingPathComponent:@"tmp"];
 
     NSString *tmpDirectory = NSTemporaryDirectory();
     NSLog(@"app_home_tmp: %@",tmpDirectory);
 }  
-</code></pre></div></div>
+</code></pre>
+</div>
 
 <h2 id="文件操作">文件操作</h2>
 
@@ -502,6 +507,12 @@
             
         
             
+            
+                
+                    
+                
+                    
+                
             
                 
                     
