@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>参与Github开源库</title>
-    <meta name="description" content="记录一下，参与Github开源库的大致流程。">
+    <title>iOS 常用第三方库</title>
+    <meta name="description" content="iOS 常用的第三方库。">
 
     <!-- 高亮 -->
     <link href="/css/rouge.css" rel="stylesheet"/>
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2018/01/09/%E5%8F%82%E4%B8%8EGithub%E5%BC%80%E6%BA%90%E5%BA%93/">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2016/04/08/iOS%E5%B8%B8%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
 
 
@@ -163,11 +163,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>参与Github开源库</h1>
+        <h1>iOS 常用第三方库</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2018-01-09
+                <i class="fa fa-calendar"></i>2016-04-08
             </div>
 
             <div class="label-card">
@@ -187,7 +187,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#Github" title="Category: Github" rel="category">Github</a>
+        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>
     
   
 
@@ -204,8 +204,11 @@
   <i class="fa fa-tags"></i>
   
     
-        <!--a href="/tag/#Github" title="Tag: Github" rel="tag">Github</a-->
-        <a href="/tag/#Github" title="Tag: Github" rel="tag">Github</a>
+        <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
+        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
+    
+        <!--a href="/tag/#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93" title="Tag: 第三方库" rel="tag">第三方库</a-->
+        <a href="/tag/#第三方库" title="Tag: 第三方库" rel="tag">第三方库</a>
     
   
 
@@ -217,129 +220,65 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#背景简介" id="markdown-toc-背景简介">背景简介</a></li>
-  <li><a href="#参与开源库" id="markdown-toc-参与开源库">参与开源库</a>    <ul>
-      <li><a href="#创建话题" id="markdown-toc-创建话题">创建话题</a></li>
-      <li><a href="#pull-request" id="markdown-toc-pull-request">Pull Request</a>        <ul>
-          <li><a href="#fork-仓库" id="markdown-toc-fork-仓库">fork 仓库</a></li>
-          <li><a href="#clone" id="markdown-toc-clone">clone</a></li>
-          <li><a href="#remote-add" id="markdown-toc-remote-add">remote add</a></li>
-          <li><a href="#创建-branch" id="markdown-toc-创建-branch">创建 branch</a></li>
-          <li><a href="#pull-request-1" id="markdown-toc-pull-request-1">pull request</a></li>
+  <li><a href="#oc" id="markdown-toc-oc">OC</a>    <ul>
+      <li><a href="#图片" id="markdown-toc-图片">图片</a>        <ul>
+          <li><a href="#1sdimage" id="markdown-toc-1sdimage">1、SDImage</a></li>
+        </ul>
+      </li>
+      <li><a href="#日志" id="markdown-toc-日志">日志</a>        <ul>
+          <li><a href="#1cocoalimberjack" id="markdown-toc-1cocoalimberjack">1、CocoaLimberjack</a></li>
+        </ul>
+      </li>
+      <li><a href="#网络" id="markdown-toc-网络">网络</a>        <ul>
+          <li><a href="#1afnetworking" id="markdown-toc-1afnetworking">1、AFNetWorking</a></li>
         </ul>
       </li>
     </ul>
   </li>
-  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
-  <li><a href="#拓展" id="markdown-toc-拓展">拓展</a></li>
+  <li><a href="#swfit" id="markdown-toc-swfit">Swfit</a>    <ul>
+      <li><a href="#约束" id="markdown-toc-约束">约束</a></li>
+      <li><a href="#网络-1" id="markdown-toc-网络-1">网络</a></li>
+    </ul>
+  </li>
 </ul>
 
-<h2 id="背景简介">背景简介</h2>
+<h2 id="oc">OC</h2>
+<h3 id="图片">图片</h3>
+<h4 id="1sdimage">1、SDImage</h4>
 
-<p>开发过程中常常需要使用第三方开源库，而最大的开源库平台非 Github 莫属。</p>
+<p><a href="http://blog.csdn.net/chenyong05314/article/details/45652773">SDImage有两个宏来判断程序在主线程中运行</a></p>
 
-<p><a href="https://github.com/dzenbot/DZNEmptyDataSet">DZNEmptyDataSet</a>主要是iOS开发中用于无数据时展示空白背景的第三方开源库，最近更新的 1.8.1 版本中出现一个问题，自定义背景custemView中若有Butten，没有点击效果，<a href="https://github.com/dzenbot/DZNEmptyDataSet/issues/376">问题链接</a>。切换至 1.6.1 版本没有该问题，但是会出现另一个问题，tableView 有 headerView 且 headerView 上有操作按钮时，空白背景会遮挡 headerView 导致无法点击。</p>
+<p><a href="http://www.cocoachina.com/ios/20160530/16495.html">SDImage源码</a></p>
 
-<p>这里，记录下我第一次参与开源库。</p>
+<p><a href="http://www.jianshu.com/p/76614766b2ea">SDWebImage源码分析</a></p>
 
-<h2 id="参与开源库">参与开源库</h2>
+<h3 id="日志">日志</h3>
+<h4 id="1cocoalimberjack">1、CocoaLimberjack</h4>
 
-<blockquote>
-  <p>前提：</p>
-</blockquote>
+<p><a href="https://github.com/CocoaLumberjack/CocoaLumberjack">github 源码</a></p>
 
-<blockquote>
-  <p>github 账号。</p>
-</blockquote>
+<p><a href="http://blog.csdn.net/zhonggaorong/article/details/51656169">CocoaLimberjack</a></p>
 
-<blockquote>
-  <p>基本的 github 使用，如 ssh、push、fork等。</p>
-</blockquote>
+<h3 id="网络">网络</h3>
+<h4 id="1afnetworking">1、AFNetWorking</h4>
 
-<h3 id="创建话题">创建话题</h3>
+<p><a href="http://www.cnblogs.com/machao/p/5830337.html">AFN 3.0 源码分析（上）</a></p>
 
-<p>如，发现了一个bug，可以创建一个issue 和其他人一起讨论。</p>
+<p><a href="http://www.shaoqun.com/a/214374.aspx">AFNetWorking实现分析</a></p>
 
-<p>创建 issue 注意以下几点：<a href="https://guides.github.com/features/issues/">issue guides</a></p>
+<p><a href="http://www.jianshu.com/p/11bb0d4dc649">新版，弃用Connection，使用</a></p>
 
-<ul>
-  <li>检查是否已经有这个 issue 存在，没有则创建一个，有就不要重复创建了；</li>
-  <li>务必对自己的问题有清晰的认识：期望的结果是什么？然而却发生了什么？ 详细描述其他人如何重现该问题；</li>
-  <li>包含一些系统相关的细节，比如用的什么浏览器、库或操作系统及版本号；</li>
-  <li>在你的话题或在 <a href="http://gist.github.com/">Gist</a> 里贴出你的错误输出或日志。如果在话题里贴出来，请用三个反引号包围起来使得能够良好的呈现给大家；</li>
-  <li>在像 <a href="http://jsfiddle.net/">JSFiddle</a> 或 <a href="http://codepen.io/">CodePen</a> 类似的平台上重现该问题并给出问题demo的链接。</li>
-</ul>
+<p><a href="http://www.cnblogs.com/polobymulberry/p/5081049.html">AFN源码阅读</a></p>
 
-<h3 id="pull-request">Pull Request</h3>
+<h2 id="swfit">Swfit</h2>
 
-<p>若发现一个bug，并且可以修复它。想把修改后的代码提交给原作者，为开源库做些贡献，则需要 pull request。</p>
+<p><a href="http://www.csdn.net/article/2015-01-09/2823502-swift-open-source-libs">开源项目汇总</a></p>
 
-<p>因为别人的开源库，我是没有修改权限的（除非作者把我加入到协作者，当然这是极少数大牛才有可能），所以能做的就是，把别人的开源库 fork 到自己的账号下。然后操作自己账号的的同名仓库（如：这里是 DZNEmptyDataSet ），既要保证可以随时更新这个开源库，又要保证自己修改的部分是独立的。以下以 DZNEmptyDataSet 为例：</p>
+<h3 id="约束">约束</h3>
+<p><a href="http://www.hangge.com/blog/cache/detail_1097.html">自动布局库SnapKit</a></p>
 
-<ul>
-  <li>fork  DZNEmptyDataSet (此处为了区别将我fork后的仓库记为 yj/DZNEmptyDataSet )；</li>
-  <li>clone yj/DZNEmptyDataSet 至本地；</li>
-  <li>将本地仓库关联原 DZNEmptyDataSet，将其添加为一个远程仓库；</li>
-  <li>创建新分支，用于添加自己的修改；</li>
-  <li>push 到 yj/DZNEmptyDataSet；</li>
-  <li>pull request。</li>
-</ul>
-
-<blockquote>
-  <p>注：clone、remote add 都要用 ssh，而非 http.</p>
-</blockquote>
-
-<h4 id="fork-仓库">fork 仓库</h4>
-
-<p>找到原第三方库，将其 fork 到自己账号下，成功后我自己的账户下会有一个同名的仓库（这里为了区别，将其记为 <code class="highlighter-rouge">yj/DZNEmptyDataSet</code>，实际是<code class="highlighter-rouge">DZNEmptyDataSet</code>）。</p>
-
-<p>之后对代码的修改都是 push 到<code class="highlighter-rouge">yj/DZNEmptyDataSet</code>，因为原仓库没权限。</p>
-
-<h4 id="clone">clone</h4>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git clone git@github.com:yjyuanshuai/DZNEmptyDataSet.git
-</code></pre></div></div>
-
-<h4 id="remote-add">remote add</h4>
-
-<blockquote>
-  <p>注：要在本地仓库地址下，进行下面操作。</p>
-</blockquote>
-
-<p>复制原作者的项目地址，添加为自己的一个远程仓库，用来实时将原项目的修改更新到咱们本地并合并。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>// upstream 是自己写的，写成其他任何字符串皆可
-git remote add upstream git@github.com:dzenbot/DZNEmptyDataSet.git
-</code></pre></div></div>
-
-<h4 id="创建-branch">创建 branch</h4>
-
-<p>这只是一个约定成俗的方式，当然你也可以在master上添加修改，创建新的branch添加自己的修改的好处是，你可以同时添加多个修改，在一个修改还没有被原作者merge时，你可以用master创建新的branch继续你的其它修改。</p>
-
-<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>git branch issue376
-git checkout issue376
-</code></pre></div></div>
-
-<p>然后在这个新分支上修改代码，push 到 <code class="highlighter-rouge">yj/DZNEmptyDataSet</code>。</p>
-
-<h4 id="pull-request-1">pull request</h4>
-
-<p>到我的 github 上，点击 <code class="highlighter-rouge">Compare &amp; pull request</code>，向原作者请求合并到原项目中。</p>
-
-<p>也可以选择<code class="highlighter-rouge">issue376</code>分支，点击右侧<code class="highlighter-rouge">pull request</code>。</p>
-
-<hr />
-<h2 id="相关链接">相关链接</h2>
-
-<p><a href="https://www.cnblogs.com/metoy/p/4097001.html">参与Github开源库-pull request</a></p>
-
-<p><a href="http://blog.csdn.net/lanxuezaipiao/article/details/23546349">参与Github开源库3</a></p>
-
-<hr />
-<h2 id="拓展">拓展</h2>
-
-<p>Github + Travis CI 自动持续集成 ？
-GitHub —— Codecov 统计单测覆盖率 ？</p>
+<h3 id="网络-1">网络</h3>
+<p><a href="http://www.cocoachina.com/ios/20141202/10390.html">Alamofire网络基础教程</a></p>
 
         </article>
         <hr>
@@ -351,15 +290,6 @@ GitHub —— Codecov 统计单测覆盖率 ？</p>
                 
                     
                 
-            
-        
-            
-            
-                
-                    
-                
-            
-                
                     
                 
             
@@ -368,19 +298,18 @@ GitHub —— Codecov 统计单测覆盖率 ？</p>
             
                 
                     
-                
-            
-                
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/01/08/SDK/">SDK
+                            
+                            </a>
+                        </li>
+                        
+                        
                     
-                
-            
-        
-            
-            
-                
-                    
-                
-            
                 
                     
                 
@@ -390,23 +319,21 @@ GitHub —— Codecov 统计单测覆盖率 ？</p>
             
                 
                     
-                
-            
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/01/04/%E7%BB%84%E4%BB%B6%E5%8C%96/">组件化
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
                 
                     
                 
             
-        
-            
-            
                 
                     
-                
-            
-                
-                    
-                
-            
                 
                     
                 
@@ -417,11 +344,119 @@ GitHub —— Codecov 统计单测覆盖率 ？</p>
                 
                     
                 
+                    
+                
             
                 
                     
                 
+                    
+                
             
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/20/iOS-11+iPhone-X-%E9%80%82%E9%85%8D/">iOS开发之适配
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/17/%E5%B7%A5%E5%85%B7/">开发工具
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/">iOS WWDC更新总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
                 
                     
                 
@@ -432,7 +467,11 @@ GitHub —— Codecov 统计单测覆盖率 ？</p>
                 
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -443,33 +482,36 @@ GitHub —— Codecov 统计单测覆盖率 ？</p>
                 
                     
                 
+                    
+                
             
                 
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
             
         
-            
-            
-                
-                    
-                
-            
         
+            </ul>
         
 
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2018/01/08/SDK/">SDK</a></p>
+        <p><strong>上一篇</strong> <a href="/2016/03/04/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">iOS 多线程</a></p>
         
     </div>
     <div class="nex">
 
+        
+        <p><strong>下一篇</strong> <a href="/2016/04/08/FMDB%E4%BD%BF%E7%94%A8/">FMDB使用</a></p>
         
     </div>
 </div>
@@ -493,6 +535,8 @@ GitHub —— Codecov 统计单测覆盖率 ？</p>
                     Content
                 </div>
                 <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
                     
                     <li><a href="#comments">Comments</a></li>
                 </ul>
