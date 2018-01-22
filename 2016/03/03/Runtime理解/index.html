@@ -226,6 +226,7 @@
       <li><a href="#获取列表" id="markdown-toc-获取列表">获取列表</a></li>
       <li><a href="#方法调用" id="markdown-toc-方法调用">方法调用</a></li>
       <li><a href="#拦截调用" id="markdown-toc-拦截调用">拦截调用</a></li>
+      <li><a href="#动态添加方法" id="markdown-toc-动态添加方法">动态添加方法</a></li>
     </ul>
   </li>
   <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
@@ -396,6 +397,29 @@
 如果没有重写拦截调用的方法，程序报错。</p>
 
 <h3 id="拦截调用">拦截调用</h3>
+
+<p>在方法调用中说到了，如果没有找到方法就会转向拦截调用。拦截调用就是，在找不到调用的方法程序崩溃之前，你有机会通过重写NSObject的四个方法来处理。</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sr">//</span> <span class="err">第一个方法是当你调用一个不存在的类方法的时候，会调用这个方法，默认返回</span><span class="no">NO</span><span class="err">，你可以加上自己的处理然后返回</span><span class="no">YES</span><span class="err">。</span>
+<span class="o">+</span> <span class="p">(</span><span class="no">BOOL</span><span class="p">)</span><span class="n">resolveClassMethod</span><span class="p">:(</span><span class="no">SEL</span><span class="p">)</span><span class="n">sel</span><span class="p">;</span>
+
+<span class="sr">//</span> <span class="err">第二个方法和第一个方法相似，只不过处理的是实例方法。</span>
+<span class="o">+</span> <span class="p">(</span><span class="no">BOOL</span><span class="p">)</span><span class="n">resolveInstanceMethod</span><span class="p">:(</span><span class="no">SEL</span><span class="p">)</span><span class="n">sel</span><span class="p">;</span>
+
+<span class="sr">//</span> <span class="err">后两个方法需要转发到其他的类处理</span>
+<span class="sr">//</span> <span class="err">第三个方法是将你调用的不存在的方法重定向到一个其他声明了这个方法的类，只需要你返回一个有这个方法的</span><span class="n">target</span><span class="err">。</span>
+<span class="o">-</span> <span class="p">(</span><span class="nb">id</span><span class="p">)</span><span class="n">forwardingTargetForSelector</span><span class="p">:(</span><span class="no">SEL</span><span class="p">)</span><span class="n">aSelector</span><span class="p">;</span>
+
+<span class="sr">//</span> <span class="err">第四个方法是将你调用的不存在的方法打包成</span><span class="no">NSInvocation</span><span class="err">传给你。做完你自己的处理后，调用</span><span class="n">invokeWithTarget</span><span class="p">:</span><span class="err">方法让某个</span><span class="n">target</span><span class="err">触发这个方法。</span>
+<span class="o">-</span> <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">forwardInvocation</span><span class="p">:(</span><span class="no">NSInvocation</span> <span class="o">*</span><span class="p">)</span><span class="n">anInvocation</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<h3 id="动态添加方法">动态添加方法</h3>
+<p>重写了拦截调用的方法并且返回了YES，我们要怎么处理呢？
+有一个办法是根据传进来的SEL类型的selector动态添加一个方法。</p>
+
+<p>有一个办法是根据传进来的SEL类型的selector动态添加一个方法。</p>
 
 <hr />
 <h2 id="相关链接">相关链接</h2>
