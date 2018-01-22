@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Apple Developer账号申请</title>
-    <meta name="description" content="开发者账号申请流程">
+    <title>Runtime(2)-内部实现</title>
+    <meta name="description" content="Method Swizzling 俗称为黑魔法，根据 Runtime 的原理，在实际开发过程中很有用。">
 
     <!-- 高亮 -->
     <link href="/css/rouge.css" rel="stylesheet"/>
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2015/11/07/Apple%E8%AF%81%E4%B9%A6%E4%B8%8E%E9%85%8D%E7%BD%AE/">
+    <link rel="canonical" href="http://localhost:4000/2016/03/03/Runtime%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
@@ -163,11 +163,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Apple Developer账号申请</h1>
+        <h1>Runtime(2)-内部实现</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2015-11-07
+                <i class="fa fa-calendar"></i>2016-03-03
             </div>
 
             <div class="label-card">
@@ -205,7 +205,10 @@
   
     
         <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
-        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>
+        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
+    
+        <!--a href="/tag/#Runtime" title="Tag: Runtime" rel="tag">Runtime</a-->
+        <a href="/tag/#Runtime" title="Tag: Runtime" rel="tag">Runtime</a>
     
   
 
@@ -216,18 +219,7 @@
         </div>
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
-        <ul id="markdown-toc">
-  <li><a href="#证书" id="markdown-toc-证书">证书</a></li>
-  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
-</ul>
-
-<h2 id="证书">证书</h2>
-
-<hr />
-<h2 id="相关链接">相关链接</h2>
-
-<p><a href="http://www.cocoachina.com/appstore/20160708/16990.html">http://www.cocoachina.com/appstore/20160708/16990.html</a></p>
-
+        
         </article>
         <hr>
 
@@ -235,6 +227,8 @@
         
             
             
+                
+                    
                 
                     
                 
@@ -257,6 +251,8 @@
                         
                     
                 
+                    
+                
             
         
             
@@ -273,7 +269,11 @@
                         
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -284,7 +284,11 @@
                 
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -304,7 +308,11 @@
                         
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -324,7 +332,11 @@
                         
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -344,11 +356,17 @@
                         
                     
                 
+                    
+                
             
                 
                     
                 
+                    
+                
             
+                
+                    
                 
                     
                 
@@ -368,22 +386,17 @@
                         
                     
                 
-            
-                
                     
                 
             
                 
                     
                 
-            
-        
-            
-            
-                
                     
                 
             
+                
+                    
                 
                     
                 
@@ -394,11 +407,32 @@
                 
                     
                 
+                    
+                
             
                 
                     
                 
+                    
+                
             
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
                 
                     
                 
@@ -411,13 +445,13 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2015/11/07/Apple%E5%BC%80%E5%8F%91%E8%80%85%E8%B4%A6%E5%8F%B7%E7%94%B3%E8%AF%B7/">Apple Developer账号申请</a></p>
+        <p><strong>上一篇</strong> <a href="/2016/03/03/Runtime%E7%90%86%E8%A7%A3/">Runtime(1)-简介与原理</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2016/03/01/iOS-%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86/">iOS 内存管理</a></p>
+        <p><strong>下一篇</strong> <a href="/2016/03/03/Runtime%E5%BA%94%E7%94%A8/">Runtime(3)-应用</a></p>
         
     </div>
 </div>

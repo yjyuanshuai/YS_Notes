@@ -223,12 +223,15 @@
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
   <li><a href="#编译bug汇总一" id="markdown-toc-编译bug汇总一">编译bug汇总（一）</a>    <ul>
-      <li><a href="#1linker-command-failed-with-exit-code" id="markdown-toc-1linker-command-failed-with-exit-code">1、linker command failed with exit code</a></li>
+      <li><a href="#1linker-command-failed-with-exit-code" id="markdown-toc-1linker-command-failed-with-exit-code">1、<code class="highlighter-rouge">linker command failed with exit code</code></a></li>
+      <li><a href="#2xxx-which-may-not-be-supported-by-this-version-of-xcode" id="markdown-toc-2xxx-which-may-not-be-supported-by-this-version-of-xcode">2、<code class="highlighter-rouge">xxx which may not be supported by this version of Xcode</code></a></li>
+      <li><a href="#3the-entitlements-specified-in-your-applications-code-signing-entitlements-file-do-not-match-those-specified-in-your-provisioning-profile-0xe8008016" id="markdown-toc-3the-entitlements-specified-in-your-applications-code-signing-entitlements-file-do-not-match-those-specified-in-your-provisioning-profile-0xe8008016">3、<code class="highlighter-rouge">The entitlements specified in your application’s Code Signing Entitlements file do not match those specified in your provisioning profile. (0xE8008016).</code></a></li>
+      <li><a href="#4implicit-declaration-of-function---c99" id="markdown-toc-4implicit-declaration-of-function---c99">4、<code class="highlighter-rouge">Implicit declaration of function - C99</code></a></li>
     </ul>
   </li>
 </ul>
 
-<h1 id="编译bug汇总一">编译bug汇总（一）</h1>
+<h2 id="编译bug汇总一">编译bug汇总（一）</h2>
 
 <table>
   <thead>
@@ -242,23 +245,47 @@
       <td style="text-align: left">linker command failed with exit code</td>
       <td style="text-align: left">链接出错（如：多个同名类）</td>
     </tr>
+    <tr>
+      <td style="text-align: left">xxx which may not be supported by this version of Xcode</td>
+      <td style="text-align: left">Xcode最高支持版本低于当前设备的系统版本</td>
+    </tr>
   </tbody>
 </table>
 
-<h2 id="1linker-command-failed-with-exit-code">1、linker command failed with exit code</h2>
-<p>1）描述：</p>
+<h3 id="1linker-command-failed-with-exit-code">1、<code class="highlighter-rouge">linker command failed with exit code</code></h3>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>linker command failed with exit code
-</code></pre>
-</div>
+<p>1) 原因：同时存在至少 2 个同名的类文件（如同名的.m文件），导致编译报错。</p>
 
-<p>2) 原因：</p>
+<p>2）修改：删除重复的类文件。</p>
 
-<p>同时存在至少 2 个 .m 文件，导致编译报错。</p>
+<h3 id="2xxx-which-may-not-be-supported-by-this-version-of-xcode">2、<code class="highlighter-rouge">xxx which may not be supported by this version of Xcode</code></h3>
 
-<p>3）修改：</p>
+<p><img src="http://img.blog.csdn.net/20170105222041413?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzMxNjYyNg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="" /></p>
 
-<p>删除重复的 .m</p>
+<p>1）原因：当前真机的系统版本（如：10.2）高于Xcode最高支持的系统版本（10.0）。</p>
+
+<p>2）解决：</p>
+<blockquote>
+  <p>[1] 升级 Xcode；</p>
+</blockquote>
+
+<blockquote>
+  <p>[2] 将 10.2 的 SDK 拷到 Xcode 对应路径下，即可运行 10.2 系统真机。</p>
+</blockquote>
+
+<p><a href="http://blog.csdn.net/u013316626/article/details/54100011">快速解决低版本Xcode不支持高版本iOS真机调试的问题</a></p>
+
+<h3 id="3the-entitlements-specified-in-your-applications-code-signing-entitlements-file-do-not-match-those-specified-in-your-provisioning-profile-0xe8008016">3、<code class="highlighter-rouge">The entitlements specified in your application’s Code Signing Entitlements file do not match those specified in your provisioning profile. (0xE8008016).</code></h3>
+
+<p>1）可能的原因：</p>
+
+<p>2）解决：</p>
+
+<p><a href="https://developer.apple.com/library/ios/technotes/tn2415/_index.html">苹果-Entitlement问题定位指南</a></p>
+
+<h3 id="4implicit-declaration-of-function---c99">4、<code class="highlighter-rouge">Implicit declaration of function - C99</code></h3>
+
+<p><a href="http://blog.csdn.net/wxs0124/article/details/50148873">iOS错误汇总 Implicit declaration of function - C99 完美解决</a></p>
 
 <hr />
 

@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>Method Swizzling</title>
-    <meta name="description" content="Method Swizzling 俗称为黑魔法，根据 Runtime 的原理，在实际开发过程中很有用。">
+    <title>iOS 常用第三方库</title>
+    <meta name="description" content="iOS 常用的第三方库。">
 
     <!-- 高亮 -->
     <link href="/css/rouge.css" rel="stylesheet"/>
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="http://localhost:4000/2016/03/03/Method-Swizzling/">
+    <link rel="canonical" href="http://localhost:4000/2016/04/08/iOS%E5%B8%B8%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
 
 
@@ -163,11 +163,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>Method Swizzling</h1>
+        <h1>iOS 常用第三方库</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2016-03-03
+                <i class="fa fa-calendar"></i>2016-04-08
             </div>
 
             <div class="label-card">
@@ -207,8 +207,8 @@
         <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
         <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
     
-        <!--a href="/tag/#Runtime" title="Tag: Runtime" rel="tag">Runtime</a-->
-        <a href="/tag/#Runtime" title="Tag: Runtime" rel="tag">Runtime</a>
+        <!--a href="/tag/#%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93" title="Tag: 第三方库" rel="tag">第三方库</a-->
+        <a href="/tag/#第三方库" title="Tag: 第三方库" rel="tag">第三方库</a>
     
   
 
@@ -220,14 +220,65 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#在第三方库中的使用" id="markdown-toc-在第三方库中的使用">在第三方库中的使用</a></li>
-  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
+  <li><a href="#oc" id="markdown-toc-oc">OC</a>    <ul>
+      <li><a href="#图片" id="markdown-toc-图片">图片</a>        <ul>
+          <li><a href="#1sdimage" id="markdown-toc-1sdimage">1、SDImage</a></li>
+        </ul>
+      </li>
+      <li><a href="#日志" id="markdown-toc-日志">日志</a>        <ul>
+          <li><a href="#1cocoalimberjack" id="markdown-toc-1cocoalimberjack">1、CocoaLimberjack</a></li>
+        </ul>
+      </li>
+      <li><a href="#网络" id="markdown-toc-网络">网络</a>        <ul>
+          <li><a href="#1afnetworking" id="markdown-toc-1afnetworking">1、AFNetWorking</a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#swfit" id="markdown-toc-swfit">Swfit</a>    <ul>
+      <li><a href="#约束" id="markdown-toc-约束">约束</a></li>
+      <li><a href="#网络-1" id="markdown-toc-网络-1">网络</a></li>
+    </ul>
+  </li>
 </ul>
 
-<h2 id="在第三方库中的使用">在第三方库中的使用</h2>
+<h2 id="oc">OC</h2>
+<h3 id="图片">图片</h3>
+<h4 id="1sdimage">1、SDImage</h4>
 
-<hr />
-<h2 id="相关链接">相关链接</h2>
+<p><a href="http://blog.csdn.net/chenyong05314/article/details/45652773">SDImage有两个宏来判断程序在主线程中运行</a></p>
+
+<p><a href="http://www.cocoachina.com/ios/20160530/16495.html">SDImage源码</a></p>
+
+<p><a href="http://www.jianshu.com/p/76614766b2ea">SDWebImage源码分析</a></p>
+
+<h3 id="日志">日志</h3>
+<h4 id="1cocoalimberjack">1、CocoaLimberjack</h4>
+
+<p><a href="https://github.com/CocoaLumberjack/CocoaLumberjack">github 源码</a></p>
+
+<p><a href="http://blog.csdn.net/zhonggaorong/article/details/51656169">CocoaLimberjack</a></p>
+
+<h3 id="网络">网络</h3>
+<h4 id="1afnetworking">1、AFNetWorking</h4>
+
+<p><a href="http://www.cnblogs.com/machao/p/5830337.html">AFN 3.0 源码分析（上）</a></p>
+
+<p><a href="http://www.shaoqun.com/a/214374.aspx">AFNetWorking实现分析</a></p>
+
+<p><a href="http://www.jianshu.com/p/11bb0d4dc649">新版，弃用Connection，使用</a></p>
+
+<p><a href="http://www.cnblogs.com/polobymulberry/p/5081049.html">AFN源码阅读</a></p>
+
+<h2 id="swfit">Swfit</h2>
+
+<p><a href="http://www.csdn.net/article/2015-01-09/2823502-swift-open-source-libs">开源项目汇总</a></p>
+
+<h3 id="约束">约束</h3>
+<p><a href="http://www.hangge.com/blog/cache/detail_1097.html">自动布局库SnapKit</a></p>
+
+<h3 id="网络-1">网络</h3>
+<p><a href="http://www.cocoachina.com/ios/20141202/10390.html">Alamofire网络基础教程</a></p>
 
         </article>
         <hr>
@@ -454,13 +505,13 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2016/03/03/Runtime/">Runtime</a></p>
+        <p><strong>上一篇</strong> <a href="/2016/03/05/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">iOS 多线程</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2016/03/04/Block/">Block</a></p>
+        <p><strong>下一篇</strong> <a href="/2016/04/08/FMDB%E4%BD%BF%E7%94%A8/">FMDB使用</a></p>
         
     </div>
 </div>

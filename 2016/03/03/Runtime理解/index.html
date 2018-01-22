@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>Runtime(1)-简介与原理</title>
+    <meta name="description" content="iOS Runtime的内部实现，主要的数据结构等。">
+
+    <!-- 高亮 -->
+    <link href="/css/rouge.css" rel="stylesheet"/>
+
+    <link rel="shortcut icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <link rel="icon" href="/assets/images/favicon.ico?" type="image/x-icon">
+    <!-- 菜单前的图标，需要下面这句 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
+    <link rel="stylesheet" href="/css/main.css ">
+    <link rel="canonical" href="http://localhost:4000/2016/03/03/Runtime%E7%90%86%E8%A7%A3/">
+    <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="http://localhost:4000/feed.xml ">
+
+
+    <script>
+    // 百度统计代码
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "//hm.baidu.com/hm.js?cf8506e0ef223e57ff6239944e5d46a4";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+    </script>
+
+
+    <script>
+    // google analytics
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-72449510-4', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+
+
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    tex2jax: { inlineMath: [["$","$"],["\\(","\\)"]] },
+    "HTML-CSS": {
+      linebreaks: { automatic: true, width: "container" }
+    }
+});
+</script>
+<!-- <script type="text/javascript"
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script> -->
+
+</head>
+
+ 
+  <body>
+
+    <header id="top">
+    <div class="wrapper">
+        <a href="/" class="brand">YJ`s notes</a>
+        <small></small>
+        <button id="headerMenu" class="menu"><i class="fa fa-bars"></i></button>
+        <nav id="headerNav">
+            <ul>
+                <li>
+                    
+                    <a href="/">
+                    
+                        <i class="fa fa-home"></i>首页
+                    </a>
+                </li>
+
+                
+                    
+                    <li>
+                        
+                        <a href="/archive/">
+                        
+                            <i class="fa fa-archive"></i>归档
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/category/">
+                        
+                            <i class="fa fa-th-list"></i>类别
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/tag/">
+                        
+                            <i class="fa fa-tags"></i>标签
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/collection/">
+                        
+                            <i class="fa fa-bookmark"></i>收藏
+                        </a>
+                    </li>
+                    
+                
+                    
+                    <li>
+                        
+                        <a href="/about/">
+                        
+                            <i class="fa fa-heart"></i>关于我
+                        </a>
+                    </li>
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+        <div class="page clearfix" post>
+    <div class="left">
+        <h1>Runtime(1)-简介与原理</h1>
+        <div class="label">
+
+            <div class="label-card">
+                <i class="fa fa-calendar"></i>2016-03-03
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+                
+            </div>
+
+            <div class="label-card">
+            
+
+
+<!-- <span class="point">•</span> -->
+<span class="categories">
+  <i class="fa fa-th-list"></i>
+  
+    
+        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>
+    
+  
+
+  <!-- <span class="point">•</span> -->
+</span>
+
+
+            </div>
+
+            <div class="label-card">
+            
+<!-- <span class="point">•</span> -->
+<span class="pageTag">
+  <i class="fa fa-tags"></i>
+  
+    
+        <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
+        <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
+    
+        <!--a href="/tag/#Runtime" title="Tag: Runtime" rel="tag">Runtime</a-->
+        <a href="/tag/#Runtime" title="Tag: Runtime" rel="tag">Runtime</a>
+    
+  
+
+</span>
+
+            </div>
+
+        </div>
+        <hr>
+        <article itemscope itemtype="http://schema.org/BlogPosting">
+        <ul id="markdown-toc">
+  <li><a href="#runtime-简介" id="markdown-toc-runtime-简介">Runtime 简介</a></li>
+  <li><a href="#一些常识" id="markdown-toc-一些常识">一些常识</a></li>
+  <li><a href="#基本原理" id="markdown-toc-基本原理">基本原理</a>    <ul>
+      <li><a href="#获取列表" id="markdown-toc-获取列表">获取列表</a></li>
+      <li><a href="#方法调用" id="markdown-toc-方法调用">方法调用</a></li>
+      <li><a href="#拦截调用" id="markdown-toc-拦截调用">拦截调用</a></li>
+    </ul>
+  </li>
+  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
+</ul>
+
+<h2 id="runtime-简介">Runtime 简介</h2>
+
+<p>在我们平时编写的OC代码中, 程序运行过程时, 其实最终都是转成了runtime的C语言代码。</p>
+
+<p>Runtime 可以做的事：</p>
+
+<ul>
+  <li>在程序运行过程中，动态创建一个类（比如KVO的底层实现）；</li>
+  <li>在程序运行过程中，动态地为某个类添加属性/方法。可以用于封装框架(想怎么改就怎么改) 这就是我们runtime机制的主要运用方向；</li>
+  <li>遍历一个类中所有的成员变量（属性）/所有方法。（比如字典–&gt;模型：利用runtime遍历模型对象的所有属性, 根据属性名从字典中取出对应的值, 设置到模型的属性上；还有归档和接档，利用runtime遍历模型对象的所有属性）；</li>
+</ul>
+
+<h2 id="一些常识">一些常识</h2>
+
+<p>1、头文件</p>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1">#import &lt;objc/runtime.h&gt;</span>
+<span class="c1">#import &lt;objc/message.h&gt;</span>
+</code></pre>
+</div>
+
+<p>2、字段及含义</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">字段</th>
+      <th style="text-align: left">类型</th>
+      <th style="text-align: left">含义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Method</td>
+      <td style="text-align: left">struct objc_method</td>
+      <td style="text-align: left">方法</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Ivar</td>
+      <td style="text-align: left">struct objc_ivar</td>
+      <td style="text-align: left">实例变量</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Category</td>
+      <td style="text-align: left">struct objc_category</td>
+      <td style="text-align: left">类别</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">objc_property_t</td>
+      <td style="text-align: left">struct objc_property</td>
+      <td style="text-align: left">类中声明的属性</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>3、方法</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">方法</th>
+      <th style="text-align: left">意义</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">objc_msgSend</td>
+      <td style="text-align: left">给对象发送消息</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">class_copyMethodList</td>
+      <td style="text-align: left">遍历某个类所有的方法</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">class_copyIvarList</td>
+      <td style="text-align: left">遍历某个类所有的成员变量</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">class_copyPropertyList</td>
+      <td style="text-align: left">获取属性列表</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">class_copyProtocolList</td>
+      <td style="text-align: left">获取协议列表</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="基本原理">基本原理</h2>
+
+<p>以 Runtime 中类的结构体为例：</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="sr">//</span><span class="err">类在</span><span class="n">runtime</span><span class="err">中的表示</span>
+<span class="n">struct</span> <span class="n">objc_class</span> <span class="p">{</span>
+    <span class="no">Class</span> <span class="n">isa</span><span class="p">;</span><span class="sr">//</span><span class="err">指针，顾名思义，表示是一个什么，</span>
+    <span class="sr">//</span><span class="err">实例的</span><span class="n">isa</span><span class="err">指向类对象，类对象的</span><span class="n">isa</span><span class="err">指向元类</span>
+<span class="c1">#if !__OBJC2__</span>
+    <span class="no">Class</span> <span class="n">super_class</span><span class="p">;</span>  <span class="sr">//</span><span class="err">指向父类</span>
+    <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="nb">name</span><span class="p">;</span>  <span class="sr">//</span><span class="err">类名</span>
+    <span class="n">long</span> <span class="n">version</span><span class="p">;</span>
+    <span class="n">long</span> <span class="n">info</span><span class="p">;</span>
+    <span class="n">long</span> <span class="n">instance_size</span>
+    <span class="n">struct</span> <span class="n">objc_ivar_list</span> <span class="o">*</span><span class="n">ivars</span> <span class="sr">//</span><span class="err">成员变量列表</span>
+    <span class="n">struct</span> <span class="n">objc_method_list</span> <span class="o">**</span><span class="n">methodLists</span><span class="p">;</span> <span class="sr">//</span><span class="err">方法列表</span>
+    <span class="n">struct</span> <span class="n">objc_cache</span> <span class="o">*</span><span class="n">cache</span><span class="p">;</span><span class="sr">//</span><span class="err">缓存</span>
+    <span class="sr">//</span><span class="err">一种优化，调用过的方法存入缓存列表，下次调用先找缓存</span>
+    <span class="n">struct</span> <span class="n">objc_protocol_list</span> <span class="o">*</span><span class="n">protocols</span> <span class="sr">//</span><span class="err">协议列表</span>
+<span class="c1">#endif</span>
+<span class="p">}</span> <span class="no">OBJC2_UNAVAILABLE</span><span class="p">;</span>
+</code></pre>
+</div>
+
+<h3 id="获取列表">获取列表</h3>
+
+<p>有时候会有这样的需求，我们需要知道当前类中每个属性的名字（比如字典转模型，字典的Key和模型对象的属性名字不匹配）。</p>
+
+<p>我们可以通过runtime的一系列方法获取类的一些信息（包括属性列表，方法列表，成员变量列表，和遵循的协议列表）。</p>
+
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">unsigned</span> <span class="n">int</span> <span class="n">count</span><span class="p">;</span>
+
+<span class="sr">//</span><span class="err">获取属性列表</span>
+<span class="n">objc_property_t</span> <span class="o">*</span><span class="n">propertyList</span> <span class="o">=</span> <span class="n">class_copyPropertyList</span><span class="p">([</span><span class="nb">self</span> <span class="k">class</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">count</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">unsigned</span> <span class="n">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">count</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>         
+  <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">propertyname</span> <span class="o">=</span> <span class="n">property_getName</span><span class="p">(</span><span class="n">propertyList</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+  <span class="n">nslog</span><span class="p">(</span><span class="err">@</span><span class="s2">"property----=""&gt;%@"</span><span class="p">,</span> <span class="p">[</span><span class="no">NSString</span> <span class="n">stringWithUTF8String</span><span class="ss">:propertyName</span><span class="p">]);</span>
+<span class="p">}</span>
+
+<span class="sr">//</span><span class="err">获取方法列表</span>
+<span class="no">Method</span> <span class="o">*</span><span class="n">methodList</span> <span class="o">=</span> <span class="n">class_copyMethodList</span><span class="p">([</span><span class="nb">self</span> <span class="k">class</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">count</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">unsigned</span> <span class="n">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">count</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>         
+  <span class="no">Method</span> <span class="nb">method</span> <span class="o">=</span> <span class="n">methodList</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>      
+  <span class="n">nslog</span><span class="p">(</span><span class="err">@</span><span class="s2">"method----=""&gt;%@"</span><span class="p">,</span> <span class="no">NSStringFromSelector</span><span class="p">(</span><span class="n">method_getName</span><span class="p">(</span><span class="nb">method</span><span class="p">)));</span>
+<span class="p">}</span>
+
+<span class="sr">//</span><span class="err">获取成员变量列表</span>
+<span class="no">Ivar</span> <span class="o">*</span><span class="n">ivarList</span> <span class="o">=</span> <span class="n">class_copyIvarList</span><span class="p">([</span><span class="nb">self</span> <span class="k">class</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">count</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">unsigned</span> <span class="n">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">count</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>         
+  <span class="no">Ivar</span> <span class="n">myivar</span> <span class="o">=</span> <span class="n">ivarList</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>       
+  <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">ivarname</span> <span class="o">=</span> <span class="n">ivar_getName</span><span class="p">(</span><span class="n">myIvar</span><span class="p">);</span>       
+  <span class="n">nslog</span><span class="p">(</span><span class="err">@</span><span class="s2">"ivar----=""&gt;%@"</span><span class="p">,</span> <span class="p">[</span><span class="no">NSString</span> <span class="n">stringWithUTF8String</span><span class="ss">:ivarName</span><span class="p">]);</span>
+<span class="p">}</span>
+
+<span class="sr">//</span><span class="err">获取协议列表</span>
+<span class="n">__unsafe_unretained</span> <span class="no">Protocol</span> <span class="o">**</span><span class="n">protocolList</span> <span class="o">=</span> <span class="n">class_copyProtocolList</span><span class="p">([</span><span class="nb">self</span> <span class="k">class</span><span class="p">],</span> <span class="o">&amp;</span><span class="n">count</span><span class="p">);</span>
+<span class="k">for</span> <span class="p">(</span><span class="n">unsigned</span> <span class="n">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="n">count</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>         
+  <span class="no">Protocol</span> <span class="o">*</span><span class="n">myProtocal</span> <span class="o">=</span> <span class="n">protocolList</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>     
+  <span class="n">const</span> <span class="n">char</span> <span class="o">*</span><span class="n">protocolName</span> <span class="o">=</span> <span class="n">protocol_getName</span><span class="p">(</span><span class="n">myProtocal</span><span class="p">);</span>     
+  <span class="n">nslog</span><span class="p">(</span><span class="err">@</span><span class="s2">"protocol----=""&gt;%@"</span><span class="p">,</span> <span class="p">[</span><span class="no">NSString</span> <span class="n">stringWithUTF8String</span><span class="ss">:protocolName</span><span class="p">]);</span>
+<span class="p">}</span>
+
+</code></pre>
+</div>
+
+<h3 id="方法调用">方法调用</h3>
+
+<p>如果用实例对象调用实例方法，会到实例的isa指针指向的对象（也就是类对象）操作。</p>
+
+<p>如果调用的是类方法，就会到类对象的isa指针指向的对象（也就是元类对象）中操作。</p>
+
+<p>首先，在相应操作的对象中的缓存方法列表中找调用的方法，如果找到，转向相应实现并执行。
+如果没找到，在相应操作的对象中的方法列表中找调用的方法，如果找到，转向相应实现执行
+如果没找到，去父类指针所指向的对象中执行1，2.
+以此类推，如果一直到根类还没找到，转向拦截调用。
+如果没有重写拦截调用的方法，程序报错。</p>
+
+<h3 id="拦截调用">拦截调用</h3>
+
+<hr />
+<h2 id="相关链接">相关链接</h2>
+
+<p><a href="http://blog.csdn.net/coyote1994/article/details/52355026">runtime从入门到精通（一）—— 初识runtime</a></p>
+
+<p><a href="http://blog.csdn.net/coyote1994/article/details/52441513">runtime从入门到精通（二）—— 官方文档翻译</a></p>
+
+<p><a href="http://blog.csdn.net/coyote1994/article/details/52451309">runtime从入门到精通（三）—— runtime常用接口方法</a></p>
+
+<p><a href="http://blog.csdn.net/coyote1994/article/details/52452346">runtime从入门到精通（四）—— 一些runtime相关术语的数据结构</a></p>
+
+<p><a href="http://blog.csdn.net/coyote1994/article/details/52454600">runtime从入门到精通（五）—— 消息发送和消息转发</a></p>
+
+<p><a href="http://blog.csdn.net/coyote1994/article/details/52469954">runtime从入门到精通（六）—— runtime在实际开发中的应用</a></p>
+
+<p><a href="http://blog.csdn.net/coyote1994/article/details/52470653">runtime从入门到精通（七）—— 自动归档和解档</a></p>
+
+<p><a href="http://blog.csdn.net/coyote1994/article/details/52470689">runtime从入门到精通（八）—— 使用runtime实现字典转模型</a></p>
+
+<p><a href="http://blog.csdn.net/coyote1994/article/details/52472670">runtime从入门到精通（九）—— 万能界面跳转</a></p>
+
+<p><a href="http://yulingtianxia.com/blog/2014/11/05/objective-c-runtime/#SEL">杨萧玉-Runtime（主要是内部实现，数据结构等）</a></p>
+
+<p><a href="http://www.cocoachina.com/ios/20150901/13173.html">iOS：学习runtime的理解和心得</a></p>
+
+        </article>
+        <hr>
+
+        
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/01/08/SDK/">SDK
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/01/04/%E7%BB%84%E4%BB%B6%E5%8C%96/">组件化
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/20/iOS-11+iPhone-X-%E9%80%82%E9%85%8D/">iOS开发之适配
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/17/%E5%B7%A5%E5%85%B7/">开发工具
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/17/Xcode%E5%BC%80%E5%8F%91%E6%95%88%E7%8E%87Tips/">开发效率Tips
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS-WWDC%E6%9B%B4%E6%96%B0%E6%80%BB%E7%BB%93/">iOS WWDC更新总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+        
+            </ul>
+        
+
+        <div class="post-recent">
+    <div class="pre">
+        
+        <p><strong>上一篇</strong> <a href="/2016/03/02/Runloop/">Runloop</a></p>
+        
+    </div>
+    <div class="nex">
+
+        
+        <p><strong>下一篇</strong> <a href="/2016/03/03/Runtime%E5%86%85%E9%83%A8%E5%AE%9E%E7%8E%B0/">Runtime(2)-内部实现</a></p>
+        
+    </div>
+</div>
+
+
+        <h2 id="comments">Comments</h2>
+        
+
+
+
+
+
+    </div>
+    <button class="anchor"><i class="fa fa-anchor"></i></button>
+    <div class="right">
+        <div class="wrap">
+
+            <!-- Content -->
+            <div class="side content">
+                <div>
+                    Content
+                </div>
+                <ul id="content-side" class="content-ul">
+                    
+                    <li><a href="#similar_posts">Similar Posts</a></li>
+                    
+                    <li><a href="#comments">Comments</a></li>
+                </ul>
+            </div>
+            <!-- 其他div框放到这里 -->
+            <!-- <div class="side">bbbb</div> -->
+        </div>
+    </div>
+</div>
+<script>
+/**
+ * target _blank
+ */
+(function() {
+    var aTags = document.querySelectorAll('article a:not([id])')
+    for (var i = 0; i < aTags.length; i++) {
+        aTags[i].setAttribute('target', '_blank')
+    }
+}());
+</script>
+<script src="/js/pageContent.js " charset="utf-8"></script>
+
+
+    <footer class="site-footer">
+
+
+    <div class="wrapper">
+
+        <p class="description">
+            
+        </p>
+        <p class="contact">
+            <!-- Contact me at: -->
+            
+            <a href="https://github.com/yjyuanshuai" title="GitHub"><i class="fa fa-github" aria-hidden="true"></i></a> 
+            
+            <a href="mailto:TimerYJ@163.com" title="email"><i class="fa fa-envelope-o" aria-hidden="true"></i></a> 
+            
+            <a href="http://weibo.com/2480605254" title="Weibo"><i class="fa fa-weibo" aria-hidden="true"></i></a> 
+            
+            
+            
+            
+            
+        </p>
+        <!-- <p>
+            本站总访问量<span id="busuanzi_value_site_pv"></span>次，本站访客数<span id="busuanzi_value_site_uv"></span>人次，本文总阅读量<span id="busuanzi_value_page_pv"></span>次
+        </p> -->
+        <p class="power">
+            <span>
+                Site powered by <a href="https://jekyllrb.com/">Jekyll</a> & <a href="https://pages.github.com/">Github Pages</a>.
+            </span>
+            <span>
+                Theme designed by <a href="https://github.com/Gaohaoyang">HyG</a>.
+            </span>
+        </p>
+    </div>
+</footer>
+<!-- <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script> -->
+
+    <div class="back-to-top">
+    <a href="#top" data-scroll>
+        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+    </a>
+</div>
+
+    <script src=" /js/main.js " charset="utf-8"></script>
+    <script src=" /js/smooth-scroll.min.js " charset="utf-8"></script>
+    <script type="text/javascript">
+      smoothScroll.init({
+        speed: 500, // Integer. How fast to complete the scroll in milliseconds
+        easing: 'easeInOutCubic', // Easing pattern to use
+        offset: 20, // Integer. How far to offset the scrolling anchor location in pixels
+      });
+    </script>
+    <!-- <script src=" /js/scroll.min.js " charset="utf-8"></script> -->
+  </body>
+
+</html>
