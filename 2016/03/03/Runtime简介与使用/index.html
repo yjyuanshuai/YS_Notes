@@ -222,6 +222,7 @@
         <ul id="markdown-toc">
   <li><a href="#runtime-简介" id="markdown-toc-runtime-简介">Runtime 简介</a></li>
   <li><a href="#基本使用" id="markdown-toc-基本使用">基本使用</a>    <ul>
+      <li><a href="#动态增加类" id="markdown-toc-动态增加类">动态增加类</a></li>
       <li><a href="#获取列表" id="markdown-toc-获取列表">获取列表</a></li>
       <li><a href="#方法调用" id="markdown-toc-方法调用">方法调用</a></li>
       <li><a href="#拦截调用" id="markdown-toc-拦截调用">拦截调用</a></li>
@@ -268,6 +269,8 @@
 <span class="c1">#endif</span>
 <span class="p">}</span> <span class="no">OBJC2_UNAVAILABLE</span><span class="p">;</span>
 </code></pre></div></div>
+
+<h3 id="动态增加类">动态增加类</h3>
 
 <h3 id="获取列表">获取列表</h3>
 
@@ -350,18 +353,20 @@
 <p>首先从外部隐式调用一个不存在的方法：</p>
 <div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code>
 <span class="sr">//</span><span class="err">隐式调用方法</span>
-<span class="p">[</span><span class="n">target</span> <span class="n">performSelector</span><span class="ss">:@selector</span><span class="p">(</span><span class="n">resolveAdd</span><span class="p">:)</span> <span class="n">withObject</span><span class="p">:</span><span class="err">@</span><span class="s2">"test"</span><span class="p">];</span>
+<span class="p">[</span><span class="nb">self</span> <span class="n">performSelector</span><span class="ss">:@selector</span><span class="p">(</span><span class="n">tempMethod</span><span class="p">:)];</span>
 </code></pre></div></div>
 
 <p>然后，在target对象内部重写拦截调用的方法，动态添加方法。</p>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">void</span> <span class="n">runAddMethod</span><span class="p">(</span><span class="nb">id</span> <span class="nb">self</span><span class="p">,</span> <span class="no">SEL</span> <span class="n">_cmd</span><span class="p">,</span> <span class="no">NSString</span> <span class="o">*</span><span class="n">string</span><span class="p">){</span>
-    <span class="no">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s2">"add C IMP "</span><span class="p">,</span> <span class="n">string</span><span class="p">);</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">void</span> <span class="n">runtimeAddMethod</span><span class="p">(</span><span class="nb">id</span> <span class="nb">self</span><span class="p">,</span> <span class="no">SEL</span> <span class="n">sel</span><span class="p">)</span>
+<span class="p">{</span>
+    <span class="no">NSLog</span><span class="p">(</span><span class="err">@</span><span class="s2">"---- Runtime 动态添加方法，%@ ---- %@"</span><span class="p">,</span> <span class="nb">self</span><span class="p">,</span> <span class="no">NSStringFromSelector</span><span class="p">(</span><span class="n">sel</span><span class="p">));</span>
 <span class="p">}</span>
 
-<span class="o">+</span> <span class="p">(</span><span class="no">BOOL</span><span class="p">)</span><span class="n">resolveInstanceMethod</span><span class="p">:(</span><span class="no">SEL</span><span class="p">)</span><span class="n">sel</span><span class="p">{</span>
-    <span class="sr">//</span><span class="err">给本类动态添加一个方法</span>
-    <span class="k">if</span> <span class="p">([</span><span class="no">NSStringFromSelector</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span> <span class="n">isEqualToString</span><span class="p">:</span><span class="err">@</span><span class="s2">"resolveAdd:"</span><span class="p">])</span> <span class="p">{</span>
-        <span class="n">class_addMethod</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">sel</span><span class="p">,</span> <span class="p">(</span><span class="no">IMP</span><span class="p">)</span><span class="n">runAddMethod</span><span class="p">,</span> <span class="s2">"v@:*"</span><span class="p">);</span>
+<span class="o">+</span> <span class="p">(</span><span class="no">BOOL</span><span class="p">)</span><span class="n">resolveInstanceMethod</span><span class="p">:(</span><span class="no">SEL</span><span class="p">)</span><span class="n">sel</span>
+<span class="p">{</span>
+    <span class="k">if</span> <span class="p">([</span><span class="no">NSStringFromSelector</span><span class="p">(</span><span class="n">sel</span><span class="p">)</span> <span class="n">isEqualToString</span><span class="p">:</span><span class="err">@</span><span class="s2">"tempMethod:"</span><span class="p">])</span> <span class="p">{</span>
+        <span class="sr">//</span> <span class="err">第</span><span class="mi">4</span><span class="err">个参数，</span><span class="n">v</span><span class="o">-&gt;</span><span class="n">void</span><span class="p">;</span>   <span class="err">@</span><span class="o">-&gt;</span><span class="err">对象，</span><span class="nb">self</span><span class="p">;</span>   <span class="p">:</span><span class="o">-&gt;</span><span class="no">SEL</span><span class="err">，</span><span class="n">_cmd</span>
+        <span class="n">class_addMethod</span><span class="p">(</span><span class="nb">self</span><span class="p">,</span> <span class="n">sel</span><span class="p">,</span> <span class="p">(</span><span class="no">IMP</span><span class="p">)</span><span class="n">runtimeAddMethod</span><span class="p">,</span> <span class="s2">"v@:"</span><span class="p">);</span>
     <span class="p">}</span>
     <span class="k">return</span> <span class="no">YES</span><span class="p">;</span>
 <span class="p">}</span>
@@ -471,7 +476,7 @@
 </code></pre></div></div>
 
 <blockquote>
-  <p>注意：这里面我们把getAssociatedObject方法的地址作为唯一的key，_cmd代表当前调用方法的地址。</p>
+  <p>注意：这里面我们把getAssociatedObject方法的地址作为唯一的key，_ cmd代表当前调用方法的地址。</p>
 </blockquote>
 
 <h3 id="方法交换">方法交换</h3>
@@ -516,7 +521,11 @@
 <h2 id="一些常识">一些常识</h2>
 
 <p>1、头文件</p>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">#import &lt;objc/runtime.h&gt;</span>
+<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="err">模拟器</span>
+<span class="c1">#import &lt;objc/objc-runtime.h&gt;</span>
+
+<span class="sr">//</span> <span class="err">真机</span>
+<span class="c1">#import &lt;objc/runtime.h&gt;</span>
 <span class="c1">#import &lt;objc/message.h&gt;</span>
 </code></pre></div></div>
 
@@ -613,7 +622,17 @@
     <tr>
       <td style="text-align: left">class_addMethod</td>
       <td style="text-align: left">加方法</td>
-      <td style="text-align: left">Class-target；SEL-要重写的方法；IMP-方法的实现；”v@:*“-方法的签名，代表一个参数的方法</td>
+      <td style="text-align: left">Class target；SEL要重写的方法；IMP方法的实现；”v@:”-方法的签名，代表一个参数的方法</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">objc_setAssociatedObject</td>
+      <td style="text-align: left">将某个值跟某个对象关联起来，将某个值存储到某个对象中</td>
+      <td style="text-align: left">id target; &amp;key 存储属性值的key地址; id 属性; objc_AssociationPolicy</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">objc_getAssociatedObject</td>
+      <td style="text-align: left">获取对应值</td>
+      <td style="text-align: left">id target; &amp;key 存储属性值的key地址</td>
     </tr>
   </tbody>
 </table>
