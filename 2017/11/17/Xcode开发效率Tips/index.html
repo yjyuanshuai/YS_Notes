@@ -227,15 +227,8 @@
       <li><a href="#自定义快捷代码片段" id="markdown-toc-自定义快捷代码片段">自定义快捷代码片段</a></li>
     </ul>
   </li>
-  <li><a href="#pods" id="markdown-toc-pods">Pods</a>    <ul>
-      <li><a href="#导入第三方库" id="markdown-toc-导入第三方库">导入第三方库</a></li>
-      <li><a href="#写自己的pods" id="markdown-toc-写自己的pods">写自己的Pods</a>        <ul>
-          <li><a href="#1-共有pods库" id="markdown-toc-1-共有pods库">1. 共有Pods库</a></li>
-          <li><a href="#2-私有pods库" id="markdown-toc-2-私有pods库">2. 私有Pods库</a></li>
-        </ul>
-      </li>
-    </ul>
-  </li>
+  <li><a href="#cocoapods" id="markdown-toc-cocoapods">CocoaPods</a></li>
+  <li><a href="#carthage" id="markdown-toc-carthage">Carthage</a></li>
 </ul>
 
 <h2 id="xcode">Xcode</h2>
@@ -255,21 +248,20 @@
   <p>注：<code class="highlighter-rouge">~/Library/Developer/Xcode/UserData/CodeSnippets</code> 文件中即为自定义的代码块。</p>
 </blockquote>
 
-<h2 id="pods">Pods</h2>
-<h3 id="导入第三方库">导入第三方库</h3>
-<div class="language-ruby highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="sr">//</span> <span class="err">基本</span>
-<span class="n">pod</span> <span class="s1">'AFNetworking'</span>
+<h2 id="cocoapods">CocoaPods</h2>
+<ol>
+  <li>导入第三方库;</li>
+  <li>写自己的Pods
+    <ul>
+      <li>共有Pods库;</li>
+      <li>私有Pods库</li>
+    </ul>
+  </li>
+</ol>
 
-<span class="sr">//</span> <span class="err">带版本</span>
-<span class="n">pod</span> <span class="s1">'AFNetworking'</span><span class="p">,</span> <span class="s1">'3.0.0'</span>
+<h2 id="carthage">Carthage</h2>
 
-<span class="sr">//</span> <span class="err">指定路径</span>
-<span class="n">pod</span> <span class="s1">'ShareSDK3'</span><span class="p">,</span><span class="ss">:git</span> <span class="o">=&gt;</span><span class="s1">'https://git.oschina.net/MobClub/ShareSDK-for-iOS.git'</span>
-</code></pre></div></div>
-
-<h3 id="写自己的pods">写自己的Pods</h3>
-<h4 id="1-共有pods库">1. 共有Pods库</h4>
-<h4 id="2-私有pods库">2. 私有Pods库</h4>
+<p><a href="https://www.jianshu.com/p/5ccde5f22a17">如何使用Carthage管理iOS依赖库</a></p>
 
         </article>
         <hr>
