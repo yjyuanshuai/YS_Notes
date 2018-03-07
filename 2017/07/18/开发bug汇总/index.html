@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>iOS 编译bug汇总</title>
+    <title>iOS 开发bug汇总</title>
     <meta name="description" content="汇总iOS开发过程中遇到的一些Bug。">
 
     <!-- 高亮 -->
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/07/18/%E7%BC%96%E8%AF%91bug%E6%B1%87%E6%80%BB/">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2017/07/18/%E5%BC%80%E5%8F%91bug%E6%B1%87%E6%80%BB/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
 
 
@@ -161,7 +161,7 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>iOS 编译bug汇总</h1>
+        <h1>iOS 开发bug汇总</h1>
         <div class="label">
 
             <div class="label-card">
@@ -185,9 +185,7 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>&nbsp;
-    
-        <a href="/category/#Bug" title="Category: Bug" rel="category">Bug</a>
+        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>
     
   
 
@@ -220,43 +218,58 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#编译bug汇总一" id="markdown-toc-编译bug汇总一">编译bug汇总（一）</a>    <ul>
-      <li><a href="#1linker-command-failed-with-exit-code" id="markdown-toc-1linker-command-failed-with-exit-code">1、<code class="highlighter-rouge">linker command failed with exit code</code></a></li>
-      <li><a href="#2xxx-which-may-not-be-supported-by-this-version-of-xcode" id="markdown-toc-2xxx-which-may-not-be-supported-by-this-version-of-xcode">2、<code class="highlighter-rouge">xxx which may not be supported by this version of Xcode</code></a></li>
-      <li><a href="#3the-entitlements-specified-in-your-applications-code-signing-entitlements-file-do-not-match-those-specified-in-your-provisioning-profile-0xe8008016" id="markdown-toc-3the-entitlements-specified-in-your-applications-code-signing-entitlements-file-do-not-match-those-specified-in-your-provisioning-profile-0xe8008016">3、<code class="highlighter-rouge">The entitlements specified in your application’s Code Signing Entitlements file do not match those specified in your provisioning profile. (0xE8008016).</code></a></li>
-      <li><a href="#4implicit-declaration-of-function---c99" id="markdown-toc-4implicit-declaration-of-function---c99">4、<code class="highlighter-rouge">Implicit declaration of function - C99</code></a></li>
+  <li><a href="#bug汇总" id="markdown-toc-bug汇总">bug汇总</a>    <ul>
+      <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
+    </ul>
+  </li>
+  <li><a href="#xcode" id="markdown-toc-xcode">Xcode</a>    <ul>
+      <li><a href="#xxx-which-may-not-be-supported-by-this-version-of-xcode" id="markdown-toc-xxx-which-may-not-be-supported-by-this-version-of-xcode"><code class="highlighter-rouge">xxx which may not be supported by this version of Xcode</code></a></li>
+      <li><a href="#could-not-find-developer-disk-image" id="markdown-toc-could-not-find-developer-disk-image"><code class="highlighter-rouge">Could not find Developer Disk Image</code></a></li>
+    </ul>
+  </li>
+  <li><a href="#其他" id="markdown-toc-其他">其他</a>    <ul>
+      <li><a href="#linker-command-failed-with-exit-code" id="markdown-toc-linker-command-failed-with-exit-code"><code class="highlighter-rouge">linker command failed with exit code</code></a></li>
+      <li><a href="#the-entitlements-specified-in-your-applications-code-signing-entitlements-file-do-not-match-those-specified-in-your-provisioning-profile-0xe8008016" id="markdown-toc-the-entitlements-specified-in-your-applications-code-signing-entitlements-file-do-not-match-those-specified-in-your-provisioning-profile-0xe8008016"><code class="highlighter-rouge">The entitlements specified in your application’s Code Signing Entitlements file do not match those specified in your provisioning profile. (0xE8008016).</code></a></li>
+      <li><a href="#implicit-declaration-of-function---c99" id="markdown-toc-implicit-declaration-of-function---c99"><code class="highlighter-rouge">Implicit declaration of function - C99</code></a></li>
     </ul>
   </li>
 </ul>
 
-<h2 id="编译bug汇总一">编译bug汇总（一）</h2>
+<h2 id="bug汇总">bug汇总</h2>
 
 <table>
   <thead>
     <tr>
+      <th style="text-align: left">类别</th>
       <th style="text-align: left">Bug报错提示</th>
       <th style="text-align: left">简介</th>
     </tr>
   </thead>
   <tbody>
     <tr>
+      <td style="text-align: left">编译</td>
       <td style="text-align: left">linker command failed with exit code</td>
       <td style="text-align: left">链接出错（如：多个同名类）</td>
     </tr>
     <tr>
+      <td style="text-align: left">Xcode</td>
       <td style="text-align: left">xxx which may not be supported by this version of Xcode</td>
       <td style="text-align: left">Xcode最高支持版本低于当前设备的系统版本</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">Could not find Developer Disk Image</td>
+      <td style="text-align: left">同上</td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="1linker-command-failed-with-exit-code">1、<code class="highlighter-rouge">linker command failed with exit code</code></h3>
+<h3 id="相关链接">相关链接</h3>
 
-<p>1) 原因：同时存在至少 2 个同名的类文件（如同名的.m文件），导致编译报错。</p>
+<p><a href="http://www.jianshu.com/p/a1aa0df5aa3c">XCode 错误、报错、警告集锦</a></p>
 
-<p>2）修改：删除重复的类文件。</p>
-
-<h3 id="2xxx-which-may-not-be-supported-by-this-version-of-xcode">2、<code class="highlighter-rouge">xxx which may not be supported by this version of Xcode</code></h3>
+<h2 id="xcode">Xcode</h2>
+<h3 id="xxx-which-may-not-be-supported-by-this-version-of-xcode"><code class="highlighter-rouge">xxx which may not be supported by this version of Xcode</code></h3>
 
 <p><img src="http://img.blog.csdn.net/20170105222041413?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvdTAxMzMxNjYyNg==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt="" /></p>
 
@@ -273,7 +286,24 @@
 
 <p><a href="http://blog.csdn.net/u013316626/article/details/54100011">快速解决低版本Xcode不支持高版本iOS真机调试的问题</a></p>
 
-<h3 id="3the-entitlements-specified-in-your-applications-code-signing-entitlements-file-do-not-match-those-specified-in-your-provisioning-profile-0xe8008016">3、<code class="highlighter-rouge">The entitlements specified in your application’s Code Signing Entitlements file do not match those specified in your provisioning profile. (0xE8008016).</code></h3>
+<h3 id="could-not-find-developer-disk-image"><code class="highlighter-rouge">Could not find Developer Disk Image</code></h3>
+<p><img src="http://img.blog.csdn.net/20151030093940112" alt="" /></p>
+
+<p>1）场景与原因： 真机测试时，真机版本是 iOS 11，而 Xcode 是 7.3，最高支持 9.0 真机；</p>
+
+<p>2）解决：将支持的真机的文件加入到 Xcode 目标路径中。</p>
+
+<p><a href="https://www.jianshu.com/p/3930df903a44">真机测试Could not find Developer Disk Image</a></p>
+
+<h2 id="其他">其他</h2>
+
+<h3 id="linker-command-failed-with-exit-code"><code class="highlighter-rouge">linker command failed with exit code</code></h3>
+
+<p>1) 原因：同时存在至少 2 个同名的类文件（如同名的.m文件），导致编译报错。</p>
+
+<p>2）修改：删除重复的类文件。</p>
+
+<h3 id="the-entitlements-specified-in-your-applications-code-signing-entitlements-file-do-not-match-those-specified-in-your-provisioning-profile-0xe8008016"><code class="highlighter-rouge">The entitlements specified in your application’s Code Signing Entitlements file do not match those specified in your provisioning profile. (0xE8008016).</code></h3>
 
 <p>1）可能的原因：</p>
 
@@ -281,15 +311,9 @@
 
 <p><a href="https://developer.apple.com/library/ios/technotes/tn2415/_index.html">苹果-Entitlement问题定位指南</a></p>
 
-<h3 id="4implicit-declaration-of-function---c99">4、<code class="highlighter-rouge">Implicit declaration of function - C99</code></h3>
+<h3 id="implicit-declaration-of-function---c99"><code class="highlighter-rouge">Implicit declaration of function - C99</code></h3>
 
 <p><a href="http://blog.csdn.net/wxs0124/article/details/50148873">iOS错误汇总 Implicit declaration of function - C99 完美解决</a></p>
-
-<hr />
-
-<p>相关链接：</p>
-
-<p><a href="http://www.jianshu.com/p/a1aa0df5aa3c">XCode 错误、报错、警告集锦</a></p>
 
         </article>
         <hr>
@@ -297,6 +321,24 @@
         
         
             
+            
+                
+                    
+                        
+                        <h2 id="similar_posts">Similar Posts</h2>
+                        <ul>
+                        
+                        <li class="relatedPost">
+                            <a href="/2018/02/08/5TM%E4%B9%8B%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98/">5TM--所遇问题
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
             
                 
                     
@@ -310,8 +352,38 @@
                 
                     
                         
-                        <h2 id="similar_posts">Similar Posts</h2>
-                        <ul>
+                        <li class="relatedPost">
+                            <a href="/2018/01/30/5TM%E4%B9%8B%E6%A6%82%E8%BF%B0/">5TM--概述
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
                         
                         <li class="relatedPost">
                             <a href="/2018/01/04/%E7%BB%84%E4%BB%B6%E5%8C%96/">组件化
@@ -414,45 +486,6 @@
             
                 
                     
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2017/08/03/%E8%87%AA%E5%AE%9A%E4%B9%89CollectionView%E5%B8%83%E5%B1%80/">自定义 CollectionView 布局
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
                 
                     
                 
@@ -472,9 +505,6 @@
                     
                 
             
-        
-            
-            
                 
                     
                 
@@ -489,12 +519,6 @@
             
         
             
-            
-                
-                    
-                
-                    
-                
             
                 
                     

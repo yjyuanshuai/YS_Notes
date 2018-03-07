@@ -6,8 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <title>iOS 多线程</title>
-    <meta name="description" content="iOS开发中多线程有关类，及应用。">
+    <title>5TM--概述</title>
+    <meta name="description" content="5TM，根据自身需求设计的一款时间管理类App。主要功能是事件记录，并统计成图标。此外支持记录自己的学习笔记、日记、小结等。主要目的是DIY一个符合自己需求的时间管理类的App，除了装13，也是想把自己所学为自己所用 O(∩_∩)O哈哈~。">
 
     <!-- 高亮 -->
     <link href="/css/rouge.css" rel="stylesheet"/>
@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- <link rel="stylesheet" href="https://at.alicdn.com/t/font_8v3czwksspqlg14i.css"> -->
     <link rel="stylesheet" href="/css/main.css ">
-    <link rel="canonical" href="https://yjyuanshuai.github.io/2016/03/04/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">
+    <link rel="canonical" href="https://yjyuanshuai.github.io/2018/01/30/5TM%E4%B9%8B%E6%A6%82%E8%BF%B0/">
     <link rel="alternate" type="application/rss+xml" title="YJ`s notes" href="https://yjyuanshuai.github.io/feed.xml ">
 
 
@@ -161,11 +161,11 @@
 
         <div class="page clearfix" post>
     <div class="left">
-        <h1>iOS 多线程</h1>
+        <h1>5TM--概述</h1>
         <div class="label">
 
             <div class="label-card">
-                <i class="fa fa-calendar"></i>2016-03-04
+                <i class="fa fa-calendar"></i>2018-01-30
             </div>
 
             <div class="label-card">
@@ -185,7 +185,9 @@
   <i class="fa fa-th-list"></i>
   
     
-        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>
+        <a href="/category/#iOS" title="Category: iOS" rel="category">iOS</a>&nbsp;
+    
+        <a href="/category/#项目" title="Category: 项目" rel="category">项目</a>
     
   
 
@@ -205,8 +207,8 @@
         <!--a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a-->
         <a href="/tag/#iOS" title="Tag: iOS" rel="tag">iOS</a>&nbsp;
     
-        <!--a href="/tag/#%E5%A4%9A%E7%BA%BF%E7%A8%8B" title="Tag: 多线程" rel="tag">多线程</a-->
-        <a href="/tag/#多线程" title="Tag: 多线程" rel="tag">多线程</a>
+        <!--a href="/tag/#5TM" title="Tag: 5TM" rel="tag">5TM</a-->
+        <a href="/tag/#5TM" title="Tag: 5TM" rel="tag">5TM</a>
     
   
 
@@ -218,121 +220,193 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#多线程初识" id="markdown-toc-多线程初识">多线程初识</a>    <ul>
-      <li><a href="#原理" id="markdown-toc-原理">原理</a></li>
-      <li><a href="#优缺点" id="markdown-toc-优缺点">优缺点</a>        <ul>
-          <li><a href="#优点" id="markdown-toc-优点">优点</a></li>
-          <li><a href="#缺点" id="markdown-toc-缺点">缺点</a></li>
+  <li><a href="#开发计划与完成情况" id="markdown-toc-开发计划与完成情况">开发计划与完成情况</a></li>
+  <li><a href="#所需技术" id="markdown-toc-所需技术">所需技术</a></li>
+  <li><a href="#前期准备" id="markdown-toc-前期准备">前期准备</a>    <ul>
+      <li><a href="#需求概述" id="markdown-toc-需求概述">需求概述</a></li>
+      <li><a href="#需求确认与可行性" id="markdown-toc-需求确认与可行性">需求确认与可行性</a>        <ul>
+          <li><a href="#需求确认" id="markdown-toc-需求确认">需求确认</a></li>
+          <li><a href="#可行性" id="markdown-toc-可行性">可行性</a></li>
         </ul>
       </li>
     </ul>
   </li>
-  <li><a href="#ios-开发中常用的多线程" id="markdown-toc-ios-开发中常用的多线程">iOS 开发中常用的多线程</a>    <ul>
-      <li><a href="#nsthread" id="markdown-toc-nsthread">NSThread</a></li>
-      <li><a href="#gcd" id="markdown-toc-gcd">GCD</a></li>
-      <li><a href="#nsoperation" id="markdown-toc-nsoperation">NSOperation</a></li>
+  <li><a href="#ue与ui" id="markdown-toc-ue与ui">UE与UI</a></li>
+  <li><a href="#开发" id="markdown-toc-开发">开发</a></li>
+  <li><a href="#数据库设计" id="markdown-toc-数据库设计">数据库设计</a></li>
+  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a>    <ul>
+      <li><a href="#ios" id="markdown-toc-ios">iOS</a></li>
     </ul>
   </li>
-  <li><a href="#其他多线程-api" id="markdown-toc-其他多线程-api">其他多线程 API</a>    <ul>
-      <li><a href="#pthread" id="markdown-toc-pthread">pthread</a></li>
-    </ul>
-  </li>
-  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
 </ul>
 
-<h2 id="多线程初识">多线程初识</h2>
-<h3 id="原理">原理</h3>
-<p>同一时间，CPU只能处理1条线程，只有1条线程在工作（执行），多线程并发（同时）执行，其实是CPU快速地在多条线程之间调度（切换），如果CPU调度线程的时间足够快，就造成了多线程并发执行的假象。</p>
-
-<h3 id="优缺点">优缺点</h3>
-<h4 id="优点">优点</h4>
-<ul>
-  <li>提高程序执行效率；</li>
-  <li>能适当提高资源利用率（CPU、内存利用率）；</li>
-</ul>
-
-<h4 id="缺点">缺点</h4>
-<ul>
-  <li>开启线程需要占用一定的内存空间（默认情况下，主线程占用1M，子线程占用512KB），如果开启大量的线程，会占用大量的内存空间，降低程序的性能；</li>
-  <li>线程越多，CPU在调度线程上的开销就越大；</li>
-</ul>
-
-<h2 id="ios-开发中常用的多线程">iOS 开发中常用的多线程</h2>
+<h2 id="开发计划与完成情况">开发计划与完成情况</h2>
 
 <table>
   <thead>
     <tr>
-      <th style="text-align: left">多线程 API</th>
-      <th style="text-align: left">说明</th>
+      <th style="text-align: left">版本</th>
+      <th style="text-align: left">需求概述</th>
+      <th style="text-align: left">计划</th>
+      <th style="text-align: left">进度</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td style="text-align: left">NSThread</td>
-      <td style="text-align: left">OC中直接操作线程对象，生命周期由程序员管理</td>
+      <td style="text-align: left">1.0.0</td>
+      <td style="text-align: left">需求确认与可行性；UE设计（部分）</td>
+      <td style="text-align: left">2018.01.30 - 02.09</td>
+      <td style="text-align: left">√</td>
     </tr>
     <tr>
-      <td style="text-align: left">GCD</td>
-      <td style="text-align: left">C语言实现，自动管理生命周期</td>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">事件记录与统计</td>
+      <td style="text-align: left">2018.03月底上线</td>
+      <td style="text-align: left"> </td>
     </tr>
     <tr>
-      <td style="text-align: left">NSOperation</td>
-      <td style="text-align: left">基于GCD，自动管理生命周期</td>
+      <td style="text-align: left">2.0.0</td>
+      <td style="text-align: left">增加笔记、标签</td>
+      <td style="text-align: left">待定</td>
+      <td style="text-align: left"> </td>
     </tr>
   </tbody>
 </table>
 
-<h3 id="nsthread">NSThread</h3>
+<h2 id="所需技术">所需技术</h2>
+
+<p>一个完整的 App 需要产品经理、美工、后台、客户端、前端等。我计划先做个简单点的 App，UI 简单，控件尽量用系统的。尽量少涉及后台。</p>
+
 <ul>
-  <li>面向对象；</li>
-  <li>
-    <p>简单易用，可以直接操作线程对象。</p>
-  </li>
-  <li>语言：OC；</li>
-  <li>频率：偶尔；</li>
-  <li>线程生命周期：程序员管理。</li>
+  <li>UE（<del>AXure 或 Sketch</del>），目前采用墨刀，更适合小白；</li>
+  <li>UI（<del>Photoshop 或 其他的简单切图软件</del>）， 目前涉及少量简单的PS工作；</li>
+  <li>iOS（OC）；</li>
+  <li>Andriod，暂时不做，iOS端稳定后可以考虑；</li>
+  <li>后台（<del>Java 或 PHP</del>）， 考虑时间和经济成本，采用 CloudKit；</li>
+  <li>数据库，使用数据库设计软件记录下来；</li>
+  <li>前端（<del>H5</del> ），暂时不涉及；</li>
 </ul>
 
-<h3 id="gcd">GCD</h3>
+<h2 id="前期准备">前期准备</h2>
+
+<p>想想要做的事，有点激动，又有点紧张。。。不禁又开始怀疑自己的能力，这么多要学的东西，真的能做出来吗？不过我喜欢折腾，不折腾是永远做不出来的。带着好玩儿的心态去做想做的事，相信总有一天可以做出来的 O(∩ _ ∩)O哈哈~</p>
+
 <ul>
-  <li>
-    <p>充分利用设备的多核（自动）。</p>
-  </li>
-  <li>语言：C；</li>
-  <li>频率：经常；</li>
-  <li>生命周期：自动管理。</li>
+  <li>确认好需求，1.0.0要至简！！（ 这个才是最难的好 Mia~~~ ）；</li>
+  <li>学习基本的 UE、UI制作（这块。。。尽量少花时间）；</li>
+  <li><del>学习各种语言</del>（后台选CloudKit，省了后台学习的成本）；</li>
+  <li>花钱买 Apple 开发者账号（个人账号一年688￥，/(ㄒoㄒ)/~~）；</li>
+  <li>服务器（这个我保持能不花钱就不花钱的原则，毕竟没整过服务器不太懂，尽量不整太复杂的）；</li>
 </ul>
 
-<h3 id="nsoperation">NSOperation</h3>
-<ul>
-  <li>基于GCD；</li>
-  <li>
-    <p>比GCD 多一些更简单实用的功能。</p>
-  </li>
-  <li>语言：OC；</li>
-  <li>频率：经常；</li>
-  <li>生命周期：自动管理。</li>
-</ul>
+<h3 id="需求概述">需求概述</h3>
 
-<h2 id="其他多线程-api">其他多线程 API</h2>
-<h3 id="pthread">pthread</h3>
-<ul>
-  <li>通用的多线程 API；</li>
-  <li>适用于 Unix / Linux / Windows 等系统；</li>
-  <li>跨平台，可移植性；</li>
-  <li>
-    <p>使用难度大。</p>
-  </li>
-  <li>语言：C ；</li>
-  <li>频率：几乎不用；</li>
-  <li>线程生命周期：程序员管理。</li>
-</ul>
+<ol>
+  <li>根据 “34枚金币法” 的基础，将事件分类，并记录时间；</li>
+  <li>根据记录，自动总结时间，用动画做折线图、饼图、注图（可参考随手记）；</li>
+  <li>给用户自己记录，日记、小结等，用时间轴的形式展示；</li>
+  <li>可存储到云端，方便备份和远端同步；</li>
+  <li>输出成 PDF（这个需求待定，笔记类的应用更适合）；</li>
+  <li>生成截图 / 捕捉截图，分享到第三方账号（微信等），系统的分享方式（AirDrop、打印等）；</li>
+  <li>接受反馈意见，根据反馈调整后续的版本计划；</li>
+</ol>
+
+<h3 id="需求确认与可行性">需求确认与可行性</h3>
+
+<p>根据自己的需求，准备做一款时间管理类的App，主要功能是事件记录，并统计成图标。此外支持记录自己的学习笔记、日记、小结等。主要目的是DIY一个符合自己需求的时间管理类的App，除了装13，也是想把自己所学为自己所用 O(∩_∩)O哈哈~。</p>
+
+<h4 id="需求确认">需求确认</h4>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">需求</th>
+      <th style="text-align: left">简述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">App名</td>
+      <td style="text-align: left">5TM</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">1.0.0</td>
+      <td style="text-align: left">上述需求概述中的 1 / 2 / 4 / 7</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">2.0.0</td>
+      <td style="text-align: left">3 / 6</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"> </td>
+      <td style="text-align: left">5</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="可行性">可行性</h4>
+
+<p>在网上试图找一些独立开发者的经验贴，结果。。。真的找到了一位前辈，而且将过程记录的相当详细，给我帮助很大。在此深表感谢，留下个传送门 <a href="http://keeganlee.me/post/practice/20160807">KEEGAN小钢</a>，虽然咱没多大的阅读量，万一有人需要呢，O(∩_∩)O哈哈~</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">可行性</th>
+      <th style="text-align: left">简述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">需求</td>
+      <td style="text-align: left">完全是自己 YY 出来的，O(∩_∩)O哈哈~</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">UE</td>
+      <td style="text-align: left">考虑时间成本，选用适合小白的线上工具，墨刀</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">UI</td>
+      <td style="text-align: left">同上，能用代码实现的不切图，能扣到图的，不切图</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">iOS端</td>
+      <td style="text-align: left">选用自己最熟悉的 OC 开发，尽量少用第三方库，毕竟目的之一是练手</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">后台</td>
+      <td style="text-align: left">CloudKit，和 iOS 端无缝结合，而且还是免费滴。并且现在也支持其他平台使用，后续若准备开发Andriod，也是能用的。</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="ue与ui">UE与UI</h2>
+
+<p>这个过程比较纠结，删删改改的花了很长时间。02.09确定了大概的框架，紧接着就开始了代码开发的工作，但很快发现UE设计的不满意。此时感触良多的是，一个产品最难的地方不是实现过程，而是需求确认和设计，有很多细节需要考虑。</p>
+
+<p>到今天（03.07），UE设计还没有完全确认，编辑界面始终没有想好该怎么设计。。。囧zzz</p>
+
+<h2 id="开发">开发</h2>
+
+<p>真正开发的过程中，不可避免的会遇到很多问题，准备另写一篇博客专门记录下自己遇到的问题。</p>
+
+<h2 id="数据库设计">数据库设计</h2>
+
+<p>将数据库设计记录下来，方便后期自己查看和修改，毕竟我的记性差到怀疑人生~~我也很绝望啊。</p>
 
 <hr />
-
 <h2 id="相关链接">相关链接</h2>
 
-<p><a href="http://mp.weixin.qq.com/s/FIBLT5CGDXF3wydQq5Q3FA">阿里面试题</a></p>
+<p><a href="http://keeganlee.me/post/practice/20160807">KEEGAN小钢</a></p>
+
+<h3 id="ios">iOS</h3>
+
+<p><a href="http://www.cocoachina.com/ios/20161026/17786.html">iOS项目iCloud及CloudKit Dashboard运用</a></p>
+
+<p><a href="http://www.cocoachina.com/ios/20160817/17382.html">使用 iCloud API 的正确姿势</a></p>
+
+<p><a href="https://www.jianshu.com/p/83b6e781eb51">手把手教你给一个iOS app配置多个环境变量（注意看评论区的讨论）</a></p>
+
+<p><a href="https://www.cnblogs.com/sayimba/p/6051594.html">ios-实现项目在开发、测试、正式环境快速部署</a></p>
 
         </article>
         <hr>
@@ -349,30 +423,6 @@
                         
                         <li class="relatedPost">
                             <a href="/2018/02/08/5TM%E4%B9%8B%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98/">5TM--所遇问题
-                            
-                            </a>
-                        </li>
-                        
-                        
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                        
-                        <li class="relatedPost">
-                            <a href="/2018/01/30/5TM%E4%B9%8B%E6%A6%82%E8%BF%B0/">5TM--概述
                             
                             </a>
                         </li>
@@ -505,6 +555,36 @@
             
                 
                     
+                        
+                        <li class="relatedPost">
+                            <a href="/2017/11/06/iOS%E5%BC%80%E5%8F%91%E6%8A%80%E6%9C%AF%E6%80%BB%E7%BB%93/">iOS 开发技术总结
+                            
+                            </a>
+                        </li>
+                        
+                        
+                    
+                
+                    
+                
+            
+                
+                    
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+                    
+                
+            
+                
+                    
                 
                     
                 
@@ -524,20 +604,14 @@
                     
                 
             
-                
-                    
-                
-                    
-                
-            
-                
-                    
-                
-                    
-                
-            
         
             
+            
+                
+                    
+                
+                    
+                
             
                 
                     
@@ -553,13 +627,13 @@
         <div class="post-recent">
     <div class="pre">
         
-        <p><strong>上一篇</strong> <a href="/2016/03/04/Block/">Block</a></p>
+        <p><strong>上一篇</strong> <a href="/2018/01/09/%E5%8F%82%E4%B8%8EGithub%E5%BC%80%E6%BA%90%E5%BA%93/">参与Github开源库</a></p>
         
     </div>
     <div class="nex">
 
         
-        <p><strong>下一篇</strong> <a href="/2016/04/08/iOS%E5%B8%B8%E7%94%A8%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93/">iOS 常用第三方库</a></p>
+        <p><strong>下一篇</strong> <a href="/2018/02/08/5TM%E4%B9%8B%E6%89%80%E9%81%87%E9%97%AE%E9%A2%98/">5TM--所遇问题</a></p>
         
     </div>
 </div>

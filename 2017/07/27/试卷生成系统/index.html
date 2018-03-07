@@ -217,34 +217,383 @@
         <hr>
         <article itemscope itemtype="http://schema.org/BlogPosting">
         <ul id="markdown-toc">
-  <li><a href="#步骤" id="markdown-toc-步骤">步骤</a>    <ul>
-      <li><a href="#生成-word" id="markdown-toc-生成-word">生成 Word</a>        <ul>
-          <li><a href="#参考链接" id="markdown-toc-参考链接">参考链接</a></li>
+  <li><a href="#更新记录" id="markdown-toc-更新记录">更新记录</a></li>
+  <li><a href="#简介" id="markdown-toc-简介">简介</a></li>
+  <li><a href="#生成-word" id="markdown-toc-生成-word">生成 Word</a>    <ul>
+      <li><a href="#模板文件ftl" id="markdown-toc-模板文件ftl">模板文件(.ftl)</a></li>
+      <li><a href="#freemaker-语法" id="markdown-toc-freemaker-语法">freemaker 语法</a></li>
+    </ul>
+  </li>
+  <li><a href="#java-swing" id="markdown-toc-java-swing">Java Swing</a>    <ul>
+      <li><a href="#jtable" id="markdown-toc-jtable">JTable</a></li>
+      <li><a href="#自定义-jtable-的-cell" id="markdown-toc-自定义-jtable-的-cell">自定义 JTable 的 Cell</a>        <ul>
+          <li><a href="#题目内容" id="markdown-toc-题目内容">“题目内容”</a></li>
+          <li><a href="#操作" id="markdown-toc-操作">“操作”</a></li>
         </ul>
       </li>
     </ul>
   </li>
+  <li><a href="#相关链接" id="markdown-toc-相关链接">相关链接</a></li>
 </ul>
 
-<h2 id="步骤">步骤</h2>
+<h2 id="更新记录">更新记录</h2>
 
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">时间</th>
+      <th style="text-align: left">版本</th>
+      <th style="text-align: left">主要内容</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">-</td>
+      <td style="text-align: left">V1.0.0</td>
+      <td style="text-align: left">试题录入；生成试卷</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">-</td>
+      <td style="text-align: left">V1.1.0</td>
+      <td style="text-align: left">调整模板格式</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">2018-02-05</td>
+      <td style="text-align: left">V2.0.0</td>
+      <td style="text-align: left">增加试题编辑；调整模板格式</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="简介">简介</h2>
+
+<p>需求简述：一个单机的试卷生成系统，可以录入试题、根据配置生成固定格式的试卷（word版）同时生成对应的参考答案。</p>
+
+<p>分析主要的技术有：</p>
 <ul>
-  <li>分析主要的技术难点有 2 个，一是数据库，二是生成 Word；</li>
-  <li>实现生成 Word；</li>
-  <li>数据库</li>
+  <li>实现生成 Word（网上查了一些方法，采用 freemaker 生成）；</li>
+  <li>数据库；</li>
+  <li>Java Swing；</li>
 </ul>
 
-<h3 id="生成-word">生成 Word</h3>
+<h2 id="生成-word">生成 Word</h2>
 
 <p>在网上查了不少资料，Java生成Word的方法有很多种。我这里选择的是用 freemaker，首先制作好试卷模板，导入 freemaker.jar 包，编写代码生成 Word。</p>
 
-<h4 id="参考链接">参考链接</h4>
+<h3 id="模板文件ftl">模板文件(.ftl)</h3>
+
+<p>模板文件的生成过程：</p>
+<ol>
+  <li>将调好格式的 word 文件，转成 xml，格式化一下看起来整洁点；</li>
+  <li>修改 xml 后缀改为 ftl；</li>
+  <li>修改文件内容，比如试题部分要做到根据传入的 Map 数据实现循环，而单个选择题的选项部分也要实现循环使用；</li>
+</ol>
+
+<h3 id="freemaker-语法">freemaker 语法</h3>
+<p>一、循环语句：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;#list tiankongList as tk&gt;
+${tk.tiankong_timu}
+&lt;/#list&gt;
+</code></pre></div></div>
+
+<p>二、判断语句：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">判断符号</th>
+      <th style="text-align: left">对应字符</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">&gt;</td>
+      <td style="text-align: left">gt</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">&gt;=</td>
+      <td style="text-align: left">gte</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">&lt;</td>
+      <td style="text-align: left">lt</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">&lt;=</td>
+      <td style="text-align: left">lte</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;#if (x&gt;y)&gt;
+&lt;/#if&gt;
+
+&lt;#if tiankong_tishu gt 0&gt;
+&lt;/#if&gt;
+</code></pre></div></div>
+
+<p>三、赋值</p>
+
+<p>将单选题中的选项列表（danxuanItem.xuanxiangList）赋值给变量（danxuanxxList）</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;#assign danxuanxxList = danxuanItem.xuanxiangList&gt;
+</code></pre></div></div>
+
+<h2 id="java-swing">Java Swing</h2>
+
+<ul>
+  <li>布局；</li>
+  <li>callback;</li>
+</ul>
+
+<h3 id="jtable">JTable</h3>
+
+<p>题目列表用 JTable 来做的，数据显示和刷新比较麻烦，主要是和客户端的形式不一样，且初始化和赋值方法比较多，导致不知道用什么方法好。最后在百度后不断尝试中，使用的方式是：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>table = new JTable();
+
+table.setRowSelectionAllowed(false);  //关掉行选中功能，防止在点击“编辑”按钮时，响应有问题
+
+table.setModel(new DefaultTableModel(tableDatas, columnNames) {
+			private static final long serialVersionUID = 201802030001L;
+			public boolean isCellEditable(int row, int column) {
+				if (column == 1) {  //设置第2列可编辑
+					return true;
+				}
+				return false;       //设置其他列不可编辑
+			}
+		});
+</code></pre></div></div>
+
+<p>在数据变动后，重新 setModel，并且加上刷新即可。</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>table.updateUI();
+</code></pre></div></div>
+
+<h3 id="自定义-jtable-的-cell">自定义 JTable 的 Cell</h3>
+
+<p>类似 OC 中的 Table 的 2 种代理，JTable 的 Cell 也有 2 种方法，一是渲染（类似 DataSource，用作展示用的），一是编辑器（类似 Delegate，和交互有关的）。</p>
+
+<p>“题目内容”列，不需要交互，只要展示就可以了，所以只设置了渲染器。“操作”列，需要响应“编辑”按钮，所以除渲染器外还要编辑器。</p>
+
+<h4 id="题目内容">“题目内容”</h4>
+
+<p>设置默认的渲染器：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>//设置默认的渲染器
+table.setDefaultRenderer(Object.class, new ContentTextAreaRender());
+</code></pre></div></div>
+
+<p>自定义辅助类：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class ContentTextArea extends JTextArea {
+	public ContentTextArea() {
+		// TODO Auto-generated constructor stub
+		setLineWrap(true); 			// 激活断行不断字功能
+		setWrapStyleWord(true);
+	}
+}
+</code></pre></div></div>
+
+<p>渲染器：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class ContentTextAreaRender implements TableCellRenderer {
+	private Box vBox;
+	private ContentTextArea textArea;
+
+	public ContentTextAreaRender() {
+		// TODO Auto-generated constructor stub
+		textArea = new ContentTextArea();
+
+		Box hBox = Box.createHorizontalBox();
+		hBox.add(Box.createHorizontalStrut(10));
+		hBox.add(textArea);
+		hBox.add(Box.createHorizontalStrut(10));
+
+		vBox = Box.createVerticalBox();
+		vBox.add(Box.createVerticalStrut(10));
+		vBox.add(hBox);
+		vBox.add(Box.createVerticalStrut(10));
+	}
+
+	@Override
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+			int row, int column) {
+		// TODO Auto-generated method stub
+
+		// 根据列宽，计算高度
+		int maxPreferredHeight = 0;
+
+		for (int i = 0; i &lt; table.getColumnCount() - 1; i++) {
+			int columnWidth = table.getColumnModel().getColumn(column).getWidth();
+			textArea.setText("" + table.getValueAt(row, i));
+			textArea.setSize(columnWidth-20, 20);
+			textArea.setMinimumSize(new Dimension(columnWidth-20, 20));
+			maxPreferredHeight = Math.max(maxPreferredHeight, textArea.getPreferredSize().height) + 20;
+		}
+
+
+		if (table.getRowHeight(row) != maxPreferredHeight) {
+			table.setRowHeight(row, maxPreferredHeight);
+		}
+		textArea.setText(value == null ? "" : value.toString());
+		return vBox;
+	}
+}
+
+</code></pre></div></div>
+
+<h4 id="操作">“操作”</h4>
+
+<p>设置指定列的 渲染器和编辑器</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>TableColumn btnColumn = table.getColumnModel().getColumn(columnNames.length - 1);
+//设置 最后一列的渲染器
+btnColumn.setCellRenderer(new EditBtnRender());
+//设置 最后一列的编辑器
+btnColumn.setCellEditor(new EditBtnEditor(editBtnEvent));
+</code></pre></div></div>
+
+<p>自定义的辅助类：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/**
+ * EditBtn，给2个属性，分别记录所在的行和列
+ */
+class EditBtn extends JButton {
+	private static final long serialVersionUID = 201802050001L;
+	private int row;
+	private int column;
+
+	public EditBtn(String title) {
+		// TODO Auto-generated constructor stub
+		super(title);
+	}
+
+	public void setRowAndColumn(int row, int column) {
+		this.column = column;
+		this.row = row;
+	}
+
+	public int getColumn() {
+		return this.column;
+	}
+
+	public int getRow() {
+		return this.row;
+	}
+}
+
+/**
+ * EditBtnEvent, 自定义的事件处理
+ */
+abstract class EditBtnEvent {
+	public abstract void invoke(ActionEvent e);
+}
+</code></pre></div></div>
+
+<p>渲染器：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class EditBtnRender implements TableCellRenderer {
+	private Box box;
+	private EditBtn editBtn;
+
+	public EditBtnRender() {
+		// TODO Auto-generated constructor stub
+		editBtn = new EditBtn(YSGlobalStaticClass.EDIT_FRAME_EDIT);
+
+		Box hBox = Box.createHorizontalBox();
+		hBox.add(Box.createVerticalGlue());
+		hBox.add(editBtn);
+		hBox.add(Box.createVerticalGlue());
+
+
+		box = Box.createVerticalBox();
+		box.add(Box.createVerticalGlue());
+		box.add(hBox);
+		box.add(Box.createVerticalGlue());
+	}
+
+	@Override
+	public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+			int row, int column) {
+		// TODO Auto-generated method stub
+
+		return box;
+	}
+}
+</code></pre></div></div>
+
+<p>编辑器：</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class EditBtnEditor extends AbstractCellEditor implements TableCellEditor {
+
+	private static final long serialVersionUID = 201801310001L;
+	private Box box;
+	private EditBtn editBtn;
+	private EditBtnEvent editBtnEvent;
+
+	public EditBtnEditor() {
+		// TODO Auto-generated constructor stub
+
+		editBtn = new EditBtn(YSGlobalStaticClass.EDIT_FRAME_EDIT);
+		editBtn.addActionListener(new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+
+				// 这里调用自定义的事件处理方法
+				editBtnEvent.invoke(e);
+			}
+		});
+
+		Box hBox = Box.createHorizontalBox();
+		hBox.add(Box.createVerticalGlue());
+		hBox.add(editBtn);
+		hBox.add(Box.createVerticalGlue());
+
+		box = Box.createVerticalBox();
+		box.add(Box.createVerticalGlue());
+		box.add(hBox);
+		box.add(Box.createVerticalGlue());
+	}
+
+	public EditBtnEditor(EditBtnEvent e) {
+		this();
+		this.editBtnEvent = e;
+	}
+
+	/*
+	 * 重写编辑器方法，返回一个按钮给JTable
+	 */
+	@Override
+	public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int column) {
+		// 将这个被点击的按钮所在的行和列放进 editBtn 里面
+		editBtn.setRowAndColumn(row, column);
+		return box;
+	}
+
+	@Override
+	public Object getCellEditorValue() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+}
+</code></pre></div></div>
+
+<hr />
+<h2 id="相关链接">相关链接</h2>
 
 <p><a href="http://blog.csdn.net/aeolus1019/article/details/7973255">Java使用iText生成word文件的完美解决方案</a></p>
 
 <p><a href="http://ylcodes01.blog.51cto.com/5607366/1842693">java通过freemarker生成word文档</a></p>
 
 <p><a href="http://www.cnblogs.com/abc8023/p/5607254.html">Java 导出 Word</a></p>
+
+<p><a href="http://blog.csdn.net/xietansheng/article/details/78079806">Java Swing总结目录</a></p>
+
+<p><a href="http://www.importnew.com/19301.html">Java callback回调</a></p>
+
+<p><a href="http://blog.csdn.net/u011277123/article/details/53316169">打包Jar</a></p>
 
         </article>
         <hr>
@@ -257,6 +606,28 @@
                     
                 
             
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
+                
+                    
+                
+            
+        
+            
+            
+                
+                    
+                
+            
         
             
             
@@ -322,28 +693,6 @@
                 
                     
                 
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
-            
-                
-                    
-                
-            
-                
-                    
-                
-            
-        
-            
             
                 
                     
